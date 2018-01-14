@@ -1,0 +1,11 @@
+# extensions
+*.cmake
+*.vcproj
+*.exe
+
+# files
+CMakeCache.txt
+Makefile
+
+# folders
+CMakeFiles/*
