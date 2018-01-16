@@ -62,8 +62,13 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 set(sources
     # Main source.
     source/main.cpp
+    source/board.cpp
+    source/game.cpp
+    source/grid.cpp
     include/game.hpp
-    include/board.hpp)
+    include/board.hpp
+    include/grid.hpp
+    include/tile.hpp)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(Boost REQUIRED )
