@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "grid.hpp"
 
 Grid::Grid() { //Default constructor
@@ -18,6 +20,7 @@ void Grid::clicked(int x, int y) {
 	if (x < 0 || y < 0 || x > (size_tiles_x * scale) || y > (size_tiles_y * scale)) {
 		return;
 	}
+	std::cout << "Clicked on tile (" << (x / scale) << ", " << (y / scale) << ")\n";
 	//tiles[(y / scale) * size_tiles_x + (x / scale)].clicked;
 }
 
