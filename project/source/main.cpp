@@ -5,5 +5,9 @@
 int main(void) {
     auto game = Game();
 
+    while(true) {
+        game.update();
+    }
+
     return 0;
 }

@@ -7,10 +7,11 @@
 
 class Board {
   private:
-    Grid boardGrid;
+    Grid boardGrid = Grid(10, 10);
 
   public:
-    Board() {
+    Board() 
+    {
         std::cout << "New board created" << std::endl;
     }
 

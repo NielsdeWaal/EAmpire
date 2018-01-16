@@ -2,6 +2,7 @@
 #define TILE_HPP
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Tile {
   private:
@@ -9,6 +10,11 @@ class Tile {
     int lives;
 
   public:
+    Tile() 
+    {
+        std::cout << "Tile made" << std::endl;
+    }
+
     int getID();
 };
 
