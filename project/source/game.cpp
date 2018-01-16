@@ -5,3 +5,7 @@ void Game::update() {
         board.update();
     }
 }
+
+void Game::initialize() {
+    boards.push_back(Board());
+}
