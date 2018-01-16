@@ -1,5 +1,5 @@
 # extensions
-*.cmake
+#*.cmake
 *.vcproj
 *.exe
 
