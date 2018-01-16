@@ -2,6 +2,7 @@
 #*.cmake
 *.vcproj
 *.exe
+*.swp
 
 # files
 CMakeCache.txt
