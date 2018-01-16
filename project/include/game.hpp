@@ -5,10 +5,13 @@
 #include <vector>
 
 #include "board.hpp"
+#include "gameState.hpp"
 
 class Game {
   private:
     std::vector<Board> boards;
+
+    GameState* game_state = GameState::get_state();
 
   public:
     Game() {
