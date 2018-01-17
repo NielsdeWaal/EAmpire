@@ -3,33 +3,25 @@
 
 #include <SFML/Graphics.hpp>
 
-class Button : public sf::Drawable {
+class Button {
 private:
-	sf::Vector2f position;
+	std::string s;
+	sf::Vector2f location;
+	sf::Font font;
+	sf::Text text;
 	sf::Vector2f size;
 
-	unsigned int state;
-
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-
+	sf::RectangleShape boundary;
 
 public:
-	Button();
 
-	Button(std::string s, sf::Vector2f position);
+	Button(std::string s, sf::Vector2f location, sf::Vector2f size);
 
-	~Button();
+	void draw(sf::RenderWindow& window);
 
-	sf::Vector2f get_position();
-	sf::Vector2f get_size();
-	
-	unsigned int get_state();
+	void setup();
 
-	void set_position(sf::Vector2f position);
-
-	void update(sf::Events& e, sf::RenderWindow& window);
-
-
+	bool is_mouse_inside(const sf::Vector2i mouse_pos) const;
 };
 
 #endif //BUTTON_HPP
