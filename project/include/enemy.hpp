@@ -7,8 +7,7 @@ class Enemy {
 protected:
 	int damage;
 	int health;
-	sf::Vector2f speed;
-	sf::Vector2f position;
+	sf::Vector2f speed, position;
 	sf::Color color;
 public:
 	Enemy(sf::Vector2f start_position, sf::Color color, const int damage, const sf::Vector2f speed, int health):

@@ -28,3 +28,19 @@ void Enemy_a::draw(sf::RenderWindow & window) {
 	window.draw(circle);
 }
 
+sf::CircleShape Enemy_a::getCircle() {
+	return circle;
+}
+
+void Enemy_a::setFillColor(sf::Color color) {
+	circle.setFillColor(color);
+}
+
+void Enemy_a::draw_string(sf::RenderWindow & window, sf::Vector2f object) {
+	text.setString("RANDOMTEXT");
+	text.setOrigin(text.getGlobalBounds().left + text.getGlobalBounds().width / 2.0f,
+		text.getGlobalBounds().top + text.getGlobalBounds().height / 2.0f);
+	text.setPosition(object);
+	std::cout << text.getPosition().x << " : " << text.getPosition().y << std::endl;
+	window.draw(text);
+}
