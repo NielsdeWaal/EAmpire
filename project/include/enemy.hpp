@@ -1,57 +1,37 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
-
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
 class Enemy {
+protected:
 	int damage;
-	sf::Vector2f speed;
 	int health;
+	sf::Vector2f speed;
 	sf::Vector2f position;
 	sf::Color color;
-	//std::string shape;
-	sf::RectangleShape shape;
 public:
-	Enemy(sf::Vector2f position, sf::Color color, const int damage, const sf::Vector2f speed, int health):
-		position(position),
-		shape(shape),
+	Enemy(sf::Vector2f start_position, sf::Color color, const int damage, const sf::Vector2f speed, int health):
+		position(start_position),
 		color(color),
 		damage(damage),
 		speed(speed),
 		health(health)
-	{
-		/*const struct { const char * name; } shapes[]{
-			{ "circle"		, sf::CircleShape },
-			{ "rectangle"	, sf::RectangleShape }
-		};*/
+	{}
 
-		shape.setPosition(position);
-		shape.setFillColor(color);
+	~Enemy(void){
+		std::cout << "Enemy is being deleted" << std::endl;
 	}
+	virtual void attack(int & health_player) = 0;
 
-	virtual void attack(int & health_player) {
-		health_player -= damage;
-	}
+	virtual void take_damage(const int damage_player) = 0;
 
-	virtual void take_damage(const int damage_player) {
-		health -= damage_player;
-	}
-	
-	virtual sf::Vector2f move_forward() {
-		position += speed;
-		return position;
-	}
+	virtual void move_direction(sf::Vector2f direction) = 0;
 
-	virtual sf::Vector2f move_direction(sf::Vector2f direction) {
-		sf::Vector2f buffer_position = move_forward();
-		position = sf::Vector2f(buffer_position.x * direction.x, buffer_position.y * direction.y);
-		return position;
-	}
+	virtual void draw(sf::RenderWindow & window) = 0;
 
-	virtual void draw(sf::RenderWindow & window) {
-		shape.setPosition(position);
-		window.draw(shape);
-	}
+	//There will be another function for knowing wich way the enemy have to go
+
 };
 
 #endif // ENEMY_HPP
