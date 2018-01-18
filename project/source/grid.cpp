@@ -1,8 +1,93 @@
 #include <iostream>
-#include <queue>
-#include <set>
 
 #include "grid.hpp"
+
+std::vector<Grid::Mini_tile> Grid::create_mini_grid() {
+	std::vector<Mini_tile> mini_grid(size_tiles_x * size_tiles_y);
+	for (int y = 0; y < size_tiles_y; y++) {
+		for (int x = 0; x < size_tiles_x; x++) {
+			if (!tiles[y * size_tiles_x + x].is_navigable()) {
+				mini_grid[y * size_tiles_x + x].navigable = false;
+			}
+		}
+	}
+	return mini_grid;
+}
+
+bool Grid::fill_mini_grid(std::vector<Grid::Mini_tile>& mini_grid, sf::Vector2i start, sf::Vector2i end) {
+	mini_grid[start.y * size_tiles_x + start.x].distance = 1;
+	bool next_available = true;
+	int current_distance = 1;
+	while (next_available) {
+		next_available = false;
+		for (int y = 0; y < size_tiles_y; y++) {
+			for (int x = 0; x < size_tiles_x; x++) {
+
+
+				if (!mini_grid[y * size_tiles_x + x].navigable) {          // Debug
+					std::cout << "X";                                      //
+				}                                                          //
+				else {                                                     //
+					std::cout << mini_grid[y * size_tiles_x + x].distance; //
+				}
+
+				if (mini_grid[y * size_tiles_x + x].distance == current_distance) {
+					if ((x + 1) < size_tiles_x && mini_grid[y * size_tiles_x + (x + 1)].navigable && mini_grid[y * size_tiles_x + (x + 1)].distance == 0) {
+						mini_grid[y * size_tiles_x + (x + 1)].distance = (current_distance + 1);
+						next_available = true;
+					}
+					if ((x - 1) >= 0 && mini_grid[y * size_tiles_x + (x - 1)].navigable && mini_grid[y * size_tiles_x + (x - 1)].distance == 0) {
+						mini_grid[y * size_tiles_x + (x - 1)].distance = (current_distance + 1);
+						next_available = true;
+					}
+					if ((y + 1) < size_tiles_y && mini_grid[(y + 1) * size_tiles_x + x].navigable && mini_grid[(y + 1) * size_tiles_x + x].distance == 0) {
+						mini_grid[(y + 1) * size_tiles_x + x].distance = (current_distance + 1);
+						next_available = true;
+					}
+					if ((y - 1) >= 0 && mini_grid[(y - 1) * size_tiles_x + x].navigable && mini_grid[(y - 1) * size_tiles_x + x].distance == 0) {
+						mini_grid[(y - 1) * size_tiles_x + x].distance = (current_distance + 1);
+						next_available = true;
+					}
+				}
+			}
+			std::cout << "\n"; // Debug
+		}
+		if (mini_grid[end.y * size_tiles_x + end.x].distance != 0) {
+			return true;
+		}
+		std::cout << "\n"; // Debug
+		current_distance++;
+	}
+	std::cout << "No route"; // Debug
+	return false;
+}
+
+std::vector<sf::Vector2i> Grid::path_from_grid(std::vector<Grid::Mini_tile>& mini_grid, sf::Vector2i end) {
+	std::vector<sf::Vector2i> path;
+	auto current = end;
+	
+	while (mini_grid[current.y * size_tiles_x + current.x].distance != 1) {
+		path.insert(path.end(), current);
+		if ((current.x + 1) < size_tiles_x && mini_grid[current.y * size_tiles_x + (current.x + 1)].distance == mini_grid[current.y * size_tiles_x + current.x].distance - 1) {
+			current.x++;
+			continue;
+		}
+		if ((current.x - 1) >= 0 && mini_grid[current.y * size_tiles_x + (current.x - 1)].distance == mini_grid[current.y * size_tiles_x + current.x].distance - 1) {
+			current.x--;
+			continue;
+		}
+		if ((current.y + 1) < size_tiles_y && mini_grid[(current.y + 1) * size_tiles_x + current.x].distance == mini_grid[current.y * size_tiles_x + current.x].distance - 1) {
+			current.y++;
+			continue;
+		}
+		if ((current.y - 1) >= 0 && mini_grid[(current.y - 1) * size_tiles_x + current.x].distance == mini_grid[current.y * size_tiles_x + current.x].distance - 1) {
+			current.y--;
+			continue;
+		}
+	}
+	path.insert(path.end(), current);
+	return path;
+}
 
 Grid::Grid() { //Default constructor
 	tiles = std::vector<Tile>(10 * 10);
@@ -26,75 +111,22 @@ void Grid::clicked(int x, int y) {
 	//tiles[(y / scale) * size_tiles_x + (x / scale)].clicked;
 }
 
-bool Grid::find_path(sf::Vector2i start, sf::Vector2i end) {
-	struct Mini_tile {
-		int distance = 0;
-		bool navigable = true;
-	};
-
-	std::vector<Mini_tile> temp(size_tiles_x * size_tiles_y);
-	for (int y = 0; y < size_tiles_y; y++) {
-		for (int x = 0; x < size_tiles_x; x++) {
-			if (!tiles[y * size_tiles_x + x].is_navigable()) {
-				temp[y * size_tiles_x + x].navigable = false;
-			}
-			if (!temp[y * size_tiles_x + x].navigable) {
-				std::cout << "X";
-			}
-			else {
-				std::cout << temp[y * size_tiles_x + x].distance;
-			}
-		}
-		std::cout << "\n";
+std::vector<sf::Vector2i> Grid::find_path(sf::Vector2i start, sf::Vector2i end) {
+	auto mini_grid = create_mini_grid();
+	if (!fill_mini_grid(mini_grid, start, end)) {
+		return (std::vector<sf::Vector2i>(0));
 	}
-	temp[start.y * size_tiles_x + start.x].distance = 1;
-	bool next_available = true;
-	int current_distance = 1;
-	while (next_available) {
-		next_available = false;
-		for (int y = 0; y < size_tiles_y; y++) {
-			for (int x = 0; x < size_tiles_x; x++) {
-				
-
-				if (!temp[y * size_tiles_x + x].navigable) {
-					std::cout << "X";
-				}
-				else {
-					std::cout << temp[y * size_tiles_x + x].distance;
-				}
-
-				if (temp[y * size_tiles_x + x].distance == current_distance) {
-					if ((x + 1) < size_tiles_x && temp[y * size_tiles_x + (x + 1)].navigable && temp[y * size_tiles_x + (x + 1)].distance == 0) {
-						temp[y * size_tiles_x + (x + 1)].distance = (current_distance + 1);
-						next_available = true;
-					}
-					if ((x - 1) >= 0 && temp[y * size_tiles_x + (x - 1)].navigable && temp[y * size_tiles_x + (x - 1)].distance == 0) {
-						temp[y * size_tiles_x + (x - 1)].distance = (current_distance + 1);
-						next_available = true;
-					}
-					if ((y + 1) < size_tiles_y && temp[(y + 1) * size_tiles_x + x].navigable && temp[(y + 1) * size_tiles_x + x].distance == 0) {
-						temp[(y + 1) * size_tiles_x + x].distance = (current_distance + 1);
-						next_available = true;
-					}
-					if ((y - 1) >= 0 && temp[(y - 1) * size_tiles_x + x].navigable && temp[(y - 1) * size_tiles_x + x].distance == 0) {
-						temp[(y - 1) * size_tiles_x + x].distance = (current_distance + 1);
-						next_available = true;
-					}
-				}
-				if (temp[y * size_tiles_x + x].distance != 0 && x == end.x && y == end.y) {
-					std::cout << "Found";
-					next_available = false;
-					break;
-				}
-			}
-			std::cout << "\n";
-		}
-		std::cout << "\n";
-		current_distance++;
+	auto path = path_from_grid(mini_grid, end);
+	for(auto coordinate : path) {
+		std::cout << "(" << coordinate.x << ", " << coordinate.y << ")\n";
 	}
-	std::cout << current_distance;
+	return path;
+}
 
-	return false;
+bool Grid::can_place(sf::Vector2i start, sf::Vector2i end, sf::Vector2i location) {
+	auto mini_grid = create_mini_grid();
+	mini_grid[location.y * size_tiles_x + location.x].navigable = false;
+	return fill_mini_grid(mini_grid, start, end);
 }
 
 void Grid::set_tile(int tile_x, int tile_y, Tile tile) {
