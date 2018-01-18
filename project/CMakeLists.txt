@@ -65,14 +65,24 @@ set(sources
     source/board.cpp
     source/game.cpp
     source/grid.cpp
+	source/action.cpp
+	source/enemy_a.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
-    include/tile.hpp)
+    include/tile.hpp
+	include/action.hpp
+	include/enemy.hpp
+	include/enemy_a.hpp)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(Boost REQUIRED )
 find_package(SFML 2 REQUIRED system window graphics network audio)
 
+if(SFML_FOUND)
+  include_directories(${SFML_INCLUDE_DIR})
+endif()
+
+
 add_executable(${EXE} ${sources})
-target_link_libraries(${EXE} ${Boost_LIBRARIES} dl ${SFML_LIBRARIES})
+target_link_libraries(${EXE} ${Boost_LIBRARIES} ${SFML_LIBRARIES})
