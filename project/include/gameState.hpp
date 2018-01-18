@@ -30,6 +30,7 @@ class GameState {
          * wory about multiple instances.
          *
          * @return Pointer to GameState
+         */
         static GameState* get_state();
 
         /**
