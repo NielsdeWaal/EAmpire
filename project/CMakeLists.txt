@@ -67,6 +67,7 @@ set(sources
     source/board.cpp
     source/game.cpp
     source/grid.cpp
+    source/tile.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
