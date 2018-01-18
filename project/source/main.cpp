@@ -16,22 +16,20 @@ int main(void) {
 	//Direction = Left,Right,Up,Down
 	sf::Vector2f directions[4] = { sf::Vector2f(-1,0), sf::Vector2f(1,0), sf::Vector2f(0,-1), sf::Vector2f(0,1) };
 	sf::Vector2i cursorPos;
-	sf::RectangleShape rec(sf::Vector2f(0,0));
-	rec.setPosition(sf::Vector2f(200, 200));
-	rec.setSize(sf::Vector2f(100, 100));
 
 	action actions[] = {
 		action(sf::Keyboard::Left,	[&a1,&directions]() {	a1.move_direction(directions[0]);	}),
 		action(sf::Keyboard::Right,	[&a1,&directions]() {	a1.move_direction(directions[1]);	}),
 		action(sf::Keyboard::Up,	[&a1,&directions]() {	a1.move_direction(directions[2]);	}),
 		action(sf::Keyboard::Down,	[&a1,&directions]() {	a1.move_direction(directions[3]);	}),
+		action(sf::Keyboard::A,		[&a1]				{	a1.take_damage(50);					}),
 		action([&cursorPos, &a1, &window]() {
 		if (cursorPos.y <= a1.getCircle().getGlobalBounds().top + a1.getCircle().getGlobalBounds().height - a1.getCircle().getRadius() && cursorPos.y >= a1.getCircle().getGlobalBounds().top - a1.getCircle().getRadius()&&
 			cursorPos.x <= a1.getCircle().getGlobalBounds().left + a1.getCircle().getGlobalBounds().width && cursorPos.x >= a1.getCircle().getGlobalBounds().left) {
-			a1.setFillColor(sf::Color::Blue);
-			a1.draw_string(window, sf::Vector2f(a1.getCircle().getGlobalBounds().top + a1.getCircle().getGlobalBounds().height - a1.getCircle().getRadius(), a1.getCircle().getGlobalBounds().left + a1.getCircle().getGlobalBounds().width - a1.getCircle().getRadius()));
+			a1.set_fill_color(sf::Color::Blue);
+			//a1.draw_string(window, sf::Vector2f(a1.getCircle().getGlobalBounds().top + a1.getCircle().getGlobalBounds().height - a1.getCircle().getRadius(), a1.getCircle().getGlobalBounds().left + a1.getCircle().getGlobalBounds().width - a1.getCircle().getRadius()));
 		} else {
-			a1.setFillColor(sf::Color::Red);
+			a1.set_fill_color(sf::Color::Red);
 		}; }) };
 
 
@@ -46,9 +44,9 @@ int main(void) {
 				window.close();
 			}
 		};
+
 		window.clear();
 		a1.draw(window);
-		window.draw(rec);
 		window.display();
 
 		//std::cout << a1.getCircle().getGlobalBounds().top + a1.getCircle().getGlobalBounds().height << std::endl;

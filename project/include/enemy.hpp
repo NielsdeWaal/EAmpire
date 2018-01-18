@@ -27,6 +27,16 @@ protected:
 	//The text that represents the lives of the enemy when you hovering over it with your mouse
 	sf::Text text;
 public:
+
+	/**
+	* @brief Constructor
+	*
+	* @param[in] start_position		The position where the enemy will start.
+	* @param[in] color				The default color of the enemy.
+	* @param[in] damage				The damage the enemy will do to the players lives.
+	* @param[in] speed				The speed with which the enemy moves.
+	* @param[in] lives				The lives of the enemy.
+	*/
 	Enemy(sf::Vector2f start_position, sf::Color color, const int damage, const sf::Vector2f speed, int lives):
 		position(start_position),
 		color(color),
@@ -50,7 +60,7 @@ public:
 	* @brief Function that reduces the lives of the enemy
 	*
 	* Reduces the lives of the enemy with the attack number of the towers.
-	* when the lives are at 0, the destructor is invoked.
+	* when the lives are at 0, the destructor will be invoked.
 	*
 	* @param[in] The damage of the tower who reduced the lives of the enemy
 	*/
