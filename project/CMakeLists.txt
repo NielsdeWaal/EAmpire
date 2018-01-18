@@ -59,6 +59,8 @@ endif()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/source)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+include(cmake_modules/clang-cxx-dev-tools.cmake)
+
 set(sources
     # Main source.
     source/main.cpp
