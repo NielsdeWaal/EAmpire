@@ -1,6 +1,6 @@
-#include <SFML\Graphics.hpp>
+#include <SFML/Graphics.hpp>
 #include <functional>
-#include "Action.hpp"
+#include "action.hpp"
 
 	action::action(std::function<bool()> condition, std::function< void()> work):
 		condition(condition),
