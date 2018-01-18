@@ -9,6 +9,7 @@ protected:
 	int health;
 	sf::Vector2f speed, position;
 	sf::Color color;
+	sf::Text health;
 public:
 	Enemy(sf::Vector2f start_position, sf::Color color, const int damage, const sf::Vector2f speed, int health):
 		position(start_position),
@@ -28,6 +29,8 @@ public:
 	virtual void move_direction(sf::Vector2f direction) = 0;
 
 	virtual void draw(sf::RenderWindow & window) = 0;
+
+	virtual void setFillColor(sf::Color color) = 0;
 
 	//There will be another function for knowing wich way the enemy have to go
 
