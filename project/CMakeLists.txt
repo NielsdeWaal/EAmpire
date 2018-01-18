@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 
-project(project)
+project(EAmpire)
 set(EXE "main")
 
 enable_testing()
@@ -54,6 +54,8 @@ else()
 
     set(CMAKE_EXE_LINKER_FLAGS_DEBUG   "/DEBUG /MANIFEST:NO" CACHE STRING "" FORCE)
     set(CMAKE_EXE_LINKER_FLAGS_RELEASE "/DEBUG /MANIFEST:NO /INCREMENTAL:NO /OPT:REF,ICF" CACHE STRING "" FORCE) 
+
+    #set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/source)
@@ -68,10 +70,14 @@ set(sources
     source/game.cpp
     source/grid.cpp
     source/tile.cpp
+    source/gameState.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
+    include/gameState.hpp
     include/tile.hpp)
+
+enable_testing()
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(Boost REQUIRED )

@@ -5,6 +5,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "tile.hpp"
+#include "gameState.hpp"
 
 /**
 * @file grid.hpp
@@ -68,6 +69,8 @@ class Grid {
 	* @return std::vector with all locations of the path.
 	**/
 	std::vector<sf::Vector2i> path_from_grid(std::vector<Mini_tile>& mini_grid, sf::Vector2i end);
+
+        GameState* game_state = GameState::get_state();
 
   public:
 	/**
