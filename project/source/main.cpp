@@ -18,6 +18,7 @@ int main(void) {
 	std::string exit = "Exit";
 	Button play_button(play, sf::Vector2f{ float((window.getSize().x / 2)), float((window.getSize().y / 2)) }, sf::Vector2f{ 70,50 }, window);
 	Button exit_button(exit, sf::Vector2f{ float((window.getSize().x / 2)), float((window.getSize().y / 2))+window.getSize().y*0.15f }, sf::Vector2f{ 70,50 }, window);
+
 	
 	Grid grid(10, 10, 30);
 	
@@ -34,7 +35,7 @@ int main(void) {
 			case sf::Event::MouseButtonPressed:
 				if	(play_button.is_pressed()){
 					std::cout << "Play button pressed" << std::endl;
-					//Change gamestate
+					//Change gamestate to new board
 				}
 				if (exit_button.is_pressed()) {
 					window.close();
