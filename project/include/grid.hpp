@@ -23,6 +23,8 @@ class Grid {
 	int size_tiles_x;
 	int size_tiles_y;
 	int scale;
+	int start_x;
+	int start_y;
 
 	/**
 	* @brief Struct to help with path-finding.
@@ -88,8 +90,10 @@ class Grid {
 	* @param[in] tiles_x The amount of tiles on the x axis.
 	* @param[in] tiles_y The amount of tiles on the y axis.
 	* @param[in] scale   Used to know how big the grid is in pixels.
+	* @param[in] start_x The x coordinate of the upper left origin.
+	* @param[in] start_y The y coordinate of the upper left origin.
 	**/
-	Grid(int tiles_x, int tiles_y, int tile_scale);
+	Grid(int tiles_x, int tiles_y, int scale, int start_x, int start_y);
 
 	/**
 	* @brief Calculate which tile has been clicked.
@@ -155,6 +159,13 @@ class Grid {
 	* @return Whether it is navigable or not.
 	**/
 	bool is_navigable(int tile_x, int tile_y);
+
+	/**
+	* @brief Draws the grid on the relative coordinates
+	*
+	* @param[in] window The window to draw on.
+	**/
+	void draw(sf::RenderWindow& window);
 
 	/**
 	* @brief Updates all the tiles in the grid.

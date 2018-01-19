@@ -89,26 +89,30 @@ std::vector<sf::Vector2i> Grid::path_from_grid(std::vector<Grid::Mini_tile>& min
 	return path;
 }
 
-Grid::Grid() { //Default constructor
-	tiles = std::vector<Tile>(10 * 10);
-	size_tiles_x = 10;
-	size_tiles_y = 10;
-	scale = 50;
-}
+Grid::Grid(): //Default constructor
+	tiles(std::vector<Tile>(10 * 10)),
+	size_tiles_x(10),
+	size_tiles_y(10),
+	scale(50),
+	start_x(0),
+	start_y(0)
+	{}
 
-Grid::Grid(int tiles_x, int tiles_y, int tile_scale = 50) {
-	tiles = std::vector<Tile>(tiles_x * tiles_y);
-	size_tiles_x = tiles_x;
-	size_tiles_y = tiles_y;
-	scale = tile_scale;
-}
+Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0, int start_y = 0):
+	tiles(std::vector<Tile>(tiles_x * tiles_y)),
+	size_tiles_x(tiles_x),
+	size_tiles_y(tiles_y),
+	scale(scale),
+	start_x(start_x),
+	start_y(start_y)
+	{}
 
 void Grid::clicked(int x, int y) {
-	if (x < 0 || y < 0 || x >= (size_tiles_x * scale) || y >= (size_tiles_y * scale)) {
+	if ((x - start_x) < 0 || (y - start_y) < 0 || (x - start_x) >= (size_tiles_x * scale) || (y - start_y) >= (size_tiles_y * scale)) {
 		return;
 	}
-	std::cout << "Clicked on tile (" << (x / scale) << ", " << (y / scale) << ")\n";
-	//tiles[(y / scale) * size_tiles_x + (x / scale)].clicked;
+	std::cout << "Clicked on tile (" << ((x - start_x) / scale) << ", " << ((y - start_y) / scale) << ")\n";
+	//tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].clicked;
 }
 
 std::vector<sf::Vector2i> Grid::find_path(sf::Vector2i start, sf::Vector2i end) {
@@ -139,6 +143,29 @@ void Grid::set_tile_navigability(int tile_x, int tile_y, bool navigability) {
 
 bool Grid::is_navigable(int tile_x, int tile_y) {
 	return tiles[tile_y * size_tiles_x + tile_x].is_navigable();
+}
+
+void Grid::draw(sf::RenderWindow& window) {
+	sf::Texture tile_normal;
+	sf::Texture tile_blocked;
+	tile_normal.loadFromFile("textures/tile_normal.png");
+	tile_blocked.loadFromFile("textures/tile_blocked.png");
+	sf::Sprite sprite_tile_normal;
+	sf::Sprite sprite_tile_blocked;
+	sprite_tile_normal.setTexture(tile_normal);
+	sprite_tile_blocked.setTexture(tile_blocked);
+	for (int x = 0; x < size_tiles_x; x++) {
+		for (int y = 0; y < size_tiles_y; y++) {
+			if (tiles[y * size_tiles_x + x].is_navigable()) {
+				sprite_tile_normal.setPosition(sf::Vector2f(start_x + (x * scale), start_y + (y * scale)));
+				window.draw(sprite_tile_normal);
+			}
+			else {
+				sprite_tile_blocked.setPosition(sf::Vector2f(start_x + (x * scale), start_y + (y * scale)));
+				window.draw(sprite_tile_blocked);
+			}
+		}
+	}
 }
 
 void Grid::update() {
