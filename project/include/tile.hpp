@@ -5,19 +5,18 @@
 
 class Tile {
   private:
-    bool navigable;
-    int id;
-    int lives;
-
+	int id;
+	int lives;
+	bool navigable;
   public:
-    Tile() {};
+    Tile() {}
 
-    Tile(bool is_navigable);
+	Tile(bool is_navigable);
 
 	void set_navigability(bool navigability);
 
 	bool is_navigable();
-    
+
 	int getID();
 };
 

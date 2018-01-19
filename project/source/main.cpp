@@ -1,4 +1,6 @@
 #include <iostream>
+#include <chrono>
+#include <thread>
 #include <SFML/Graphics.hpp>
 
 #include "game.hpp"
@@ -65,10 +67,11 @@ int main(void) {
 
 			}
 		}
+		game.update();
+		std::this_thread::sleep_for(std::chrono::seconds(1));
 		window.clear();
 		play_button.draw();
 		window.display();
 	}
-
     return 0;
 }
