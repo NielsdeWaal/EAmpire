@@ -67,6 +67,7 @@ set(sources
     source/grid.cpp
 	source/action.cpp
 	source/enemy_a.cpp
+	source/enemy.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
