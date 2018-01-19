@@ -6,7 +6,7 @@
 
 class Button {
 private:
-	std::string s;
+	std::string& s;
 	sf::Vector2f location;
 	sf::Font font;
 	sf::Text text;
@@ -16,7 +16,7 @@ private:
 
 public:
 
-	Button(std::string s, sf::Vector2f location, sf::Vector2f size, sf::RenderWindow& window);
+	Button(std::string& s, sf::Vector2f location, sf::Vector2f size, sf::RenderWindow& window);
 
 	void draw();
 

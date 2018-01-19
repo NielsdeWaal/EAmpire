@@ -5,7 +5,8 @@
 ///				it is used in the function that checks whether or not the mouse is over the button.
 /// \param		std::string s : std::string s - Contains the text displayed on the button
 ///	
-Button::Button(std::string s, sf::Vector2f location, sf::Vector2f size, sf::RenderWindow& window):
+Button::Button(std::string& s, sf::Vector2f location, sf::Vector2f size, sf::RenderWindow& window):
+	s(s),
 	location(location),
 	size(size),
 	window(window)
@@ -19,12 +20,13 @@ Button::Button(std::string s, sf::Vector2f location, sf::Vector2f size, sf::Rend
 void Button::setup() {
 	if (!font.loadFromFile("PlayfairDisplay-Black.ttf")) {
 		//handle error
+		std::cout << "File not loaded" << std::endl;
 	}
 	font.loadFromFile("PlayfairDisplay-Black.ttf");
 	text.setFont(font);
 	text.setFillColor(sf::Color::White);
 	text.setString(s);
-	text.setPosition(location);
+	text.setPosition(location.x+2,location.y+2);
 
 	boundary.setPosition(location);
 	boundary.setSize(size);
