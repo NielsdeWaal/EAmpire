@@ -10,24 +10,20 @@
 int main(void) {
 	std::cout << "Starting application 01-02 static ball\n";
 	sf::RenderWindow window{ sf::VideoMode{ 640, 640 }, "SFML window" };
-	Enemy_a a1{ sf::Vector2f{0,0}, sf::Color::Red, 8 , sf::Vector2f{4,4}, 300, 50.0 };
+	Enemy_a a1{ sf::Vector2f{100,100}, sf::Color::Red, 8 , 5, 300, 50.0 };
+	Enemy_a a2{ sf::Vector2f{ 150,150 }, sf::Color::Red, 8 , 1, 300, 50.0 };
+	sf::Vector2f locations(0, 0);
 
 	//Tryout: has to be deleted or implemented somewhere else
 	//Direction = Left,Right,Up,Down
-	sf::Vector2f directions[4] = { sf::Vector2f(-1,0), sf::Vector2f(1,0), sf::Vector2f(0,-1), sf::Vector2f(0,1) };
+	sf::Vector2f directions[4] = { sf::Vector2f(200,200), sf::Vector2f(1,0), sf::Vector2f(0,-1), sf::Vector2f(0,1) };
 	sf::Vector2i cursorPos;
 
 	action actions[] = {
-		action(sf::Keyboard::Left,	[&a1,&directions]() {	a1.move_direction(directions[0]);	}),
-		action(sf::Keyboard::Right,	[&a1,&directions]() {	a1.move_direction(directions[1]);	}),
-		action(sf::Keyboard::Up,	[&a1,&directions]() {	a1.move_direction(directions[2]);	}),
-		action(sf::Keyboard::Down,	[&a1,&directions]() {	a1.move_direction(directions[3]);	}),
-		action(sf::Keyboard::A,		[&a1]				{	a1.take_damage(50);					}),
 		action([&cursorPos, &a1, &window]() {
-		if (cursorPos.y <= a1.getCircle().getGlobalBounds().top + a1.getCircle().getGlobalBounds().height - a1.getCircle().getRadius() && cursorPos.y >= a1.getCircle().getGlobalBounds().top - a1.getCircle().getRadius()&&
+		if (cursorPos.y <= a1.getCircle().getGlobalBounds().top + a1.getCircle().getGlobalBounds().height && cursorPos.y >= a1.getCircle().getGlobalBounds().top - a1.getCircle().getRadius()&&
 			cursorPos.x <= a1.getCircle().getGlobalBounds().left + a1.getCircle().getGlobalBounds().width && cursorPos.x >= a1.getCircle().getGlobalBounds().left) {
 			a1.set_fill_color(sf::Color::Blue);
-			//a1.draw_string(window, sf::Vector2f(a1.getCircle().getGlobalBounds().top + a1.getCircle().getGlobalBounds().height - a1.getCircle().getRadius(), a1.getCircle().getGlobalBounds().left + a1.getCircle().getGlobalBounds().width - a1.getCircle().getRadius()));
 		} else {
 			a1.set_fill_color(sf::Color::Red);
 		}; }) };
@@ -44,12 +40,21 @@ int main(void) {
 				window.close();
 			}
 		};
-
 		window.clear();
+		bool first_state = false;
+		if (!first_state) {
+			bool firstlocation = a1.move_direction(locations);
+			if (firstlocation) {
+				locations = sf::Vector2f(300, 300);
+			}
+		}
+		else if(first_state) {
+			std::cout << "start second" << std::endl;
+			bool secondlocation = a1.move_direction(sf::Vector2f(300, 300));
+		}
+		
 		a1.draw(window);
 		window.display();
-
-		//std::cout << a1.getCircle().getGlobalBounds().top + a1.getCircle().getGlobalBounds().height << std::endl;
 
 		sf::sleep(sf::milliseconds(20));
 	}

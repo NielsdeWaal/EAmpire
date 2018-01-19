@@ -14,14 +14,15 @@
 * This is a subclass of Enemy. The Enemy is a circle shape with adaptable diameter and adaptable color.
 */
 
-class Enemy_a : Enemy{
+class Enemy_a :public Enemy{
 private:
 	//The diameteer of the circle
 	float diameter;
 	//The circle shape of the enemy
 	sf::CircleShape circle;
-	
-	//Is not finished
+
+
+	//NOT FINISHED: because it is a feature
 	//sf::Text text;
 
 public:
@@ -38,36 +39,13 @@ public:
 	* @param[in] lives				The lives of the enemy.
 	* @param[in] diameter			The diameter for the circle shape.
 	*/
-	Enemy_a(sf::Vector2f start_position, const sf::Color color, const int damage, const sf::Vector2f speed, int lives, const float diameter);
+	Enemy_a(sf::Vector2f start_position, const sf::Color color, const int damage, const int speed, int lives, const float diameter);
 	
 	/**
 	* @brief Destructor
 	*/
 	~Enemy_a();
 
-	/**
-	* @brief Function that reduces the lives of the player
-	*
-	* @param[in, out] The lives of the player who must be reduced
-	*/
-	void attack(int & health_player) override;
-
-	/**
-	* @brief Function that reduces the lives of the enemy
-	*
-	* Reduces the lives of the enemy with the attack number of the towers.
-	* when the lives are at 0, the destructor will be invoked.
-	*
-	* @param[in] The damage of the tower who reduced the lives of the enemy
-	*/
-	void take_damage(const int damage_player) override;
-
-	/**
-	* @brief Function for moving the enemy in different directions
-	*
-	* @param[in] The direction where the enemy has to move to. Left,Right,Up,Down = sf::Vector2f(-1,0), sf::Vector2f(1,0), sf::Vector2f(0,-1), sf::Vector2f(0,1)
-	*/
-	void move_direction(sf::Vector2f direction) override;
 	
 	/**
 	* @brief Function for drawing the enemy
@@ -91,7 +69,7 @@ public:
 	sf::CircleShape getCircle();
 
 	//is not finished
-	void draw_string(sf::RenderWindow & window, sf::Vector2f object) override;
+	//void draw_string(sf::Vector2f position) override;
 
 };
 #endif // !ENEMYA_HPP
