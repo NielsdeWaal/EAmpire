@@ -16,7 +16,7 @@ TEST(TestTesting, Exception) {
     try {
         throw 42;
         FAIL() << "Expected exception";
-    } catch (int i) { // caught by reference to base
+    } catch (int i) { 
         EXPECT_EQ(42, i);
     } catch (...) {
         FAIL() << "Incorrect exception given";
