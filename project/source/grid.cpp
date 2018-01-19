@@ -67,7 +67,7 @@ std::vector<sf::Vector2i> Grid::path_from_grid(std::vector<Grid::Mini_tile>& min
 	auto current = end;
 	
 	while (mini_grid[current.y * size_tiles_x + current.x].distance != 1) {
-		path.insert(path.end(), current);
+		path.insert(path.begin(), current);
 		if ((current.x + 1) < size_tiles_x && mini_grid[current.y * size_tiles_x + (current.x + 1)].distance == mini_grid[current.y * size_tiles_x + current.x].distance - 1) {
 			current.x++;
 			continue;
@@ -85,7 +85,7 @@ std::vector<sf::Vector2i> Grid::path_from_grid(std::vector<Grid::Mini_tile>& min
 			continue;
 		}
 	}
-	path.insert(path.end(), current);
+	path.insert(path.begin(), current);
 	return path;
 }
 
