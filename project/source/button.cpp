@@ -18,9 +18,12 @@ void Button::setup() {
 	text.setFont(font);
 	text.setFillColor(sf::Color::White);
 	text.setString(s);
+	text.setOrigin(size.x / 2, size.y / 2);
 	text.setPosition(location.x+2,location.y+2);
 
+
 	boundary.setPosition(location);
+	boundary.setOrigin(size.x/2, size.y/2);
 	boundary.setSize(size);
 	boundary.setFillColor(sf::Color::Green);
 }
