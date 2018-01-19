@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sim-project version="11.20" multi-file="no" uid="simpe807db9959d1424cb493543331ecd154">
+  <meta>
+    <name>Project</name>
+    <authors> </authors>
+    <description />
+  </meta>
+  <counters models="1">
+    <entity-names>
+      <counter>
+        <item-type type-id="class" type="UmlClass" />
+        <value>1</value>
+      </counter>
+    </entity-names>
+    <entity-ids>
+      <counter>
+        <item-type type-id="" type="AbstractElementGroup" />
+        <value>21</value>
+      </counter>
+      <counter>
+        <item-type type-id="class" type="UmlClass" />
+        <value>2</value>
+      </counter>
+    </entity-ids>
+    <diagrams>
+      <counter>
+        <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlClassDiagram</type>
+        <value>1</value>
+      </counter>
+    </diagrams>
+    <fields>
+      <counter>
+        <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.AttributeField</type>
+        <value>8</value>
+      </counter>
+      <counter>
+        <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
+        <value>15</value>
+      </counter>
+    </fields>
+  </counters>
+  <alias-groups />
+  <management uid="md-bc591f5298194eb2b6414173aeede1ad" name="" task-id-sequence="0">
+    <persons>
+      <person id="P0ea67b968ed04ee3be01200c7269b66d">
+        <first-name />
+        <last-name />
+        <role />
+        <e-mail />
+        <phone-number />
+        <description />
+        <color>#00000000</color>
+      </person>
+    </persons>
+    <teams />
+    <sprints />
+    <projects />
+    <modules />
+    <tasks />
+    <to-dos />
+  </management>
+  <glossary id="glsr-814036d6d6b9483c9bce3eff7f46778b" />
+  <types default="UML">
+    <type-sets>
+      <type-set file="UmlTypes.xml" />
+    </type-sets>
+    <custom-types>
+      <type id="Integer const (Interger const)" tid="" name="Integer const (Interger const)" description="" />
+      <type id="Integer const" tid="" name="Integer const" description="" />
+      <type id="sf::Vector2f" tid="" name="sf::Vector2f" description="" />
+      <type id="Float" tid="" name="Float" description="" />
+      <type id="sf::Color" tid="" name="sf::Color" description="" />
+      <type id="&amp; Integer (Uml.Integer)" tid="" name="&amp; Integer (Uml.Integer)" description="" />
+      <type id="Void" tid="" name="Void" description="" />
+      <type id="bool" tid="" name="bool" description="" />
+      <type id="sf::RenderWindow &amp;" tid="" name="sf::RenderWindow &amp;" description="" />
+      <type id="void" tid="" name="void" description="" />
+    </custom-types>
+  </types>
+  <items />
+  <models>
+    <model id="p34893cb2e8234c1f869b6fbd896fdadc_956720208" name="Model1" namespace="" order-index="1">
+      <meta>
+        <authors>
+          <author> </author>
+        </authors>
+        <description />
+        <creation-date>01/19/2018 19:33:11</creation-date>
+        <change-date>01/01/0001 00:00:00</change-date>
+        <revision-count>0</revision-count>
+        <version />
+      </meta>
+      <abstract-items />
+      <sub-models />
+      <diagram type="uml-class" id="pb1df69bf2e194a5aa5e73cf5aaf950aa_974245920" name="ClassDiagram1" order-index="1" uid="" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>01/19/2018 19:33:11</creation-date>
+          <change-date>01/19/2018 20:30:26</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <abstract-items>
+          <item id="di521220485485105064" cid="C001" type="class" name="Enemy" style-class="" is-abstract="true" visibility="package" change-tracking-state="added" creator="P0ea67b968ed04ee3be01200c7269b66d" creation-date="01/19/2018 19:33:23">
+            <style class="default" />
+            <attributes>
+              <attribute id="a7b7a31c6b8b741abaaea3357533e4b0a823" cid="ELEM001" name="lives" creation-date="01/01/0001 00:00:00" type="Integer" type-id="Uml.Integer" visibility="private">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-e65126a7-606b-401c-96d3-2c96f6273556" />
+                </source-codes>
+              </attribute>
+              <attribute id="a429a594672fe45be867c1a59e33ec333415" cid="ELEM002" name="damage" creation-date="01/01/0001 00:00:00" type="Integer const (Interger const)" type-id="Integer const (Interger const)" visibility="private">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-2dc21222-252c-4d65-8009-8c1103e604f5" />
+                </source-codes>
+              </attribute>
+              <attribute id="ae3286a8b961548df9cf4ea6da9716737317" cid="ELEM003" name="speed" creation-date="01/01/0001 00:00:00" type="Integer const" type-id="Integer const" visibility="private">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-21cfb061-c345-437c-b84d-640a939f1e2d" />
+                </source-codes>
+              </attribute>
+              <attribute id="aa76141a5b1ad4c4e86180a943eb941e2317" cid="ELEM006" name="position" creation-date="01/01/0001 00:00:00" type="sf::Vector2f" type-id="sf::Vector2f" visibility="protected">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-cccfda02-117a-4571-919d-37f5189c790b" />
+                </source-codes>
+              </attribute>
+              <attribute id="a4b96ba7ac03e429eaf792c7478c4bcf8961" cid="ELEM007" name="color" creation-date="01/01/0001 00:00:00" type="sf::Color" type-id="sf::Color" visibility="protected">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-b0189f39-6933-45bf-938e-a9572fe4eee3" />
+                </source-codes>
+              </attribute>
+            </attributes>
+            <operations>
+              <operation id="o756c5e52243e454ba3a3cc5758dffd791" cid="ELEM004" name="length" creation-date="01/01/0001 00:00:00" type="Float" type-id="Float" visibility="private">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p80ca2eb309524e5f9bf057055d191eb6" name="vector2" type="sf::Vector2f" type-id="sf::Vector2f" direction="In" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o2aa4e4d5b5804cef885817d19e34763d330" cid="ELEM005" name="normalize" creation-date="01/01/0001 00:00:00" type="sf::Vector2f" type-id="sf::Vector2f" visibility="private">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p2c9cbd27d9964e1180671743baf4fbeb" name="vector2f" type="sf::Vector2f" type-id="sf::Vector2f" direction="In" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o794097abd5754a46ab57170063d75c63421" cid="ELEM008" name="Enemy" creation-date="01/01/0001 00:00:00" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p70d5bbdd9e524610aaf3aa02b4e10857" name="start_position" type="sf::Vector2f" type-id="sf::Vector2f" direction="In" />
+                  <parameter id="p76badfa4cb544bff8190b3dd757e7f8a" name="color" type="sf::Color" type-id="sf::Color" direction="In" />
+                  <parameter id="pec93e544c6a54e54bbef8f8611963c47" name="damage" type="Integer const" type-id="Integer const" direction="In" />
+                  <parameter id="p94f8d27e48df40319d173ed46ec1c830" name="speed" type="Integer const" type-id="Integer const" direction="In" />
+                  <parameter id="pab25dc0438e34c8cafbb893e331b3b26" name="lives" type="Integer" type-id="Uml.Integer" direction="In" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o763e02e1ed7c4511bc11beb133152f6b639" cid="ELEM009" name="~Enemy" creation-date="01/01/0001 00:00:00" type="" type-id="" visibility="public">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="ocb710d05efe74790b5d9df114dde0bc3172" cid="ELEM010" name="attack" creation-date="01/01/0001 00:00:00" type="Void" type-id="Void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p08d0cdde5005431c940607bcd15a9e2b" name="lives_player" type="&amp; Integer (Uml.Integer)" type-id="&amp; Integer (Uml.Integer)" direction="In" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="oa3807f343f2549aabea0c0f9e6cbc591195" cid="ELEM011" name="take_damage" creation-date="01/01/0001 00:00:00" type="Void" type-id="Void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p4c82c1041eba40f8aa3d0328715a1cd9" name="damage_tower" type="Integer const" type-id="Integer const" direction="In" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="oa2453684e0424d258dcc9d9fe162fec6832" cid="ELEM012" name="move_direction" creation-date="01/01/0001 00:00:00" type="bool" type-id="bool" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pcaa3e92e2a6d4d0bae4600bd232d4566" name="location" type="sf::Vector2f" type-id="sf::Vector2f" direction="In" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o8ab235faaafa4614aa354d821de3b3fd288" cid="ELEM013" name="draw" creation-date="01/01/0001 00:00:00" type="void" type-id="void" visibility="public" virtual="true">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pc8d4f4ae914a425a95f9071548fe852f" name="window" type="sf::RenderWindow &amp;" type-id="sf::RenderWindow &amp;" direction="Out" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o732c5948ba11459fb4b58c9b1842565b369" cid="ELEM014" name="set_fill_color" creation-date="01/01/0001 00:00:00" type="void" type-id="void" visibility="public" virtual="true">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pf63cf2bea775469085a07a5a8de2235f" name="color" type="sf::Color" type-id="sf::Color" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+            </operations>
+            <source-codes>
+              <source-code language="ActionScript" />
+            </source-codes>
+          </item>
+          <item id="di698637841904255067" cid="C001" type="class" name="Enemy" style-class="" is-abstract="true" visibility="package" change-tracking-state="added" creator="P0ea67b968ed04ee3be01200c7269b66d" creation-date="01/19/2018 19:33:23">
+            <style class="default" />
+            <attributes>
+              <attribute id="a7b7a31c6b8b741abaaea3357533e4b0a823" cid="ELEM001" name="lives" creation-date="01/01/0001 00:00:00" type="Integer" type-id="Uml.Integer" visibility="private">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-e65126a7-606b-401c-96d3-2c96f6273556" />
+                </source-codes>
+              </attribute>
+              <attribute id="a429a594672fe45be867c1a59e33ec333415" cid="ELEM002" name="damage" creation-date="01/01/0001 00:00:00" type="Integer const (Interger const)" type-id="Integer const (Interger const)" visibility="private">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-2dc21222-252c-4d65-8009-8c1103e604f5" />
+                </source-codes>
+              </attribute>
+              <attribute id="ae3286a8b961548df9cf4ea6da9716737317" cid="ELEM003" name="speed" creation-date="01/01/0001 00:00:00" type="Integer const" type-id="Integer const" visibility="private">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-21cfb061-c345-437c-b84d-640a939f1e2d" />
+                </source-codes>
+              </attribute>
+              <attribute id="aa76141a5b1ad4c4e86180a943eb941e2317" cid="ELEM006" name="position" creation-date="01/01/0001 00:00:00" type="sf::Vector2f" type-id="sf::Vector2f" visibility="protected">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-cccfda02-117a-4571-919d-37f5189c790b" />
+                </source-codes>
+              </attribute>
+              <attribute id="a4b96ba7ac03e429eaf792c7478c4bcf8961" cid="ELEM007" name="color" creation-date="01/01/0001 00:00:00" type="sf::Color" type-id="sf::Color" visibility="protected">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-b0189f39-6933-45bf-938e-a9572fe4eee3" />
+                </source-codes>
+              </attribute>
+            </attributes>
+            <operations>
+              <operation id="o756c5e52243e454ba3a3cc5758dffd791" cid="ELEM004" name="length" creation-date="01/01/0001 00:00:00" type="Float" type-id="Float" visibility="private">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p80ca2eb309524e5f9bf057055d191eb6" name="vector2" type="sf::Vector2f" type-id="sf::Vector2f" direction="In" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o2aa4e4d5b5804cef885817d19e34763d330" cid="ELEM005" name="normalize" creation-date="01/01/0001 00:00:00" type="sf::Vector2f" type-id="sf::Vector2f" visibility="private">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p2c9cbd27d9964e1180671743baf4fbeb" name="vector2f" type="sf::Vector2f" type-id="sf::Vector2f" direction="In" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o794097abd5754a46ab57170063d75c63421" cid="ELEM008" name="Enemy" creation-date="01/01/0001 00:00:00" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p70d5bbdd9e524610aaf3aa02b4e10857" name="start_position" type="sf::Vector2f" type-id="sf::Vector2f" direction="In" />
+                  <parameter id="p76badfa4cb544bff8190b3dd757e7f8a" name="color" type="sf::Color" type-id="sf::Color" direction="In" />
+                  <parameter id="pec93e544c6a54e54bbef8f8611963c47" name="damage" type="Integer const" type-id="Integer const" direction="In" />
+                  <parameter id="p94f8d27e48df40319d173ed46ec1c830" name="speed" type="Integer const" type-id="Integer const" direction="In" />
+                  <parameter id="pab25dc0438e34c8cafbb893e331b3b26" name="lives" type="Integer" type-id="Uml.Integer" direction="In" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o763e02e1ed7c4511bc11beb133152f6b639" cid="ELEM009" name="~Enemy" creation-date="01/01/0001 00:00:00" type="" type-id="" visibility="public">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="ocb710d05efe74790b5d9df114dde0bc3172" cid="ELEM010" name="attack" creation-date="01/01/0001 00:00:00" type="Void" type-id="Void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p08d0cdde5005431c940607bcd15a9e2b" name="lives_player" type="&amp; Integer (Uml.Integer)" type-id="&amp; Integer (Uml.Integer)" direction="In" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="oa3807f343f2549aabea0c0f9e6cbc591195" cid="ELEM011" name="take_damage" creation-date="01/01/0001 00:00:00" type="Void" type-id="Void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p4c82c1041eba40f8aa3d0328715a1cd9" name="damage_tower" type="Integer const" type-id="Integer const" direction="In" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="oa2453684e0424d258dcc9d9fe162fec6832" cid="ELEM012" name="move_direction" creation-date="01/01/0001 00:00:00" type="bool" type-id="bool" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pcaa3e92e2a6d4d0bae4600bd232d4566" name="location" type="sf::Vector2f" type-id="sf::Vector2f" direction="In" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o8ab235faaafa4614aa354d821de3b3fd288" cid="ELEM013" name="draw" creation-date="01/01/0001 00:00:00" type="void" type-id="void" visibility="public" virtual="true">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pc8d4f4ae914a425a95f9071548fe852f" name="window" type="sf::RenderWindow &amp;" type-id="sf::RenderWindow &amp;" direction="Out" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o732c5948ba11459fb4b58c9b1842565b369" cid="ELEM014" name="set_fill_color" creation-date="01/01/0001 00:00:00" type="void" type-id="void" visibility="public" virtual="true">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pf63cf2bea775469085a07a5a8de2235f" name="color" type="sf::Color" type-id="sf::Color" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+            </operations>
+            <source-codes>
+              <source-code language="ActionScript" />
+            </source-codes>
+          </item>
+        </abstract-items>
+        <layer id="7d430991c8444f6198a03c77349daf2c" name="Default" visible="true" enabled="true" locked="false">
+          <item id="di521220485485105064" iid="42b2b5fe50a64cb3a069b8526f08d99c" creation-date="01/19/2018 19:33:23" order-index="0" type="entity">
+            <layout ax="128" ay="68" awidth="398" aheight="339" x="128" y="68" width="398" height="339" />
+            <class />
+          </item>
+        </layer>
+      </diagram>
+    </model>
+  </models>
+</sim-project>
