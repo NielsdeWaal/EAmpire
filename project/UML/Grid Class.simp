@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sim-project version="11.20" multi-file="no" uid="simp7e88dd4f502240efa7e99cf93c1def57">
+  <meta>
+    <name>Grid Class</name>
+    <authors> </authors>
+    <description />
+  </meta>
+  <counters models="1">
+    <entity-names>
+      <counter>
+        <item-type type-id="class" type="UmlClass" />
+        <value>1</value>
+      </counter>
+      <counter>
+        <item-type stereotype="struct" type-id="class" type="UmlClass" />
+        <value>1</value>
+      </counter>
+    </entity-names>
+    <entity-ids>
+      <counter>
+        <item-type type-id="" type="AbstractElementGroup" />
+        <value>85</value>
+      </counter>
+      <counter>
+        <item-type type-id="class" type="UmlClass" />
+        <value>3</value>
+      </counter>
+      <counter>
+        <item-type type-id="universal-connector" type="UniversalConnector" />
+        <value>4</value>
+      </counter>
+      <counter>
+        <item-type type-id="containment" type="UmlContainment" />
+        <value>2</value>
+      </counter>
+    </entity-ids>
+    <diagrams>
+      <counter>
+        <type>SoftwareIdeasModeler.Core.Diagrams.UmlDiagrams.UmlClassDiagram</type>
+        <value>1</value>
+      </counter>
+    </diagrams>
+    <fields>
+      <counter>
+        <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.AttributeField</type>
+        <value>15</value>
+      </counter>
+      <counter>
+        <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
+        <value>24</value>
+      </counter>
+    </fields>
+  </counters>
+  <alias-groups />
+  <management uid="md-d4b61bd5ae104b5fa137f79d4892ea6f" name="" task-id-sequence="0">
+    <persons>
+      <person id="P836934cdc2da43f09b20714d53920d80">
+        <first-name />
+        <last-name />
+        <role />
+        <e-mail />
+        <phone-number />
+        <description />
+        <color>#00000000</color>
+      </person>
+    </persons>
+    <teams />
+    <sprints />
+    <projects />
+    <modules />
+    <tasks />
+    <to-dos />
+  </management>
+  <glossary id="glsr-9c172bdfdbb64da38f2634768173557e" />
+  <types default="UML">
+    <type-sets>
+      <type-set file="UmlTypes.xml" />
+    </type-sets>
+    <custom-types>
+      <type id=":vector&lt;Mini_tile&gt;&amp; mini_grid" tid="" name=":vector&lt;Mini_tile&gt;&amp; mini_grid" description="" />
+      <type id="std: :vector&lt;Tile&gt;" tid="" name="std: :vector&lt;Tile&gt;" description="" />
+      <type id=":Vector2i start" tid="" name=":Vector2i start" description="" />
+      <type id=":Vector2i end" tid="" name=":Vector2i end" description="" />
+      <type id="std::vector&lt;sf::Vector2i&gt;" tid="" name="std::vector&lt;sf::Vector2i&gt;" description="" />
+      <type id="GameState*" tid="" name="GameState*" description="" />
+      <type id="struct Mini_tile" tid="" name="struct Mini_tile" description="" />
+      <type id="void" tid="" name="void" description="" />
+      <type id=":Vector2i location" tid="" name=":Vector2i location" description="" />
+    </custom-types>
+  </types>
+  <items />
+  <models>
+    <model id="p62660f3f835145c08a151b571f8a7652_844688449" name="Model1" namespace="" order-index="1">
+      <meta>
+        <authors>
+          <author> </author>
+        </authors>
+        <description />
+        <creation-date>01/19/2018 11:43:55</creation-date>
+        <change-date>01/01/0001 00:00:00</change-date>
+        <revision-count>0</revision-count>
+        <version />
+      </meta>
+      <abstract-items />
+      <sub-models />
+      <diagram type="uml-class" id="ped04dc42920b410e81782929ce4c7a43_593112074" name="ClassDiagram1" order-index="1" uid="" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false">
+        <style>
+          <background-color index="1" color="#FFFFFFFF" />
+          <background-color index="2" color="#FFFFFFFF" />
+          <background-type type="solid" />
+        </style>
+        <meta>
+          <authors>
+            <author> </author>
+          </authors>
+          <description />
+          <creation-date>01/19/2018 11:43:55</creation-date>
+          <change-date>01/19/2018 11:58:00</change-date>
+          <revision-count>0</revision-count>
+          <version />
+        </meta>
+        <abstract-items>
+          <item id="di819546690521952885" cid="C001" type="class" name="Grid" style-class="" visibility="package" change-tracking-state="added" creator="P836934cdc2da43f09b20714d53920d80" creation-date="01/19/2018 11:44:18">
+            <style class="default" />
+            <attributes>
+              <attribute id="acad877ffc34040ff8834b0c860e3591c384" cid="ELEM001" name="tiles" creation-date="01/01/0001 00:00:00" type="std: :vector&lt;Tile&gt;" type-id="std: :vector&lt;Tile&gt;" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a6902646d91df4a74aa1994bfa6ed024a998" cid="ELEM003" name="size_tiles_x" creation-date="01/01/0001 00:00:00" type="Integer" type-id="Uml.Integer" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="ada47fd76312046b79b3afc63de5a82dd517" cid="ELEM004" name="size_tiles_y" creation-date="01/01/0001 00:00:00" type="Integer" type-id="Uml.Integer" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="ab103deb704174683bd66de8f709746fe475" cid="ELEM005" name="scale" creation-date="01/01/0001 00:00:00" type="Integer" type-id="Uml.Integer" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a99f3bd1e2ac24e98aa1d14b65240c730275" cid="ELEM013" name="game_state" creation-date="01/01/0001 00:00:00" type="GameState*" type-id="GameState*" visibility="private">
+                <style class="default" />
+              </attribute>
+              <attribute id="a413506d983b442dabd9926115cab898a677" cid="ELEM014" name="self" creation-date="01/01/0001 00:00:00" type="struct Mini_tile" type-id="struct Mini_tile" visibility="private">
+                <style class="default" />
+              </attribute>
+            </attributes>
+            <operations>
+              <operation id="oead47de3f2204c11904f3f39318cf544227" cid="ELEM002" name="create_mini_grid" creation-date="01/01/0001 00:00:00" type="std: :vector&lt;Tile&gt;" type-id="std: :vector&lt;Tile&gt;" visibility="private">
+                <style class="default" />
+              </operation>
+              <operation id="o3506deb9c2854041808a92390ed388dd180" cid="ELEM011" name="fill_mini_grid" creation-date="01/01/0001 00:00:00" type="Boolean" type-id="Uml.Boolean" visibility="private">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pbdf8a56cc04f4a9f8d151fd795b5d23c" name="std" type=":vector&lt;Mini_tile&gt;&amp; mini_grid" type-id=":vector&lt;Mini_tile&gt;&amp; mini_grid" />
+                  <parameter id="p285b376f4d1342abbe182cb50c4ffb41" name="sf" type=":Vector2i start" type-id=":Vector2i start" />
+                  <parameter id="p305bac8d8a8646b0af29a5a7182263f5" name="sf" type=":Vector2i end" type-id=":Vector2i end" />
+                </parameters>
+              </operation>
+              <operation id="o6685efd6f1f747ce8a06d197ad96db373" cid="ELEM012" name="path_from_grid" creation-date="01/01/0001 00:00:00" type="std::vector&lt;sf::Vector2i&gt;" type-id="std::vector&lt;sf::Vector2i&gt;" visibility="private">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pd8bb207a6e02459f95279035de74c0f2" name="std" type=":vector&lt;Mini_tile&gt;&amp; mini_grid" type-id=":vector&lt;Mini_tile&gt;&amp; mini_grid" />
+                  <parameter id="p0f7e5fd728a54ed28c0384b81a144b53" name="sf" type=":Vector2i end" type-id=":Vector2i end" />
+                </parameters>
+              </operation>
+              <operation id="o6cf9210ece114c008760b9a1c2a4f1fc610" cid="ELEM016" name="Grid" creation-date="01/01/0001 00:00:00" type="" type-id="" visibility="public">
+                <style class="default" />
+              </operation>
+              <operation id="o4ca0df7159d3466e9aa65980b18eba65739" cid="ELEM015" name="Grid" creation-date="01/01/0001 00:00:00" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p1d2f04e969b043ed8cd8073022a82c6f" name="int tiles_x" type="" type-id="" />
+                  <parameter id="p32e97ac4967c4633bb73c2cf3e39ae1a" name="int tiles_y" type="" type-id="" />
+                  <parameter id="p25360466712b42fab01a5f7804e404f4" name="int tile_scale" type="" type-id="" />
+                </parameters>
+              </operation>
+              <operation id="o4b38c510d71341f5a749689aa0f05887809" cid="ELEM017" name="clicked" creation-date="01/01/0001 00:00:00" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p18d48133b01d4f248b9d6459456c0b59" name="int x" type="" type-id="" />
+                  <parameter id="p9b287b32490744d385d47236fde0d98e" name="int y" type="" type-id="" />
+                </parameters>
+              </operation>
+              <operation id="o3f60c57859454157b9b87480574edc5e783" cid="ELEM018" name="find_path" creation-date="01/01/0001 00:00:00" type="std::vector&lt;sf::Vector2i&gt;" type-id="std::vector&lt;sf::Vector2i&gt;" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p0d4bc5bac5b34970ae51ccc7e86ecec0" name="sf" type=":Vector2i start" type-id=":Vector2i start" />
+                  <parameter id="p2c60cfc07abe4a438567fb63f5631bba" name="sf" type=":Vector2i end" type-id=":Vector2i end" />
+                </parameters>
+              </operation>
+              <operation id="o5222ff25ec4a4f23b3460444551e4b1d354" cid="ELEM019" name="can_place" creation-date="01/01/0001 00:00:00" type=":Vector2i location" type-id=":Vector2i location" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pb8ebd1d158634dd2a2a6c7e9cb6bed0d" name="sf" type=":Vector2i start" type-id=":Vector2i start" />
+                  <parameter id="p96a0016cf6154dd1b4588466e8d90983" name="sf" type=":Vector2i end" type-id=":Vector2i end" />
+                  <parameter id="p41e20a45a5c24d3bb0a891769006bf7b" name="sf" type=":Vector2i location" type-id=":Vector2i location" />
+                </parameters>
+              </operation>
+              <operation id="ocdfb3697a6f144448384a95a5874e023247" cid="ELEM020" name="set_tile" creation-date="01/01/0001 00:00:00" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p1dcef0184c4348888caf96bea4ff6442" name="int tile_x" type="" type-id="" />
+                  <parameter id="p04e86615be00414aa46989b0a816941b" name="int tile_y" type="" type-id="" />
+                  <parameter id="p85c4eb7abbad44479ddd20de40c1a7e9" name="Tile tile" type="" type-id="" />
+                </parameters>
+              </operation>
+              <operation id="ob2ada0b94271439fa4e812e26a8c012f70" cid="ELEM021" name="set_tile_navigability" creation-date="01/01/0001 00:00:00" type="void" type-id="void" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p5e0569cff5d2450a91675e7de650cd31" name="int tile_x" type="" type-id="" />
+                  <parameter id="p9ec116c9e0d54d39be520e5d875f6c82" name="int tile_y" type="" type-id="" />
+                  <parameter id="p3c702dd531c64b14af5777606838cedb" name="bool navigability" type="" type-id="" />
+                </parameters>
+              </operation>
+              <operation id="o387fd518cc644409bd347cb821d4fde6434" cid="ELEM022" name="is_navigable" creation-date="01/01/0001 00:00:00" type="Boolean" type-id="Uml.Boolean" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p1ca9e18aca4a4ce0a349bbe793c43236" name="int tile_x" type="" type-id="" />
+                  <parameter id="p9cf9f218dbfa45ebadce151069cda245" name="int tile_y" type="" type-id="" />
+                </parameters>
+              </operation>
+              <operation id="o4476ee3e13034978a95890b5925f5c9d334" cid="ELEM023" name="update" creation-date="01/01/0001 00:00:00" type="void" type-id="void" visibility="public">
+                <style class="default" />
+              </operation>
+            </operations>
+          </item>
+          <item id="di567987262932524374" cid="C002" type="class" name="Mini_tile" style-class="" visibility="private" change-tracking-state="added" creator="P836934cdc2da43f09b20714d53920d80" creation-date="01/19/2018 11:48:27">
+            <stereotypes>
+              <stereotype name="struct" />
+            </stereotypes>
+            <style class="default" />
+            <attributes>
+              <attribute id="a378a46198e354a619103ab099b8af33750" cid="ELEM010" name="distance" creation-date="01/01/0001 00:00:00" type="Integer" type-id="Uml.Integer" visibility="public">
+                <style class="default" />
+              </attribute>
+              <attribute id="a2638672fedf44d6bbf4a03bb1e77cd00355" cid="ELEM009" name="navigable" creation-date="01/01/0001 00:00:00" type="Boolean" type-id="Uml.Boolean" visibility="public">
+                <style class="default" />
+              </attribute>
+            </attributes>
+          </item>
+          <item id="di946366625326646713" cid="CNT001" type="containment" name="" style-class="" visibility="package" change-tracking-state="added" creator="P836934cdc2da43f09b20714d53920d80" creation-date="01/19/2018 11:58:00" from="di567987262932524374" to="di819546690521952885">
+            <style class="default" />
+          </item>
+        </abstract-items>
+        <layer id="f119524fc2c24c62a7e558b3de256dda" name="Default" visible="true" enabled="true" locked="false">
+          <item id="di819546690521952885" iid="df364bc3bb5d4964b3f424d6a3798643" creation-date="01/19/2018 11:44:18" order-index="0" type="entity">
+            <layout ax="530" ay="170" awidth="354" aheight="425" x="530" y="170" width="354" height="425" />
+            <class />
+          </item>
+          <item id="di567987262932524374" iid="58c38665bc5046f3b257b7cc5aa02204" creation-date="01/19/2018 11:48:27" order-index="1" type="entity">
+            <layout ax="300" ay="340" awidth="140" aheight="80" x="300" y="340" width="140" height="80" />
+            <class />
+          </item>
+          <item id="di946366625326646713" iid="e77c6833dbc64c0bb107155747931db2" creation-date="01/19/2018 11:58:00" order-index="2" type="relation">
+            <layout line-style="oblique" lock-start-point="false" lock-end-point="false" lock-to-fields="false" auto-path="" x1="440" y1="380" x2="530" y2="381" start-border-pos="0.376298236846924" end-border-pos="0.875912026798024" name-position="0,0">
+              <points>
+                <point x="440" y="380" />
+                <point x="530" y="381" />
+              </points>
+            </layout>
+            <relation from="di567987262932524374" from-iid="58c38665bc5046f3b257b7cc5aa02204" to="di819546690521952885" to-iid="df364bc3bb5d4964b3f424d6a3798643" />
+          </item>
+        </layer>
+      </diagram>
+    </model>
+  </models>
+</sim-project>
