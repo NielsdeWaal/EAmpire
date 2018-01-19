@@ -13,3 +13,7 @@ void Tile::set_navigability(bool navigability) {
 bool Tile::is_navigable() {
 	return navigable;
 }
+
+void Tile::clicked() {
+	navigable = !navigable;
+}

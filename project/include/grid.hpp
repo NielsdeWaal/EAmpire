@@ -26,6 +26,12 @@ class Grid {
 	int start_x;
 	int start_y;
 
+	sf::Texture tile_normal;
+	sf::Texture tile_blocked;
+
+	sf::Sprite sprite_tile_normal;
+	sf::Sprite sprite_tile_blocked;
+
 	/**
 	* @brief Struct to help with path-finding.
 	*

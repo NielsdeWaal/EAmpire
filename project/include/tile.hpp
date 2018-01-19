@@ -18,6 +18,8 @@ class Tile {
 	bool is_navigable();
 
 	int getID();
+
+	void clicked();
 };
 
 #endif // TILE_HPP

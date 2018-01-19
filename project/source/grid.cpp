@@ -22,15 +22,6 @@ bool Grid::fill_mini_grid(std::vector<Grid::Mini_tile>& mini_grid, sf::Vector2i 
 		next_available = false;
 		for (int y = 0; y < size_tiles_y; y++) {
 			for (int x = 0; x < size_tiles_x; x++) {
-
-
-				if (!mini_grid[y * size_tiles_x + x].navigable) {          // Debug
-					std::cout << "X";                                      //
-				}                                                          //
-				else {                                                     //
-					std::cout << mini_grid[y * size_tiles_x + x].distance; //
-				}
-
 				if (mini_grid[y * size_tiles_x + x].distance == current_distance) {
 					if ((x + 1) < size_tiles_x && mini_grid[y * size_tiles_x + (x + 1)].navigable && mini_grid[y * size_tiles_x + (x + 1)].distance == 0) {
 						mini_grid[y * size_tiles_x + (x + 1)].distance = (current_distance + 1);
@@ -50,12 +41,10 @@ bool Grid::fill_mini_grid(std::vector<Grid::Mini_tile>& mini_grid, sf::Vector2i 
 					}
 				}
 			}
-			std::cout << "\n"; // Debug
 		}
 		if (mini_grid[end.y * size_tiles_x + end.x].distance != 0) {
 			return true;
 		}
-		std::cout << "\n"; // Debug
 		current_distance++;
 	}
 	std::cout << "No route"; // Debug
@@ -96,7 +85,12 @@ Grid::Grid(): //Default constructor
 	scale(50),
 	start_x(0),
 	start_y(0)
-	{}
+	{
+		tile_normal.loadFromFile("textures/tile_normal.png");
+		tile_blocked.loadFromFile("textures/tile_blocked.png");
+		sprite_tile_normal.setTexture(tile_normal);
+		sprite_tile_blocked.setTexture(tile_blocked);
+	}
 
 Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0, int start_y = 0):
 	tiles(std::vector<Tile>(tiles_x * tiles_y)),
@@ -105,14 +99,19 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0, int start_
 	scale(scale),
 	start_x(start_x),
 	start_y(start_y)
-	{}
+	{
+		tile_normal.loadFromFile("textures/tile_normal.png");
+		tile_blocked.loadFromFile("textures/tile_blocked.png");
+		sprite_tile_normal.setTexture(tile_normal);
+		sprite_tile_blocked.setTexture(tile_blocked);
+	}
 
 void Grid::clicked(int x, int y) {
 	if ((x - start_x) < 0 || (y - start_y) < 0 || (x - start_x) >= (size_tiles_x * scale) || (y - start_y) >= (size_tiles_y * scale)) {
 		return;
 	}
 	std::cout << "Clicked on tile (" << ((x - start_x) / scale) << ", " << ((y - start_y) / scale) << ")\n";
-	//tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].clicked;
+	tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].clicked();
 }
 
 std::vector<sf::Vector2i> Grid::find_path(sf::Vector2i start, sf::Vector2i end) {
@@ -121,9 +120,6 @@ std::vector<sf::Vector2i> Grid::find_path(sf::Vector2i start, sf::Vector2i end) 
 		return (std::vector<sf::Vector2i>(0));
 	}
 	auto path = path_from_grid(mini_grid, end);
-	for(auto coordinate : path) {
-		std::cout << "(" << coordinate.x << ", " << coordinate.y << ")\n";
-	}
 	return path;
 }
 
@@ -146,14 +142,6 @@ bool Grid::is_navigable(int tile_x, int tile_y) {
 }
 
 void Grid::draw(sf::RenderWindow& window) {
-	sf::Texture tile_normal;
-	sf::Texture tile_blocked;
-	tile_normal.loadFromFile("textures/tile_normal.png");
-	tile_blocked.loadFromFile("textures/tile_blocked.png");
-	sf::Sprite sprite_tile_normal;
-	sf::Sprite sprite_tile_blocked;
-	sprite_tile_normal.setTexture(tile_normal);
-	sprite_tile_blocked.setTexture(tile_blocked);
 	for (int x = 0; x < size_tiles_x; x++) {
 		for (int y = 0; y < size_tiles_y; y++) {
 			if (tiles[y * size_tiles_x + x].is_navigable()) {
