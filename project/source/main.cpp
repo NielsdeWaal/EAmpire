@@ -30,15 +30,25 @@ int main(void) {
 	
 	std::string play = "Play";
 	std::string exit = "Exit";
+	std::string tower1 = "Tower#1";
 	
-	Button play_button(play, sf::Vector2f{ float((window.getSize().x / 2)), float((window.getSize().y / 2)) }, sf::Vector2f{ 70,50 }, window);
-	Button exit_button(exit, sf::Vector2f{ float((window.getSize().x / 2)), float((window.getSize().y / 2))+window.getSize().y*0.15f }, sf::Vector2f{ 70,50 }, window);
+	//Button play_button(play, sf::Vector2f{ float((window.getSize().x / 2)), float((window.getSize().y / 2)) }, sf::Vector2f{ 70,50 }, window);
+	Button exit_button(	exit, 
+						sf::Vector2f{ (float((window.getSize().x / 2 )+ 212)), (float((window.getSize().y / 2)+100))+window.getSize().y*0.15f }, 
+						sf::Vector2f{ 70,50 }, 
+						window);
+	Button basic_tower(	tower1, 
+						sf::Vector2f{ (float((window.getSize().x / 2) + 325)), (float((window.getSize().y-window.getSize().y)+77)) },
+						sf::Vector2f{ 130,50 },
+						window);
+	std::cout << basic_tower.get_location().x << ' ' << basic_tower.get_location().y << std::endl;
 
-	
 	while( window.isOpen()) {
 
 		auto path = grid.find_path(start, end);
 		sf::Event evnt;
+
+		auto state = "free";
 		
 		while (window.pollEvent(evnt)) {
 
@@ -49,13 +59,30 @@ int main(void) {
 				break;
 
 			case sf::Event::MouseButtonPressed:
-				if	(play_button.is_pressed()){
-					std::cout << "Play button pressed" << std::endl;
-					//Change gamestate to new board
+				//if	(play_button.is_pressed()){
+				//	std::cout << "Play button pressed" << std::endl;
+				//	//Change gamestate to new board
+				//}
+
+				if (evnt.mouseButton.button == sf::Mouse::Left) {
+					if (exit_button.is_pressed()) {
+						window.close();
+					}
+					if (basic_tower.is_pressed()) {
+						if (state == "free") {
+							state = "building";
+							std::cout << state << std::endl;
+						}
+					}
+					grid.clicked(evnt.mouseButton.x, evnt.mouseButton.y);
 				}
-				if (exit_button.is_pressed()) {
-					window.close();
+				if (evnt.mouseButton.button == sf::Mouse::Right) {
+					if (state == "building") {
+						state = "free";
+						std::cout << state << std::endl;
+					}
 				}
+
 				break;
 
 			case sf::Event::LostFocus:
@@ -67,25 +94,6 @@ int main(void) {
 				std::cout << "MOUSE HAS ENTERED THE BUILDING" << std::endl;
 				//continue game
 				break;
-			case sf::Event::MouseButtonPressed:
-				if (evnt.mouseButton.button == sf::Mouse::Left) {
-					grid.clicked(evnt.mouseButton.x, evnt.mouseButton.y);
-				}
-
-				//if (event.mouseButton.button == sf::Mouse::Right) {
-				//	if (lastButton) {
-				//		//start.x = (int)event.mouseButton.x / 50;
-				//		//start.y = (int)event.mouseButton.y / 50;
-				//		lastButton = !lastButton;
-				//	}
-				//	else {
-				//		//end.x = (int)event.mouseButton.x / 50;
-				//		//end.y = (int)event.mouseButton.y / 50;
-				//		lastButton = !lastButton;
-				//	}
-				//}
-
-				break;
 
 			case sf::Event::KeyPressed:
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
@@ -96,7 +104,6 @@ int main(void) {
 			}
 
 			}
-		}
 		//game.update();
 
 		window.clear();
@@ -107,7 +114,8 @@ int main(void) {
 			sprite_tile_path.setPosition(tile.x * 50 + (window.getSize().x / 4), tile.y * 50 + 50);
 			window.draw(sprite_tile_path);
 		}
-		//exit_button.draw();
+		exit_button.draw();
+		basic_tower.draw();
 		//play_button.draw();
 		window.display();
 		game.update();
