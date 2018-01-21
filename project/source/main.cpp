@@ -21,8 +21,8 @@ int main(void) {
 
 	action actions[] = {
 		action([&cursorPos, &a1, &window]() {
-		if (cursorPos.y <= a1.getCircle().getGlobalBounds().top + a1.getCircle().getGlobalBounds().height && cursorPos.y >= a1.getCircle().getGlobalBounds().top - a1.getCircle().getRadius()&&
-			cursorPos.x <= a1.getCircle().getGlobalBounds().left + a1.getCircle().getGlobalBounds().width && cursorPos.x >= a1.getCircle().getGlobalBounds().left) {
+		if (cursorPos.y <= a1.get_circle().getGlobalBounds().top + a1.get_circle().getGlobalBounds().height && cursorPos.y >= a1.get_circle().getGlobalBounds().top - a1.get_circle().getRadius()&&
+			cursorPos.x <= a1.get_circle().getGlobalBounds().left + a1.get_circle().getGlobalBounds().width && cursorPos.x >= a1.get_circle().getGlobalBounds().left) {
 			a1.set_fill_color(sf::Color::Blue);
 		} else {
 			a1.set_fill_color(sf::Color::Red);
