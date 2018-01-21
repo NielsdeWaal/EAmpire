@@ -110,7 +110,7 @@ bool Grid::is_clicked(int x, int y) {
 	if ((x - start_x) < 0 || (y - start_y) < 0 || (x - start_x) >= (size_tiles_x * scale) || (y - start_y) >= (size_tiles_y * scale)) {
 		return 0;
 	}
-	std::cout << "Clicked on tile (" << ((x - start_x) / scale) << ", " << ((y - start_y) / scale) << ")\n";
+	//std::cout << "Clicked on tile (" << ((x - start_x) / scale) << ", " << ((y - start_y) / scale) << ")\n";
 	return 1;
 }
 

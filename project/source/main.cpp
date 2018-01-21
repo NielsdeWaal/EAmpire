@@ -12,9 +12,6 @@
 int main(void) {
     auto game = Game();
 
-	//for (int i = 0; i < 9; i++) {
-	//	grid.set_tile_navigability(4, i, false);
-	//}
 	sf::RenderWindow window(sf::VideoMode(1000, 750), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close );
 
 	Grid grid(10, 10, 50, window.getSize().x/4, 50);
@@ -55,13 +52,20 @@ int main(void) {
 		action(sf::Keyboard::Delete,	[&state]	{state = "selling"; }),
 		action(sf::Mouse::Right,		[&state]	{state = "free"; }),
 		action(sf::Mouse::Left,			[&state, &window,&exit_button,&basic_tower,&sell_button,&grid]
-													{	if (exit_button.is_pressed()) { window.close(); }
-														if (basic_tower.is_pressed()) { state = "building"; }
-														if (sell_button.is_pressed()) { state = "selling"; }
+													{	if (exit_button.is_pressed()) { window.close(); 
+														}
+														if (basic_tower.is_pressed()) { state = "building"; 
+														}
+														if (sell_button.is_pressed()) { state = "selling"; 
+														}
 														if (grid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y) && (!strcmp(state,"building"))) {
-															grid.set_built(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y); state = "free";}
+															grid.set_built(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y); 
+															state = "free"; 
+														}
 														if (grid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y) && (!strcmp(state, "selling"))) {
-															grid.set_free(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y); state = "free";}
+															grid.set_free(sf::Mouse::getPosition(window).x,   sf::Mouse::getPosition(window).y); 
+															state = "free";
+														}
 
 													})
 	};
@@ -95,8 +99,6 @@ int main(void) {
 
 			}
 
-			//game.update();
-
 			window.clear();
 
 			grid.draw(window);
@@ -105,6 +107,7 @@ int main(void) {
 				sprite_tile_path.setPosition(tile.x * 50 + (window.getSize().x / 4), tile.y * 50 + 50);
 				window.draw(sprite_tile_path);
 			}
+
 			exit_button.draw();
 			basic_tower.draw();
 			sell_button.draw();
