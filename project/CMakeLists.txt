@@ -3,6 +3,10 @@ cmake_minimum_required(VERSION 2.6)
 project(EAmpire)
 set(EXE "main")
 
+#find_package(PkgConfig)
+#pkg_check_modules(GTEST REQUIRED gtest>=1.7.0)
+#pkg_check_modules(GMOCK REQUIRED gtest>=1.7.0)
+
 enable_testing()
 
 if(NOT MSVC)
@@ -60,8 +64,12 @@ endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/source)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
+
+#add_subdirectory(test)
 
 include(cmake_modules/clang-cxx-dev-tools.cmake)
+include(cmake_modules/FindSFML.cmake)
 
 set(sources
     # Main source.
@@ -71,11 +79,14 @@ set(sources
     source/grid.cpp
     source/tile.cpp
     source/gameState.cpp
+	#source/button.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
     include/gameState.hpp
-    include/tile.hpp)
+    include/tile.hpp
+    #include/button.hpp)
+    )
 
 enable_testing()
 

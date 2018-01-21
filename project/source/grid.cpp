@@ -156,6 +156,14 @@ void Grid::draw(sf::RenderWindow& window) {
 	}
 }
 
+std::pair<int, int> Grid::get_grid_size() {
+    return std::make_pair(size_tiles_x, size_tiles_y);
+}
+
+std::pair<int, int> Grid::get_start_values() {
+    return std::make_pair(start_x, start_y);
+}
+
 void Grid::update() {
 	for(auto tile : tiles) {
 		//tile.update();

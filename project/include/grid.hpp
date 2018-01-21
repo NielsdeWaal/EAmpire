@@ -1,6 +1,7 @@
 #ifndef GRID_HPP
 #define GRID_HPP
 
+#include <utility>
 #include <vector>
 #include <SFML/Graphics.hpp>
 
@@ -179,6 +180,20 @@ class Grid {
 	* NOTE: Doesn't yet work.
 	**/
     void update();
+
+        /**
+         * @brief Returns size of grid
+         *
+         * @return std::pair with size values
+         */
+    std::pair<int, int> get_grid_size();
+
+        /**
+         * @brief Returns start
+         *
+         * @return std::pair with start values
+         */
+    std::pair<int, int> get_start_values();
 };
 
 #endif // GRID_HPP
