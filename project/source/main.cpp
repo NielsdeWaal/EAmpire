@@ -31,6 +31,7 @@ int main(void) {
 	std::string play = "Play";
 	std::string exit = "Exit";
 	std::string tower1 = "Tower#1";
+	std::string sell = "Sell";
 	
 	//Button play_button(play, sf::Vector2f{ float((window.getSize().x / 2)), float((window.getSize().y / 2)) }, sf::Vector2f{ 70,50 }, window);
 	Button exit_button(	exit, 
@@ -41,19 +42,28 @@ int main(void) {
 						sf::Vector2f{ (float((window.getSize().x / 2) + 325)), (float((window.getSize().y-window.getSize().y)+77)) },
 						sf::Vector2f{ 130,50 },
 						window);
+	Button sell_button(	sell,
+						sf::Vector2f{ (float((window.getSize().x / 2) + 325)), (float((window.getSize().y-window.getSize().y)+137)) },
+						sf::Vector2f{ 130,50 },
+						window);
 
 	auto state = "free";
 
 	action actions[] = {
-		action(sf::Keyboard::Escape, [&window] {window.close(); }),
-		action(sf::Mouse::Left, [&state, &window,&exit_button,&basic_tower,&grid]
-												{		if (exit_button.is_pressed()) { window.close(); }
-														if (basic_tower.is_pressed()) { if (!strcmp(state, "free")) { state = "building"; } }
+		action(sf::Keyboard::Escape,	[&window]	{window.close(); }),
+		action(sf::Keyboard::Num1,		[&state]	{state = "building"; }),
+		action(sf::Keyboard::Delete,	[&state]	{state = "selling"; }),
+		action(sf::Mouse::Right,		[&state]	{state = "free"; }),
+		action(sf::Mouse::Left,			[&state, &window,&exit_button,&basic_tower,&sell_button,&grid]
+													{	if (exit_button.is_pressed()) { window.close(); }
+														if (basic_tower.is_pressed()) { state = "building"; }
+														if (sell_button.is_pressed()) { state = "selling"; }
 														if (grid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y) && (!strcmp(state,"building"))) {
-															grid.set_navigability(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y); state = "free";}
+															grid.set_built(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y); state = "free";}
+														if (grid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y) && (!strcmp(state, "selling"))) {
+															grid.set_free(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y); state = "free";}
 
-												}),
-		action(sf::Mouse::Right, [&state] {if (!strcmp(state,"building")) { state = "free"; } })
+													})
 	};
 
 	while (window.isOpen()) {
@@ -73,36 +83,6 @@ int main(void) {
 				window.close();
 				break;
 
-			//case sf::Event::MouseButtonPressed:
-				////if	(play_button.is_pressed()){
-				////	std::cout << "Play button pressed" << std::endl;
-				////	//Change gamestate to new board
-				////}
-
-				//if (evnt.mouseButton.button == sf::Mouse::Left) {
-				//	if (exit_button.is_pressed()) {
-				//		window.close();
-				//	}
-				//	if (basic_tower.is_pressed()) {
-				//		if (!strcmp(state,"free")) {
-				//			state = "building";
-				//			std::cout << state << std::endl;
-				//		}
-				//	}
-				//	if ((grid.is_clicked(evnt.mouseButton.x, evnt.mouseButton.y)) && (!strcmp(state,"building"))) {
-				//		grid.set_navigability(evnt.mouseButton.x, evnt.mouseButton.y);
-				//		//Build tower
-				//		state = "free";
-				//	}
-				//}
-				//else if (evnt.mouseButton.button == sf::Mouse::Right) {
-				//	if (!strcmp(state,"building")) {
-				//		state = "free";
-				//		std::cout << state << std::endl;
-				//	}
-				//}
-				//break;
-
 			case sf::Event::LostFocus:
 				std::cout << "MOUSE HAS LEFT THE BUILDING" << std::endl;
 				//pause game
@@ -113,12 +93,6 @@ int main(void) {
 				//continue game
 				break;
 
-			//case sf::Event::KeyPressed:
-			//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
-			//		//Pop up 'Do you want to exit?' screen
-			//		window.close();
-			//	}
-			//	break;
 			}
 
 			//game.update();
@@ -133,7 +107,9 @@ int main(void) {
 			}
 			exit_button.draw();
 			basic_tower.draw();
+			sell_button.draw();
 			//play_button.draw();
+			
 			window.display();
 			game.update();
 

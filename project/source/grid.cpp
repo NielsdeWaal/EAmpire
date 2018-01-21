@@ -114,8 +114,12 @@ bool Grid::is_clicked(int x, int y) {
 	return 1;
 }
 
-void Grid::set_navigability(int x, int y) {
-	tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].clicked();
+void Grid::set_built(int x, int y) {
+	tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].set_built();
+}
+
+void Grid::set_free(int x, int y) {
+	tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].set_free();
 }
 
 std::vector<sf::Vector2i> Grid::find_path(sf::Vector2i start, sf::Vector2i end) {

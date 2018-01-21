@@ -112,7 +112,9 @@ class Grid {
 	**/
 	bool is_clicked(int x, int y);
 
-	void set_navigability(int x, int y);
+	void set_built(int x, int y);
+
+	void set_free(int x, int y);
 
 	/**
 	* @brief Finds a path in the grid.
