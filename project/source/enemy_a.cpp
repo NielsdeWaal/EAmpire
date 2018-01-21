@@ -18,7 +18,7 @@ void Enemy_a::draw(sf::RenderWindow & window) {
 	window.draw(circle);
 }
 
-sf::CircleShape Enemy_a::getCircle() {
+sf::CircleShape Enemy_a::get_circle() {
 	return circle;
 }
 

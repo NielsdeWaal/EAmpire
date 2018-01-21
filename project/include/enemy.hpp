@@ -27,7 +27,7 @@ private:
 	* @param[in]	vector				The vector that have to be calculated
 	* @return		float				The length of the vector
 	*/
-	float length(sf::Vector2f vector2);
+	float length(sf::Vector2f vector2f);
 
 	/**
 	* @brief Private function to normalize a sf::vector2f in 2D

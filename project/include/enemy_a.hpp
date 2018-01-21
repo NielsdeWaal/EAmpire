@@ -66,7 +66,7 @@ public:
 	*
 	* This is useful for other class to get the globalbounds of the circle
 	*/
-	sf::CircleShape getCircle();
+	sf::CircleShape get_circle();
 
 	//is not finished
 	//void draw_string(sf::Vector2f position) override;

@@ -1,8 +1,8 @@
 #include "enemy.hpp"
 
 //PRIVATE
-float Enemy::length(sf::Vector2f vector2) {
-	return sqrt(vector2.x * vector2.x + vector2.y * vector2.y);
+float Enemy::length(sf::Vector2f vector2f) {
+	return sqrt(vector2f.x * vector2f.x + vector2f.y * vector2f.y);
 }
 
 sf::Vector2f Enemy::normalize(sf::Vector2f vector2f) {
