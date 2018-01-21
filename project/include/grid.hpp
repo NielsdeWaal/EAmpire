@@ -110,7 +110,9 @@ class Grid {
 	* @param[in] x The relative x coordinate in the grid.
 	* @param[in] y The relative y coordinate in the grid.
 	**/
-	void clicked(int x, int y);
+	bool is_clicked(int x, int y);
+
+	void set_navigability(int x, int y);
 
 	/**
 	* @brief Finds a path in the grid.

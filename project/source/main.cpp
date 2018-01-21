@@ -43,16 +43,18 @@ int main(void) {
 						window);
 	std::cout << basic_tower.get_location().x << ' ' << basic_tower.get_location().y << std::endl;
 
-	while( window.isOpen()) {
+	auto state = "free";
+
+	while (window.isOpen()) {
 
 		auto path = grid.find_path(start, end);
 		sf::Event evnt;
 
-		auto state = "free";
-		
+
+
 		while (window.pollEvent(evnt)) {
 
-			switch(evnt.type)
+			switch (evnt.type)
 			{
 			case sf::Event::Closed:
 				window.close();
@@ -69,20 +71,23 @@ int main(void) {
 						window.close();
 					}
 					if (basic_tower.is_pressed()) {
-						if (state == "free") {
+						if (!strcmp(state,"free")) {
 							state = "building";
 							std::cout << state << std::endl;
 						}
 					}
-					grid.clicked(evnt.mouseButton.x, evnt.mouseButton.y);
+					if ((grid.is_clicked(evnt.mouseButton.x, evnt.mouseButton.y)) && (!strcmp(state,"building"))) {
+						grid.set_navigability(evnt.mouseButton.x, evnt.mouseButton.y);
+						//Build tower
+						state = "free";
+					}
 				}
-				if (evnt.mouseButton.button == sf::Mouse::Right) {
-					if (state == "building") {
+				else if (evnt.mouseButton.button == sf::Mouse::Right) {
+					if (!strcmp(state,"building")) {
 						state = "free";
 						std::cout << state << std::endl;
 					}
 				}
-
 				break;
 
 			case sf::Event::LostFocus:
@@ -103,22 +108,23 @@ int main(void) {
 				break;
 			}
 
-			}
-		//game.update();
+			//game.update();
 
-		window.clear();
-		
-		grid.draw(window);
-		
-		for (auto tile : path) {
-			sprite_tile_path.setPosition(tile.x * 50 + (window.getSize().x / 4), tile.y * 50 + 50);
-			window.draw(sprite_tile_path);
+			window.clear();
+
+			grid.draw(window);
+
+			for (auto tile : path) {
+				sprite_tile_path.setPosition(tile.x * 50 + (window.getSize().x / 4), tile.y * 50 + 50);
+				window.draw(sprite_tile_path);
+			}
+			exit_button.draw();
+			basic_tower.draw();
+			//play_button.draw();
+			window.display();
+			game.update();
+
 		}
-		exit_button.draw();
-		basic_tower.draw();
-		//play_button.draw();
-		window.display();
-		game.update();
 	}
     return 0;
 }
