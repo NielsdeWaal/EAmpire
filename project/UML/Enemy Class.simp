@@ -9,16 +9,20 @@
     <entity-names>
       <counter>
         <item-type type-id="class" type="UmlClass" />
-        <value>1</value>
+        <value>2</value>
       </counter>
     </entity-names>
     <entity-ids>
       <counter>
-        <item-type type-id="" type="AbstractElementGroup" />
-        <value>21</value>
+        <item-type type-id="class" type="UmlClass" />
+        <value>3</value>
       </counter>
       <counter>
-        <item-type type-id="class" type="UmlClass" />
+        <item-type type-id="" type="AbstractElementGroup" />
+        <value>10</value>
+      </counter>
+      <counter>
+        <item-type type-id="generalization" type="UmlGeneralization" />
         <value>2</value>
       </counter>
     </entity-ids>
@@ -31,16 +35,17 @@
     <fields>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.AttributeField</type>
-        <value>8</value>
+        <value>17</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
-        <value>15</value>
+        <value>22</value>
       </counter>
     </fields>
   </counters>
   <alias-groups />
   <management uid="md-bc591f5298194eb2b6414173aeede1ad" name="" task-id-sequence="0">
+    <working-schedule uid="ws-78c621fbef16453b850cc78771c43201" hours="8" monday="8" tuesday="8" wednesday="8" thursday="8" friday="8" saturday="0" sunday="0" />
     <persons>
       <person id="P0ea67b968ed04ee3be01200c7269b66d">
         <first-name />
@@ -50,6 +55,7 @@
         <phone-number />
         <description />
         <color>#00000000</color>
+        <working-schedule uid="ws-ab7f7893b9d64164a6d056f033cb4865" hours="8" monday="8" tuesday="8" wednesday="8" thursday="8" friday="8" saturday="0" sunday="0" />
       </person>
     </persons>
     <teams />
@@ -75,6 +81,9 @@
       <type id="bool" tid="" name="bool" description="" />
       <type id="sf::RenderWindow &amp;" tid="" name="sf::RenderWindow &amp;" description="" />
       <type id="void" tid="" name="void" description="" />
+      <type id="const sf::Color (sf::Color)" tid="" name="const sf::Color (sf::Color)" description="" />
+      <type id="const Float" tid="" name="const Float" description="" />
+      <type id="sf::CircleShape" tid="" name="sf::CircleShape" description="" />
     </custom-types>
   </types>
   <items />
@@ -92,7 +101,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pb1df69bf2e194a5aa5e73cf5aaf950aa_974245920" name="ClassDiagram1" order-index="1" uid="" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false">
+      <diagram type="uml-class" id="pb1df69bf2e194a5aa5e73cf5aaf950aa_974245920" name="ClassDiagram1" order-index="1" uid="" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,-1">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -104,7 +113,7 @@
           </authors>
           <description />
           <creation-date>01/19/2018 19:33:11</creation-date>
-          <change-date>01/19/2018 20:30:26</change-date>
+          <change-date>01/21/2018 17:58:53</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -353,11 +362,93 @@
               <source-code language="ActionScript" />
             </source-codes>
           </item>
+          <item id="di845925958607057174" cid="C002" type="class" name="Enemy_a" style-class="" visibility="package" change-tracking-state="added" creation-date="01/21/2018 17:31:39">
+            <style class="default" />
+            <attributes>
+              <attribute id="af6ffed4ddde14f51aaa3514b6f4e8b13451" cid="ELEM015" name="diameter" creation-date="01/01/0001 00:00:00" type="Float" type-id="Float" visibility="private">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-763065b0-4eef-4124-8485-98ec016ca7ae" />
+                </source-codes>
+              </attribute>
+              <attribute id="a65c645ff0b204d9e8c7fa59e4a389594984" cid="ELEM016" name="circle" creation-date="01/01/0001 00:00:00" type="" type-id="" visibility="private">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-e07cbf31-d344-49af-8aa5-1fbc431ee18a" />
+                </source-codes>
+              </attribute>
+            </attributes>
+            <operations>
+              <operation id="od8ecc107f7094c2bb890fae76c80f8a4765" cid="ELEM017" name="Enemy_a" creation-date="01/01/0001 00:00:00" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pe134a835f9f74f1a9859fd6441b7ce87" name="start_position" type="sf::Vector2f" type-id="sf::Vector2f" direction="In" />
+                  <parameter id="p0f1f419da53b4f00a1d66d4a11e2aafc" name="color" type="const sf::Color (sf::Color)" type-id="const sf::Color (sf::Color)" direction="In" />
+                  <parameter id="pc1a45f6f76394e68b654801fbe519b05" name="damage" type="Integer const" type-id="Integer const" direction="In" />
+                  <parameter id="pe926a8378b754890bfd76d3c724fc169" name="speed" type="Integer const" type-id="Integer const" direction="In" />
+                  <parameter id="p74ebc6ea8fe94974b420338e6ed535ab" name="lives" type="Integer" type-id="Uml.Integer" direction="In" />
+                  <parameter id="p7104bedf0a574c018280b31036d82597" name="diameter" type="const Float" type-id="const Float" direction="In" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o2d6ec36d16524286961b3fe00b1a8e7e661" cid="ELEM018" name="~Enemy" creation-date="01/01/0001 00:00:00" type="" type-id="" visibility="public">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="od3ed3d2680e949a6a1183103439fddaa360" cid="ELEM019" name="draw" creation-date="01/01/0001 00:00:00" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p523ea50a93a94e89aa8fc893683efbab" name="sf::RenderWindow &amp; window" type="" type-id="" direction="Out" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o2de1ebe80de948069820de2d67a1047a386" cid="ELEM020" name="set_fill_color" creation-date="01/01/0001 00:00:00" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p84b97d6c066f46c4903de8ad50635070" name="color" type="sf::Color" type-id="sf::Color" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="oeb1f70052ae34bfdaa088817df707e3c545" cid="ELEM021" name="get_circle()" creation-date="01/01/0001 00:00:00" type="sf::CircleShape" type-id="sf::CircleShape" visibility="public">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+            </operations>
+            <source-codes>
+              <source-code language="ActionScript" />
+            </source-codes>
+          </item>
+          <item id="di167123449275628929" cid="GNR001" type="generalization" name="" style-class="" visibility="package" change-tracking-state="added" creation-date="01/21/2018 17:58:52" from="di845925958607057174" to="di521220485485105064">
+            <style class="default" />
+          </item>
         </abstract-items>
         <layer id="7d430991c8444f6198a03c77349daf2c" name="Default" visible="true" enabled="true" locked="false">
           <item id="di521220485485105064" iid="42b2b5fe50a64cb3a069b8526f08d99c" creation-date="01/19/2018 19:33:23" order-index="0" type="entity">
             <layout ax="128" ay="68" awidth="398" aheight="339" x="128" y="68" width="398" height="339" />
             <class />
+          </item>
+          <item id="di845925958607057174" iid="3e60b8802dba488abce9fb72ec4bdaae" creation-date="01/21/2018 17:31:39" order-index="1" type="entity">
+            <layout ax="723" ay="70.25" awidth="380" aheight="334.5" x="723" y="70.25" width="380" height="334.5" />
+            <class />
+          </item>
+          <item id="di167123449275628929" iid="3153ee79112c4d1a9f58a2bcc87526f0" creation-date="01/21/2018 17:58:52" order-index="2" type="relation">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="true" auto-path="" x1="723" y1="245" x2="526" y2="246" start-border-pos="0.869020926756353" end-border-pos="0.381268436578171" name-position="0,0">
+              <points>
+                <point x="723" y="245" />
+                <point x="526" y="246" />
+              </points>
+            </layout>
+            <relation from="di845925958607057174" from-iid="3e60b8802dba488abce9fb72ec4bdaae" from-field="oeb1f70052ae34bfdaa088817df707e3c545" to="di521220485485105064" to-iid="42b2b5fe50a64cb3a069b8526f08d99c" to-field="o794097abd5754a46ab57170063d75c63421" />
           </item>
         </layer>
       </diagram>
