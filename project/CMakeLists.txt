@@ -72,12 +72,14 @@ set(sources
     source/tile.cpp
     source/gameState.cpp
 	source/button.cpp
+	source/action.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
     include/gameState.hpp
     include/tile.hpp
-	include/button.hpp)
+	include/button.hpp
+	include/action.hpp)
 
 enable_testing()
 
