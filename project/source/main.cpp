@@ -7,13 +7,13 @@
 int main(void) {
     auto game = Game();
 
-	Grid grid(10, 10, 50, 0, 0);
+	//for (int i = 0; i < 9; i++) {
+	//	grid.set_tile_navigability(4, i, false);
+	//}
 
-	for (int i = 0; i < 9; i++) {
-		grid.set_tile_navigability(4, i, false);
-	}
+	sf::RenderWindow window(sf::VideoMode(1000, 750), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close );
 
-	sf::RenderWindow window(sf::VideoMode(1000, 750), "EAmpire Tower Defense");
+	Grid grid(10, 10, 50, window.getSize().x/4, 50);
 
 	bool lastButton = false;
 	auto start = sf::Vector2i(0,0);
@@ -39,32 +39,38 @@ int main(void) {
 			case sf::Event::MouseButtonPressed:
 				if (event.mouseButton.button == sf::Mouse::Left) {
 					grid.clicked(event.mouseButton.x, event.mouseButton.y);
-					break;
 				}
-				if (event.mouseButton.button == sf::Mouse::Right) {
-					if (lastButton) {
-						start.x = (int)event.mouseButton.x/50;
-						start.y = (int)event.mouseButton.y/50;
-						lastButton = !lastButton;
-					}
-					else {
-						end.x = (int)event.mouseButton.x/50;
-						end.y = (int)event.mouseButton.y/50;
-						lastButton = !lastButton;
-					}
-					break;
+
+				//if (event.mouseButton.button == sf::Mouse::Right) {
+				//	if (lastButton) {
+				//		//start.x = (int)event.mouseButton.x / 50;
+				//		//start.y = (int)event.mouseButton.y / 50;
+				//		lastButton = !lastButton;
+				//	}
+				//	else {
+				//		//end.x = (int)event.mouseButton.x / 50;
+				//		//end.y = (int)event.mouseButton.y / 50;
+				//		lastButton = !lastButton;
+				//	}
+				//}
+
+				break;
+
+			case sf::Event::KeyPressed:
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+					//Pop up 'Do you want to exit?' screen
+					window.close();
 				}
-				
-			}
+				break;
+			}	
 		}
 
 		window.clear();
 		grid.draw(window);
 		for(auto tile : path) {
-			sprite_tile_path.setPosition(tile.x*50, tile.y*50);
+			sprite_tile_path.setPosition(tile.x*50+(window.getSize().x/4), tile.y*50+50);
 			window.draw(sprite_tile_path);
 		}
-
 
 		window.display();
 
