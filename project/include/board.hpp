@@ -4,14 +4,16 @@
 #include <iostream>
 
 #include "grid.hpp"
+#include "gameState.hpp"
 
 class Board {
   private:
-    Grid boardGrid = Grid(10, 10);
+    Grid boardGrid;
+    GameState *game_state = GameState::get_state();
 
   public:
     Board() 
-    {
+    { 
         std::cout << "New board created" << std::endl;
     }
 

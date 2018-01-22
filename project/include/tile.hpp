@@ -6,16 +6,25 @@
 
 class Tile {
   private:
-    int id;
-    int lives;
-
+	int id;
+	int lives;
+	bool navigable;
   public:
-    Tile() 
-    {
-        std::cout << "Tile made" << std::endl;
-    }
+    Tile() {}
 
-    int getID();
+	Tile(bool is_navigable);
+
+	void set_navigability(bool navigability);
+
+	bool is_navigable();
+
+	int getID();
+
+	void clicked();
+
+	void set_built();
+
+	void set_free();
 };
 
 #endif // TILE_HPP
