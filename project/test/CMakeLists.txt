@@ -36,4 +36,17 @@ set_target_properties(libgmock PROPERTIES
 include_directories("${source_dir}/googletest/include"
                     "${source_dir}/googlemock/include")
 
-add_subdirectory(testTesting)
+include_directories("${source_dir}/../include"
+                    "${source_dir}/../source"
+                    "${source_dir}/../")
+
+link_directories("${CMAKE_SOURCE_DIR}/../")
+
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/../cmake_modules" ${CMAKE_MODULE_PATH})
+find_package(SFML 2 REQUIRED graphics)
+if(SFML_FOUND)
+    include_directories(${SFML_INCLUDE_DIR})
+endif()
+
+#add_subdirectory(testTesting)
+add_subdirectory(snap-grid)

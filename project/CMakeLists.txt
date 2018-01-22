@@ -66,9 +66,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/source)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
 
-add_subdirectory(test)
+#add_subdirectory(test)
 
 include(cmake_modules/clang-cxx-dev-tools.cmake)
+include(cmake_modules/FindSFML.cmake)
 
 set(sources
     # Main source.
@@ -84,7 +85,18 @@ set(sources
     include/grid.hpp
     include/gameState.hpp
     include/tile.hpp
-	include/button.hpp)
+    include/button.hpp)
+
+set(gridLibSRC
+    source/grid.cpp
+    include/grid.hpp)
+
+add_library(gridlib STATIC
+        ${gridLibSRC})
+
+target_include_directories(gridlib PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
 
 enable_testing()
 
