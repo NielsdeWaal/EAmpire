@@ -85,16 +85,6 @@ int main(void) {
 			case sf::Event::Closed:
 				window.close();
 				break;
-			case sf::Event::MouseButtonPressed:
-				if	(play_button.is_pressed()){
-					std::cout << "Play button pressed" << std::endl;
-					//Change gamestate to new board
-				}
-				if (exit_button.is_pressed()) {
-					window.close();
-					break;
-				}
-				break;
 			case sf::Event::LostFocus:
 				std::cout << "MOUSE HAS LEFT THE BUILDING" << std::endl;
 				//pause game
