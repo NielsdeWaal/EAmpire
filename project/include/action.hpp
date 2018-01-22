@@ -14,12 +14,14 @@
 *
 * With this class you can save specific events and their corresponding actions (as lambdas)
 */
+
 class action {
 private:
 	std::function< bool() > condition;
 	std::function< void() > work;
 
 public:
+
 	/**
 	* @brief Standard constructor for the action calss
 	*

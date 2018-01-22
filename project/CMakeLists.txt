@@ -74,20 +74,25 @@ include(cmake_modules/FindSFML.cmake)
 set(sources
     # Main source.
     source/main.cpp
-    source/board.cpp
     source/game.cpp
+    source/board.cpp
     source/grid.cpp
-    source/tile.cpp
     source/gameState.cpp
+    source/tile.cpp
     source/button.cpp
     source/action.cpp
+    source/enemy.cpp
+	  source/enemy_a.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
     include/gameState.hpp
     include/tile.hpp
     include/button.hpp
-	  include/action.hpp)
+    include/action.hpp
+	  include/enemy.hpp
+	  include/enemy_a.hpp
+	  include/enemy_container.hpp)
 
 
 set(gridLibSRC
@@ -109,6 +114,11 @@ find_package(SFML 2 REQUIRED system window graphics network audio)
 if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})
 endif()
+
+if(SFML_FOUND)
+  include_directories(${SFML_INCLUDE_DIR})
+endif()
+
 
 add_executable(${EXE} ${sources})
 target_link_libraries(${EXE} ${Boost_LIBRARIES} ${SFML_LIBRARIES})
