@@ -1,65 +1,67 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <SFML/Graphics.hpp>
 
 #include "game.hpp"
+#include "button.hpp"
+#include "grid.hpp"
+
 
 int main(void) {
     auto game = Game();
 
-	sf::RenderWindow window(sf::VideoMode(1500, 1100), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close );
+	sf::RenderWindow window(sf::VideoMode(512.0f, 512.0f), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close);
 
-	Grid grid(11, 11, 50, window.getSize().x/4, 50);
 
-	bool lastButton = false;
-	auto start = sf::Vector2i(1,1);
-	auto end   = sf::Vector2i(9,9);
+	std::string play = "Play";
+	std::string exit = "Exit";
+	Button play_button(play, sf::Vector2f{ float((window.getSize().x / 2)), float((window.getSize().y / 2)) }, sf::Vector2f{ 70,50 }, window);
+	Button exit_button(exit, sf::Vector2f{ float((window.getSize().x / 2)), float((window.getSize().y / 2))+window.getSize().y*0.15f }, sf::Vector2f{ 70,50 }, window);
 
-	auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-	int loop = 0;
+	
+	Grid grid(10, 10, 30);
+	
+	while( window.isOpen()) {
+		sf::Event evnt;
+		while (window.pollEvent(evnt)) {
 
-    while(window.isOpen()) {
-		grid.create_maze();
-		auto path = grid.find_path(start, end);
-
-		//std::this_thread::sleep_for(std::chrono::milliseconds(200));
-		sf::Event event;
-		while (window.pollEvent(event)) {
-
-			switch(event.type)
+			switch(evnt.type)
 			{
 			case sf::Event::Closed:
 				window.close();
 				break;
 
 			case sf::Event::MouseButtonPressed:
-				if (event.mouseButton.button == sf::Mouse::Left) {
-					grid.clicked(event.mouseButton.x, event.mouseButton.y);
+				if	(play_button.is_pressed()){
+					std::cout << "Play button pressed" << std::endl;
+					//Change gamestate to new board
+				}
+				if (exit_button.is_pressed()) {
+					window.close();
 					break;
 				}
-			case sf::Event::KeyPressed:
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
-					//Pop up 'Do you want to exit?' screen
-					window.close();
-				}
+				break;
+
+			case sf::Event::LostFocus:
+				std::cout << "MOUSE HAS LEFT THE BUILDING" << std::endl;
+				//pause game
+				break;
+
+			case sf::Event::GainedFocus:
+				std::cout << "MOUSE HAS ENTERED THE BUILDING" << std::endl;
+				//continue game
+				break;
+
 			}
 		}
-
-		window.clear();
-		grid.draw(window);
-		grid.draw_path(window, path);
-		window.display();
-
-        game.update();
-
-		loop++;
-		if ((std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()) - time) > 1) {
-			time++;
-			std::cout << loop << "'s loops per second\n";
-			loop = 0;
-		}
-
+		game.update();
 		//std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
+		sf::sleep(sf::milliseconds(20));
+		window.clear();
+		exit_button.draw();
+		play_button.draw();
+		window.display();
+	}
     return 0;
 }
