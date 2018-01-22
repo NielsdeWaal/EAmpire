@@ -9,21 +9,21 @@
     <entity-names>
       <counter>
         <item-type type-id="class" type="UmlClass" />
-        <value>2</value>
+        <value>3</value>
       </counter>
     </entity-names>
     <entity-ids>
       <counter>
         <item-type type-id="class" type="UmlClass" />
-        <value>3</value>
-      </counter>
-      <counter>
-        <item-type type-id="" type="AbstractElementGroup" />
-        <value>10</value>
+        <value>4</value>
       </counter>
       <counter>
         <item-type type-id="generalization" type="UmlGeneralization" />
         <value>2</value>
+      </counter>
+      <counter>
+        <item-type type-id="" type="AbstractElementGroup" />
+        <value>12</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -35,11 +35,11 @@
     <fields>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.AttributeField</type>
-        <value>17</value>
+        <value>23</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
-        <value>22</value>
+        <value>26</value>
       </counter>
     </fields>
   </counters>
@@ -84,6 +84,10 @@
       <type id="const sf::Color (sf::Color)" tid="" name="const sf::Color (sf::Color)" description="" />
       <type id="const Float" tid="" name="const Float" description="" />
       <type id="sf::CircleShape" tid="" name="sf::CircleShape" description="" />
+      <type id="std::vector&lt;T&gt;" tid="" name="std::vector&lt;T&gt;" description="" />
+      <type id="const &amp; T" tid="" name="const &amp; T" description="" />
+      <type id="const T &amp;" tid="" name="const T &amp;" description="" />
+      <type id="std::vector&lt;Enemy*&gt;" tid="" name="std::vector&lt;Enemy*&gt;" description="" />
     </custom-types>
   </types>
   <items />
@@ -101,7 +105,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pb1df69bf2e194a5aa5e73cf5aaf950aa_974245920" name="ClassDiagram1" order-index="1" uid="" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,-1">
+      <diagram type="uml-class" id="pb1df69bf2e194a5aa5e73cf5aaf950aa_974245920" name="ClassDiagram1" order-index="1" uid="" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="350,97">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -113,7 +117,7 @@
           </authors>
           <description />
           <creation-date>01/19/2018 19:33:11</creation-date>
-          <change-date>01/21/2018 17:58:53</change-date>
+          <change-date>01/22/2018 15:27:15</change-date>
           <revision-count>0</revision-count>
           <version />
         </meta>
@@ -431,6 +435,49 @@
           <item id="di167123449275628929" cid="GNR001" type="generalization" name="" style-class="" visibility="package" change-tracking-state="added" creation-date="01/21/2018 17:58:52" from="di845925958607057174" to="di521220485485105064">
             <style class="default" />
           </item>
+          <item id="di323763092662904112" cid="C003" type="class" name="enemy_container" style-class="" visibility="package" change-tracking-state="added" creation-date="01/22/2018 15:27:15">
+            <style class="default" />
+            <attributes>
+              <attribute id="a448e57d5e4df4c32a5b69a8954d16db1649" cid="ELEM022" name="screen_objects" creation-date="01/01/0001 00:00:00" type="std::vector&lt;T&gt;" type-id="std::vector&lt;T&gt;" visibility="private">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-8484224d-a109-49b6-9d34-cf857cd631d0" />
+                </source-codes>
+              </attribute>
+            </attributes>
+            <operations>
+              <operation id="o16203d22446c4c8e80b0a4c512848532687" cid="ELEM023" name="add" creation-date="01/01/0001 00:00:00" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="p4f53092db55c4539b07736487de92194" name="pointer" type="const T &amp;" type-id="const T &amp;" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o6c650d0d8ca0429a9f97ae36570bbd0e402" cid="ELEM024" name="remove" creation-date="01/01/0001 00:00:00" type="" type-id="" visibility="public">
+                <style class="default" />
+                <parameters>
+                  <parameter id="pe43eb819fa834ecf86bc7534a1a10c01" name="pointer" type="const &amp; T" type-id="const &amp; T" />
+                </parameters>
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+              <operation id="o67d244d652ee4102b3d0c2c544a91d33476" cid="ELEM025" name="get_container" creation-date="01/01/0001 00:00:00" type="std::vector&lt;Enemy*&gt;" type-id="std::vector&lt;Enemy*&gt;" visibility="public">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" />
+                </source-codes>
+              </operation>
+            </operations>
+            <template-parameters>
+              <template-parameter id="t88ddfa6883f748f8a23d014504d4324e207" name="T" kind="typename" default-value="" />
+            </template-parameters>
+            <source-codes>
+              <source-code language="ActionScript" />
+            </source-codes>
+          </item>
         </abstract-items>
         <layer id="7d430991c8444f6198a03c77349daf2c" name="Default" visible="true" enabled="true" locked="false">
           <item id="di521220485485105064" iid="42b2b5fe50a64cb3a069b8526f08d99c" creation-date="01/19/2018 19:33:23" order-index="0" type="entity">
@@ -449,6 +496,10 @@
               </points>
             </layout>
             <relation from="di845925958607057174" from-iid="3e60b8802dba488abce9fb72ec4bdaae" from-field="oeb1f70052ae34bfdaa088817df707e3c545" to="di521220485485105064" to-iid="42b2b5fe50a64cb3a069b8526f08d99c" to-field="o794097abd5754a46ab57170063d75c63421" />
+          </item>
+          <item id="di323763092662904112" iid="f319060d50274bac94844af6639a45b5" creation-date="01/22/2018 15:27:15" order-index="3" type="entity">
+            <layout ax="479" ay="500" awidth="274" aheight="120" x="479" y="500" width="274" height="120" />
+            <class />
           </item>
         </layer>
       </diagram>
