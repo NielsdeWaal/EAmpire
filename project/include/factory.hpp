@@ -23,7 +23,7 @@ private:
 	sf::RenderWindow& window;
 
 public:
-	factory(std::string filename);
+	factory(std::string filename, sf::RenderWindow& window);
 
 	button_ptr read_line();
 

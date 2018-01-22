@@ -1,6 +1,6 @@
 #include "factory.hpp"
 
-factory::factory(std::string filename):
+factory::factory(std::string filename, sf::RenderWindow& window):
 	s(s),
 	window(window)
 {

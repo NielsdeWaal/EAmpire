@@ -7,6 +7,7 @@
 #include "button.hpp"
 #include "grid.hpp"
 #include "action.hpp"
+#include "factory.hpp"
 
 
 int main(void) {
@@ -28,6 +29,8 @@ int main(void) {
 	std::string exit = "Exit";
 	std::string tower1 = "Tower#1";
 	std::string sell = "Sell";
+
+	//factory button_factory("buttons.txt", window);
 	
 	//Button play_button(play, sf::Vector2f{ float((window.getSize().x / 2)), float((window.getSize().y / 2)) }, sf::Vector2f{ 70,50 }, window);
 	Button exit_button(	exit, 
@@ -85,16 +88,7 @@ int main(void) {
 			case sf::Event::Closed:
 				window.close();
 				break;
-			case sf::Event::MouseButtonPressed:
-				if	(play_button.is_pressed()){
-					std::cout << "Play button pressed" << std::endl;
-					//Change gamestate to new board
-				}
-				if (exit_button.is_pressed()) {
-					window.close();
-					break;
-				}
-				break;
+			
 			case sf::Event::LostFocus:
 				std::cout << "MOUSE HAS LEFT THE BUILDING" << std::endl;
 				//pause game
