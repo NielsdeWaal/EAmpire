@@ -29,9 +29,11 @@ class Grid {
 
 	sf::Texture tile_normal;
 	sf::Texture tile_blocked;
+	sf::Texture tile_path;
 
 	sf::Sprite sprite_tile_normal;
 	sf::Sprite sprite_tile_blocked;
+	sf::Sprite sprite_tile_path;
 
 	/**
 	* @brief Struct to help with path-finding.
@@ -173,6 +175,21 @@ class Grid {
 	* @param[in] window The window to draw on.
 	**/
 	void draw(sf::RenderWindow& window);
+
+	/**
+	* @brief Draws a path on the grid on the relative coordinates
+	*
+	* @param[in] window The window to draw on.
+	* @param[in] path Path to be drawn.
+	**/
+	void draw_path(sf::RenderWindow& window, std::vector<sf::Vector2i> path);
+
+	/**
+	* @brief Function to turn the grind into a random maze.
+	*
+	* This function is mostly just for demo purposes.
+	**/
+	void create_maze();
 
 	/**
 	* @brief Updates all the tiles in the grid.
