@@ -88,6 +88,17 @@ set(sources
     #include/button.hpp)
     )
 
+set(gridLibSRC
+    source/grid.cpp
+    include/grid.hpp)
+
+add_library(gridlib STATIC
+        ${gridLibSRC})
+
+target_include_directories(gridlib PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
 enable_testing()
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
