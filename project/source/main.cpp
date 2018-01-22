@@ -11,9 +11,16 @@
 
 int main(void) {
     auto game = Game();
-	sf::RenderWindow window(sf::VideoMode(1000, 750), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close );
+	sf::RenderWindow window(sf::VideoMode(1000, 1000), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close );
 
-	Grid grid(10, 10, 50, window.getSize().x/4, 50);
+
+	auto grid_x = 10, grid_y = 10, scale = 50;
+	auto grid_x_pixel = (grid_x < 10 ? 700 : grid_x * scale + 200);
+	auto grid_y_pixel = (grid_y < 10 ? 600 : grid_y * scale + 100);
+
+	Grid grid(grid_x, grid_y, scale, (grid_x_pixel - 100) / 2 - grid_x * 25, grid_y_pixel / 2 - grid_y * 25);
+
+	window.create(sf::VideoMode(grid_x_pixel, grid_y_pixel), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close );
 
 	bool lastButton = false;
 	auto start = sf::Vector2i(0,0);
@@ -27,20 +34,41 @@ int main(void) {
 	std::string play = "Play";
 	std::string exit = "Exit";
 	std::string tower1 = "Tower#1";
+	std::string tower2 = "Tower#2";
+	std::string tower3 = "Tower#3";
+	std::string tower4 = "Tower#4";
+	std::string tower5 = "Tower#5";
 	std::string sell = "Sell";
+	std::string menu = "Menu";
 	
 	//Button play_button(play, sf::Vector2f{ float((window.getSize().x / 2)), float((window.getSize().y / 2)) }, sf::Vector2f{ 70,50 }, window);
-	Button exit_button(	exit, 
-						sf::Vector2f{ (float((window.getSize().x / 2 )+ 212)), (float((window.getSize().y / 2)+100))+window.getSize().y*0.15f }, 
-						sf::Vector2f{ 70,50 }, 
+	Button tower1_button(tower1, 
+						sf::Vector2f(grid_x_pixel - 50, 125),
+						sf::Vector2f(100, 50),
 						window);
-	Button basic_tower(	tower1, 
-						sf::Vector2f{ (float((window.getSize().x / 2) + 325)), (float((window.getSize().y-window.getSize().y)+77)) },
-						sf::Vector2f{ 130,50 },
+	Button tower2_button(tower2, 
+						sf::Vector2f(grid_x_pixel - 50, 200),
+						sf::Vector2f(100, 50),
+						window);
+	Button tower3_button(tower3, 
+						sf::Vector2f(grid_x_pixel - 50, 275),
+						sf::Vector2f(100, 50),
+						window);
+	Button tower4_button(tower4, 
+						sf::Vector2f(grid_x_pixel - 50, 350),
+						sf::Vector2f(100, 50),
+						window);
+	Button tower5_button(tower5, 
+						sf::Vector2f(grid_x_pixel - 50, 425),
+						sf::Vector2f(100, 50),
 						window);
 	Button sell_button(	sell,
-						sf::Vector2f{ (float((window.getSize().x / 2) + 325)), (float((window.getSize().y-window.getSize().y)+137)) },
-						sf::Vector2f{ 130,50 },
+						sf::Vector2f(grid_x_pixel - 50, 525),
+						sf::Vector2f(100, 50),
+						window);
+	Button menu_button( menu,
+						sf::Vector2f(grid_x_pixel - 50, 25),
+						sf::Vector2f( 100, 50),
 						window);
 
 	auto state = "free";
@@ -50,10 +78,10 @@ int main(void) {
 		action(sf::Keyboard::Num1,		[&state]	{state = "building"; }),
 		action(sf::Keyboard::Delete,	[&state]	{state = "selling"; }),
 		action(sf::Mouse::Right,		[&state]	{state = "free"; }),
-		action(sf::Mouse::Left,			[&state, &window,&exit_button,&basic_tower,&sell_button,&grid]
-													{	if (exit_button.is_pressed()) { window.close(); 
+		action(sf::Mouse::Left,			[&state, &window,&menu_button,&tower1_button,&sell_button,&grid]
+													{	if (menu_button.is_pressed()) { window.close(); 
 														}
-														if (basic_tower.is_pressed()) { state = "building"; 
+														if (tower1_button.is_pressed()) { state = "building"; 
 														}
 														if (sell_button.is_pressed()) { state = "selling"; 
 														}
@@ -97,18 +125,18 @@ int main(void) {
 
 			}
 
-			window.clear();
+			window.clear(sf::Color(100, 100, 100));
 
 			grid.draw(window);
+			grid.draw_path(window, path);
 
-			for (auto tile : path) {
-				sprite_tile_path.setPosition(tile.x * 50 + (window.getSize().x / 4), tile.y * 50 + 50);
-				window.draw(sprite_tile_path);
-			}
-
-			exit_button.draw();
-			basic_tower.draw();
+			tower1_button.draw();
+			tower2_button.draw();
+			tower3_button.draw();
+			tower4_button.draw();
+			tower5_button.draw();
 			sell_button.draw();
+			menu_button.draw();
 			//play_button.draw();
 			
 			window.display();
