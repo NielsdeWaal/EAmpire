@@ -1,4 +1,7 @@
 #include <iostream>
+#include <algorithm>
+#include <random>
+#include <chrono>
 
 #include "grid.hpp"
 
@@ -47,7 +50,6 @@ bool Grid::fill_mini_grid(std::vector<Grid::Mini_tile>& mini_grid, sf::Vector2i 
 		}
 		current_distance++;
 	}
-	std::cout << "No route"; // Debug
 	return false;
 }
 
@@ -88,9 +90,11 @@ Grid::Grid(): //Default constructor
 	{
 		tile_normal.loadFromFile("textures/tile_normal.png");
 		tile_blocked.loadFromFile("textures/tile_blocked.png");
+		tile_blocked.loadFromFile("textures/tile_path.png");
 		sprite_tile_normal.setTexture(tile_normal);
 		sprite_tile_blocked.setTexture(tile_blocked);
-	}
+		sprite_tile_path.setTexture(tile_path);
+}
 
 Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0, int start_y = 0):
 	tiles(std::vector<Tile>(tiles_x * tiles_y)),
@@ -102,8 +106,10 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0, int start_
 	{
 		tile_normal.loadFromFile("textures/tile_normal.png");
 		tile_blocked.loadFromFile("textures/tile_blocked.png");
+		tile_path.loadFromFile("textures/tile_path.png");
 		sprite_tile_normal.setTexture(tile_normal);
 		sprite_tile_blocked.setTexture(tile_blocked);
+		sprite_tile_path.setTexture(tile_path);
 	}
 
 bool Grid::is_clicked(int x, int y) {
@@ -164,8 +170,110 @@ void Grid::draw(sf::RenderWindow& window) {
 	}
 }
 
+
+
+void Grid::draw_path(sf::RenderWindow& window, std::vector<sf::Vector2i> path) {
+	for(auto tile : path) {
+		sprite_tile_path.setPosition(start_x + (tile.x * scale), start_y + (tile.y * scale));
+		window.draw(sprite_tile_path);
+	}
+}
+
 void Grid::update() {
 	for(auto tile : tiles) {
 		//tile.update();
 	}
+}
+
+void Grid::create_maze() {
+	for (int x = 0; x < size_tiles_x; x++) {
+		for (int y = 0; y < size_tiles_y; y++) {
+			if (x % 2 == 0 || y % 2 == 0) {
+				tiles[y * size_tiles_x + x].set_navigability(false);
+			}
+		}
+	}
+	std::vector<sf::Vector2i> visited;
+	std::vector<sf::Vector2i> walls;
+	visited.insert(visited.begin(), sf::Vector2i(1,1));
+	walls.insert(walls.begin(), sf::Vector2i(1,2));
+	walls.insert(walls.begin(), sf::Vector2i(2,1));
+	while (!walls.empty()) {
+		unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+		std::shuffle(walls.begin(), walls.end(), std::default_random_engine(seed));
+		auto current_wall = walls[0];
+		walls.erase(walls.begin());
+		if (current_wall.x % 2 == 0) { // Wall horizontal between tiles.
+			if (!(std::find(visited.begin(), visited.end(), sf::Vector2i(current_wall.x - 1, current_wall.y)) != visited.end() && // Both tiles allready visited.
+				  std::find(visited.begin(), visited.end(), sf::Vector2i(current_wall.x + 1, current_wall.y)) != visited.end())) {
+				tiles[current_wall.y * size_tiles_x + current_wall.x].set_navigability(true);
+				if (std::find(visited.begin(), visited.end(), sf::Vector2i(current_wall.x - 1, current_wall.y)) != visited.end()) { // Left tile visited, adding walls around right tile.
+					visited.insert(visited.begin(), sf::Vector2i(current_wall.x + 1, current_wall.y));
+					if (current_wall.y > 3) { // 1 right, 1 up.
+						walls.insert(walls.begin(), sf::Vector2i(current_wall.x + 1, current_wall.y - 1));
+					}
+					if (current_wall.x < size_tiles_x - 3) { // 2 right.
+						walls.insert(walls.begin(), sf::Vector2i(current_wall.x + 2, current_wall.y));
+					}
+					if (current_wall.y < size_tiles_y - 3) { // 1 right, 1 down.
+						walls.insert(walls.begin(), sf::Vector2i(current_wall.x + 1, current_wall.y + 1));
+					}
+				}
+				else { // Right tile visited, adding walls around left tile.
+					visited.insert(visited.begin(), sf::Vector2i(current_wall.x - 1, current_wall.y));
+					if (current_wall.y > 3) { // 1 left, 1 up.
+						walls.insert(walls.begin(), sf::Vector2i(current_wall.x - 1, current_wall.y - 1));
+					}
+					if (current_wall.x > 3) { // 2 left.
+						walls.insert(walls.begin(), sf::Vector2i(current_wall.x - 2, current_wall.y));
+					}
+					if (current_wall.y < size_tiles_y - 3) { // 1 left, 1 down.
+						walls.insert(walls.begin(), sf::Vector2i(current_wall.x - 1, current_wall.y + 1));
+					}
+				}
+			}
+		}
+		else { // Tile vertical between tiles.
+			if (!(std::find(visited.begin(), visited.end(), sf::Vector2i(current_wall.x, current_wall.y - 1)) != visited.end() && // Both tiles allready visited.
+				  std::find(visited.begin(), visited.end(), sf::Vector2i(current_wall.x, current_wall.y + 1)) != visited.end())) {
+				tiles[current_wall.y * size_tiles_x + current_wall.x].set_navigability(true);
+				if (std::find(visited.begin(), visited.end(), sf::Vector2i(current_wall.x, current_wall.y - 1)) != visited.end()) { // Tile above visited, adding walls around tile below.
+					visited.insert(visited.begin(), sf::Vector2i(current_wall.x, current_wall.y + 1));
+					if (current_wall.x > 3) { // 1 down, 1 left.
+						walls.insert(walls.begin(), sf::Vector2i(current_wall.x - 1, current_wall.y + 1));
+					}
+					if (current_wall.y < size_tiles_y - 3) { // 2 down.
+						walls.insert(walls.begin(), sf::Vector2i(current_wall.x, current_wall.y + 2));
+					}
+					if (current_wall.x < size_tiles_y - 3) { // 1 down, 1 right.
+						walls.insert(walls.begin(), sf::Vector2i(current_wall.x + 1, current_wall.y + 1));
+					}
+				}
+				else { // Tile below visited, adding walls around tile above.
+					visited.insert(visited.begin(), sf::Vector2i(current_wall.x, current_wall.y - 1));
+					if (current_wall.x > 3) { // 1 up, 1 left.
+						walls.insert(walls.begin(), sf::Vector2i(current_wall.x - 1, current_wall.y - 1));
+					}
+					if (current_wall.y > 3) { // 2 up.
+						walls.insert(walls.begin(), sf::Vector2i(current_wall.x, current_wall.y - 2));
+					}
+					if (current_wall.y < size_tiles_y - 3) { // 1 up, 1 right.
+						walls.insert(walls.begin(), sf::Vector2i(current_wall.x + 1, current_wall.y - 1));
+					}
+				}
+			}
+		}
+		/*for (auto wall : walls) {
+			std::cout << "(" << wall.x << ", " << wall.y << ")\n";
+		}
+		std::cout << "\n";*/
+	}
+}
+
+std::pair<int, int> Grid::get_grid_size() {
+	return std::make_pair(size_tiles_x, size_tiles_y);
+}
+
+std::pair<int, int> Grid::get_start_values() {
+	return std::make_pair(start_x, start_y);
 }

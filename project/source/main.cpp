@@ -11,7 +11,6 @@
 
 int main(void) {
     auto game = Game();
-
 	sf::RenderWindow window(sf::VideoMode(1000, 750), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close );
 
 	Grid grid(10, 10, 50, window.getSize().x/4, 50);
@@ -86,7 +85,16 @@ int main(void) {
 			case sf::Event::Closed:
 				window.close();
 				break;
-
+			case sf::Event::MouseButtonPressed:
+				if	(play_button.is_pressed()){
+					std::cout << "Play button pressed" << std::endl;
+					//Change gamestate to new board
+				}
+				if (exit_button.is_pressed()) {
+					window.close();
+					break;
+				}
+				break;
 			case sf::Event::LostFocus:
 				std::cout << "MOUSE HAS LEFT THE BUILDING" << std::endl;
 				//pause game
