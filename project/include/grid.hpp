@@ -105,7 +105,15 @@ class Grid {
 	Grid(int tiles_x, int tiles_y, int scale, int start_x, int start_y);
 
 	/**
-	* @brief Calculate which tile has been clicked.
+	* @brief Checks whether a click has occured in the grid
+	*
+	* @param[in] x The relative x coordinate in the grid.
+	* @param[in] y The relative y coordinate in the grid.
+	**/
+	bool is_clicked(int x, int y);
+	
+	/**
+	* @brief Changes the specific tile that has been clicked to non-navigatable
 	*
 	* The right tile is calculated by deviding the coordinate by the scale.
 	* It then communicates to the correct tile that it has been clicked on.
@@ -113,7 +121,18 @@ class Grid {
 	* @param[in] x The relative x coordinate in the grid.
 	* @param[in] y The relative y coordinate in the grid.
 	**/
-	void clicked(int x, int y);
+	void set_built(int x, int y);
+
+	/**
+	* @brief Changes the specific tile that has been clicked to navigatable
+	*
+	* The right tile is calculated by deviding the coordinate by the scale.
+	* It then communicates to the correct tile that it has been clicked on.
+	*
+	* @param[in] x The relative x coordinate in the grid.
+	* @param[in] y The relative y coordinate in the grid.
+	**/
+	void set_free(int x, int y);
 
 	/**
 	* @brief Finds a path in the grid.
