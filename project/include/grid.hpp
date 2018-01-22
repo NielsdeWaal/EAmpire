@@ -1,6 +1,7 @@
 #ifndef GRID_HPP
 #define GRID_HPP
 
+#include <utility>
 #include <vector>
 #include <SFML/Graphics.hpp>
 
@@ -184,18 +185,32 @@ class Grid {
 	void draw_path(sf::RenderWindow& window, std::vector<sf::Vector2i> path);
 
 	/**
+	* @brief Function to turn the grind into a random maze.
+	*
+	* This function is mostly just for demo purposes.
+	**/
+	void create_maze();
+
+	/**
 	* @brief Updates all the tiles in the grid.
 	*
 	* NOTE: Doesn't yet work.
 	**/
     void update();
 
-	/**
-	* @brief Function to turn the grind into a random maze.
-	*
-	* This function is mostly just for demo purposes.
-	**/
-	void create_maze();
+        /**
+         * @brief Returns size of grid
+         *
+         * @return std::pair with size values
+         */
+    std::pair<int, int> get_grid_size();
+
+        /**
+         * @brief Returns start
+         *
+         * @return std::pair with start values
+         */
+    std::pair<int, int> get_start_values();
 };
 
 #endif // GRID_HPP

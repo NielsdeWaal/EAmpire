@@ -7,13 +7,13 @@
 int main(void) {
     auto game = Game();
 
-	Grid grid(19, 19, 50, 0, 0);
-	
-	sf::RenderWindow window(sf::VideoMode(950, 950), "EAmpire Tower Defense");
+	sf::RenderWindow window(sf::VideoMode(1500, 1100), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close );
+
+	Grid grid(11, 11, 50, window.getSize().x/4, 50);
 
 	bool lastButton = false;
 	auto start = sf::Vector2i(1,1);
-	auto end   = sf::Vector2i(17,17);
+	auto end   = sf::Vector2i(9,9);
 
 	auto time = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 	int loop = 0;
@@ -37,20 +37,11 @@ int main(void) {
 					grid.clicked(event.mouseButton.x, event.mouseButton.y);
 					break;
 				}
-				if (event.mouseButton.button == sf::Mouse::Right) {
-					if (lastButton) {
-						start.x = (int)(event.mouseButton.x)/50;
-						start.y = (int)(event.mouseButton.y)/50;
-						lastButton = !lastButton;
-					}
-					else {
-						end.x = (int)(event.mouseButton.x)/50;
-						end.y = (int)(event.mouseButton.y)/50;
-						lastButton = !lastButton;
-					}
-					break;
+			case sf::Event::KeyPressed:
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)){
+					//Pop up 'Do you want to exit?' screen
+					window.close();
 				}
-				
 			}
 		}
 
