@@ -81,13 +81,15 @@ set(sources
     source/gameState.cpp
     source/button.cpp
     source/action.cpp
+	source/factory.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
     include/gameState.hpp
     include/tile.hpp
     include/button.hpp
-	  include/action.hpp)
+	include/action.hpp
+	include/factory.hpp)
 
 
 set(gridLibSRC
