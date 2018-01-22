@@ -20,6 +20,10 @@ class Tile {
 	int getID();
 
 	void clicked();
+
+	void set_built();
+
+	void set_free();
 };
 
 #endif // TILE_HPP

@@ -17,3 +17,11 @@ bool Tile::is_navigable() {
 void Tile::clicked() {
 	navigable = !navigable;
 }
+
+void Tile::set_built() {
+	navigable = false;
+}
+
+void Tile::set_free() {
+	navigable = true;
+}

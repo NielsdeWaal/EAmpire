@@ -112,12 +112,20 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0, int start_
 		sprite_tile_path.setTexture(tile_path);
 	}
 
-void Grid::clicked(int x, int y) {
+bool Grid::is_clicked(int x, int y) {
 	if ((x - start_x) < 0 || (y - start_y) < 0 || (x - start_x) >= (size_tiles_x * scale) || (y - start_y) >= (size_tiles_y * scale)) {
-		return;
+		return 0;
 	}
-	std::cout << "Clicked on tile (" << ((x - start_x) / scale) << ", " << ((y - start_y) / scale) << ")\n";
-	tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].clicked();
+	//std::cout << "Clicked on tile (" << ((x - start_x) / scale) << ", " << ((y - start_y) / scale) << ")\n";
+	return 1;
+}
+
+void Grid::set_built(int x, int y) {
+	tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].set_built();
+}
+
+void Grid::set_free(int x, int y) {
+	tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].set_free();
 }
 
 std::vector<sf::Vector2i> Grid::find_path(sf::Vector2i start, sf::Vector2i end) {
