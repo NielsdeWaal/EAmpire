@@ -74,7 +74,8 @@ set(sources
     include/tile.hpp
 	include/action.hpp
 	include/enemy.hpp
-	include/enemy_a.hpp)
+	include/enemy_a.hpp
+	include/enemy_container.hpp)
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(Boost REQUIRED )
