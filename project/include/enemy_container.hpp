@@ -2,7 +2,6 @@
 #define ENEMY_CONTAINER_HPP
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "enemy.hpp"
 
 /**
 * @file enemy_container.hpp
