@@ -87,6 +87,7 @@ set(sources
     include/gameState.hpp
     include/tile.hpp
     include/button.hpp
+    include/enemy_container.hpp
 	  include/action.hpp)
 
 
@@ -109,6 +110,11 @@ find_package(SFML 2 REQUIRED system window graphics network audio)
 if(SFML_FOUND)
   include_directories(${SFML_INCLUDE_DIR})
 endif()
+
+if(SFML_FOUND)
+  include_directories(${SFML_INCLUDE_DIR})
+endif()
+
 
 add_executable(${EXE} ${sources})
 target_link_libraries(${EXE} ${Boost_LIBRARIES} ${SFML_LIBRARIES})

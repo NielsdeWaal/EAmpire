@@ -1,10 +1,3 @@
-#ifndef ACTION_HPP
-#define ACTION_HPP
-
-#include <SFML/Graphics.hpp>
-#include <functional>
-
-
 /**
 * @file button.hpp
 * @author Nick Goris, Wouter van Ooijen
@@ -14,6 +7,10 @@
 *
 * With this class you can save specific events and their corresponding actions (as lambdas)
 */
+#ifndef _ACTION_HPP
+#define _ACTION_HPP
+#include <SFML/Graphics.hpp>
+#include <functional>
 class action {
 private:
 	std::function< bool() > condition;

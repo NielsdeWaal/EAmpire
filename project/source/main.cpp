@@ -3,6 +3,7 @@
 #include <cstring>
 #include <iostream>
 #include <thread>
+#include <SFML/Graphics.hpp>
 
 #include "action.hpp"
 #include "button.hpp"
