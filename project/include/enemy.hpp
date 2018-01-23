@@ -1,5 +1,7 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
+
+#include <cmath>
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
@@ -15,46 +17,63 @@
 */
 
 class Enemy {
-protected:
-	//The damage that the enemy can do to the lives of the player
-	int damage;
+private:
+	//The damage that the enemy can do to the lives of the player. And the speed with which the enemy can move
+	const int damage, speed;
 	//The lives of the enemy
 	int lives;
+
+	/**
+	* @brief Private function to calculate the length of a sf::vector2i in 2D
+	*
+	* @param[in]	vector				The vector that have to be calculated
+	* @return		float				The length of the vector
+	*/
+	float length(sf::Vector2i vector2i);
+
+	/**
+	* @brief Private function to normalize a sf::vector2i in 2D
+	* 
+	* It uses the length function
+	*
+	* @param[in]	vector				The vector that have to be calculated
+	* @return		sf::Vector2i		The normalized vector
+	*/
+	sf::Vector2f normalize(sf::Vector2i vector2i);
+
+protected:
 	//The speed with which the enemy can move
-	sf::Vector2f speed, position;
+	sf::Vector2i position;
 	//The color of the enemy's shape
 	sf::Color color;
-	//The text that represents the lives of the enemy when you hovering over it with your mouse
-	sf::Text text;
+	//The diameteer of the circle
+	float diameter = 50;
+	//The circle shape of the enemy
+	sf::CircleShape circle;
 public:
 
 	/**
 	* @brief Constructor
 	*
-	* @param[in] start_position		The position where the enemy will start.
-	* @param[in] color				The default color of the enemy.
-	* @param[in] damage				The damage the enemy will do to the players lives.
-	* @param[in] speed				The speed with which the enemy moves.
-	* @param[in] lives				The lives of the enemy.
+	* @param[in]	start_position		The position where the enemy will start.
+	* @param[in]	color				The default color of the enemy.
+	* @param[in]	damage				The damage the enemy will do to the players lives.
+	* @param[in]	speed				The speed with which the enemy moves.
+	* @param[in]	lives				The lives of the enemy.
 	*/
-	Enemy(sf::Vector2f start_position, sf::Color color, const int damage, const sf::Vector2f speed, int lives):
-		position(start_position),
-		color(color),
-		damage(damage),
-		speed(speed),
-		lives(lives)
-	{}
+	Enemy(sf::Vector2i start_position, sf::Color color, const int damage, const int speed, int lives);
 
-	~Enemy(void){
-		std::cout << "Enemy is being deleted" << std::endl;
-	}
+	/**
+	* @brief Destructor
+	*/
+	~Enemy();
 
 	/**
 	* @brief Function that reduces the lives of the player
 	*
-	* @param[in, out] The lives of the player who must be reduced
+	* @param[in]	lives_player		The lives of the player who must be reduced
 	*/
-	virtual void attack(int & lives_player) = 0;
+	void attack(int & lives_player);
 
 	/**
 	* @brief Function that reduces the lives of the enemy
@@ -62,40 +81,46 @@ public:
 	* Reduces the lives of the enemy with the attack number of the towers.
 	* when the lives are at 0, the destructor will be invoked.
 	*
-	* @param[in] The damage of the tower who reduced the lives of the enemy
+	* @param[in]	damage_tower		The damage of the tower who reduced the lives of the enemy
 	*/
-	virtual void take_damage(const int damage_tower) = 0;
+	void take_damage(const int damage_tower);
 
 	/**
-	* @brief Function for moving the enemy in different directions
+	* @brief Function for moving the enemy to a specific location
 	*
-	* @param[in] The direction where the enemy has to move to. Left,Right,Up,Down = sf::Vector2f(-1,0), sf::Vector2f(1,0), sf::Vector2f(0,-1), sf::Vector2f(0,1)
+	* The direction to move your enemy into is simply the difference between the location and the enemy position. 
+	* However, you want the enemies to move with constant speed, so we normalize the result.  
+	* This will give you the direction as a vector of length 1. multiply this direction by the speed constant of that enemy's type. 
+	* The result is a vector with it's length depending on the speed factor instead of the distance to the player. use the result to move your enemy.
+	*
+	* @param[in]	location			The location where the enemy has to move to.
+	* @return		bool				when the enemy arrives at the location, true is returned. Otherwise it returns false
 	*/
-	virtual void move_direction(sf::Vector2f direction) = 0;
+	bool move_direction(sf::Vector2i location);
 	
 	/**
-	* @brief Function for drawing the enemy
+	* @brief Getter for getting the Circleshape of the enemy.
 	*
-	* @param[out] Window, the screen on which you have to draw
+	* This is useful for other class to get the globalbounds of the circle
+	*/
+	sf::CircleShape get_circle();
+
+	/**
+	* @brief Virtual function for drawing the enemy
+	*
+	* @param[out]	window				The screen on which you have to draw
 	*/
 	virtual void draw(sf::RenderWindow & window) = 0;
 
 	/**
-	* @brief Function for coloring the shape of the enemy when hovering over it with your mouse.
+	* @brief Virtual function for coloring the shape of the enemy when hovering over it with your mouse.
 	*
-	* @param[in] The color that must take the shape of the enemy
+	* @param[in]	color				The color that must take the shape of the enemy
 	*/
-	virtual void set_fill_color(sf::Color color) = 0;
+	void set_fill_color(sf::Color color);
 
-	/**
-	* @brief Function for drawing the info of the enemy when hovering over it with your mouse.
-	*
-	* @param[out] Window, the screen on which you have to draw.
-	* @param[in]  Position of the enemy to center the text of the shape of the object
-	*/
-	virtual void draw_string(sf::RenderWindow & window, sf::Vector2f object) = 0;
+	sf::Vector2f Vector2f_from_Vector2i(sf::Vector2i rhs);
 
-	//There will be another function for knowing wich way the enemy have to go
 
 };
 

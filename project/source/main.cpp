@@ -1,4 +1,4 @@
-#include <SFML/Graphics.hpp>
+#include <iostream>
 #include <chrono>
 #include <cstring>
 #include <iostream>
@@ -126,5 +126,6 @@ int main(void) {
             game.update();
         }
     }
-    return 0;
+
+   return 0;
 }

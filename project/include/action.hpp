@@ -11,6 +11,7 @@
 #define _ACTION_HPP
 #include <SFML/Graphics.hpp>
 #include <functional>
+
 class action {
 private:
 	std::function< bool() > condition;

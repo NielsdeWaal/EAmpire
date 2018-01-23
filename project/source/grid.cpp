@@ -284,7 +284,8 @@ std::pair<int, int> Grid::get_start_values() {
 	return std::make_pair(start_x, start_y);
 }
 
-void new_round(int enemy_amount) {
-    if(game_state->get_round_status) {
+void Grid::new_round(int enemy_amount) {
+    if(game_state->get_round_status()) {
 
+    }
 }

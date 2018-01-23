@@ -74,21 +74,28 @@ include(cmake_modules/FindSFML.cmake)
 set(sources
     # Main source.
     source/main.cpp
-    source/board.cpp
     source/game.cpp
+    source/board.cpp
     source/grid.cpp
-    source/tile.cpp
     source/gameState.cpp
+    source/tile.cpp
     source/button.cpp
     source/action.cpp
+    source/enemy.cpp
+	source/enemy_a.cpp
+	source/enemy_b.cpp
+	source/enemy_container.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
     include/gameState.hpp
     include/tile.hpp
     include/button.hpp
-    include/enemy_container.hpp
-	  include/action.hpp)
+    include/action.hpp
+	include/enemy.hpp
+	include/enemy_a.hpp
+	include/enemy_b.hpp
+	include/enemy_container.hpp)
 
 
 set(gridLibSRC

@@ -88,7 +88,6 @@ class Grid {
 	**/
 	std::vector<sf::Vector2i> path_from_grid(std::vector<Mini_tile>& mini_grid, sf::Vector2i end);
 
-        GameState* game_state = GameState::get_state();
 
     int size_x;
     int size_y;

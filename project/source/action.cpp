@@ -17,10 +17,10 @@ action::action(sf::Mouse::Button button, std::function< void() > work):
         work(work)
 {}
 
-action::action(std::function< void() > work) :
+/*action::action(std::function< void() > work) :
         condition([]() {return true; }),
         work(work)
-{}
+{}*/
 
 void action::action::operator()() {
         if (condition()) {

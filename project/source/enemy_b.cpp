@@ -1,15 +1,15 @@
-#include "enemy_a.hpp"
+#include "enemy_b.hpp"
 #include <math.h>
 
-Enemy_a::Enemy_a () :
-		Enemy(sf::Vector2i(200,200), sf::Color::Red, 50, 3, 5)
+Enemy_b::Enemy_b () :
+		Enemy(sf::Vector2i(400,400), sf::Color::Blue, 50, 2, 5)
 	{}
 
-Enemy_a::~Enemy_a() {
+Enemy_b::~Enemy_b() {
 	std::cout << "enemy_a is deleted" << std::endl;
 }
 
-void Enemy_a::draw(sf::RenderWindow & window) {
+void Enemy_b::draw(sf::RenderWindow & window) {
 	circle.setPosition(Vector2f_from_Vector2i(position));
 	window.draw(circle);
 }
