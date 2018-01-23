@@ -13,7 +13,6 @@ int main(void) {
     auto game = Game();
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close );
 
-
 	auto grid_x = 10, grid_y = 10, scale = 50;
 	auto grid_x_pixel = (grid_x < 10 ? 700 : grid_x * scale + 200);
 	auto grid_y_pixel = (grid_y < 10 ? 600 : grid_y * scale + 100);
@@ -26,11 +25,6 @@ int main(void) {
 	auto start = sf::Vector2i(0,0);
 	auto end   = sf::Vector2i(9,9);
 
-	sf::Texture tile_path;
-	sf::Sprite sprite_tile_path;
-	tile_path.loadFromFile("textures/tile_path.png");
-	sprite_tile_path.setTexture(tile_path);
-	
 	std::string play = "Play";
 	std::string exit = "Exit";
 	std::string tower1 = "Tower#1";
@@ -98,14 +92,13 @@ int main(void) {
 	};
 
 	while (window.isOpen()) {
-
-		auto path = grid.find_path(start, end);
-		sf::Event evnt;
-
 		for (auto &action : actions) {
 			action();
 		}
 
+		auto path = grid.find_path(start, end);
+
+		sf::Event evnt;
 		while (window.pollEvent(evnt)) {
 
 			switch (evnt.type)
@@ -124,25 +117,25 @@ int main(void) {
 				break;
 
 			}
-
-			window.clear(sf::Color(100, 100, 100));
-
-			grid.draw(window);
-			grid.draw_path(window, path);
-
-			tower1_button.draw();
-			tower2_button.draw();
-			tower3_button.draw();
-			tower4_button.draw();
-			tower5_button.draw();
-			sell_button.draw();
-			menu_button.draw();
-			//play_button.draw();
-			
-			window.display();
-			game.update();
-
 		}
+
+		window.clear(sf::Color(100, 100, 100));
+
+		grid.draw(window);
+		grid.draw_path(window, path);
+
+		tower1_button.draw();
+		tower2_button.draw();
+		tower3_button.draw();
+		tower4_button.draw();
+		tower5_button.draw();
+		sell_button.draw();
+		menu_button.draw();
+		//play_button.draw();
+
+		window.display();
+		game.update();
+
 	}
     return 0;
 }
