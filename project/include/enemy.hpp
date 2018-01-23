@@ -1,6 +1,7 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
 #include <iostream>
+#include <cmath>
 #include <SFML/Graphics.hpp>
 
 /**
