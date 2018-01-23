@@ -13,6 +13,7 @@
 #include "gameState.hpp"
 #include "enemy.hpp"
 #include "enemy_a.hpp"
+#include "enemy_b.hpp"
 #include "enemy_container.hpp"
 #include "enemy_generator.hpp"
 
@@ -45,7 +46,8 @@ class Grid {
 
         GameState* game_state = GameState::get_state();
 
-        std::vector<std::unique_ptr<Enemy>> enemies;
+        //std::vector<std::map<int, std::shared_ptr<Enemy>>> enemies;
+        std::vector<std::shared_ptr<Enemy>> enemies;
 
 	/**
 	* @brief Struct to help with path-finding.

@@ -116,6 +116,8 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0, int start_
 		sprite_tile_normal.setTexture(tile_normal);
 		sprite_tile_blocked.setTexture(tile_blocked);
 		sprite_tile_path.setTexture(tile_path);
+                enemy_generator(enemies, 10, 20);
+
 	}
 
 bool Grid::is_clicked(int x, int y) {
@@ -287,6 +289,6 @@ std::pair<int, int> Grid::get_start_values() {
 void Grid::new_round(int enemy_amount) {
     if(game_state->get_round_status()) {
         game_state->set_new_round(false);
-        enemy_generator(enemies, 10, 20);
+        //enemy_generator(enemies, 10, 20);
     }
 }

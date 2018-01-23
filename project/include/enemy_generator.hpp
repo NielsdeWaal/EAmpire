@@ -13,17 +13,23 @@ void enemy_generator(std::vector<T> &vec, Ts... ts) {
     }
     int args[] =  {ts...};
     int index = 0;
+    int index_counter = 0; //TODO(niels): Make generator function for this 
 
     for (auto item : args) {
         for (auto i = 0; i < item; ++i) {
             if (index == 0) {
-                vec.emplace_back(new Enemy_a());//TODO(niels): Build container for tower types
+                //vec.emplace_back(std::make_pair(index_counter, new Enemy_a()));//TODO(niels): Build container for tower types
+                vec.emplace_back(new Enemy_a());
             } else if (index == 1) {
+                //vec.emplace_back(std::make_pair(index_counter, new Enemy_b()));
                 vec.emplace_back(new Enemy_b());
             }
+            index_counter += 1;
         }
         index += 1;
     }
+
+    return;
 }
 
 /*int main() {
