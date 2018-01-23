@@ -111,7 +111,35 @@ class Grid {
 	* @param[in] y The relative y coordinate in the grid.
 	**/
 	bool is_clicked(int x, int y);
-	
+
+	/**
+	* @brief Returns the amount of tiles on the x axis.
+	*
+	* @return Amount of tiles on the x axis.
+	**/
+	int get_size_x();
+
+	/**
+	* @brief Returns the amount of tiles on the y axis.
+	*
+	* @return Amount of tiles on the y axis.
+	**/
+	int get_size_y();
+
+	/**
+	* @brief Returns the x coordinate of the start position.
+	*
+	* @return X coordinate of the start position.
+	**/
+	int get_start_x();
+
+	/**
+	* @brief Returns the y coordinate of the start position.
+	*
+	* @return Y coordinate of the start position.
+	**/
+	int get_start_y();
+
 	/**
 	* @brief Changes the specific tile that has been clicked to non-navigatable
 	*
