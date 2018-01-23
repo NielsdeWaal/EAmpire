@@ -51,8 +51,9 @@ void Enemy::take_damage(const int damage_tower) {
 
 bool Enemy::move_direction(sf::Vector2i direction) {
 	sf::Vector2f direction_enemy = normalize(position - direction);
-	std::cout << position.x << " : " << position.y << "\n";
-	if (position.x == direction.x && position.y == direction.y) {
+	float ratio = 1.0;
+	//std::cout << position.x << " : " << position.y << "\n";
+	if (position.x <= direction.x + ratio && position.x >= direction.x - ratio && position.y <= direction.y + ratio && position.y >= direction.y - ratio) {
 		//std::cout << "done";
 		return true;
 	}

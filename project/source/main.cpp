@@ -26,10 +26,10 @@ int main(void) {
 			enemy.second->draw(window);
 			//std::cout << enemy.first << "\n";
 		}
-		container.get_container()[2]->move_direction(sf::Vector2f(20, 20));
-		container.get_container()[0]->move_direction(sf::Vector2f(700, 700));
-		container.get_container()[1]->move_direction(sf::Vector2f(400, 300));
-		bool location = container.get_container()[3]->move_direction(sf::Vector2f(200, 300));
+		container.get_container()[2]->move_direction(sf::Vector2i(20, 20));
+		container.get_container()[0]->move_direction(sf::Vector2i(700, 700));
+		container.get_container()[1]->move_direction(sf::Vector2i(400, 300));
+		bool location = container.get_container()[3]->move_direction(sf::Vector2i(200, 300));
 		window.display();
 		if (location == true) {
 			container.remove(3);
@@ -39,9 +39,9 @@ int main(void) {
 					enemy.second->draw(window);
 					//std::cout << enemy.first << "\n";
 				}
-				container.get_container()[2]->move_direction(sf::Vector2f(20, 400));
-				container.get_container()[0]->move_direction(sf::Vector2f(700, 700));
-				container.get_container()[1]->move_direction(sf::Vector2f(400, 300));
+				container.get_container()[2]->move_direction(sf::Vector2i(20, 400));
+				container.get_container()[0]->move_direction(sf::Vector2i(700, 700));
+				container.get_container()[1]->move_direction(sf::Vector2i(400, 300));
 				window.display();
 
 				sf::sleep(sf::milliseconds(20));
