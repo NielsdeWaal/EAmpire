@@ -1,5 +1,5 @@
-#ifndef ENEMYA_HPP
-#define ENEMYA_HPP
+#ifndef ENEMYB_HPP
+#define ENEMYB_HPP
 
 #include <SFML/Graphics.hpp>
 #include "enemy.hpp"
@@ -14,7 +14,7 @@
 * This is a subclass of Enemy. The Enemy is a circle shape with adaptable diameter and adaptable color.
 */
 
-class Enemy_a :public Enemy{
+class Enemy_b :public Enemy{
 public:
 	/**
 	* @brief Constructor
@@ -29,12 +29,12 @@ public:
 	* @param[in] lives				The lives of the enemy.
 	* @param[in] diameter			The diameter for the circle shape.
 	*/
-	Enemy_a();
+	Enemy_b();
 	
 	/**
 	* @brief Destructor
 	*/
-	~Enemy_a();
+	~Enemy_b();
 
 	
 	/**

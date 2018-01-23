@@ -19,6 +19,22 @@ sf::Vector2f Enemy::normalize(sf::Vector2f vector2f) {
 
 
 //PUBLIC
+Enemy::Enemy(sf::Vector2f start_position, sf::Color color, const int damage, const int speed, int lives) :
+	position(start_position),
+	color(color),
+	damage(damage),
+	speed(speed),
+	lives(lives)
+{
+	circle.setRadius(diameter);
+	circle.setFillColor(color);
+	circle.setPosition(position);
+}
+
+Enemy::~Enemy() {
+	std::cout << "Enemy is being deleted" << std::endl;
+}
+
 void Enemy::attack(int & health_player) {
 	health_player -= damage;
 }
@@ -35,13 +51,19 @@ void Enemy::take_damage(const int damage_tower) {
 
 bool Enemy::move_direction(sf::Vector2f direction) {
 	sf::Vector2f direction_enemy = normalize(position - direction);
-	std::cout << position.x << " : " << position.y << std::endl;
-	std::cout << direction.x << " : " << direction.y << std::endl;
 	float ratio = 3.0;
 	if (position.x <= direction.x + ratio && position.x >= direction.x - ratio && position.y <= direction.y + ratio && position.y >= direction.y - ratio) {
-		std::cout << "done";
+		//std::cout << "done";
 		return true;
 	}
 	position = position - sf::Vector2f(direction_enemy.x * speed, direction_enemy.y * speed);
 	return false;
+}
+
+sf::CircleShape Enemy::get_circle() {
+	return circle;
+}
+
+void Enemy::set_fill_color(sf::Color color) {
+	circle.setFillColor(color);
 }

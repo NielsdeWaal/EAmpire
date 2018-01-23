@@ -44,10 +44,10 @@ protected:
 	sf::Vector2f position;
 	//The color of the enemy's shape
 	sf::Color color;
-
-	//NOT FINISHED: because it is a feature
-	//The text that represents the lives of the enemy when you hovering over it with your mouse
-	//sf::Text text;
+	//The diameteer of the circle
+	float diameter = 50;
+	//The circle shape of the enemy
+	sf::CircleShape circle;
 public:
 
 	/**
@@ -59,20 +59,12 @@ public:
 	* @param[in]	speed				The speed with which the enemy moves.
 	* @param[in]	lives				The lives of the enemy.
 	*/
-	Enemy(sf::Vector2f start_position, sf::Color color, const int damage, const int speed, int lives):
-		position(start_position),
-		color(color),
-		damage(damage),
-		speed(speed),
-		lives(lives)
-	{}
+	Enemy(sf::Vector2f start_position, sf::Color color, const int damage, const int speed, int lives);
 
 	/**
 	* @brief Destructor
 	*/
-	~Enemy(void){
-		std::cout << "Enemy is being deleted" << std::endl;
-	}
+	~Enemy();
 
 	/**
 	* @brief Function that reduces the lives of the player
@@ -105,6 +97,13 @@ public:
 	bool move_direction(sf::Vector2f location);
 	
 	/**
+	* @brief Getter for getting the Circleshape of the enemy.
+	*
+	* This is useful for other class to get the globalbounds of the circle
+	*/
+	sf::CircleShape get_circle();
+
+	/**
 	* @brief Virtual function for drawing the enemy
 	*
 	* @param[out]	window				The screen on which you have to draw
@@ -116,20 +115,8 @@ public:
 	*
 	* @param[in]	color				The color that must take the shape of the enemy
 	*/
-	virtual void set_fill_color(sf::Color color) = 0;
+	void set_fill_color(sf::Color color);
 
-
-
-	//NOT FINISHED: because it is a feature
-	/**
-	* @brief Function for drawing the info of the enemy when hovering over it with your mouse.
-	*
-	* @param[out] Window, the screen on which you have to draw.
-	* @param[in]  Position of the enemy to center the text of the shape of the object
-	*/
-	//virtual void draw_string( sf::Vector2f position) = 0;
-
-	//There will be another function for knowing wich way the enemy have to go
 
 };
 

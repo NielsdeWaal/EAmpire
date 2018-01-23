@@ -2,7 +2,9 @@
 #define ENEMY_CONTAINER_HPP
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
+#include "enemy.hpp"
+#include "enemy_a.hpp"
+#include "enemy_b.hpp"
 /**
 * @file enemy_container.hpp
 * @author Dylan van Eck
@@ -12,30 +14,25 @@
 *
 */
 
-template <typename T>
 class Enemy_container {
 private:
 	//the vector container for to set pointers to
-	std::vector<T> screen_objects;
+	std::map< int, Enemy*> enemy_container;
+	int count = 0;
 
 public:
+
+	Enemy_container() {};
 	/**
 	* @brief Function for drawing the enemy
 	*
 	* @param[in] pointer		object 
 	*/
-	void add(const T & pointer) {
-		screen_objects.push_back(pointer);
-	}
+	void add();
 
-	void remove(const T & pointer) {
-		screen_objects.erase(std::remove(screen_objects.begin(), screen_objects.end(), pointer), screen_objects.end());
-		delete pointer;
-	}
+	void remove(int index);
 
-	std::vector<Enemy*> get_container() {
-		return screen_objects;
-	}
+	std::map< int, Enemy*> get_container();
 
 };
 
