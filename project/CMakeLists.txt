@@ -82,7 +82,9 @@ set(sources
     source/button.cpp
     source/action.cpp
     source/enemy.cpp
-	  source/enemy_a.cpp
+	source/enemy_a.cpp
+	source/enemy_b.cpp
+	source/enemy_container.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
@@ -90,9 +92,10 @@ set(sources
     include/tile.hpp
     include/button.hpp
     include/action.hpp
-	  include/enemy.hpp
-	  include/enemy_a.hpp
-	  include/enemy_container.hpp)
+	include/enemy.hpp
+	include/enemy_a.hpp
+	include/enemy_b.hpp
+	include/enemy_container.hpp)
 
 
 set(gridLibSRC
