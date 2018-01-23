@@ -2,7 +2,7 @@
 #include <math.h>
 
 Enemy_a::Enemy_a () :
-		Enemy(sf::Vector2f(200,200), sf::Color::Red, 50, 3, 5)
+		Enemy(sf::Vector2i(200,200), sf::Color::Red, 50, 3, 5)
 	{}
 
 Enemy_a::~Enemy_a() {
@@ -10,7 +10,7 @@ Enemy_a::~Enemy_a() {
 }
 
 void Enemy_a::draw(sf::RenderWindow & window) {
-	circle.setPosition(position);
+	circle.setPosition(Vector2f_from_Vector2i(position));
 	window.draw(circle);
 }
 

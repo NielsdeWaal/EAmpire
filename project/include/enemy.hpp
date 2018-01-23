@@ -22,26 +22,26 @@ private:
 	int lives;
 
 	/**
-	* @brief Private function to calculate the length of a sf::vector2f in 2D
+	* @brief Private function to calculate the length of a sf::vector2i in 2D
 	*
 	* @param[in]	vector				The vector that have to be calculated
 	* @return		float				The length of the vector
 	*/
-	float length(sf::Vector2f vector2f);
+	float length(sf::Vector2i vector2i);
 
 	/**
-	* @brief Private function to normalize a sf::vector2f in 2D
+	* @brief Private function to normalize a sf::vector2i in 2D
 	* 
 	* It uses the length function
 	*
 	* @param[in]	vector				The vector that have to be calculated
-	* @return		sf::Vector2f		The normalized vector
+	* @return		sf::Vector2i		The normalized vector
 	*/
-	sf::Vector2f normalize(sf::Vector2f vector2f);
+	sf::Vector2f normalize(sf::Vector2i vector2i);
 
 protected:
 	//The speed with which the enemy can move
-	sf::Vector2f position;
+	sf::Vector2i position;
 	//The color of the enemy's shape
 	sf::Color color;
 	//The diameteer of the circle
@@ -59,7 +59,7 @@ public:
 	* @param[in]	speed				The speed with which the enemy moves.
 	* @param[in]	lives				The lives of the enemy.
 	*/
-	Enemy(sf::Vector2f start_position, sf::Color color, const int damage, const int speed, int lives);
+	Enemy(sf::Vector2i start_position, sf::Color color, const int damage, const int speed, int lives);
 
 	/**
 	* @brief Destructor
@@ -94,7 +94,7 @@ public:
 	* @param[in]	location			The location where the enemy has to move to.
 	* @return		bool				when the enemy arrives at the location, true is returned. Otherwise it returns false
 	*/
-	bool move_direction(sf::Vector2f location);
+	bool move_direction(sf::Vector2i location);
 	
 	/**
 	* @brief Getter for getting the Circleshape of the enemy.
@@ -116,6 +116,8 @@ public:
 	* @param[in]	color				The color that must take the shape of the enemy
 	*/
 	void set_fill_color(sf::Color color);
+
+	sf::Vector2f Vector2f_from_Vector2i(sf::Vector2i rhs);
 
 
 };
