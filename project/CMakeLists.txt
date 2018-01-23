@@ -91,11 +91,11 @@ set(sources
     include/tile.hpp
     include/button.hpp
 	include/action.hpp
-	include/factory.hpp)
+	include/factory.hpp
     include/action.hpp
-	  include/enemy.hpp
-	  include/enemy_a.hpp
-	  include/enemy_container.hpp)
+	include/enemy.hpp
+	include/enemy_a.hpp
+	include/enemy_container.hpp)
 
 
 set(gridLibSRC
