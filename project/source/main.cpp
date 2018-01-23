@@ -30,7 +30,9 @@ int main(void) {
 	std::string tower1 = "Tower#1";
 	std::string sell = "Sell";
 
-	//factory button_factory("buttons.txt", window);
+	//factory button_factory("files/buttons.txt", window);
+	//button_vector button = button_factory.buttons_from_file();
+
 	
 	//Button play_button(play, sf::Vector2f{ float((window.getSize().x / 2)), float((window.getSize().y / 2)) }, sf::Vector2f{ 70,50 }, window);
 	Button exit_button(	exit, 

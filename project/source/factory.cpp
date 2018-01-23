@@ -40,10 +40,11 @@ button_vector factory::buttons_from_file() {
 
 std::ifstream & operator>>(std::ifstream & input, sf::Vector2f & rhs) {
 	char c;
-
+	std::cout << c << std::endl;
 	input >> c;
-
+	std::cout << c << std::endl;
 	input >> c;
-
+	std::cout << c << "JEMOEDER"<< std::endl;
+	//std::cout << input << std::endl;
 	return input;
 }
