@@ -21,8 +21,8 @@ void GameState::set_lives(int amount) {
 GameState::GameState()
 {}
 
-void GameState::set_new_round() {
-    new_round = true;
+void GameState::set_new_round(bool result) {
+    new_round = result;
 }
 
 bool GameState::get_round_status() {

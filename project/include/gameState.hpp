@@ -50,7 +50,7 @@ class GameState {
          */
         void set_lives(int amount);
 
-        void set_new_round();
+        void set_new_round(bool result);
 
         bool get_round_status();
 };

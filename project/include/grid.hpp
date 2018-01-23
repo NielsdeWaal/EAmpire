@@ -5,13 +5,16 @@
 #include <thread>
 #include <utility>
 #include <vector>
+#include <memory>
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
 #include "tile.hpp"
 #include "gameState.hpp"
+#include "enemy.hpp"
 #include "enemy_a.hpp"
 #include "enemy_container.hpp"
+#include "enemy_generator.hpp"
 
 /**
 * @file grid.hpp
@@ -41,6 +44,8 @@ class Grid {
 	sf::Sprite sprite_tile_path;
 
         GameState* game_state = GameState::get_state();
+
+        std::vector<std::unique_ptr<Enemy>> enemies;
 
 	/**
 	* @brief Struct to help with path-finding.

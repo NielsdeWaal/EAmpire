@@ -286,6 +286,7 @@ std::pair<int, int> Grid::get_start_values() {
 
 void Grid::new_round(int enemy_amount) {
     if(game_state->get_round_status()) {
-
+        game_state->set_new_round(false);
+        enemy_generator(enemies, 10, 20);
     }
 }
