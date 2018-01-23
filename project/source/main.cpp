@@ -133,10 +133,7 @@ int main(void) {
 			}
 		}
 
-			window.clear(sf::Color(100, 100, 100));
-
 			
-		}
 		window.clear(sf::Color(100, 100, 100));
 		grid.draw(window);
 		grid.draw_path(window, path);
