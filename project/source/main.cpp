@@ -30,6 +30,16 @@ int main(void) {
 	sf::Sprite sprite_tile_path;
 	tile_path.loadFromFile("textures/tile_path.png");
 	sprite_tile_path.setTexture(tile_path);
+
+	sf::Texture build_texture;
+	sf::Sprite sprite_hammer;
+	build_texture.loadFromFile("textures/hammer.png");
+	sprite_hammer.setTexture(build_texture);
+
+	sf::Texture sell_texture;
+	sf::Sprite sprite_sell;
+	sell_texture.loadFromFile("textures/sell.png");
+	sprite_sell.setTexture(sell_texture);
 	
 	std::string play = "Play";
 	std::string exit = "Exit";
@@ -79,11 +89,14 @@ int main(void) {
 		action(sf::Keyboard::Delete,	[&state]	{state = "selling"; }),
 		action(sf::Mouse::Right,		[&state]	{state = "free"; }),
 		action(sf::Mouse::Left,			[&state, &window,&menu_button,&tower1_button,&sell_button,&grid]
-													{	if (menu_button.is_pressed()) { window.close(); 
+													{	if (menu_button.is_pressed()) { 
+															window.close(); 
 														}
-														if (tower1_button.is_pressed()) { state = "building"; 
+														if (tower1_button.is_pressed()) { 
+															state = "building";
 														}
-														if (sell_button.is_pressed()) { state = "selling"; 
+														if (sell_button.is_pressed()) { 
+															state = "selling"; 
 														}
 														if (grid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y) && (!strcmp(state,"building"))) {
 															grid.set_built(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y); 
@@ -125,24 +138,39 @@ int main(void) {
 
 			}
 
-			window.clear(sf::Color(100, 100, 100));
 
-			grid.draw(window);
-			grid.draw_path(window, path);
-
-			tower1_button.draw();
-			tower2_button.draw();
-			tower3_button.draw();
-			tower4_button.draw();
-			tower5_button.draw();
-			sell_button.draw();
-			menu_button.draw();
-			//play_button.draw();
 			
-			window.display();
-			game.update();
-
 		}
+		window.clear(sf::Color(100, 100, 100));
+		grid.draw(window);
+		grid.draw_path(window, path);
+
+		tower1_button.draw();
+		tower2_button.draw();
+		tower3_button.draw();
+		tower4_button.draw();
+		tower5_button.draw();
+		sell_button.draw();
+		menu_button.draw();
+		//play_button.draw();
+
+		if (!strcmp(state, "building")) {
+			sprite_hammer.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
+			window.draw(sprite_hammer);
+			window.setMouseCursorVisible(false);
+		}
+		else if (!strcmp(state, "selling")) {
+			sprite_sell.setPosition(static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
+			window.draw(sprite_sell);
+			window.setMouseCursorVisible(false);
+		}
+		else {
+			window.setMouseCursorVisible(true);
+		}
+
+		window.display();
+		game.update();
+
 	}
     return 0;
 }
