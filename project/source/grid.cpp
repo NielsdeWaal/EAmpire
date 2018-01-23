@@ -120,6 +120,22 @@ bool Grid::is_clicked(int x, int y) {
 	return 1;
 }
 
+int Grid::get_size_x() {
+	return size_tiles_x;
+}
+
+int Grid::get_size_y() {
+	return size_tiles_y;
+}
+
+int Grid::get_start_x() {
+	return start_x;
+}
+
+int Grid::get_start_y() {
+	return start_y;
+}
+
 void Grid::set_built(int x, int y) {
 	tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].set_built();
 }
