@@ -7,7 +7,7 @@ class Tile {
   private:
 	int id;
 	int lives;
-	bool navigable;
+	bool navigable = true;
   public:
     Tile() {}
 

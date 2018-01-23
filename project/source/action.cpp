@@ -24,3 +24,4 @@ void action::operator()() {
 		work();
 	}
 }
+
