@@ -106,13 +106,6 @@ public:
 	sf::CircleShape get_circle();
 
 	/**
-	* @brief Virtual function for drawing the enemy
-	*
-	* @param[out]	window				The screen on which you have to draw
-	*/
-	virtual void draw(sf::RenderWindow & window) = 0;
-
-	/**
 	* @brief Virtual function for coloring the shape of the enemy when hovering over it with your mouse.
 	*
 	* @param[in]	color				The color that must take the shape of the enemy
@@ -139,6 +132,13 @@ public:
 	* @return		bool				When the end destination is reached, true will be returned.
 	*/
 	bool next_location(std::vector<sf::Vector2i> path, Grid grid);
+
+	/**
+	* @brief Virtual function for drawing the enemy
+	*
+	* @param[out]	window				The screen on which you have to draw
+	*/
+	virtual void draw(sf::RenderWindow & window) = 0;
 
 
 };
