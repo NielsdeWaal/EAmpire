@@ -15,8 +15,6 @@
 int main(void) {
 	auto game = Game();
 		sf::RenderWindow window(sf::VideoMode(1000, 1000), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close);
-		
-
 		auto grid_x = 10, grid_y = 10, scale = 50;
 		auto grid_x_pixel = (grid_x < 10 ? 700 : grid_x * scale + 200);
 		auto grid_y_pixel = (grid_y < 10 ? 600 : grid_y * scale + 100);
@@ -40,7 +38,6 @@ int main(void) {
 		std::string menu = "Menu";
 
 		Enemy_container container = Enemy_container();
-		container.add();
 
 		//Button play_button(play, sf::Vector2f{ float((window.getSize().x / 2)), float((window.getSize().y / 2)) }, sf::Vector2f{ 70,50 }, window);
 		Button tower1_button(tower1,
@@ -102,8 +99,6 @@ int main(void) {
 		})
 		};
 
-		sf::Clock clock;
-		window.setFramerateLimit(60);
 		while (window.isOpen()) {
 			for (auto &action : actions) {
 				action();
@@ -148,14 +143,11 @@ int main(void) {
 			//play_button.draw();
 			for (const auto & enemy : container.get_container()) {
 				enemy.second->draw(window);
-				if (enemy.second->next_location(path, grid)) {
+				if (!enemy.second->next_location(path, grid)) {
 					container.remove(enemy.first);
 				}
 			}
-			sf::Time time = clock.getElapsedTime();
-			std::cout << 1.0f / time.asSeconds() << std::endl;
 
-			clock.restart().asSeconds();
 			window.display();
 			game.update();
 		}
