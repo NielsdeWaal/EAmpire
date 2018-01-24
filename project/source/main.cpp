@@ -37,13 +37,13 @@ int main(void) {
 	sell_texture.loadFromFile("textures/sell.png");
 	sprite_sell.setTexture(sell_texture);
 	
-	std::string play = "Play";
+	//std::string play = "Play";
 	std::string exit = "Exit";
 	std::string tower1 = "Tower#1";
-	std::string tower2 = "Tower#2";
-	std::string tower3 = "Tower#3";
-	std::string tower4 = "Tower#4";
-	std::string tower5 = "Tower#5";
+	//std::string tower2 = "Tower#2";
+	//std::string tower3 = "Tower#3";
+	//std::string tower4 = "Tower#4";
+	//std::string tower5 = "Tower#5";
 	std::string sell = "Sell";
 	std::string menu = "Menu";
 	
@@ -52,7 +52,7 @@ int main(void) {
 						sf::Vector2f(grid_x_pixel - 50, 125),
 						sf::Vector2f(100, 50),
 						window);
-	Button tower2_button(tower2, 
+	/*Button tower2_button(tower2, 
 						sf::Vector2f(grid_x_pixel - 50, 200),
 						sf::Vector2f(100, 50),
 						window);
@@ -67,7 +67,7 @@ int main(void) {
 	Button tower5_button(tower5, 
 						sf::Vector2f(grid_x_pixel - 50, 425),
 						sf::Vector2f(100, 50),
-						window);
+						window);*/
 	Button sell_button(	sell,
 						sf::Vector2f(grid_x_pixel - 50, 525),
 						sf::Vector2f(100, 50),
@@ -140,10 +140,10 @@ int main(void) {
 		grid.draw_path(window, path);
 
 		tower1_button.draw();
-		tower2_button.draw();
-		tower3_button.draw();
-		tower4_button.draw();
-		tower5_button.draw();
+		//tower2_button.draw();
+		//tower3_button.draw();
+		//tower4_button.draw();
+		//tower5_button.draw();
 		sell_button.draw();
 		menu_button.draw();
 		//play_button.draw();
