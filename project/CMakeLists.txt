@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 2.6)
 
-project(project)
+project(EAmpire)
 set(EXE "main")
+
+#find_package(PkgConfig)
+#pkg_check_modules(GTEST REQUIRED gtest>=1.7.0)
+#pkg_check_modules(GMOCK REQUIRED gtest>=1.7.0)
 
 enable_testing()
 
@@ -54,25 +58,67 @@ else()
 
     set(CMAKE_EXE_LINKER_FLAGS_DEBUG   "/DEBUG /MANIFEST:NO" CACHE STRING "" FORCE)
     set(CMAKE_EXE_LINKER_FLAGS_RELEASE "/DEBUG /MANIFEST:NO /INCREMENTAL:NO /OPT:REF,ICF" CACHE STRING "" FORCE) 
+
+    #set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/source)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/test)
+
+#add_subdirectory(test)
+
+include(cmake_modules/clang-cxx-dev-tools.cmake)
+include(cmake_modules/FindSFML.cmake)
 
 set(sources
     # Main source.
     source/main.cpp
-    source/board.cpp
     source/game.cpp
+    source/board.cpp
     source/grid.cpp
+    source/gameState.cpp
+    source/tile.cpp
+    source/button.cpp
+    source/action.cpp
+    source/enemy.cpp
+	  source/enemy_a.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
-    include/tile.hpp)
+    include/gameState.hpp
+    include/tile.hpp
+    include/button.hpp
+    include/action.hpp
+	  include/enemy.hpp
+	  include/enemy_a.hpp
+	  include/enemy_container.hpp)
+
+
+set(gridLibSRC
+    source/grid.cpp
+    include/grid.hpp)
+
+add_library(gridlib STATIC
+        ${gridLibSRC})
+
+target_include_directories(gridlib PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+enable_testing()
 
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake_modules" ${CMAKE_MODULE_PATH})
 find_package(Boost REQUIRED )
 find_package(SFML 2 REQUIRED system window graphics network audio)
+if(SFML_FOUND)
+  include_directories(${SFML_INCLUDE_DIR})
+endif()
+
+if(SFML_FOUND)
+  include_directories(${SFML_INCLUDE_DIR})
+endif()
+
 
 add_executable(${EXE} ${sources})
-target_link_libraries(${EXE} ${Boost_LIBRARIES} dl ${SFML_LIBRARIES})
+target_link_libraries(${EXE} ${Boost_LIBRARIES} ${SFML_LIBRARIES})
