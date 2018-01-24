@@ -2,10 +2,8 @@
 #include <iostream>
 
 
-Tower::Tower(Tile location) :
-	location(location)
+Tower::Tower()
 {
-	value = cost;
 }
 
 
