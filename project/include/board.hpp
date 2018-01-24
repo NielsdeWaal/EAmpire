@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-#include "grid.hpp"
 #include "gameState.hpp"
+#include "grid.hpp"
 
 class Board {
   private:
@@ -12,8 +12,7 @@ class Board {
     GameState *game_state = GameState::get_state();
 
   public:
-    Board() 
-    { 
+    Board() {
         std::cout << "New board created" << std::endl;
     }
 
