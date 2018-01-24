@@ -10,18 +10,8 @@ Enemy_a::~Enemy_a() {
 }
 
 void Enemy_a::draw(sf::RenderWindow & window) {
-	//std::cout << "position: "<< position.x << " : " << position.y << "\n";
-	//std::cout << "next location: "<<nextlocation.x << " : " << nextlocation.y << "\n";
 	if (nextlocation != position) {
 		circle.setPosition(Vector2f_from_Vector2i(position));
 	}
 	window.draw(circle);
 }
-
-
-
-
-
-//void Enemy_a::draw_string(sf::Vector2f position) {
-//	text.setFillColor(sf::Color::White);
-//}

@@ -13,11 +13,3 @@ void Enemy_b::draw(sf::RenderWindow & window) {
 	circle.setPosition(Vector2f_from_Vector2i(position));
 	window.draw(circle);
 }
-
-
-
-
-
-//void Enemy_a::draw_string(sf::Vector2f position) {
-//	text.setFillColor(sf::Color::White);
-//}
