@@ -71,16 +71,15 @@ sf::Vector2f Enemy::Vector2f_from_Vector2i(sf::Vector2i rhs) {
 
 bool Enemy::next_location(std::vector<sf::Vector2i> path, Grid grid) {
 	for (auto it = path.begin(); it != path.end(); ++it) {
-		sf::Vector2i tilelocation = sf::Vector2i(grid.get_start_values().first + (it->x * 50), grid.get_start_values().second + (it->y * 50));
-		if (position == tilelocation) {
+		if (position == sf::Vector2i(grid.get_start_values().first + (it->x * 50), grid.get_start_values().second + (it->y * 50))) {
 			if (std::next(it) != path.end()) {
 				nextlocation = sf::Vector2i(grid.get_start_values().first + (std::next(it)->x * 50), grid.get_start_values().second + (std::next(it)->y * 50));
 			}
 			else {
-				return true;
+				return false;
 			}
 		}
 		move_direction();
 	}
-	return false;
+	//return false;
 }

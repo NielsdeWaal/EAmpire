@@ -49,7 +49,7 @@ protected:
 	float diameter = 24;
 	//The circle shape of the enemy
 	sf::CircleShape circle;
-
+	//The next location that have to be located: default first tile(most left at top)
 	sf::Vector2i nextlocation = sf::Vector2i(50,50);
 public:
 
@@ -92,10 +92,9 @@ public:
 	* The direction to move your enemy into is simply the difference between the location and the enemy position. 
 	* However, you want the enemies to move with constant speed, so we normalize the result.  
 	* This will give you the direction as a vector of length 1. multiply this direction by the speed constant of that enemy's type. 
-	* The result is a vector with it's length depending on the speed factor instead of the distance to the player. use the result to move your enemy.
+	* The result is a vector with it's length depending on the speed factor instead of the distance to the player.
 	*
 	* @param[in]	location			The location where the enemy has to move to.
-	* @return		bool				when the enemy arrives at the location, true is returned. Otherwise it returns false
 	*/
 	void move_direction();
 	
@@ -120,8 +119,25 @@ public:
 	*/
 	void set_fill_color(sf::Color color);
 
+	/**
+	* @brief Function for transforming a vector2f to 2i.
+	*
+	* @param[in]	rhs					The vector2i what have to be transformed
+	*/
 	sf::Vector2f Vector2f_from_Vector2i(sf::Vector2i rhs);
 
+	/**
+	* @brief Function for looking at the next location on the path
+	*
+	* First the function walks through the path and checks if the location of the enemy matches 
+	* with the location of a tile. If so, the next_location then refers to the tile thereon.
+	* When the end destination is reached, true will be returned.
+	*
+	* @param[in]	path				The path for looking at the next pathtile
+	* @param[in]	grid				The grid for getting info to calculate the next locatiion
+	*
+	* @return		bool				When the end destination is reached, true will be returned.
+	*/
 	bool next_location(std::vector<sf::Vector2i> path, Grid grid);
 
 
