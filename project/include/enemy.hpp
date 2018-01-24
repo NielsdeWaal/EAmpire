@@ -56,6 +56,9 @@ public:
 	/**
 	* @brief Constructor
 	*
+	* If this constructor is called, it will make a circle shaped enemy with custom characteristics.
+	* That are determines by the parameters. It will also automatic set the radius, color and position.
+	*
 	* @param[in]	start_position		The position where the enemy will start.
 	* @param[in]	color				The default color of the enemy.
 	* @param[in]	damage				The damage the enemy will do to the players lives.
