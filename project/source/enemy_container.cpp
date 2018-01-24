@@ -4,8 +4,8 @@
 void Enemy_container::add() {
 	enemy_container[count] = new Enemy_a();
 	count++;
-	enemy_container[count] = new Enemy_b();
-	count++;
+	//enemy_container[count] = new Enemy_b();
+	//count++;
 }
 
 void Enemy_container::remove(int index) {

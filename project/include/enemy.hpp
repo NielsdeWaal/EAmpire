@@ -2,6 +2,7 @@
 #define ENEMY_HPP
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "grid.hpp"
 
 /**
 * @file enemy.hpp
@@ -45,9 +46,11 @@ protected:
 	//The color of the enemy's shape
 	sf::Color color;
 	//The diameteer of the circle
-	float diameter = 50;
+	float diameter = 24;
 	//The circle shape of the enemy
 	sf::CircleShape circle;
+
+	sf::Vector2i nextlocation = sf::Vector2i(50,50);
 public:
 
 	/**
@@ -94,7 +97,7 @@ public:
 	* @param[in]	location			The location where the enemy has to move to.
 	* @return		bool				when the enemy arrives at the location, true is returned. Otherwise it returns false
 	*/
-	bool move_direction(sf::Vector2i location);
+	void move_direction();
 	
 	/**
 	* @brief Getter for getting the Circleshape of the enemy.
@@ -118,6 +121,8 @@ public:
 	void set_fill_color(sf::Color color);
 
 	sf::Vector2f Vector2f_from_Vector2i(sf::Vector2i rhs);
+
+	bool next_location(std::vector<sf::Vector2i> path, Grid grid);
 
 
 };

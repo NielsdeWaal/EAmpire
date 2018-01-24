@@ -2,7 +2,7 @@
 #include <math.h>
 
 Enemy_a::Enemy_a () :
-		Enemy(sf::Vector2i(200,200), sf::Color::Red, 50, 3, 5)
+		Enemy(sf::Vector2i(80,50), sf::Color::Red, 50, 1, 5)
 	{}
 
 Enemy_a::~Enemy_a() {
@@ -10,7 +10,11 @@ Enemy_a::~Enemy_a() {
 }
 
 void Enemy_a::draw(sf::RenderWindow & window) {
-	circle.setPosition(Vector2f_from_Vector2i(position));
+	//std::cout << "position: "<< position.x << " : " << position.y << "\n";
+	//std::cout << "next location: "<<nextlocation.x << " : " << nextlocation.y << "\n";
+	if (nextlocation != position) {
+		circle.setPosition(Vector2f_from_Vector2i(position));
+	}
 	window.draw(circle);
 }
 
