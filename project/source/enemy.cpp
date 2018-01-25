@@ -82,6 +82,7 @@ bool Enemy::next_location(std::vector<sf::Vector2i> path, Grid grid) {
 		}
 		move_direction();
 	}
+	return true;
 
 }
 
