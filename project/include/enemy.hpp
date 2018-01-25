@@ -1,5 +1,7 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
+
+#include <cmath>
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "grid.hpp"

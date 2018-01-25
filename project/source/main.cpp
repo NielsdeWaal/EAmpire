@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <cstring>
 #include <thread>
 #include <SFML/Graphics.hpp>
 
