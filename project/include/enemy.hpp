@@ -1,9 +1,10 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
 
+#include <SFML/Graphics.hpp>
 #include <cmath>
 #include <iostream>
-#include <SFML/Graphics.hpp>
+
 #include "grid.hpp"
 
 /**
@@ -13,7 +14,7 @@
 *
 * @brief Abstract superclass for creating a enemy
 *
-* This is a superclass for enemies. 
+* This is a superclass for enemies.
 * It contains the variables and functions that come in handy for every enemy.
 */
 
@@ -144,8 +145,6 @@ public:
 	* @param[out]	window				The screen on which you have to draw
 	*/
 	virtual void draw(sf::RenderWindow & window) = 0;
-
-
 };
 
 #endif // ENEMY_HPP

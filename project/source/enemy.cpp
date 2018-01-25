@@ -14,8 +14,10 @@ sf::Vector2f Enemy::normalize(sf::Vector2i vector2i) {
 		vector.y = vector2i.y / length_of_vector;
 	}
 
-	return vector;
+
+    return vector;
 }
+
 
 
 //PUBLIC
@@ -40,13 +42,12 @@ void Enemy::attack(int & health_player) {
 }
 
 void Enemy::take_damage(const int damage_tower) {
-	if (lives <= 0) {
-		std::cout << "death";
-	}
-	else {
-		lives -= damage_tower;
-		std::cout << "lives down";
-	}
+    if (lives <= 0) {
+        std::cout << "death";
+    } else {
+        lives -= damage_tower;
+        std::cout << "lives down";
+    }
 }
 
 void Enemy::move_direction() {
@@ -81,4 +82,5 @@ bool Enemy::next_location(std::vector<sf::Vector2i> path, Grid grid) {
 		}
 		move_direction();
 	}
+
 }

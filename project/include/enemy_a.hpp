@@ -1,7 +1,9 @@
-#ifndef ENEMYA_HPP
-#define ENEMYA_HPP
+#ifndef ENEMY_A_HPP
+#define ENEMY_A_HPP
 
 #include <SFML/Graphics.hpp>
+#include <math.h>
+
 #include "enemy.hpp"
 
 /**
@@ -36,6 +38,15 @@ public:
 	*/
 	void draw(sf::RenderWindow & window) override;
 
-};
-#endif // !ENEMYA_HPP
 
+    /**
+    * @brief Getter for getting the Circleshape of the enemy.
+    *
+    * This is useful for other class to get the globalbounds of the circle
+    */
+    sf::CircleShape get_circle();
+
+    // is not finished
+    // void draw_string(sf::Vector2f position) override;
+};
+#endif // ENEMY_A_HPP
