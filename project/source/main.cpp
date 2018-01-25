@@ -151,7 +151,7 @@ int main(void) {
 			enemy.second->draw(window);
 			if (!enemy.second->next_location(path, grid)) {
 				container.remove(enemy.first);
-				std::cout << "end of path" << std::endl;
+				//std::cout << "end of path" << std::endl;
 			}
 		}
 
