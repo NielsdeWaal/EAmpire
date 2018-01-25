@@ -1,9 +1,7 @@
-#ifndef ENEMY_A_HPP
-#define ENEMY_A_HPP
+#ifndef ENEMYB_HPP
+#define ENEMYB_HPP
 
 #include <SFML/Graphics.hpp>
-#include <math.h>
-
 #include "enemy.hpp"
 
 /**
@@ -13,22 +11,22 @@
 *
 * @brief subclass of Enemy
 *
-* This is a subclass of Enemy.
+* This is a subclass of Enemy. The Enemy is a circle shape with adaptable diameter and adaptable color.
 */
 
-class Enemy_a :public Enemy{
+class Enemy_b :public Enemy{
 public:
 	/**
 	* @brief Constructor
 	*
 	* When this constructor is called, it will make a custom enemy.
 	*/
-	Enemy_a();
+	Enemy_b();
 	
 	/**
 	* @brief Destructor
 	*/
-	~Enemy_a();
+	~Enemy_b();
 
 	
 	/**
@@ -38,15 +36,6 @@ public:
 	*/
 	void draw(sf::RenderWindow & window) override;
 
-
-    /**
-    * @brief Getter for getting the Circleshape of the enemy.
-    *
-    * This is useful for other class to get the globalbounds of the circle
-    */
-    sf::CircleShape get_circle();
-
-    // is not finished
-    // void draw_string(sf::Vector2f position) override;
 };
-#endif // ENEMY_A_HPP
+#endif // !ENEMYA_HPP
+

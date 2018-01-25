@@ -5,6 +5,9 @@
 #include <thread>
 
 #include "action.hpp"
+#include "enemy.hpp"
+#include "enemy_a.hpp"
+#include "enemy_container.hpp"
 #include "button.hpp"
 #include "game.hpp"
 #include "grid.hpp"
@@ -38,6 +41,8 @@ int main(void) {
     sf::Sprite sprite_sell;
     sell_texture.loadFromFile("textures/sell.png");
     sprite_sell.setTexture(sell_texture);
+  
+		Enemy_container container = Enemy_container();
 
     // std::string play = "Play";
     std::string exit = "Exit";
@@ -71,6 +76,7 @@ int main(void) {
     action actions[] = {
         action(sf::Keyboard::Escape, [&window] { window.close(); }),
         action(sf::Keyboard::Num1, [&state] { state = "building"; }),
+        action(sf::Keyboard::Num2,		[&container] {container.add(); }),
         action(sf::Keyboard::Delete, [&state] { state = "selling"; }),
         action(sf::Mouse::Right, [&state] { state = "free"; }),
         action(sf::Mouse::Left, [&state, &window, &menu_button, &tower1_button,
@@ -139,6 +145,13 @@ int main(void) {
         sell_button.draw();
         menu_button.draw();
         // play_button.draw();
+        
+        for (const auto & enemy : container.get_container()) {
+				  enemy.second->draw(window);
+				  if (!enemy.second->next_location(path, grid)) {
+					  container.remove(enemy.first);
+				  }
+			  }
 
         if (!strcmp(state, "building")) {
             sprite_hammer.setPosition(
