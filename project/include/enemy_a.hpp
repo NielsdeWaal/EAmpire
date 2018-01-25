@@ -1,7 +1,9 @@
-#ifndef ENEMYA_HPP
-#define ENEMYA_HPP
+#ifndef ENEMY_A_HPP
+#define ENEMY_A_HPP
 
 #include <SFML/Graphics.hpp>
+#include <math.h>
+
 #include "enemy.hpp"
 
 /**
@@ -11,7 +13,7 @@
 *
 * @brief subclass of Enemy
 *
-* This is a subclass of Enemy. The Enemy is a circle shape with adaptable diameter and adaptable color.
+* This is a subclass of Enemy.
 */
 
 class Enemy_a :public Enemy{
@@ -19,15 +21,7 @@ public:
 	/**
 	* @brief Constructor
 	*
-	* When this constructor is called, it will make a custom circle shaped enemy.
-	* It will set the radius and the color for the circle automaticly.
-	*
-	* @param[in] start_position		The position where the enemy will start.
-	* @param[in] color				The default color of the enemy.
-	* @param[in] damage				The damage the enemy will do to the players lives.
-	* @param[in] speed				The speed with which the enemy moves.
-	* @param[in] lives				The lives of the enemy.
-	* @param[in] diameter			The diameter for the circle shape.
+	* When this constructor is called, it will make a custom enemy.
 	*/
 	Enemy_a();
 	
@@ -44,9 +38,15 @@ public:
 	*/
 	void draw(sf::RenderWindow & window) override;
 
-	//is not finished
-	//void draw_string(sf::Vector2f position) override;
 
+    /**
+    * @brief Getter for getting the Circleshape of the enemy.
+    *
+    * This is useful for other class to get the globalbounds of the circle
+    */
+    sf::CircleShape get_circle();
+
+    // is not finished
+    // void draw_string(sf::Vector2f position) override;
 };
-#endif // !ENEMYA_HPP
-
+#endif // ENEMY_A_HPP

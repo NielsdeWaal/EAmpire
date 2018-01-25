@@ -1,9 +1,11 @@
 #ifndef ENEMY_HPP
 #define ENEMY_HPP
 
+#include <SFML/Graphics.hpp>
 #include <cmath>
 #include <iostream>
-#include <SFML/Graphics.hpp>
+
+#include "grid.hpp"
 
 /**
 * @file enemy.hpp
@@ -12,7 +14,7 @@
 *
 * @brief Abstract superclass for creating a enemy
 *
-* This is a superclass for enemies. 
+* This is a superclass for enemies.
 * It contains the variables and functions that come in handy for every enemy.
 */
 
@@ -47,13 +49,18 @@ protected:
 	//The color of the enemy's shape
 	sf::Color color;
 	//The diameteer of the circle
-	float diameter = 50;
+	float diameter = 24;
 	//The circle shape of the enemy
 	sf::CircleShape circle;
+	//The next location that have to be located: default first tile(most left at top)
+	sf::Vector2i nextlocation = sf::Vector2i(50,50);
 public:
 
 	/**
 	* @brief Constructor
+	*
+	* If this constructor is called, it will make a circle shaped enemy with custom characteristics.
+	* That are determines by the parameters. It will also automatic set the radius, color and position.
 	*
 	* @param[in]	start_position		The position where the enemy will start.
 	* @param[in]	color				The default color of the enemy.
@@ -91,12 +98,11 @@ public:
 	* The direction to move your enemy into is simply the difference between the location and the enemy position. 
 	* However, you want the enemies to move with constant speed, so we normalize the result.  
 	* This will give you the direction as a vector of length 1. multiply this direction by the speed constant of that enemy's type. 
-	* The result is a vector with it's length depending on the speed factor instead of the distance to the player. use the result to move your enemy.
+	* The result is a vector with it's length depending on the speed factor instead of the distance to the player.
 	*
 	* @param[in]	location			The location where the enemy has to move to.
-	* @return		bool				when the enemy arrives at the location, true is returned. Otherwise it returns false
 	*/
-	bool move_direction(sf::Vector2i location);
+	void move_direction();
 	
 	/**
 	* @brief Getter for getting the Circleshape of the enemy.
@@ -106,22 +112,39 @@ public:
 	sf::CircleShape get_circle();
 
 	/**
-	* @brief Virtual function for drawing the enemy
-	*
-	* @param[out]	window				The screen on which you have to draw
-	*/
-	virtual void draw(sf::RenderWindow & window) = 0;
-
-	/**
 	* @brief Virtual function for coloring the shape of the enemy when hovering over it with your mouse.
 	*
 	* @param[in]	color				The color that must take the shape of the enemy
 	*/
 	void set_fill_color(sf::Color color);
 
+	/**
+	* @brief Function for transforming a vector2f to 2i.
+	*
+	* @param[in]	rhs					The vector2i what have to be transformed
+	*/
 	sf::Vector2f Vector2f_from_Vector2i(sf::Vector2i rhs);
 
+	/**
+	* @brief Function for looking at the next location on the path
+	*
+	* First the function walks through the path and checks if the location of the enemy matches 
+	* with the location of a tile. If so, the next_location then refers to the tile thereon.
+	* When the end destination is reached, true will be returned.
+	*
+	* @param[in]	path				The path for looking at the next pathtile
+	* @param[in]	grid				The grid for getting info to calculate the next locatiion
+	*
+	* @return		bool				When the end destination is reached, true will be returned.
+	*/
+	bool next_location(std::vector<sf::Vector2i> path, Grid grid);
 
+	/**
+	* @brief Virtual function for drawing the enemy
+	*
+	* @param[out]	window				The screen on which you have to draw
+	*/
+	virtual void draw(sf::RenderWindow & window) = 0;
 };
 
 #endif // ENEMY_HPP

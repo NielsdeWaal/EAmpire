@@ -1,11 +1,8 @@
 #include "enemy_container.hpp"
 
-
 void Enemy_container::add() {
 	enemy_container[count] = new Enemy_a();
-	count++;
-	enemy_container[count] = new Enemy_b();
-	count++;
+	count++;;
 }
 
 void Enemy_container::remove(int index) {

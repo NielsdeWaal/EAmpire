@@ -14,8 +14,10 @@ sf::Vector2f Enemy::normalize(sf::Vector2i vector2i) {
 		vector.y = vector2i.y / length_of_vector;
 	}
 
-	return vector;
+
+    return vector;
 }
+
 
 
 //PUBLIC
@@ -40,25 +42,17 @@ void Enemy::attack(int & health_player) {
 }
 
 void Enemy::take_damage(const int damage_tower) {
-	if (lives <= 0) {
-		std::cout << "death";
-	}
-	else {
-		lives -= damage_tower;
-		std::cout << "lives down";
-	}
+    if (lives <= 0) {
+        std::cout << "death";
+    } else {
+        lives -= damage_tower;
+        std::cout << "lives down";
+    }
 }
 
-bool Enemy::move_direction(sf::Vector2i direction) {
-	sf::Vector2f direction_enemy = normalize(position - direction);
-	float ratio = 1.0;
-	//std::cout << position.x << " : " << position.y << "\n";
-	if (position.x <= direction.x + ratio && position.x >= direction.x - ratio && position.y <= direction.y + ratio && position.y >= direction.y - ratio) {
-		//std::cout << "done";
-		return true;
-	}
+void Enemy::move_direction() {
+	sf::Vector2f direction_enemy = normalize(position - nextlocation);
 	position = position - sf::Vector2i(direction_enemy.x * speed, direction_enemy.y * speed);
-	return false;
 }
 
 sf::CircleShape Enemy::get_circle() {
@@ -75,3 +69,18 @@ sf::Vector2f Enemy::Vector2f_from_Vector2i(sf::Vector2i rhs) {
 		static_cast< float >(rhs.y)
 	);
 };
+
+bool Enemy::next_location(std::vector<sf::Vector2i> path, Grid grid) {
+	for (auto it = path.begin(); it != path.end(); ++it) {
+		if (position == sf::Vector2i(grid.get_start_values().first + (it->x * 50), grid.get_start_values().second + (it->y * 50))) {
+			if (std::next(it) != path.end()) {
+				nextlocation = sf::Vector2i(grid.get_start_values().first + (std::next(it)->x * 50), grid.get_start_values().second + (std::next(it)->y * 50));
+			}
+			else {
+				return false;
+			}
+		}
+		move_direction();
+	}
+
+}

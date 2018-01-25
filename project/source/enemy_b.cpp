@@ -14,10 +14,3 @@ void Enemy_b::draw(sf::RenderWindow & window) {
 	window.draw(circle);
 }
 
-
-
-
-
-//void Enemy_a::draw_string(sf::Vector2f position) {
-//	text.setFillColor(sf::Color::White);
-//}
