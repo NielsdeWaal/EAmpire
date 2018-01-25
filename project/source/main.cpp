@@ -107,7 +107,7 @@ int main(void) {
 
         })};
 	
-	window.setFramerateLimit(15);
+	window.setFramerateLimit(25);
     while (window.isOpen()) {
         for (auto &action : actions) {
             action();
