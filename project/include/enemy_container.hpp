@@ -60,9 +60,5 @@ public:
 	*/
 	std::map< int, Enemy*> get_container();
 
-
-    std::vector<Enemy *> get_container() {
-        return screen_objects;
-    }
 };
 #endif // ENEMY_CONTAINER_HPP

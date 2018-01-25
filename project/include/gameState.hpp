@@ -1,6 +1,10 @@
 #ifndef GAME_STATE_HPP
 #define GAME_STATE_HPP
 
+#include <map>
+#include <string>
+#include <SFML/Graphics.hpp>
+
 /**
  * @file gameState.hpp
  * @author Niels de Waal
@@ -19,6 +23,9 @@ class GameState {
 
     // TODO Is a hardcoded value, needs to be scalable to difficulty level.
     int lives = 100; ///< Current amount of lives.
+
+	std::map<std::string, sf::Texture> textures;
+	std::map<std::string, sf::Sprite> sprites;
 
   public:
     /**
@@ -45,6 +52,10 @@ class GameState {
      * @param[in] the amount that lives needs to be set to.
      */
     void set_lives(int amount);
+
+	void load_sprites(std::map<std::string, std::string> files);
+
+	void draw_sprite(std::string name, sf::Vector2f position, sf::RenderWindow &window);
 };
 
 #endif // GAME_STATE_HPP

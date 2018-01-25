@@ -4,6 +4,10 @@
 #include <SFML/Graphics.hpp>
 #include <utility>
 #include <vector>
+#include <algorithm>
+#include <chrono>
+#include <iostream>
+#include <random>
 
 #include "gameState.hpp"
 #include "tile.hpp"
@@ -26,14 +30,6 @@ class Grid {
     int scale;
     int start_x;
     int start_y;
-
-    sf::Texture tile_normal;
-    sf::Texture tile_blocked;
-    sf::Texture tile_path;
-
-    sf::Sprite sprite_tile_normal;
-    sf::Sprite sprite_tile_blocked;
-    sf::Sprite sprite_tile_path;
 
     /**
     * @brief Struct to help with path-finding.
