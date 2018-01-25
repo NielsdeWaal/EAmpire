@@ -1,6 +1,7 @@
 #ifndef GAME_STATE_HPP
 #define GAME_STATE_HPP
 
+
 #include <map>
 #include <string>
 #include <SFML/Graphics.hpp>
@@ -23,6 +24,8 @@ class GameState {
 
     // TODO Is a hardcoded value, needs to be scalable to difficulty level.
     int lives = 100; ///< Current amount of lives.
+  
+    bool new_round = true;
 
 	std::map<std::string, sf::Texture> textures;
 	std::map<std::string, sf::Sprite> sprites;
@@ -69,6 +72,10 @@ class GameState {
 	* @param[in] window Window to draw the sprite on.
 	*/
 	void draw_sprite(std::string name, sf::Vector2f position, sf::RenderWindow &window);
+  
+  void set_new_round(bool result);
+
+  bool get_round_status();
 };
 
 #endif // GAME_STATE_HPP

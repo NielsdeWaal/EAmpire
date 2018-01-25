@@ -78,6 +78,7 @@ int main(void) {
     action actions[] = {
         action(sf::Keyboard::Escape, [&window] { window.close(); }),
         action(sf::Keyboard::Num1, [&state] { state = "building"; }),
+
         action(sf::Keyboard::Num2,		[&container] {container.add(); }),
         action(sf::Keyboard::Delete, [&state] { state = "selling"; }),
         action(sf::Mouse::Right, [&state] { state = "free"; }),
@@ -94,14 +95,17 @@ int main(void) {
             }
             if (grid.is_clicked(sf::Mouse::getPosition(window).x,
                                 sf::Mouse::getPosition(window).y) &&
-                (!strcmp(state, "building"))) {
+                (!std::strcmp(state, "building"))) {
+
                 grid.set_built(sf::Mouse::getPosition(window).x,
                                sf::Mouse::getPosition(window).y);
                 state = "free";
             }
             if (grid.is_clicked(sf::Mouse::getPosition(window).x,
                                 sf::Mouse::getPosition(window).y) &&
-                (!strcmp(state, "selling"))) {
+
+                (!std::strcmp(state, "selling"))) {
+
                 grid.set_free(sf::Mouse::getPosition(window).x,
                               sf::Mouse::getPosition(window).y);
                 state = "free";
@@ -110,6 +114,7 @@ int main(void) {
         })};
 
     while (window.isOpen()) {
+
         for (auto &action : actions) {
             action();
         }
@@ -117,6 +122,7 @@ int main(void) {
         auto path = grid.find_path(start, end);
 
         sf::Event evnt;
+      
         while (window.pollEvent(evnt)) {
 
             switch (evnt.type) {

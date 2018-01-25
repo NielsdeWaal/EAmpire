@@ -10,6 +10,11 @@
 #include <random>
 
 #include "gameState.hpp"
+#include "enemy.hpp"
+#include "enemy_a.hpp"
+#include "enemy_b.hpp"
+#include "enemy_container.hpp"
+#include "enemy_generator.hpp"
 #include "tile.hpp"
 
 /**
@@ -25,6 +30,7 @@
 class Grid {
   private:
     std::vector<Tile> tiles;
+
     int size_tiles_x;
     int size_tiles_y;
     int scale;

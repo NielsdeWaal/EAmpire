@@ -18,6 +18,18 @@ void GameState::set_lives(int amount) {
     lives = amount;
 }
 
+
+GameState::GameState()
+{}
+
+void GameState::set_new_round(bool result) {
+    new_round = result;
+}
+
+bool GameState::get_round_status() {
+    return new_round;
+}
+
 void GameState::load_sprites(std::map<std::string, std::string> files) {
 	for (std::map<std::string, std::string>::iterator it = files.begin(); it != files.end(); ++it) {
 		textures.insert(std::pair<std::string, sf::Texture>(it->first, sf::Texture()));
@@ -32,4 +44,4 @@ void GameState::draw_sprite(std::string name, sf::Vector2f position, sf::RenderW
 	window.draw(sprites.find(name)->second);
 }
 
-GameState::GameState() {}
+

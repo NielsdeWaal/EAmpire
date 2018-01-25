@@ -1,5 +1,11 @@
 #include "grid.hpp"
 
+void Grid::initialise(int size_x, int size_y) {
+    for (int i = 0; i < (size_x * size_y); ++i) {
+        tiles.push_back(Tile());
+    }
+}
+
 std::vector<Grid::Mini_tile> Grid::create_mini_grid() {
     std::vector<Mini_tile> mini_grid(size_tiles_x * size_tiles_y);
     for (int y = 0; y < size_tiles_y; y++) {
@@ -104,7 +110,7 @@ Grid::Grid(): // Default constructor
       scale(50), 
       start_x(0), 
       start_y(0) 
-{}
+{enemy_generator(enemies, 10, 20);}
 
 Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
            int start_y = 0): 
@@ -114,7 +120,7 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
     scale(scale), 
     start_x(start_x), 
     start_y(start_y) 
-{}
+{enemy_generator(enemies, 10, 20);}
 
 bool Grid::is_clicked(int x, int y) {
     if ((x - start_x) < 0 || (y - start_y) < 0 ||
@@ -198,10 +204,11 @@ void Grid::draw_path(sf::RenderWindow &window, std::vector<sf::Vector2i> path) {
     }
 }
 
-void Grid::update() {
-    for (auto tile : tiles) {
-        // tile.update();
-    }
+
+void Grid::update(sf::RenderWindow& window, std::vector<sf::Vector2i> path) {
+	for(auto tile : path) {
+
+	}
 }
 
 void Grid::create_maze() {
@@ -343,5 +350,13 @@ std::pair<int, int> Grid::get_grid_size() {
 }
 
 std::pair<int, int> Grid::get_start_values() {
-    return std::make_pair(start_x, start_y);
+	return std::make_pair(start_x, start_y);
+}
+
+void Grid::new_round(int enemy_amount) {
+    if(game_state->get_round_status()) {
+        game_state->set_new_round(false);
+        //enemy_generator(enemies, 10, 20);
+    }
+
 }
