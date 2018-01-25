@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <map>
 
 #include "enemy.hpp"
 #include "enemy_a.hpp"

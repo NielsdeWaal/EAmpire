@@ -14,6 +14,18 @@
 
 int main(void) {
     auto game = Game();
+	GameState *game_state = GameState::get_state();
+
+	std::map<std::string, std::string> sprites {
+		{"tile_normal", "textures/tile_normal.png"},
+		{"tile_blocked", "textures/tile_blocked.png"},
+		{"tile_path", "textures/tile_path.png"},
+		{"hammer", "textures/hammer.png"},
+		{"sell", "textures/sell.png"}
+	};
+
+	game_state->load_sprites(sprites);
+
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "EAmpire Tower Defense",
                             sf::Style::Titlebar | sf::Style::Close);
 
@@ -31,18 +43,8 @@ int main(void) {
     bool lastButton = false;
     auto start = sf::Vector2i(0, 0);
     auto end = sf::Vector2i(9, 9);
-
-    sf::Texture build_texture;
-    sf::Sprite sprite_hammer;
-    build_texture.loadFromFile("textures/hammer.png");
-    sprite_hammer.setTexture(build_texture);
-
-    sf::Texture sell_texture;
-    sf::Sprite sprite_sell;
-    sell_texture.loadFromFile("textures/sell.png");
-    sprite_sell.setTexture(sell_texture);
   
-		Enemy_container container = Enemy_container();
+	Enemy_container container = Enemy_container();
 
     // std::string play = "Play";
     std::string exit = "Exit";
@@ -76,6 +78,7 @@ int main(void) {
     action actions[] = {
         action(sf::Keyboard::Escape, [&window] { window.close(); }),
         action(sf::Keyboard::Num1, [&state] { state = "building"; }),
+
         action(sf::Keyboard::Num2,		[&container] {container.add(); }),
         action(sf::Keyboard::Delete, [&state] { state = "selling"; }),
         action(sf::Mouse::Right, [&state] { state = "free"; }),
@@ -92,14 +95,17 @@ int main(void) {
             }
             if (grid.is_clicked(sf::Mouse::getPosition(window).x,
                                 sf::Mouse::getPosition(window).y) &&
-                (!strcmp(state, "building"))) {
+                (!std::strcmp(state, "building"))) {
+
                 grid.set_built(sf::Mouse::getPosition(window).x,
                                sf::Mouse::getPosition(window).y);
                 state = "free";
             }
             if (grid.is_clicked(sf::Mouse::getPosition(window).x,
                                 sf::Mouse::getPosition(window).y) &&
-                (!strcmp(state, "selling"))) {
+
+                (!std::strcmp(state, "selling"))) {
+
                 grid.set_free(sf::Mouse::getPosition(window).x,
                               sf::Mouse::getPosition(window).y);
                 state = "free";
@@ -109,6 +115,7 @@ int main(void) {
 	
 	window.setFramerateLimit(25);
     while (window.isOpen()) {
+
         for (auto &action : actions) {
             action();
         }
@@ -116,6 +123,7 @@ int main(void) {
         auto path = grid.find_path(start, end);
 
         sf::Event evnt;
+      
         while (window.pollEvent(evnt)) {
 
             switch (evnt.type) {
@@ -156,14 +164,10 @@ int main(void) {
 		}
 
         if (!strcmp(state, "building")) {
-            sprite_hammer.setPosition(
-                static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
-            window.draw(sprite_hammer);
+			game_state->draw_sprite("hammer", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
             window.setMouseCursorVisible(false);
         } else if (!strcmp(state, "selling")) {
-            sprite_sell.setPosition(
-                static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
-            window.draw(sprite_sell);
+			game_state->draw_sprite("sell", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
             window.setMouseCursorVisible(false);
         } else {
             window.setMouseCursorVisible(true);

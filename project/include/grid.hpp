@@ -4,8 +4,17 @@
 #include <SFML/Graphics.hpp>
 #include <utility>
 #include <vector>
+#include <algorithm>
+#include <chrono>
+#include <iostream>
+#include <random>
 
 #include "gameState.hpp"
+#include "enemy.hpp"
+#include "enemy_a.hpp"
+#include "enemy_b.hpp"
+#include "enemy_container.hpp"
+#include "enemy_generator.hpp"
 #include "tile.hpp"
 
 /**
@@ -21,19 +30,14 @@
 class Grid {
   private:
     std::vector<Tile> tiles;
+
     int size_tiles_x;
     int size_tiles_y;
     int scale;
     int start_x;
     int start_y;
-
-    sf::Texture tile_normal;
-    sf::Texture tile_blocked;
-    sf::Texture tile_path;
-
-    sf::Sprite sprite_tile_normal;
-    sf::Sprite sprite_tile_blocked;
-    sf::Sprite sprite_tile_path;
+	std::vector<std::pair<int, std::shared_ptr<Enemy>>> enemies;
+	GameState *game_state = GameState::get_state();
 
     /**
     * @brief Struct to help with path-finding.
@@ -84,8 +88,6 @@ class Grid {
     **/
     std::vector<sf::Vector2i> path_from_grid(std::vector<Mini_tile> &mini_grid,
                                              sf::Vector2i end);
-
-    GameState *game_state = GameState::get_state();
 
   public:
     /**
