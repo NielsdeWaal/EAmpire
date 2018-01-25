@@ -30,23 +30,5 @@ public:
 	*/
 	~Enemy_a();
 
-	
-	/**
-	* @brief Function for drawing the enemy
-	*
-	* @param[out] Window, the screen on which you have to draw
-	*/
-	void draw(sf::RenderWindow & window) override;
-
-
-    /**
-    * @brief Getter for getting the Circleshape of the enemy.
-    *
-    * This is useful for other class to get the globalbounds of the circle
-    */
-    sf::CircleShape get_circle();
-
-    // is not finished
-    // void draw_string(sf::Vector2f position) override;
 };
 #endif // ENEMY_A_HPP

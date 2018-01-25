@@ -112,7 +112,8 @@ int main(void) {
             }
 
         })};
-
+	
+	window.setFramerateLimit(25);
     while (window.isOpen()) {
 
         for (auto &action : actions) {
@@ -155,11 +156,12 @@ int main(void) {
         // play_button.draw();
         
         for (const auto & enemy : container.get_container()) {
-				  enemy.second->draw(window);
-				  if (!enemy.second->next_location(path, grid)) {
-					  container.remove(enemy.first);
-				  }
-			  }
+			enemy.second->draw(window);
+			if (!enemy.second->next_location(path, grid)) {
+				container.remove(enemy.first);
+				//std::cout << "end of path" << std::endl;
+			}
+		}
 
         if (!strcmp(state, "building")) {
 			game_state->draw_sprite("hammer", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);

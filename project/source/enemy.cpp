@@ -82,5 +82,11 @@ bool Enemy::next_location(std::vector<sf::Vector2i> path, Grid grid) {
 		}
 		move_direction();
 	}
+	return true;
 
+}
+
+void Enemy::draw(sf::RenderWindow & window) {
+	circle.setPosition(Vector2f_from_Vector2i(position));
+	window.draw(circle);
 }
