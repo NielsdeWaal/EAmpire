@@ -144,7 +144,7 @@ public:
 	*
 	* @param[out]	window				The screen on which you have to draw
 	*/
-	virtual void draw(sf::RenderWindow & window) = 0;
+	void draw(sf::RenderWindow & window);
 };
 
 #endif // ENEMY_HPP

@@ -28,14 +28,6 @@ public:
 	*/
 	~Enemy_b();
 
-	
-	/**
-	* @brief Function for drawing the enemy
-	*
-	* @param[out] Window, the screen on which you have to draw
-	*/
-	void draw(sf::RenderWindow & window) override;
-
 };
 #endif // !ENEMYA_HPP
 
