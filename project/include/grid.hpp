@@ -46,8 +46,8 @@ class Grid {
 
         GameState* game_state = GameState::get_state();
 
-        //std::vector<std::map<int, std::shared_ptr<Enemy>>> enemies;
-        std::vector<std::shared_ptr<Enemy>> enemies;
+        std::vector<std::pair<int, std::shared_ptr<Enemy>>> enemies;
+        //std::vector<std::shared_ptr<Enemy>> enemies;
 
 	/**
 	* @brief Struct to help with path-finding.

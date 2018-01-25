@@ -6,10 +6,19 @@
 #include "enemy_a.hpp"
 #include "enemy_b.hpp"
 
+typedef Enemy *(*Creator)();
+
+template <typename T>
+static Enemy* make() {
+    return new T{};
+}
+
+static Creator const enemy_class_array[] = {make<Enemy_a>, make<Enemy_b>};
+
 template <typename T, typename ...Ts>
 void enemy_generator(std::vector<T> &vec, Ts... ts) {
-    if (sizeof...(ts) > 2) { //TODO(niels): Make container for length checking
-        throw std::runtime_error("To many arguments");
+    if (sizeof...(ts) > sizeof(enemy_class_array)) { 
+        throw std::runtime_error("To many arguments in enemy_generator");
     }
     int args[] =  {ts...};
     int index = 0;
@@ -17,32 +26,11 @@ void enemy_generator(std::vector<T> &vec, Ts... ts) {
 
     for (auto item : args) {
         for (auto i = 0; i < item; ++i) {
-            if (index == 0) {
-                //vec.emplace_back(std::make_pair(index_counter, new Enemy_a()));//TODO(niels): Build container for tower types
-                vec.emplace_back(new Enemy_a());
-            } else if (index == 1) {
-                //vec.emplace_back(std::make_pair(index_counter, new Enemy_b()));
-                vec.emplace_back(new Enemy_b());
-            }
+            vec.emplace_back(std::make_pair(index_counter, (Enemy*)enemy_class_array[index]()));
             index_counter += 1;
         }
         index += 1;
     }
-
-    return;
 }
-
-/*int main() {
-    std::vector<std::unique_ptr<Shape>> vec;
-    someFunc(vec, 20, 30, 40);
-
-    std::cout << vec.size() << std::endl;
-
-    for (auto&& item: vec) {
-        std::cout << item->getWidth() << std::endl;                                                     
-    }
-
-    return 0;
-}*/
 
 #endif // ENEMY_GENERATOR_HPP
