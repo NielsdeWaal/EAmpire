@@ -14,6 +14,18 @@
 
 int main(void) {
     auto game = Game();
+	GameState *game_state = GameState::get_state();
+
+	std::map<std::string, std::string> sprites {
+		{"tile_normal", "textures/tile_normal.png"},
+		{"tile_blocked", "textures/tile_blocked.png"},
+		{"tile_path", "textures/tile_path.png"},
+		{"hammer", "textures/hammer.png"},
+		{"sell", "textures/sell.png"}
+	};
+
+	game_state->load_sprites(sprites);
+
     sf::RenderWindow window(sf::VideoMode(1000, 1000), "EAmpire Tower Defense",
                             sf::Style::Titlebar | sf::Style::Close);
 
@@ -31,18 +43,8 @@ int main(void) {
     bool lastButton = false;
     auto start = sf::Vector2i(0, 0);
     auto end = sf::Vector2i(9, 9);
-
-    sf::Texture build_texture;
-    sf::Sprite sprite_hammer;
-    build_texture.loadFromFile("textures/hammer.png");
-    sprite_hammer.setTexture(build_texture);
-
-    sf::Texture sell_texture;
-    sf::Sprite sprite_sell;
-    sell_texture.loadFromFile("textures/sell.png");
-    sprite_sell.setTexture(sell_texture);
   
-		Enemy_container container = Enemy_container();
+	Enemy_container container = Enemy_container();
 
     // std::string play = "Play";
     std::string exit = "Exit";
@@ -154,14 +156,10 @@ int main(void) {
 			  }
 
         if (!strcmp(state, "building")) {
-            sprite_hammer.setPosition(
-                static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
-            window.draw(sprite_hammer);
+			game_state->draw_sprite("hammer", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
             window.setMouseCursorVisible(false);
         } else if (!strcmp(state, "selling")) {
-            sprite_sell.setPosition(
-                static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)));
-            window.draw(sprite_sell);
+			game_state->draw_sprite("sell", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
             window.setMouseCursorVisible(false);
         } else {
             window.setMouseCursorVisible(true);

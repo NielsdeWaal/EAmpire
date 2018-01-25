@@ -1,8 +1,3 @@
-#include <algorithm>
-#include <chrono>
-#include <iostream>
-#include <random>
-
 #include "grid.hpp"
 
 std::vector<Grid::Mini_tile> Grid::create_mini_grid() {
@@ -109,14 +104,7 @@ Grid::Grid(): // Default constructor
       scale(50), 
       start_x(0), 
       start_y(0) 
-{
-    tile_normal.loadFromFile("textures/tile_normal.png");
-    tile_blocked.loadFromFile("textures/tile_blocked.png");
-    tile_blocked.loadFromFile("textures/tile_path.png");
-    sprite_tile_normal.setTexture(tile_normal);
-    sprite_tile_blocked.setTexture(tile_blocked);
-    sprite_tile_path.setTexture(tile_path);
-}
+{}
 
 Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
            int start_y = 0): 
@@ -126,14 +114,7 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
     scale(scale), 
     start_x(start_x), 
     start_y(start_y) 
-{
-    tile_normal.loadFromFile("textures/tile_normal.png");
-    tile_blocked.loadFromFile("textures/tile_blocked.png");
-    tile_path.loadFromFile("textures/tile_path.png");
-    sprite_tile_normal.setTexture(tile_normal);
-    sprite_tile_blocked.setTexture(tile_blocked);
-    sprite_tile_path.setTexture(tile_path);
-}
+{}
 
 bool Grid::is_clicked(int x, int y) {
     if ((x - start_x) < 0 || (y - start_y) < 0 ||
@@ -203,13 +184,9 @@ void Grid::draw(sf::RenderWindow &window) {
     for (int x = 0; x < size_tiles_x; x++) {
         for (int y = 0; y < size_tiles_y; y++) {
             if (tiles[y * size_tiles_x + x].is_navigable()) {
-                sprite_tile_normal.setPosition(
-                    sf::Vector2f(start_x + (x * scale), start_y + (y * scale)));
-                window.draw(sprite_tile_normal);
+				game_state->draw_sprite("tile_normal", sf::Vector2f(start_x + (x * scale), start_y + (y * scale)), window);
             } else {
-                sprite_tile_blocked.setPosition(
-                    sf::Vector2f(start_x + (x * scale), start_y + (y * scale)));
-                window.draw(sprite_tile_blocked);
+				game_state->draw_sprite("tile_blocked", sf::Vector2f(start_x + (x * scale), start_y + (y * scale)), window);
             }
         }
     }
@@ -217,9 +194,7 @@ void Grid::draw(sf::RenderWindow &window) {
 
 void Grid::draw_path(sf::RenderWindow &window, std::vector<sf::Vector2i> path) {
     for (auto tile : path) {
-        sprite_tile_path.setPosition(start_x + (tile.x * scale),
-                                     start_y + (tile.y * scale));
-        window.draw(sprite_tile_path);
+		game_state->draw_sprite("tile_path", sf::Vector2f(start_x + (tile.x * scale), start_y + (tile.y * scale)), window);
     }
 }
 
