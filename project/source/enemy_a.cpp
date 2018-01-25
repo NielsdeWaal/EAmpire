@@ -1,7 +1,7 @@
 #include "enemy_a.hpp"
 
 Enemy_a::Enemy_a () :
-		Enemy(sf::Vector2i(80,50), sf::Color::Red, 50, 1, 5)
+		Enemy(sf::Vector2i(50,50), sf::Color::Red, 50, 1, 5)
 	{}
 
 
@@ -11,8 +11,6 @@ Enemy_a::~Enemy_a() {
 
 
 void Enemy_a::draw(sf::RenderWindow & window) {
-	if (nextlocation != position) {
-		circle.setPosition(Vector2f_from_Vector2i(position));
-	}
+	circle.setPosition(Vector2f_from_Vector2i(position));
 	window.draw(circle);
 }
