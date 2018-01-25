@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <map>
 
 #include "enemy.hpp"
 #include "enemy_a.hpp"
@@ -60,9 +61,5 @@ public:
 	*/
 	std::map< int, Enemy*> get_container();
 
-
-    std::vector<Enemy *> get_container() {
-        return screen_objects;
-    }
 };
 #endif // ENEMY_CONTAINER_HPP
