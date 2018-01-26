@@ -5,8 +5,6 @@
 #include <cmath>
 #include <iostream>
 
-#include "grid.hpp"
-
 /**
 * @file enemy.hpp
 * @author Dylan van Eck
@@ -137,7 +135,7 @@ public:
 	*
 	* @return		bool				When the end destination is reached, true will be returned.
 	*/
-	bool next_location(std::vector<sf::Vector2i> path, Grid grid);
+	//bool next_location(std::vector<sf::Vector2i> path, Grid grid);
 
 	/**
 	* @brief Virtual function for drawing the enemy
