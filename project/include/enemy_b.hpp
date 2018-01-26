@@ -1,11 +1,11 @@
-#ifndef ENEMYB_HPP
-#define ENEMYB_HPP
+#ifndef ENEMY_B_HPP
+#define ENEMY_B_HPP
 
 #include <SFML/Graphics.hpp>
 #include "enemy.hpp"
 
 /**
-* @file enemy_a.hpp
+* @file enemy_b.hpp
 * @author Dylan van Eck
 * @date 18/01/2018
 *
@@ -14,7 +14,7 @@
 * This is a subclass of Enemy. The Enemy is a circle shape with adaptable diameter and adaptable color.
 */
 
-class Enemy_b :public Enemy{
+class Enemy_b :public Enemy {
 public:
 	/**
 	* @brief Constructor
@@ -28,14 +28,6 @@ public:
 	*/
 	~Enemy_b();
 
-	
-	/**
-	* @brief Function for drawing the enemy
-	*
-	* @param[out] Window, the screen on which you have to draw
-	*/
-	void draw(sf::RenderWindow & window) override;
-
 };
-#endif // !ENEMYA_HPP
+#endif // ENEMY_B_HPP
 

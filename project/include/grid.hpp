@@ -36,6 +36,8 @@ class Grid {
     int scale;
     int start_x;
     int start_y;
+    std::vector<std::pair<int, std::shared_ptr<Enemy>>> enemies;
+    GameState *game_state = GameState::get_state();
 
     /**
     * @brief Struct to help with path-finding.
@@ -86,8 +88,6 @@ class Grid {
     **/
     std::vector<sf::Vector2i> path_from_grid(std::vector<Mini_tile> &mini_grid,
                                              sf::Vector2i end);
-
-    GameState *game_state = GameState::get_state();
 
   public:
     /**

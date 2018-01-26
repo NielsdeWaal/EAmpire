@@ -60,6 +60,5 @@ public:
 	* @return	std::map< int, Enemy*>	The enemy_container
 	*/
 	std::map< int, Enemy*> get_container();
-
 };
 #endif // ENEMY_CONTAINER_HPP
