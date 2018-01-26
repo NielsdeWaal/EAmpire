@@ -134,7 +134,9 @@ public:
 	*
 	* @return		bool				When the end destination is reached, true will be returned.
 	*/
+
 	bool next_location(std::vector<sf::Vector2i> path);
+
 
 	/**
 	* @brief Virtual function for drawing the enemy

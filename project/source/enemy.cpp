@@ -72,25 +72,22 @@ sf::Vector2f Enemy::Vector2f_from_Vector2i(sf::Vector2i rhs) {
 
 bool Enemy::next_location(std::vector<sf::Vector2i> path) {
 	for (auto it = path.begin(); it != path.end(); ++it) {
-		//std::cout << it->x << " : " << it->y << std::endl;
-		//std::cout << position.x << " : " << position.y << std::endl;
 		if (position == sf::Vector2i(it->x, it->y)){
-			//std::cout << "kip " << std::endl;
 			if (std::next(it) != path.end()) {
 				nextlocation = sf::Vector2i(std::next(it)->x,  std::next(it)->y);
 				position = nextlocation;
 				std::cout << nextlocation.x << " : " << nextlocation.y << std::endl;
-				return true;
-				//std::cout << std::next(it)->x << " : " << std::next(it)->y << std::endl;
-				//std::cout << position.x << " : " << position.y << std::endl;
+				return false;
 			}
 			else {
-				return false;
+				return true;
 			}
 		}
 	}
+	return false;
 
 }
+
 
 void Enemy::draw(sf::RenderWindow & window, const int & tile_size) {
 	sf::Vector2i location = sf::Vector2i((position.x + 1) * tile_size, (position.y + 1) * tile_size);
