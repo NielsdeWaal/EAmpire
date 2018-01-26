@@ -13,7 +13,7 @@
 #include "grid.hpp"
 
 int main(void) {
-    auto game = Game();
+    Game game;
 	GameState *game_state = GameState::get_state();
 
 	std::map<std::string, std::string> sprites {
@@ -25,64 +25,35 @@ int main(void) {
 	};
 
 	game_state->load_sprites(sprites);
+ 
+    auto& window = game.get_window();
 
-    sf::RenderWindow window(sf::VideoMode(1000, 1000), "EAmpire Tower Defense",
-                            sf::Style::Titlebar | sf::Style::Close);
-
-    auto grid_x = 10, grid_y = 10, scale = 50;
-    auto grid_x_pixel = (grid_x < 10 ? 700 : grid_x * scale + 200);
-    auto grid_y_pixel = (grid_y < 10 ? 600 : grid_y * scale + 100);
-
-    Grid grid(grid_x, grid_y, scale, (grid_x_pixel - 100) / 2 - grid_x * 25,
-              grid_y_pixel / 2 - grid_y * 25);
-
-    window.create(sf::VideoMode(grid_x_pixel, grid_y_pixel),
-                  "EAmpire Tower Defense",
-                  sf::Style::Titlebar | sf::Style::Close);
-
-    bool lastButton = false;
-    auto start = sf::Vector2i(0, 0);
-    auto end = sf::Vector2i(9, 9);
-  
-	Enemy_container container = Enemy_container();
-
-    // std::string play = "Play";
-    std::string exit = "Exit";
-    std::string tower1 = "Tower#1";
-    // std::string tower2 = "Tower#2";
-    // std::string tower3 = "Tower#3";
-    // std::string tower4 = "Tower#4";
-    // std::string tower5 = "Tower#5";
-    std::string sell = "Sell";
-    std::string menu = "Menu";
-
+    /*
     // Button play_button(play, sf::Vector2f{ float((window.getSize().x / 2)),
     // float((window.getSize().y / 2)) }, sf::Vector2f{ 70,50 }, window);
     Button tower1_button(tower1, sf::Vector2f(grid_x_pixel - 50, 125),
                          sf::Vector2f(100, 50), window);
-    /*Button tower2_button(tower2, sf::Vector2f(grid_x_pixel - 50, 200),
+    Button tower2_button(tower2, sf::Vector2f(grid_x_pixel - 50, 200),
                            sf::Vector2f(100, 50), window);
     Button tower3_button(tower3, sf::Vector2f(grid_x_pixel - 50, 275),
                          sf::Vector2f(100, 50), window);
     Button tower4_button(tower4, sf::Vector2f(grid_x_pixel - 50, 350),
                          sf::Vector2f(100, 50), window);
     Button tower5_button(tower5, sf::Vector2f(grid_x_pixel - 50, 425),
-                         sf::Vector2f(100, 50), window);*/
+                         sf::Vector2f(100, 50), window);
     Button sell_button(sell, sf::Vector2f(grid_x_pixel - 50, 525),
-                       sf::Vector2f(100, 50), window);
-    Button menu_button(menu, sf::Vector2f(grid_x_pixel - 50, 25),
-                       sf::Vector2f(100, 50), window);
-
-    auto state = "free";
+                       sf::Vector2f(100, 50), window);*/
+                       
 
     action actions[] = {
         action(sf::Keyboard::Escape, [&window] { window.close(); }),
-        action(sf::Keyboard::Num1, [&state] { state = "building"; }),
-
-        action(sf::Keyboard::Num2,		[&container] {container.add(); }),
-        action(sf::Keyboard::Delete, [&state] { state = "selling"; }),
-        action(sf::Mouse::Right, [&state] { state = "free"; }),
-        action(sf::Mouse::Left, [&state, &window, &menu_button, &tower1_button,
+        action(sf::Mouse::Left, [&window, &game] { game.clicked(sf::Mouse::getPosition(window)); })
+    };
+        //action(sf::Keyboard::Num1, [&state] { state = "building"; }),
+        //action(sf::Keyboard::Num2,		[&container] {container.add(); }),
+        //action(sf::Keyboard::Delete, [&state] { state = "selling"; }),
+        //action(sf::Mouse::Right, [&state] { state = "free"; }),
+        /*action(sf::Mouse::Left, [&state, &window, &menu_button, &tower1_button,
                                  &sell_button, &grid] {
             if (menu_button.is_pressed()) {
                 window.close();
@@ -111,8 +82,8 @@ int main(void) {
                 state = "free";
             }
 
-        })};
-	
+        })*/
+
 	window.setFramerateLimit(25);
     while (window.isOpen()) {
 
@@ -120,10 +91,7 @@ int main(void) {
             action();
         }
 
-        auto path = grid.find_path(start, end);
-
         sf::Event evnt;
-      
         while (window.pollEvent(evnt)) {
 
             switch (evnt.type) {
@@ -142,39 +110,8 @@ int main(void) {
             }
         }
 
-        window.clear(sf::Color(100, 100, 100));
-        grid.draw(window);
-        grid.draw_path(window, path);
-
-        tower1_button.draw();
-        // tower2_button.draw();
-        // tower3_button.draw();
-        // tower4_button.draw();
-        // tower5_button.draw();
-        sell_button.draw();
-        menu_button.draw();
-        // play_button.draw();
-        
-  //      for (const auto & enemy : container.get_container()) {
-		//	enemy.second->draw(window);
-		//	if (!enemy.second->next_location(path, grid)) {
-		//		container.remove(enemy.first);
-		//		//std::cout << "end of path" << std::endl;
-		//	}
-		//}
-
-        if (!strcmp(state, "building")) {
-			game_state->draw_sprite("hammer", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
-            window.setMouseCursorVisible(false);
-        } else if (!strcmp(state, "selling")) {
-			game_state->draw_sprite("sell", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
-            window.setMouseCursorVisible(false);
-        } else {
-            window.setMouseCursorVisible(true);
-        }
-
-        window.display();
         game.update();
+        game.draw();
     }
     return 0;
 }

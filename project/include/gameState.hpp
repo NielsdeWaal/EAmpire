@@ -22,8 +22,12 @@ class GameState {
 
     GameState();
 
+    std::string action_state = "nothing";
+
     // TODO Is a hardcoded value, needs to be scalable to difficulty level.
     int lives = 100; ///< Current amount of lives.
+
+    int curreny_amount = 0;
   
     bool new_round = true;
 
@@ -44,6 +48,20 @@ class GameState {
     static GameState *get_state();
 
     /**
+    * @brief function that returns the current action state.
+    *
+    * @return current action state.
+    */
+    std::string get_action_state();
+
+    /**
+    * @brief function which sets the current action state.
+    *
+    * @param[in] new action state.
+    */
+    void set_action_state(std::string new_state);
+
+    /**
      * @brief function that returns the current amount of lives.
      *
      * @return amount of lives left.
@@ -55,6 +73,18 @@ class GameState {
      * @param[in] the amount that lives needs to be set to.
      */
     void set_lives(int amount);
+    /**
+    * @brief function that returns the current amount of curreny.
+    *
+    * @return amount of curreny.
+    */
+    int get_curreny();
+    /**
+    * @brief function which is able to change the current amount of curreny.
+    *
+    * @param[in] the amount that curreny_amount needs to be set to.
+    */
+    void set_curreny(int amount);
 	/**
 	* @brief function that loads sprites from a map.
 	*

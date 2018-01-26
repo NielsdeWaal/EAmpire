@@ -1,6 +1,6 @@
 #include "button.hpp"
 
-Button::Button(std::string &s, sf::Vector2f location, sf::Vector2f size,
+Button::Button(const std::string s, sf::Vector2f location, sf::Vector2f size,
                sf::RenderWindow &window): 
                s(s), 
                location(location), 
@@ -31,7 +31,7 @@ void Button::setup() {
 
 void Button::draw() {
     window.draw(boundary);
-    window.draw(text);
+    //window.draw(text);
 }
 
 sf::Vector2f Button::get_location() {

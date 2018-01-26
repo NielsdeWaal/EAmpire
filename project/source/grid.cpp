@@ -122,8 +122,8 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
     scale(scale), 
     start_x(start_x), 
     start_y(start_y) 
-	{
-	enemy_generator(enemies, 10, 20);
+{
+
 }
 
 bool Grid::is_clicked(int x, int y) {
