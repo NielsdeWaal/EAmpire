@@ -16,7 +16,7 @@
 * This is a subclass of Enemy.
 */
 
-class Enemy_a :public Enemy{
+class Enemy_a :public Enemy{ //#1
 public:
 	/**
 	* @brief Constructor

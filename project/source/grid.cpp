@@ -1,9 +1,10 @@
-#include <algorithm>
-#include <chrono>
-#include <iostream>
-#include <random>
-
 #include "grid.hpp"
+
+//void Grid::initialise(int size_x, int size_y) {
+//    for (int i = 0; i < (size_x * size_y); ++i) {
+//        tiles.push_back(Tile());
+//    }
+//}
 
 std::vector<Grid::Mini_tile> Grid::create_mini_grid() {
     std::vector<Mini_tile> mini_grid(size_tiles_x * size_tiles_y);
@@ -109,13 +110,8 @@ Grid::Grid(): // Default constructor
       scale(50), 
       start_x(0), 
       start_y(0) 
-{
-    tile_normal.loadFromFile("textures/tile_normal.png");
-    tile_blocked.loadFromFile("textures/tile_blocked.png");
-    tile_blocked.loadFromFile("textures/tile_path.png");
-    sprite_tile_normal.setTexture(tile_normal);
-    sprite_tile_blocked.setTexture(tile_blocked);
-    sprite_tile_path.setTexture(tile_path);
+	{	
+	enemy_generator(enemies, 10, 20);
 }
 
 Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
@@ -126,13 +122,8 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
     scale(scale), 
     start_x(start_x), 
     start_y(start_y) 
-{
-    tile_normal.loadFromFile("textures/tile_normal.png");
-    tile_blocked.loadFromFile("textures/tile_blocked.png");
-    tile_path.loadFromFile("textures/tile_path.png");
-    sprite_tile_normal.setTexture(tile_normal);
-    sprite_tile_blocked.setTexture(tile_blocked);
-    sprite_tile_path.setTexture(tile_path);
+	{
+	enemy_generator(enemies, 10, 20);
 }
 
 bool Grid::is_clicked(int x, int y) {
@@ -203,13 +194,9 @@ void Grid::draw(sf::RenderWindow &window) {
     for (int x = 0; x < size_tiles_x; x++) {
         for (int y = 0; y < size_tiles_y; y++) {
             if (tiles[y * size_tiles_x + x].is_navigable()) {
-                sprite_tile_normal.setPosition(
-                    sf::Vector2f(start_x + (x * scale), start_y + (y * scale)));
-                window.draw(sprite_tile_normal);
+				game_state->draw_sprite("tile_normal", sf::Vector2f(start_x + (x * scale), start_y + (y * scale)), window);
             } else {
-                sprite_tile_blocked.setPosition(
-                    sf::Vector2f(start_x + (x * scale), start_y + (y * scale)));
-                window.draw(sprite_tile_blocked);
+				game_state->draw_sprite("tile_blocked", sf::Vector2f(start_x + (x * scale), start_y + (y * scale)), window);
             }
         }
     }
@@ -217,17 +204,16 @@ void Grid::draw(sf::RenderWindow &window) {
 
 void Grid::draw_path(sf::RenderWindow &window, std::vector<sf::Vector2i> path) {
     for (auto tile : path) {
-        sprite_tile_path.setPosition(start_x + (tile.x * scale),
-                                     start_y + (tile.y * scale));
-        window.draw(sprite_tile_path);
+		game_state->draw_sprite("tile_path", sf::Vector2f(start_x + (tile.x * scale), start_y + (tile.y * scale)), window);
     }
 }
 
-void Grid::update() {
-    for (auto tile : tiles) {
-        // tile.update();
-    }
-}
+
+//void Grid::update(sf::RenderWindow& window, std::vector<sf::Vector2i> path) {
+//	for(auto tile : path) {
+//
+//	}
+//}
 
 void Grid::create_maze() {
     for (int x = 0; x < size_tiles_x; x++) {
@@ -368,5 +354,13 @@ std::pair<int, int> Grid::get_grid_size() {
 }
 
 std::pair<int, int> Grid::get_start_values() {
-    return std::make_pair(start_x, start_y);
+	return std::make_pair(start_x, start_y);
 }
+
+//void Grid::new_round(int enemy_amount) {
+//    if(game_state->get_round_status()) {
+//        game_state->set_new_round(false);
+//        //enemy_generator(enemies, 10, 20);
+//    }
+//
+//}
