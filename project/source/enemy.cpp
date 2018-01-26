@@ -51,7 +51,6 @@ void Enemy::take_damage(const int damage_tower) {
 
 void Enemy::move_direction() {
 	sf::Vector2f direction_enemy = normalize(position - nextlocation);
-	std::cout << direction_enemy.x << " : " << direction_enemy.y << std::endl;
 	position = position - sf::Vector2i(direction_enemy.x * speed, direction_enemy.y * speed);
 }
 
@@ -76,7 +75,6 @@ bool Enemy::next_location(std::vector<sf::Vector2i> path) {
 			if (std::next(it) != path.end()) {
 				nextlocation = sf::Vector2i(std::next(it)->x,  std::next(it)->y);
 				position = nextlocation;
-				std::cout << nextlocation.x << " : " << nextlocation.y << std::endl;
 				return false;
 			}
 			else {
@@ -91,7 +89,6 @@ bool Enemy::next_location(std::vector<sf::Vector2i> path) {
 
 void Enemy::draw(sf::RenderWindow & window, const int & tile_size) {
 	sf::Vector2i location = sf::Vector2i((position.x + 1) * tile_size, (position.y + 1) * tile_size);
-	std::cout << location.x << " : " << location.y << std::endl;
 	circle.setPosition(Vector2f_from_Vector2i(sf::Vector2i((position.x + 1) * tile_size, (position.y + 1) * tile_size)));
 	window.draw(circle);
 }
