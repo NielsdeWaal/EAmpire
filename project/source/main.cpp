@@ -113,7 +113,7 @@ int main(void) {
 
         })};
 	
-	window.setFramerateLimit(25);
+	window.setFramerateLimit(50);
     while (window.isOpen()) {
 
         for (auto &action : actions) {
@@ -156,10 +156,10 @@ int main(void) {
         // play_button.draw();
         
         for (const auto & enemy : container.get_container()) {
-			enemy.second->draw(window);
-			if (!enemy.second->next_location(path, grid)) {
+			enemy.second->draw(window, 50);
+			if (!enemy.second->next_location(path)) {
 				container.remove(enemy.first);
-				//std::cout << "end of path" << std::endl;
+				std::cout << "end of path" << std::endl;
 			}
 		}
 

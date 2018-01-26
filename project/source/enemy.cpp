@@ -21,8 +21,7 @@ sf::Vector2f Enemy::normalize(sf::Vector2i vector2i) {
 
 
 //PUBLIC
-Enemy::Enemy(sf::Vector2i start_position, sf::Color color, const int damage, const int speed, int lives) :
-	position(start_position),
+Enemy::Enemy(sf::Color color, const int damage, const int speed, int lives) :
 	color(color),
 	damage(damage),
 	speed(speed),
@@ -52,6 +51,7 @@ void Enemy::take_damage(const int damage_tower) {
 
 void Enemy::move_direction() {
 	sf::Vector2f direction_enemy = normalize(position - nextlocation);
+	std::cout << direction_enemy.x << " : " << direction_enemy.y << std::endl;
 	position = position - sf::Vector2i(direction_enemy.x * speed, direction_enemy.y * speed);
 }
 
@@ -70,23 +70,31 @@ sf::Vector2f Enemy::Vector2f_from_Vector2i(sf::Vector2i rhs) {
 	);
 };
 
-bool Enemy::next_location(std::vector<sf::Vector2i> path, Grid grid) {
+bool Enemy::next_location(std::vector<sf::Vector2i> path) {
 	for (auto it = path.begin(); it != path.end(); ++it) {
-		if (position == sf::Vector2i(grid.get_start_values().first + (it->x * 50), grid.get_start_values().second + (it->y * 50))) {
+		//std::cout << it->x << " : " << it->y << std::endl;
+		//std::cout << position.x << " : " << position.y << std::endl;
+		if (position == sf::Vector2i(it->x, it->y)){
+			//std::cout << "kip " << std::endl;
 			if (std::next(it) != path.end()) {
-				nextlocation = sf::Vector2i(grid.get_start_values().first + (std::next(it)->x * 50), grid.get_start_values().second + (std::next(it)->y * 50));
+				nextlocation = sf::Vector2i(std::next(it)->x,  std::next(it)->y);
+				position = nextlocation;
+				std::cout << nextlocation.x << " : " << nextlocation.y << std::endl;
+				return true;
+				//std::cout << std::next(it)->x << " : " << std::next(it)->y << std::endl;
+				//std::cout << position.x << " : " << position.y << std::endl;
 			}
 			else {
 				return false;
 			}
 		}
-		move_direction();
 	}
-	return true;
 
 }
 
-void Enemy::draw(sf::RenderWindow & window) {
-	circle.setPosition(Vector2f_from_Vector2i(position));
+void Enemy::draw(sf::RenderWindow & window, const int & tile_size) {
+	sf::Vector2i location = sf::Vector2i((position.x + 1) * tile_size, (position.y + 1) * tile_size);
+	std::cout << location.x << " : " << location.y << std::endl;
+	circle.setPosition(Vector2f_from_Vector2i(sf::Vector2i((position.x + 1) * tile_size, (position.y + 1) * tile_size)));
 	window.draw(circle);
 }

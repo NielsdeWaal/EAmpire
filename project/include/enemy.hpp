@@ -5,8 +5,6 @@
 #include <cmath>
 #include <iostream>
 
-#include "grid.hpp"
-
 /**
 * @file enemy.hpp
 * @author Dylan van Eck
@@ -45,7 +43,7 @@ private:
 
 protected:
 	//The speed with which the enemy can move
-	sf::Vector2i position;
+	sf::Vector2i position = sf::Vector2i(0,0);
 	//The color of the enemy's shape
 	sf::Color color;
 	//The diameteer of the circle
@@ -53,7 +51,7 @@ protected:
 	//The circle shape of the enemy
 	sf::CircleShape circle;
 	//The next location that have to be located: default first tile(most left at top)
-	sf::Vector2i nextlocation = sf::Vector2i(50,50);
+	sf::Vector2i nextlocation = sf::Vector2i(0,0);
 public:
 
 	/**
@@ -62,13 +60,12 @@ public:
 	* If this constructor is called, it will make a circle shaped enemy with custom characteristics.
 	* That are determines by the parameters. It will also automatic set the radius, color and position.
 	*
-	* @param[in]	start_position		The position where the enemy will start.
 	* @param[in]	color				The default color of the enemy.
 	* @param[in]	damage				The damage the enemy will do to the players lives.
 	* @param[in]	speed				The speed with which the enemy moves.
 	* @param[in]	lives				The lives of the enemy.
 	*/
-	Enemy(sf::Vector2i start_position, sf::Color color, const int damage, const int speed, int lives);
+	Enemy( sf::Color color, const int damage, const int speed, int lives);
 
 	/**
 	* @brief Destructor
@@ -137,14 +134,14 @@ public:
 	*
 	* @return		bool				When the end destination is reached, true will be returned.
 	*/
-	bool next_location(std::vector<sf::Vector2i> path, Grid grid);
+	bool next_location(std::vector<sf::Vector2i> path);
 
 	/**
 	* @brief Virtual function for drawing the enemy
 	*
 	* @param[out]	window				The screen on which you have to draw
 	*/
-	void draw(sf::RenderWindow & window);
+	void draw(sf::RenderWindow & window, const int & tile_size);
 };
 
 #endif // ENEMY_HPP
