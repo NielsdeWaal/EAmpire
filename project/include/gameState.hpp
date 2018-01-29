@@ -32,7 +32,7 @@ class GameState {
     std::map<std::string, sf::Texture> textures;
     std::map<std::string, sf::Sprite> sprites;
 
-    std::string round_state;
+    std::string round_state = "free";
 
   public:
     /**
