@@ -1,7 +1,7 @@
 #include "enemy_a.hpp"
 
 Enemy_a::Enemy_a () :
-		Enemy( sf::Color::Yellow, 50, 1, 5)
+		Enemy( sf::Color::Yellow, 50, 1.0, 5)
 	{}
 
 

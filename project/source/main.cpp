@@ -45,6 +45,7 @@ int main(void) {
     auto end = sf::Vector2i(9, 9);
   
 	Enemy_container container = Enemy_container();
+	//container.add();
 
     // std::string play = "Play";
     std::string exit = "Exit";
@@ -113,7 +114,7 @@ int main(void) {
 
         })};
 	
-	window.setFramerateLimit(50);
+	window.setFramerateLimit(60);
     while (window.isOpen()) {
 
         for (auto &action : actions) {
