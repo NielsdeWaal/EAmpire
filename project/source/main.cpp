@@ -104,6 +104,7 @@ int main(void) {
 	action actions[] = {
 		action(sf::Keyboard::Escape,	[&window] {window.close(); }),
 		action(sf::Keyboard::Num1,		[&state] {state = "building"; }),
+		action(sf::Keyboard::Num2,		[&container] {container.add(); }),
 		action(sf::Keyboard::Delete,	[&state] {state = "selling"; }),
 		action(sf::Mouse::Right,		[&state] {state = "free"; }),
 		action(sf::Mouse::Left,			[&state, &window,&menu_button,&tower1_button,&sell_button,&grid,&towers]
