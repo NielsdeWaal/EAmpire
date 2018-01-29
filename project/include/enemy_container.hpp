@@ -36,7 +36,7 @@ public:
 	*
 	* If this constructor is called, it will make the map with the count at zero.
 	*/
-	Enemy_container() {};
+	Enemy_container() = default;
 
 	/**
 	* @brief Function for adding a Enemy to the container

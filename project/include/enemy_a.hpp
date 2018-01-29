@@ -2,7 +2,7 @@
 #define ENEMY_A_HPP
 
 #include <SFML/Graphics.hpp>
-#include <math.h>
+#include <cmath>
 
 #include "enemy.hpp"
 

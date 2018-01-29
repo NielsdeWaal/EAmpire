@@ -151,7 +151,7 @@ int main(void) {
 		sf::Vector2f(100, 50),
 		window);*/
 
-    auto state = "free";
+    //auto state = "free";
 
 	/*action actions[] = {
 		action(sf::Keyboard::Escape,	[&window] {window.close(); }),
@@ -205,6 +205,8 @@ int main(void) {
             case sf::Event::GainedFocus:
                 std::cout << "MOUSE HAS ENTERED THE BUILDING" << std::endl;
                 // continue game
+                break;
+            default:
                 break;
             }
         }
