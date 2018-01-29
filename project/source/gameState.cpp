@@ -60,4 +60,10 @@ void GameState::draw_sprite(std::string name, sf::Vector2f position, sf::RenderW
 	window.draw(sprites.find(name)->second);
 }
 
+void GameState::set_round_state(std::string state) {
+    round_state = state;
+}
 
+std::string GameState::get_round_state() {
+    return round_state;
+}

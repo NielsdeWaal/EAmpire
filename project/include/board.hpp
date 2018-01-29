@@ -32,8 +32,11 @@ private:
 
     Button menu_button;
 
-    action actions[2] = {
-        action(sf::Keyboard::Escape, [&] {window.close();}),
+    action actions[5] = {
+        action(sf::Keyboard::Escape,    [&] {window.close();}),
+        action(sf::Keyboard::Num1,      [&] {game_state->set_round_state("building"); }),
+        action(sf::Keyboard::Delete,    [&] {game_state->set_round_state("selling"); }),
+        action(sf::Mouse::Right,        [&] {game_state->set_round_state("free"); }),
         action(sf::Mouse::Left, [&] {
                     if (menu_button.is_pressed()) {
                         window.close();

@@ -31,8 +31,10 @@ class GameState {
   
     bool new_round = true;
 
-	std::map<std::string, sf::Texture> textures;
-	std::map<std::string, sf::Sprite> sprites;
+    std::map<std::string, sf::Texture> textures;
+    std::map<std::string, sf::Sprite> sprites;
+
+    std::string round_state;
 
   public:
     /**
@@ -85,27 +87,31 @@ class GameState {
     * @param[in] the amount that curreny_amount needs to be set to.
     */
     void set_curreny(int amount);
-	/**
-	* @brief function that loads sprites from a map.
-	*
-	* This function loads the sprites from a map with filenames
-	* and converts them to sprites for easy use.
-	*
-	* @param[in] files The map with files. First value should be the name, the second the path.
-	*/
-	void load_sprites(std::map<std::string, std::string> files);
-	/**
-	* @brief function that can draw a sprite.
-	*
-	* @param[in] name Name of the sprite to be drawn.
-	* @param[in] position Position to draw the sprite at.
-	* @param[in] window Window to draw the sprite on.
-	*/
-	void draw_sprite(std::string name, sf::Vector2f position, sf::RenderWindow &window);
+    /**
+    * @brief function that loads sprites from a map.
+    *
+    * This function loads the sprites from a map with filenames
+    * and converts them to sprites for easy use.
+    *
+    * @param[in] files The map with files. First value should be the name, the second the path.
+    */
+    void load_sprites(std::map<std::string, std::string> files);
+    /**
+    * @brief function that can draw a sprite.
+    *
+    * @param[in] name Name of the sprite to be drawn.
+    * @param[in] position Position to draw the sprite at.
+    * @param[in] window Window to draw the sprite on.
+    */
+    void draw_sprite(std::string name, sf::Vector2f position, sf::RenderWindow &window);
   
-  void set_new_round(bool result);
+    void set_new_round(bool result);
 
-  bool get_round_status();
+    bool get_round_status();
+
+    void set_round_state(std::string state);
+
+    std::string get_round_state();
 };
 
 #endif // GAME_STATE_HPP
