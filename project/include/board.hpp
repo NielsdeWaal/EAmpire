@@ -10,6 +10,8 @@
 #include "gameState.hpp"
 #include "button.hpp"
 #include "grid.hpp"
+#include "tower.hpp"
+#include "tower_a.hpp"
 
 class Board {
 private:
@@ -27,22 +29,41 @@ private:
     sf::Text currency_amount;
 
     Enemy_container container = Enemy_container();
+	tower_vector towers;
 
     std::vector<sf::Vector2i> path;
 
     Button menu_button;
+	Button tower1_button;
+	Button sell_button;
 
     action actions[5] = {
         action(sf::Keyboard::Escape,    [&] {window.close();}),
         action(sf::Keyboard::Num1,      [&] {game_state->set_round_state("building"); }),
         action(sf::Keyboard::Delete,    [&] {game_state->set_round_state("selling"); }),
         action(sf::Mouse::Right,        [&] {game_state->set_round_state("free"); }),
-        action(sf::Mouse::Left, [&] {
+        action(sf::Mouse::Left,			[&] {
                     if (menu_button.is_pressed()) {
                         window.close();
                     }
-                
-    })};
+					if (tower1_button.is_pressed()) {
+						game_state->set_round_state("building");
+					}
+					if (sell_button.is_pressed()) {
+						game_state->set_round_state("selling");
+					}
+					if ((boardGrid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+						&& (game_state->get_round_state() == "building")) {
+						boardGrid.set_built(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+						towers.push_back(tower_ptr(new tower_a((sf::Mouse::getPosition(window).x - boardGrid.get_start_x()) / 50, (sf::Mouse::getPosition(window).y - boardGrid.get_start_y()) / 50)));
+						game_state->set_round_state("free");
+					}
+					if (boardGrid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y) && (game_state->get_round_state() == "selling")) {
+						boardGrid.set_free(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+						game_state->set_round_state("free");
+					}
+		})
+	};
 
 public:
     Board(sf::RenderWindow &window);
