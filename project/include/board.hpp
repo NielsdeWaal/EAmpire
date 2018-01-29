@@ -45,7 +45,7 @@ private:
     })};
 
 public:
-    Board(sf::RenderWindow &window);
+    explicit Board(sf::RenderWindow &window);
 
     void clicked(sf::Vector2i position);
 

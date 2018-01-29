@@ -22,4 +22,4 @@ TEST(TestTesting, Exception) {
         FAIL() << "Incorrect exception given";
     }
 }
-}
+} // namespace

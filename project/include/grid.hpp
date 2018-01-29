@@ -2,21 +2,20 @@
 #define GRID_HPP
 
 #include <SFML/Graphics.hpp>
-#include <utility>
-#include <vector>
 #include <algorithm>
 #include <chrono>
 #include <iostream>
 #include <random>
+#include <utility>
+#include <vector>
 
-#include "gameState.hpp"
 #include "enemy.hpp"
 #include "enemy_a.hpp"
 #include "enemy_b.hpp"
 #include "enemy_container.hpp"
 #include "enemy_generator.hpp"
-#include "tile.hpp"
 #include "gameState.hpp"
+#include "tile.hpp"
 #include "typedefs.hpp"
 
 /**
@@ -38,8 +37,8 @@ class Grid {
     int scale;
     int start_x;
     int start_y;
-	std::vector<std::pair<int, std::shared_ptr<Enemy>>> enemies;
-	GameState *game_state = GameState::get_state();
+    std::vector<std::pair<int, std::shared_ptr<Enemy>>> enemies;
+    GameState *game_state = GameState::get_state();
 
     /**
     * @brief Struct to help with path-finding.
@@ -268,11 +267,9 @@ class Grid {
      */
     std::pair<int, int> get_start_values();
 
-	void reset_damage();
+    void reset_damage();
 
-	void calculate_damage(std::vector<tower_ptr> tower_vector);
-
-
+    void calculate_damage(std::vector<tower_ptr> tower_vector);
 };
 
 #endif // GRID_HPP

@@ -3,7 +3,9 @@
 Board::Board(sf::RenderWindow &window):
     boardGrid(Grid(grid_x, grid_y, scale, (grid_x_pixel - 100) / 2 - grid_x * 25, grid_y_pixel / 2 - grid_y * 25)),
     window(window),
-    menu_button(Button(std::string("Menu"), sf::Vector2f(grid_x_pixel - 50, 25), sf::Vector2f(100, 50), window))
+    menu_button(Button(std::string("Menu"), 
+                sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 25), 
+                sf::Vector2f(100, 50), window))
 {
     window.create(sf::VideoMode(grid_x_pixel, grid_y_pixel), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close);
 
@@ -31,7 +33,7 @@ void Board::setup() {
 
 void Board::clicked(sf::Vector2i position) {
     if (boardGrid.is_clicked(position.x, position.y)) {
-        auto start_position = boardGrid.get_start_values();
+        //auto start_position = boardGrid.get_start_values();
         boardGrid.set_tile_navigability((position.x - boardGrid.get_start_values().first) / scale, 
                                         (position.y - boardGrid.get_start_values().second) / scale, 
                                         !(boardGrid.is_navigable((position.x - boardGrid.get_start_values().first) / scale, 
