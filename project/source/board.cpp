@@ -20,11 +20,13 @@ Board::Board(sf::RenderWindow &window):
 
 void Board::setup() {
     font.loadFromFile("PlayfairDisplay-Black.ttf");
+
     lives.setCharacterSize(30);
     lives.setFont(font);
     lives.setFillColor(sf::Color::White);
     //lives.setString("Lives??");
     lives.setPosition(sf::Vector2f(50, 0));
+
 }
 
 void Board::clicked(sf::Vector2i position) {
@@ -81,7 +83,10 @@ void Board::draw() {
 void Board::update() {
     path = boardGrid.find_path(start, end);
 
+    for (auto &action: actions) {
+        action();
+    }
+
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
-    //lives.setString("Lives???");
     currency_amount.setString(("Moneh: " + std::to_string(game_state->get_curreny())).c_str());
 }

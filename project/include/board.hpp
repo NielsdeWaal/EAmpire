@@ -6,6 +6,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 
+#include "action.hpp"
 #include "gameState.hpp"
 #include "button.hpp"
 #include "grid.hpp"
@@ -30,6 +31,15 @@ private:
     std::vector<sf::Vector2i> path;
 
     Button menu_button;
+
+    action actions[2] = {
+        action(sf::Keyboard::Escape, [&] {window.close();}),
+        action(sf::Mouse::Left, [&] {
+                    if (menu_button.is_pressed()) {
+                        window.close();
+                    }
+                
+    })};
 
 public:
     Board(sf::RenderWindow &window);
