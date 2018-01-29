@@ -5,6 +5,4 @@ Enemy_a::Enemy_a () :
 	{}
 
 
-Enemy_a::~Enemy_a() {
-    std::cout << "enemy_a is deleted" << std::endl;
-}
+Enemy_a::~Enemy_a() {}

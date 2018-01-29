@@ -36,9 +36,7 @@ Enemy::Enemy(sf::Color color, const int damage, const float speed, int lives) :
 	circle.setPosition(position);
 }
 
-Enemy::~Enemy() {
-	std::cout << "Enemy is being deleted" << std::endl;
-}
+Enemy::~Enemy() {}
 
 void Enemy::attack(int & health_player) {
 	health_player -= damage;
