@@ -8,4 +8,4 @@ typedef std::shared_ptr<Tower> tower_ptr;
 typedef std::vector<tower_ptr> tower_vector;
 
 
-#endif //TYPEDEFS_HPP
+#endif // TYPEDEFS_HPP

@@ -41,4 +41,4 @@ public:
 	//sf::Sprite get_sprite();
 };
 
-#endif // !TOWER_HPP
+#endif // TOWER_HPP

@@ -1,8 +1,8 @@
 #ifndef TOWER_A_HPP
 #define TOWER_A_HPP
 
-#include <SFML/Graphics.hpp>
 #include "tower.hpp"
+#include <SFML/Graphics.hpp>
 #include <iostream>
 
 class tower_a : public Tower {
@@ -43,4 +43,4 @@ public:
 };
 
 
-#endif //TOWER_A_HPP
+#endif // TOWER_A_HPP

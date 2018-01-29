@@ -43,6 +43,8 @@ int main(void) {
                 std::cout << "MOUSE HAS ENTERED THE BUILDING" << std::endl;
                 // continue game
                 break;
+            default:
+                break;
             }
         }
 

@@ -2,6 +2,8 @@
 #define ENEMYB_HPP
 
 #include <SFML/Graphics.hpp>
+#include <cmath>
+
 #include "enemy.hpp"
 
 /**
