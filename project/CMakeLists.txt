@@ -96,7 +96,8 @@ set(sources
 	include/enemy.hpp
 	include/enemy_a.hpp
 	include/enemy_b.hpp
-	include/enemy_container.hpp)
+	include/enemy_container.hpp
+	include/typedefs.hpp)
 
 
 set(gridLibSRC

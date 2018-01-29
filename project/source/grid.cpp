@@ -357,10 +357,23 @@ std::pair<int, int> Grid::get_start_values() {
 	return std::make_pair(start_x, start_y);
 }
 
-//void Grid::new_round(int enemy_amount) {
-//    if(game_state->get_round_status()) {
-//        game_state->set_new_round(false);
-//        //enemy_generator(enemies, 10, 20);
-//    }
-//
-//}
+
+void Grid::reset_damage() {
+	for (auto& tile : tiles) {
+		tile.set_damage(0);
+	}
+}
+
+void Grid::calculate_damage(std::vector<tower_ptr> tower_vector) {
+	reset_damage();
+	for (auto& tower : tower_vector) {
+		for (int y = (tower->get_loc().y + (tower->get_radius()*-1)); y <= tower->get_loc().y + tower->get_radius(); y++ ) {
+			for (int x = (tower->get_loc().x + (tower->get_radius()*-1)); x <= tower->get_loc().x + tower->get_radius(); x++) {
+				if ((x >= 0) && (x < size_tiles_x) && (y >= 0) && (y < size_tiles_y)) {
+					tiles[y * size_tiles_x + x].update_damage(tower->get_damage());
+				}
+			}
+		}
+	}
+}
+
