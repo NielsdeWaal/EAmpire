@@ -83,8 +83,8 @@ int main(void) {
             }
 
         })*/
-
-	window.setFramerateLimit(25);
+	
+	window.setFramerateLimit(50);
     while (window.isOpen()) {
 
         for (auto &action : actions) {

@@ -26,6 +26,7 @@ if(NOT MSVC)
 
     set(cxxflags
         "-std=c++17"
+        "-O0"
         ${warnings})
 
     string(REGEX REPLACE ";" " " cxxflags "${cxxflags}")
