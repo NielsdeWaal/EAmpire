@@ -10,12 +10,28 @@ GameState *GameState::get_state() {
     return instance;
 }
 
+std::string GameState::get_action_state() {
+    return action_state;
+}
+
+void GameState::set_action_state(std::string new_state) {
+    action_state = new_state;
+}
+
 int GameState::get_lives() {
     return lives;
 }
 
 void GameState::set_lives(int amount) {
     lives = amount;
+}
+
+int GameState::get_curreny() {
+    return curreny_amount;
+}
+
+void GameState::set_curreny(int amount) {
+    curreny_amount = amount;
 }
 
 
@@ -44,4 +60,11 @@ void GameState::draw_sprite(std::string name, sf::Vector2f position, sf::RenderW
 	window.draw(sprites.find(name)->second);
 }
 
+void GameState::set_round_state(std::string state) {
+    round_state = state;
+    std::cout << "Round state set to:" << state << std::endl;
+}
 
+std::string GameState::get_round_state() {
+    return round_state;
+}

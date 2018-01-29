@@ -13,7 +13,7 @@ private:
 
 	float damage;
 	float fire_rate;
-	float radius;
+	int radius;
 
 	int current_level;
 	int max_level;
