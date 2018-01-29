@@ -10,7 +10,8 @@
 
 class Game {
 private:
-    std::vector<Board> boards;
+    std::vector<Board*> boards;
+    //Board* boards;
 
     GameState *game_state = GameState::get_state();
 

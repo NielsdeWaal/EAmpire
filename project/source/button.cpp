@@ -31,7 +31,7 @@ void Button::setup() {
 
 void Button::draw() {
     window.draw(boundary);
-    //window.draw(text);
+    window.draw(text);
 }
 
 sf::Vector2f Button::get_location() {

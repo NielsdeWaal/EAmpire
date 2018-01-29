@@ -12,23 +12,28 @@ sf::RenderWindow& Game::get_window() {
 }
 
 void Game::clicked(sf::Vector2i position) {
-    for (auto board : boards) {
-        board.clicked(position);
+    for (auto& board : boards) {
+        board->clicked(position);
     }
+    //boards->clicked(position);
 }
 
 void Game::draw() {
-    for (auto board : boards) {
-        board.draw();
+    for (auto& board : boards) {
+        board->draw();
     }
+    //boards->draw();
 }
 
 void Game::update() {
-    for (auto board : boards) {
-        board.update();
+    for (auto& board : boards) {
+        board->update();
     }
+    //boards->update();
 }
 
 void Game::initialize() {
-    boards.push_back(Board(window));
+    //boards.push_back(Board(window));
+    //boards = new Board(window);
+    boards.emplace_back(new Board(window));
 }

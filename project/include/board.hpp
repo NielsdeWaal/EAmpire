@@ -39,6 +39,8 @@ public:
     void draw();
 
     void update();
+
+    void setup();
 };
 
 #endif // BOARD_HPP

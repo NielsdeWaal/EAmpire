@@ -11,6 +11,7 @@ enable_testing()
 
 if(NOT MSVC)
     set(warnings
+        "-g"
         "-Wall"
         "-Wextra"
         "-Wall"
