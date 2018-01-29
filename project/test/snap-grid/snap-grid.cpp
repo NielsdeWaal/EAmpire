@@ -1,5 +1,5 @@
-#include "gtest/gtest.h"
 #include "grid.hpp"
+#include "gtest/gtest.h"
 
 #include <SFML/Graphics.hpp>
 #include <utility>
@@ -30,23 +30,23 @@ TEST(GridTest, defaultConstructorSize) {
 TEST(GridTest, setup) {
     try {
         sf::RenderWindow window(sf::VideoMode(1000, 750), "Testing");
-        Grid grid(10, 10, 50, window.getSize().x/4, 50);
+        Grid grid(10, 10, 50, window.getSize().x / 4, 50);
 
-        auto start = sf::Vector2i(0,0);
-        auto end   = sf::Vector2i(9,9);
+        auto start = sf::Vector2i(0, 0);
+        auto end   = sf::Vector2i(9, 9);
 
         auto path = grid.find_path(start, end);
-    } catch(...) {
+    } catch (...) {
         FAIL() << "Failed to initialize non-default grid";
     }
 }
 
 TEST(GridTest, defaultPath) {
     sf::RenderWindow window(sf::VideoMode(1000, 750), "Testing");
-    Grid grid(10, 10, 50, window.getSize().x/4, 50);
+    Grid grid(10, 10, 50, window.getSize().x / 4, 50);
 
-    auto start = sf::Vector2i(0,0);
-    auto end   = sf::Vector2i(9,9);
+    auto start = sf::Vector2i(0, 0);
+    auto end = sf::Vector2i(9, 9);
 
     auto constructed_path = grid.find_path(start, end);
 

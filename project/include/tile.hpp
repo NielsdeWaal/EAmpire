@@ -2,6 +2,7 @@
 #define TILE_HPP
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 class Tile {
   private:
@@ -10,19 +11,20 @@ class Tile {
 	float damage = 0.0;
 	bool navigable = true;
   public:
-    Tile() {}
+    Tile() {
+    }
 
-	Tile(bool is_navigable);
+    Tile(bool is_navigable);
 
-	void set_navigability(bool navigability);
+    void set_navigability(bool navigability);
 
-	bool is_navigable();
+    bool is_navigable();
 
-	int getID();
+    int getID();
 
-	void clicked();
+    void clicked();
 
-	void set_built();
+    void set_built();
 
 	void set_free();
 

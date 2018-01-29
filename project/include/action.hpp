@@ -1,19 +1,17 @@
-#ifndef ACTION_HPP
-#define ACTION_HPP
-
-#include <SFML/Graphics.hpp>
-#include <functional>
-
-
 /**
-* @file button.hpp
+* @file action.hpp
 * @author Nick Goris, Wouter van Ooijen
 * @date 21/1/18
 *
 * @brief Action class to abstract event handling from the main game loop
 *
-* With this class you can save specific events and their corresponding actions (as lambdas)
+* With this class you can save specific events and their corresponding actions
+* (as lambdas)
 */
+#ifndef _ACTION_HPP
+#define _ACTION_HPP
+#include <SFML/Graphics.hpp>
+#include <functional>
 
 class action {
 private:
@@ -21,7 +19,6 @@ private:
 	std::function< void() > work;
 
 public:
-
 	/**
 	* @brief Standard constructor for the action calss
 	*
@@ -46,12 +43,10 @@ public:
 	**/
 	action(sf::Mouse::Button button, std::function<void()> work);
 
-
-
 	/**
 	* @brief Overloaded operator() to make it possible to execute functions passed as a parameter in the constructor
 	**/
 	void operator()();
 };
 
-#endif //ACTION_HPP
+#endif // ACTION_HPP
