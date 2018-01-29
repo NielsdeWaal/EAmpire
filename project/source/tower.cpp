@@ -2,10 +2,13 @@
 #include <iostream>
 
 
-Tower::Tower()
+Tower::Tower(int x_location, int y_location) :
+	x_location(x_location),
+	y_location(y_location)
 {
 }
 
+Tower::Tower() {}
 
 Tower::~Tower()
 {
@@ -30,4 +33,9 @@ void Tower::upgrade() {
 
 void Tower::sell_tower() {
 	//currency += (value*0.75)
+}
+
+void Tower::draw(sf::RenderWindow & window) {
+
+
 }

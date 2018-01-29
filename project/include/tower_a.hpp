@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "tower.hpp"
+#include <iostream>
 
 class tower_a : public Tower {
 private:
@@ -17,12 +18,20 @@ private:
 	int current_level = 1;
 	int max_level = 5;
 
+	int x_location;
+	int y_location;
+
+	sf::CircleShape radius_circle;
+
 public:
-	tower_a();
+	tower_a(int x_location, int y_location);
 
 	void upgrade();
 	void sell_tower();
-	void draw_tower();
+	void draw(sf::RenderWindow & window);
+
+	//sf::Texture get_texture();
+	//sf::Sprite get_sprite();
 
 };
 
