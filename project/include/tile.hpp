@@ -6,10 +6,10 @@
 
 class Tile {
   private:
-    int id;
-    int lives;
-    bool navigable = true;
-
+	int id;
+	int lives;
+	float damage = 0.0;
+	bool navigable = true;
   public:
     Tile() {
     }
@@ -26,7 +26,13 @@ class Tile {
 
     void set_built();
 
-    void set_free();
+	void set_free();
+
+	float get_damage();
+
+	void update_damage(float new_damage);
+
+	void set_damage(float new_damage);
 };
 
 #endif // TILE_HPP

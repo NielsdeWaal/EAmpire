@@ -11,6 +11,9 @@
 #include "button.hpp"
 #include "game.hpp"
 #include "grid.hpp"
+#include "tower.hpp"
+#include "tower_a.hpp"
+#include "typedefs.hpp"
 
 int main(void) {
     auto game = Game();
@@ -40,77 +43,94 @@ int main(void) {
                   "EAmpire Tower Defense",
                   sf::Style::Titlebar | sf::Style::Close);
 
-    bool lastButton = false;
     auto start = sf::Vector2i(0, 0);
     auto end = sf::Vector2i(9, 9);
   
 	Enemy_container container = Enemy_container();
 	//container.add();
 
-    // std::string play = "Play";
-    std::string exit = "Exit";
-    std::string tower1 = "Tower#1";
-    // std::string tower2 = "Tower#2";
-    // std::string tower3 = "Tower#3";
-    // std::string tower4 = "Tower#4";
-    // std::string tower5 = "Tower#5";
-    std::string sell = "Sell";
-    std::string menu = "Menu";
 
-    // Button play_button(play, sf::Vector2f{ float((window.getSize().x / 2)),
-    // float((window.getSize().y / 2)) }, sf::Vector2f{ 70,50 }, window);
-    Button tower1_button(tower1, sf::Vector2f(grid_x_pixel - 50, 125),
-                         sf::Vector2f(100, 50), window);
-    /*Button tower2_button(tower2, sf::Vector2f(grid_x_pixel - 50, 200),
-                           sf::Vector2f(100, 50), window);
-    Button tower3_button(tower3, sf::Vector2f(grid_x_pixel - 50, 275),
-                         sf::Vector2f(100, 50), window);
-    Button tower4_button(tower4, sf::Vector2f(grid_x_pixel - 50, 350),
-                         sf::Vector2f(100, 50), window);
-    Button tower5_button(tower5, sf::Vector2f(grid_x_pixel - 50, 425),
-                         sf::Vector2f(100, 50), window);*/
-    Button sell_button(sell, sf::Vector2f(grid_x_pixel - 50, 525),
-                       sf::Vector2f(100, 50), window);
-    Button menu_button(menu, sf::Vector2f(grid_x_pixel - 50, 25),
-                       sf::Vector2f(100, 50), window);
+	tower_vector towers;
+
+	//sf::Texture tower_a_texture;
+	//sf::Sprite sprite_tower_a;
+	//tower_a_texture.loadFromFile("textures/TinyArno.png");
+	//sprite_tower_a.setTexture(tower_a_texture);
+
+	//std::string play = "Play";
+	std::string exit = "Exit";
+	std::string tower1 = "Tower#1";
+	//std::string tower2 = "Tower#2";
+	//std::string tower3 = "Tower#3";
+	//std::string tower4 = "Tower#4";
+	//std::string tower5 = "Tower#5";
+	std::string sell = "Sell";
+	std::string menu = "Menu";
+
+	//tower_a tower_1(20,30);
+
+	//Button play_button(play, sf::Vector2f{ float((window.getSize().x / 2)), float((window.getSize().y / 2)) }, sf::Vector2f{ 70,50 }, window);
+	Button tower1_button(tower1,
+		sf::Vector2f(grid_x_pixel - 50, 125),
+		sf::Vector2f(100, 50),
+		window);
+	/*Button tower2_button(tower2,
+	sf::Vector2f(grid_x_pixel - 50, 200),
+	sf::Vector2f(100, 50),
+	window);
+	Button tower3_button(tower3,
+	sf::Vector2f(grid_x_pixel - 50, 275),
+	sf::Vector2f(100, 50),
+	window);
+	Button tower4_button(tower4,
+	sf::Vector2f(grid_x_pixel - 50, 350),
+	sf::Vector2f(100, 50),
+	window);
+	Button tower5_button(tower5,
+	sf::Vector2f(grid_x_pixel - 50, 425),
+	sf::Vector2f(100, 50),
+	window);*/
+	Button sell_button(sell,
+		sf::Vector2f(grid_x_pixel - 50, 525),
+		sf::Vector2f(100, 50),
+		window);
+	Button menu_button(menu,
+		sf::Vector2f(grid_x_pixel - 50, 25),
+		sf::Vector2f(100, 50),
+		window);
 
     auto state = "free";
 
-    action actions[] = {
-        action(sf::Keyboard::Escape, [&window] { window.close(); }),
-        action(sf::Keyboard::Num1, [&state] { state = "building"; }),
-
-        action(sf::Keyboard::Num2,		[&container] {container.add(); }),
-        action(sf::Keyboard::Delete, [&state] { state = "selling"; }),
-        action(sf::Mouse::Right, [&state] { state = "free"; }),
-        action(sf::Mouse::Left, [&state, &window, &menu_button, &tower1_button,
-                                 &sell_button, &grid] {
-            if (menu_button.is_pressed()) {
-                window.close();
-            }
-            if (tower1_button.is_pressed()) {
-                state = "building";
-            }
-            if (sell_button.is_pressed()) {
-                state = "selling";
-            }
-            if (grid.is_clicked(sf::Mouse::getPosition(window).x,
-                                sf::Mouse::getPosition(window).y) &&
-                (!std::strcmp(state, "building"))) {
-
-                grid.set_built(sf::Mouse::getPosition(window).x,
-                               sf::Mouse::getPosition(window).y);
-                state = "free";
-            }
-            if (grid.is_clicked(sf::Mouse::getPosition(window).x,
-                                sf::Mouse::getPosition(window).y) &&
-
-                (!std::strcmp(state, "selling"))) {
-
-                grid.set_free(sf::Mouse::getPosition(window).x,
-                              sf::Mouse::getPosition(window).y);
-                state = "free";
-            }
+	action actions[] = {
+		action(sf::Keyboard::Escape,	[&window] {window.close(); }),
+		action(sf::Keyboard::Num1,		[&state] {state = "building"; }),
+		action(sf::Keyboard::Delete,	[&state] {state = "selling"; }),
+		action(sf::Mouse::Right,		[&state] {state = "free"; }),
+		action(sf::Mouse::Left,			[&state, &window,&menu_button,&tower1_button,&sell_button,&grid,&towers]
+	{	if (menu_button.is_pressed()) {
+		window.close();
+	}
+	if (tower1_button.is_pressed()) {
+		state = "building";
+	}
+	if (sell_button.is_pressed()) {
+		state = "selling";
+	}
+	if ((grid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
+		&& (!strcmp(state,"building"))) {
+		grid.set_built(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+		towers.push_back(tower_ptr(new tower_a((sf::Mouse::getPosition(window).x - grid.get_start_x()) / 50, (sf::Mouse::getPosition(window).y - grid.get_start_y()) / 50)));
+		state = "free";
+		/*if (grid.is_navigable(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) {
+		grid.set_built(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+		towers.push_back(tower_ptr(new tower_a(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)));
+		state = "free";
+		}*/
+	}
+	if (grid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y) && (!strcmp(state, "selling"))) {
+		grid.set_free(sf::Mouse::getPosition(window).x,   sf::Mouse::getPosition(window).y);
+		state = "free";
+	}
 
         })};
 	
@@ -173,6 +193,7 @@ int main(void) {
         } else {
             window.setMouseCursorVisible(true);
         }
+		grid.calculate_damage(towers);
 
         window.display();
         game.update();
