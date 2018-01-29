@@ -62,6 +62,7 @@ void GameState::draw_sprite(std::string name, sf::Vector2f position, sf::RenderW
 
 void GameState::set_round_state(std::string state) {
     round_state = state;
+    std::cout << "Round state set to:" << state << std::endl;
 }
 
 std::string GameState::get_round_state() {

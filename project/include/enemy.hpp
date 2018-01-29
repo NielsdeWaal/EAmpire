@@ -19,7 +19,8 @@
 class Enemy {
 private:
 	//The damage that the enemy can do to the lives of the player. And the speed with which the enemy can move
-	const int damage, speed;
+	const int damage;
+	const float speed;
 	//The lives of the enemy
 	int lives;
 
@@ -29,7 +30,7 @@ private:
 	* @param[in]	vector				The vector that have to be calculated
 	* @return		float				The length of the vector
 	*/
-	float length(sf::Vector2i vector2i);
+	float length(sf::Vector2f vector2f);
 
 	/**
 	* @brief Private function to normalize a sf::vector2i in 2D
@@ -39,11 +40,20 @@ private:
 	* @param[in]	vector				The vector that have to be calculated
 	* @return		sf::Vector2i		The normalized vector
 	*/
-	sf::Vector2f normalize(sf::Vector2i vector2i);
+	sf::Vector2f normalize(sf::Vector2f vector2f);
+
+	/**
+	* @brief Private function for checking when ther is a corner within the grid
+	*
+	* @param[in]	boundarieA			the first boundary
+	* @param[in]	boundarieB			the second boundary
+	* @param[in]	position			position of the enemy
+	*/
+	void corner_check(sf::Vector2f & boundarieA, sf::Vector2f & boundarieB, sf::Vector2f & position);
 
 protected:
 	//The speed with which the enemy can move
-	sf::Vector2i position = sf::Vector2i(0,0);
+	sf::Vector2f position = sf::Vector2f(0.0,0.0);
 	//The color of the enemy's shape
 	sf::Color color;
 	//The diameteer of the circle
@@ -51,7 +61,8 @@ protected:
 	//The circle shape of the enemy
 	sf::CircleShape circle;
 	//The next location that have to be located: default first tile(most left at top)
-	sf::Vector2i nextlocation = sf::Vector2i(0,0);
+	sf::Vector2f boundarieA = sf::Vector2f(0, 0);
+	sf::Vector2f boundarieB = sf::Vector2f(1, 1);
 public:
 
 	/**
@@ -65,7 +76,7 @@ public:
 	* @param[in]	speed				The speed with which the enemy moves.
 	* @param[in]	lives				The lives of the enemy.
 	*/
-	Enemy( sf::Color color, const int damage, const int speed, int lives);
+	Enemy( sf::Color color, const int damage, const float speed, int lives);
 
 	/**
 	* @brief Destructor

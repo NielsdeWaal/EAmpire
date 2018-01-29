@@ -111,7 +111,7 @@ Grid::Grid(): // Default constructor
       start_x(0), 
       start_y(0) 
 	{	
-	enemy_generator(enemies, 10, 20);
+	//enemy_generator(enemies, 10, 20);
 }
 
 Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
@@ -123,7 +123,7 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
     start_x(start_x), 
     start_y(start_y) 
 {
-
+	//enemy_generator(enemies, 10, 20);
 }
 
 bool Grid::is_clicked(int x, int y) {
@@ -194,9 +194,9 @@ void Grid::draw(sf::RenderWindow &window) {
     for (int x = 0; x < size_tiles_x; x++) {
         for (int y = 0; y < size_tiles_y; y++) {
             if (tiles[y * size_tiles_x + x].is_navigable()) {
-				game_state->draw_sprite("tile_normal", sf::Vector2f(start_x + (x * scale), start_y + (y * scale)), window);
+                game_state->draw_sprite("tile_normal", sf::Vector2f(start_x + (x * scale), start_y + (y * scale)), window);
             } else {
-				game_state->draw_sprite("tile_blocked", sf::Vector2f(start_x + (x * scale), start_y + (y * scale)), window);
+                game_state->draw_sprite("tile_blocked", sf::Vector2f(start_x + (x * scale), start_y + (y * scale)), window);
             }
         }
     }
@@ -204,7 +204,7 @@ void Grid::draw(sf::RenderWindow &window) {
 
 void Grid::draw_path(sf::RenderWindow &window, std::vector<sf::Vector2i> path) {
     for (auto tile : path) {
-		game_state->draw_sprite("tile_path", sf::Vector2f(start_x + (tile.x * scale), start_y + (tile.y * scale)), window);
+        game_state->draw_sprite("tile_path", sf::Vector2f(start_x + (tile.x * scale), start_y + (tile.y * scale)), window);
     }
 }
 
@@ -357,10 +357,23 @@ std::pair<int, int> Grid::get_start_values() {
 	return std::make_pair(start_x, start_y);
 }
 
-//void Grid::new_round(int enemy_amount) {
-//    if(game_state->get_round_status()) {
-//        game_state->set_new_round(false);
-//        //enemy_generator(enemies, 10, 20);
-//    }
-//
-//}
+
+void Grid::reset_damage() {
+	for (auto& tile : tiles) {
+		tile.set_damage(0);
+	}
+}
+
+void Grid::calculate_damage(std::vector<tower_ptr> tower_vector) {
+    reset_damage();
+    for (auto& tower : tower_vector) {
+        for (int y = (tower->get_loc().y + (tower->get_radius()*-1)); y <= tower->get_loc().y + tower->get_radius(); y++ ) {
+            for (int x = (tower->get_loc().x + (tower->get_radius()*-1)); x <= tower->get_loc().x + tower->get_radius(); x++) {
+                if ((x >= 0) && (x < size_tiles_x) && (y >= 0) && (y < size_tiles_y)) {
+                    tiles[y * size_tiles_x + x].update_damage(tower->get_damage());
+                }
+            }
+        }
+    }
+}
+

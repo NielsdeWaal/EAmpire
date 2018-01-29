@@ -22,5 +22,17 @@ void Tile::set_built() {
 }
 
 void Tile::set_free() {
-    navigable = true;
+	navigable = true;
+}
+
+float Tile::get_damage() {
+	return damage;
+}
+
+void Tile::update_damage(float new_damage) {
+	damage += new_damage;
+}
+
+void Tile::set_damage(float new_damage) {
+	damage = new_damage;
 }

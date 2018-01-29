@@ -1,7 +1,7 @@
 #ifndef GAME_STATE_HPP
 #define GAME_STATE_HPP
 
-
+#include <iostream>
 #include <map>
 #include <string>
 #include <SFML/Graphics.hpp>
