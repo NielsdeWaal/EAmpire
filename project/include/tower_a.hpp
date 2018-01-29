@@ -26,8 +26,9 @@ private:
 public:
 	tower_a(int x_location, int y_location);
 
+	~tower_a();
+
 	void upgrade();
-	void sell_tower();
 
 	float get_damage();
 	void draw(sf::RenderWindow & window);

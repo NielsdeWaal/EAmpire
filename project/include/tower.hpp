@@ -30,7 +30,6 @@ public:
 
 	void build_tower();
 	void upgrade();
-	void sell_tower();
 	
 	virtual float get_damage();
 	virtual void draw(sf::RenderWindow & window);

@@ -52,14 +52,20 @@ private:
 					if (sell_button.is_pressed()) {
 						game_state->set_round_state("selling");
 					}
-					if ((boardGrid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
-						&& (game_state->get_round_state() == "building")) {
+					if ((boardGrid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) && (game_state->get_round_state() == "building")) {
 						boardGrid.set_built(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 						towers.push_back(tower_ptr(new tower_a((sf::Mouse::getPosition(window).x - boardGrid.get_start_x()) / 50, (sf::Mouse::getPosition(window).y - boardGrid.get_start_y()) / 50)));
 						game_state->set_round_state("free");
 					}
 					if (boardGrid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y) && (game_state->get_round_state() == "selling")) {
 						boardGrid.set_free(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
+						int i = 0;
+						for (auto& tower : towers) {
+							if (tower->get_loc() == sf::Vector2i((sf::Mouse::getPosition(window).x - boardGrid.get_start_x()) / 50, (sf::Mouse::getPosition(window).y - boardGrid.get_start_y()) / 50)) {
+								towers.erase(towers.begin()+i);
+							}
+							i++;
+						}
 						game_state->set_round_state("free");
 					}
 		})

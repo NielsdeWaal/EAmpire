@@ -12,6 +12,7 @@ Tower::Tower() {}
 
 Tower::~Tower()
 {
+	//currency += (value*0.75)
 }
 
 void Tower::build_tower() {
@@ -29,10 +30,6 @@ void Tower::upgrade() {
 	current_level += 1;
 	value = value + upgrade_cost;
 	upgrade_cost = (upgrade_cost * 2) + (upgrade_cost / 10);
-}
-
-void Tower::sell_tower() {
-	//currency += (value*0.75)
 }
 
 

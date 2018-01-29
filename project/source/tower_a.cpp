@@ -12,14 +12,15 @@ tower_a::tower_a(int x_location, int y_location) :
 	value = cost;
 }
 
+tower_a::~tower_a() {
+	//currency += (value*0.75)
+}
+
 
 void tower_a::upgrade() {
 
 }
 
-void tower_a::sell_tower() {
-
-}
 
 float tower_a::get_damage() {
 	return damage;

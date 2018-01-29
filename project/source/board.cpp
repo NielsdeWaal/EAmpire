@@ -88,7 +88,7 @@ void Board::update() {
     for (auto &action: actions) {
         action();
     }
-
+	boardGrid.calculate_damage(towers);
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
     currency_amount.setString(("Moneh: " + std::to_string(game_state->get_curreny())).c_str());
 }
