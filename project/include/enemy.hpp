@@ -42,6 +42,13 @@ private:
 	*/
 	sf::Vector2f normalize(sf::Vector2f vector2f);
 
+	/**
+	* @brief Private function for checking when ther is a corner within the grid
+	*
+	* @param[in]	boundarieA			the first boundary
+	* @param[in]	boundarieB			the second boundary
+	* @param[in]	position			position of the enemy
+	*/
 	void corner_check(sf::Vector2f & boundarieA, sf::Vector2f & boundarieB, sf::Vector2f & position);
 
 protected:
