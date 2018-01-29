@@ -7,6 +7,7 @@
 
 #include "tile.hpp"
 #include "gameState.hpp"
+#include "typedefs.hpp"
 
 /**
 * @file grid.hpp
@@ -258,6 +259,12 @@ class Grid {
          * @return std::pair with start values
          */
     std::pair<int, int> get_start_values();
+
+	void reset_damage();
+
+	void calculate_damage(std::vector<tower_ptr> tower_vector);
+
+
 };
 
 #endif // GRID_HPP

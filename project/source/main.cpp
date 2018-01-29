@@ -10,6 +10,7 @@
 #include "action.hpp"
 #include "tower.hpp"
 #include "tower_a.hpp"
+#include "typedefs.hpp"
 
 
 int main(void) {
@@ -27,8 +28,7 @@ int main(void) {
 	auto start = sf::Vector2i(0, 0);
 	auto end = sf::Vector2i(9, 9);
 
-	typedef std::shared_ptr<Tower> tower_ptr;
-	typedef std::vector<tower_ptr> tower_vector;
+
 
 	tower_vector towers;
 
@@ -109,7 +109,7 @@ int main(void) {
 	if ((grid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y))
 		&& (!strcmp(state,"building"))) {
 		grid.set_built(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-		towers.push_back(tower_ptr(new tower_a(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)));
+		towers.push_back(tower_ptr(new tower_a((sf::Mouse::getPosition(window).x - grid.get_start_x()) / 50, (sf::Mouse::getPosition(window).y - grid.get_start_y()) / 50)));
 		state = "free";
 		/*if (grid.is_navigable(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) {
 		grid.set_built(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
@@ -185,8 +185,9 @@ int main(void) {
 		//tower_1.draw(window);
 
 		for (auto &tower : towers) {
-			tower->draw(window);
+			//std::cout << tower->get_loc().x << ',' << tower->get_loc().y << std::endl;
 		}
+		grid.calculate_damage(towers);
 
 		window.display();
 		game.update();

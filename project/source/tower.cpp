@@ -35,7 +35,19 @@ void Tower::sell_tower() {
 	//currency += (value*0.75)
 }
 
+
+float Tower::get_damage() {
+	return damage;
+}
 void Tower::draw(sf::RenderWindow & window) {
 
 
+}
+
+sf::Vector2i Tower::get_loc() {
+	return sf::Vector2i(0, 0);
+}
+
+int Tower::get_radius() {
+	return radius;
 }

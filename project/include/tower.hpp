@@ -31,7 +31,13 @@ public:
 	void build_tower();
 	void upgrade();
 	void sell_tower();
+	
+	virtual float get_damage();
 	virtual void draw(sf::RenderWindow & window);
+
+	virtual int get_radius();
+
+	virtual sf::Vector2i get_loc();
 
 	//sf::Sprite get_sprite();
 };
