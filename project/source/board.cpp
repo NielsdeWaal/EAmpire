@@ -4,13 +4,13 @@ Board::Board(sf::RenderWindow &window):
     boardGrid(Grid(grid_x, grid_y, scale, (grid_x_pixel - 100) / 2 - grid_x * 25, grid_y_pixel / 2 - grid_y * 25)),
     window(window),
     menu_button(Button(std::string("Menu"), 
-                sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 25), 
-                sf::Vector2f(100, 50), window))
-	tower1_button(Button(std::string("Tower1"), 
-				sf::Vector2f(static_cast<float>grid_x_pixel - 50, 100), 
+				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 25), 
+				sf::Vector2f(100, 50), window)),
+	tower1_button(Button(std::string("Tower1"),
+				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 100), 
 				sf::Vector2f(100, 50), window)),
 	sell_button(Button(std::string("Sell"), 
-				sf::Vector2f(static_cast<float>grid_x_pixel - 50, 175), 
+				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 175), 
 				sf::Vector2f(100, 50), window))
 {
     window.create(sf::VideoMode(grid_x_pixel, grid_y_pixel), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close);

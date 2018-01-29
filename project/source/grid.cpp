@@ -206,7 +206,6 @@ void Grid::draw(sf::RenderWindow &window) {
             }
         }
     }
-	std::cout << tiles[1 * size_tiles_x + 1].get_damage() << std::endl;
 }
 
 void Grid::draw_path(sf::RenderWindow &window, std::vector<sf::Vector2i> path) {
