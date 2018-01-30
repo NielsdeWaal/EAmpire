@@ -386,3 +386,7 @@ void Grid::calculate_damage(std::vector<tower_ptr> tower_vector) {
     }
 }
 
+float Grid::get_damage(int tile_x, int tile_y) {
+    return tiles[tile_y * size_tiles_x + tile_x].get_damage();
+}
+

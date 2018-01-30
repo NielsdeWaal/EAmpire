@@ -12,7 +12,6 @@ private:
 	float value;
 
 	float damage = 15.0;
-	//float fire_rate = 1.0;
 	int radius = 1;
 
 	int current_level = 1;
@@ -20,8 +19,6 @@ private:
 
 	int x_location;
 	int y_location;
-
-	//sf::CircleShape radius_circle;
 
 public:
 	tower_a(int x_location, int y_location);
@@ -36,9 +33,6 @@ public:
 	int get_radius();
 
 	sf::Vector2i get_loc();
-
-	//sf::Texture get_texture();
-	//sf::Sprite get_sprite();
 
 };
 

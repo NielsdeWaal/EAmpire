@@ -95,6 +95,11 @@ void Board::update() {
     for (auto &action: actions) {
         action();
     }
+
+    //for (auto& enemy : enemies ) {
+    //  enemy->take_damage(boardGrid.get_damage(enemy.get_location().x - boardGrid.get_start_x()) / 50,enemy.get_location().y - boardGrid.get_start_y()) / 50));
+    //}
+
 	boardGrid.calculate_damage(towers);
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
     currency_amount.setString(("Moneh: " + std::to_string(game_state->get_curreny())).c_str());
