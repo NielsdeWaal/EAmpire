@@ -9,16 +9,22 @@
 #include "gameState.hpp"
 
 class Game {
-  private:
-    std::vector<Board> boards;
+private:
+    std::vector<Board*> boards;
+    //Board* boards;
 
     GameState *game_state = GameState::get_state();
 
-  public:
-    Game() {
-        std::cout << "Game started" << std::endl;
-        initialize();
-    }
+    sf::RenderWindow window;
+
+public:
+    Game();
+
+    sf::RenderWindow& get_window();
+
+    void clicked(sf::Vector2i position);
+
+    void draw();
 
     void update();
 

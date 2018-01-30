@@ -2,6 +2,7 @@
 #define ENEMY_GENERATOR_HPP
 
 /**
+ * @file enemy_generator.hpp
  * @brief Function which has only been written once but can serve
  * under multiple cases.
  *
@@ -41,7 +42,7 @@ static Creator const enemy_class_array[] = {make<Enemy_a>, make<Enemy_b>};
  * generated with the correct amount.
  *
  * @param[in, out] std::vector Vector where all the enemies will be placed in.
- * @param[in] int paramter pack of ints which dictates the amount and type of
+ * @param[in]      int paramter pack of ints which dictates the amount and type of
  * enemies placed in the vector.
  */
 template <typename T, typename... Ts>

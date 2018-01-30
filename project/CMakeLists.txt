@@ -11,6 +11,7 @@ enable_testing()
 
 if(NOT MSVC)
     set(warnings
+        "-g"
         "-Wall"
         "-Wextra"
         "-Wall"
@@ -82,9 +83,11 @@ set(sources
     source/button.cpp
     source/action.cpp
     source/enemy.cpp
-	source/enemy_a.cpp
-	source/enemy_b.cpp
-	source/enemy_container.cpp
+    source/enemy_a.cpp
+    source/enemy_b.cpp
+    source/enemy_container.cpp
+    source/tower.cpp
+    source/tower_a.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
@@ -92,10 +95,13 @@ set(sources
     include/tile.hpp
     include/button.hpp
     include/action.hpp
-	include/enemy.hpp
-	include/enemy_a.hpp
-	include/enemy_b.hpp
-	include/enemy_container.hpp)
+    include/enemy.hpp
+    include/enemy_a.hpp
+    include/enemy_b.hpp
+    include/enemy_container.hpp
+    include/tower.hpp
+    include/tower_a.hpp
+    include/typedefs.hpp)
 
 
 set(gridLibSRC
