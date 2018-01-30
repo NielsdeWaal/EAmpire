@@ -8,6 +8,7 @@
 #include <random>
 #include <utility>
 #include <vector>
+#include <string>
 
 #include "enemy.hpp"
 #include "enemy_a.hpp"
@@ -148,28 +149,6 @@ class Grid {
     int get_start_y();
 
     /**
-    * @brief Changes the specific tile that has been clicked to non-navigatable
-    *
-    * The right tile is calculated by deviding the coordinate by the scale.
-    * It then communicates to the correct tile that it has been clicked on.
-    *
-    * @param[in] x The relative x coordinate in the grid.
-    * @param[in] y The relative y coordinate in the grid.
-    **/
-    void set_built(int x, int y);
-
-    /**
-    * @brief Changes the specific tile that has been clicked to navigatable
-    *
-    * The right tile is calculated by deviding the coordinate by the scale.
-    * It then communicates to the correct tile that it has been clicked on.
-    *
-    * @param[in] x The relative x coordinate in the grid.
-    * @param[in] y The relative y coordinate in the grid.
-    **/
-    void set_free(int x, int y);
-
-    /**
     * @brief Finds a path in the grid.
     *
     * This function calculates the fastest path from one point in the grid to
@@ -294,6 +273,10 @@ class Grid {
     * @return float with the damage a tile deals
     */
     float get_damage(int tile_x, int tile_y);
+
+    std::string get_sprite(int tile_x, int tile_y);
+
+    void set_sprite(int tile_x, int tile_y, std::string new_sprite);
 };
 
 #endif // GRID_HPP

@@ -6,11 +6,14 @@ Board::Board(sf::RenderWindow &window):
     menu_button(Button(std::string("Menu"), 
 				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 25), 
 				sf::Vector2f(100, 50), window)),
-	tower1_button(Button(std::string("Tower1"),
-				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 100), 
+	tower1_button(Button(std::string("Arno"),
+				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 125), 
 				sf::Vector2f(100, 50), window)),
+    tower2_button(Button(std::string("Wall"),
+                sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 200), 
+                sf::Vector2f(100, 50), window)),
 	sell_button(Button(std::string("Sell"), 
-				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 175), 
+				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 275), 
 				sf::Vector2f(100, 50), window))
 {
     window.create(sf::VideoMode(grid_x_pixel, grid_y_pixel), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close);
@@ -55,7 +58,7 @@ void Board::draw() {
     boardGrid.draw_path(window, path);
 
     tower1_button.draw();
-    // tower2_button.draw();
+    tower2_button.draw();
     // tower3_button.draw();
     // tower4_button.draw();
     // tower5_button.draw();
@@ -76,7 +79,7 @@ void Board::draw() {
     //	}
     //}
 
-    if (game_state->get_round_state() == "building") {
+    if (game_state->get_round_state() == "building1" || game_state->get_round_state() == "building2") {
         game_state->draw_sprite("hammer", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
         window.setMouseCursorVisible(false);
     } else if (game_state->get_round_state() == "selling") {

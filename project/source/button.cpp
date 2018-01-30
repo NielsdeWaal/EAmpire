@@ -51,7 +51,7 @@ bool Button::is_pressed() {
             this->draw();
             window.display();
         }
-        boundary.setFillColor(sf::Color::Green);
+        boundary.setFillColor(sf::Color(32, 194, 14));
         return true;
     }
     return false;

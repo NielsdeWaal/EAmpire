@@ -153,14 +153,6 @@ int Grid::get_start_y() {
     return start_y;
 }
 
-void Grid::set_built(int x, int y) {
-    tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].set_built();
-}
-
-void Grid::set_free(int x, int y) {
-    tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].set_free();
-}
-
 std::vector<sf::Vector2i> Grid::find_path(sf::Vector2i start,
                                           sf::Vector2i end) {
     auto mini_grid = create_mini_grid();
@@ -193,17 +185,10 @@ bool Grid::is_navigable(int tile_x, int tile_y) {
 void Grid::draw(sf::RenderWindow &window) {
     for (int x = 0; x < size_tiles_x; x++) {
         for (int y = 0; y < size_tiles_y; y++) {
-            if (tiles[y * size_tiles_x + x].is_navigable()) {
-                game_state->draw_sprite("tile_normal", 
-                                        sf::Vector2f(static_cast<float>(start_x + (x * scale)), 
-                                                     static_cast<float>(start_y + (y * scale))), 
-                                        window);
-            } else {
-                game_state->draw_sprite("tile_blocked", 
-                                        sf::Vector2f(static_cast<float>(start_x + (x * scale)), 
-                                                     static_cast<float>(start_y + (y * scale))), 
-                                        window);
-            }
+            game_state->draw_sprite(tiles[y * size_tiles_x + x].get_sprite(), 
+                sf::Vector2f(static_cast<float>(start_x + (x * scale)),
+                static_cast<float>(start_y + (y * scale))), 
+                window);
         }
     }
 }
@@ -390,3 +375,10 @@ float Grid::get_damage(int tile_x, int tile_y) {
     return tiles[tile_y * size_tiles_x + tile_x].get_damage();
 }
 
+std::string Grid::get_sprite(int tile_x, int tile_y) {
+    return tiles[tile_y * size_tiles_x + tile_x].get_sprite();
+}
+
+void Grid::set_sprite(int tile_x, int tile_y, std::string new_sprite) {
+    return tiles[tile_y * size_tiles_x + tile_x].set_sprite(new_sprite);
+}
