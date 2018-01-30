@@ -110,7 +110,7 @@ public:
 	*
 	* @param[in]	location			The location where the enemy has to move to.
 	*/
-	void move_direction();
+	void move_direction(const int & size_grid);
 	
 	/**
 	* @brief Getter for getting the Circleshape of the enemy.

@@ -23,7 +23,6 @@ void Enemy::corner_check(sf::Vector2f & boundarieA, sf::Vector2f & boundarieB, s
 		position.y = boundarieA.y;
 	}
 }
-
 //PUBLIC
 Enemy::Enemy(sf::Color color, const int damage, const float speed, int lives) :
 	color(color),
@@ -51,13 +50,13 @@ void Enemy::take_damage(const int damage_tower) {
     }
 }
 
-void Enemy::move_direction() {
+void Enemy::move_direction(const int & size_grid) {
 	sf::Vector2f direction_enemy = normalize(sf::Vector2f(position.x - boundarieB.x, position.y - boundarieB.y));
 	position = position - sf::Vector2f(direction_enemy.x * speed, direction_enemy.y * speed);
-	if (position.x > 9) {
-		position.x = 9;
-	} else if (position.y > 9) {
-		position.y = 9;
+	if (position.x > size_grid - 1) {
+		position.x = size_grid - 1;
+	} else if (position.y > size_grid - 1) {
+		position.y = size_grid - 1;
 	} else if (position.x < 0) {
 		position.x = 0;
 	} else if (position.y < 0) {
@@ -87,12 +86,12 @@ bool Enemy::next_location(std::vector<sf::Vector2i> path) {
 				boundarieB = sf::Vector2f((float)std::next(it)->x, (float)std::next(it)->y);
 				if (position == boundarieB) {
 					boundarieA = boundarieB;
-					move_direction();
+					move_direction(path.size());
 					if (std::next(std::next(it)) != path.end()) {
 						boundarieB = sf::Vector2f((float)std::next(std::next(it))->x, (float)std::next(std::next(it))->y);
 					}
 				} else if (position.x >= boundarieA.x && position.y >= boundarieA.y && position.x <= boundarieB.x && position.y <= boundarieB.y || position.x <= boundarieA.x && position.y <= boundarieA.y && position.x >= boundarieB.x && position.y >= boundarieB.y) {
-					move_direction();
+					move_direction(path.size());
 					corner_check(boundarieA, boundarieB, position);
 					return false;
 				}
@@ -101,7 +100,7 @@ bool Enemy::next_location(std::vector<sf::Vector2i> path) {
 					if (std::next(std::next(it)) != path.end()) {
 						boundarieB = sf::Vector2f(float(std::next(std::next(it))->x), float(std::next(std::next(it))->y));
 					}
-					move_direction();
+					move_direction(path.size());
 					corner_check(boundarieA, boundarieB, position);
 					return false;
 				}
