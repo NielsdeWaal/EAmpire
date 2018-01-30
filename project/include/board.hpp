@@ -79,11 +79,19 @@ private:
                     if (boardGrid.is_navigable(
                             (mouse_x - boardGrid.get_start_x()) / 50,
                             (mouse_y - boardGrid.get_start_y()) / 50)) {
-                        boardGrid.set_built(mouse_x, mouse_y);
-                        towers.push_back(tower_ptr(new tower_a(
+                        if (boardGrid.can_place(start, end, sf::Vector2i(
                             (mouse_x - boardGrid.get_start_x()) / 50,
-                            (mouse_y - boardGrid.get_start_y()) / 50)));
-                        game_state->set_round_state("free");
+                            (mouse_y - boardGrid.get_start_y()) / 50))) {
+                            boardGrid.set_built(mouse_x, mouse_y);
+                            towers.push_back(tower_ptr(new tower_a(
+                                (mouse_x - boardGrid.get_start_x()) / 50,
+                                (mouse_y - boardGrid.get_start_y()) / 50)));
+                            game_state->set_round_state("free");
+                        }
+                        else {
+                            //TODO Add some vidual indication that you can't build where the user is clicking.
+                        }
+                        
                     }
                 }
                 if (boardGrid.is_clicked(mouse_x, mouse_y) &&
