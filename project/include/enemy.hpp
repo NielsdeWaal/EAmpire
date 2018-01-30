@@ -19,13 +19,14 @@
 class Enemy {
 private:
 	//The damage that the enemy can do to the lives of the player. And the speed with which the enemy can move
-	const int damage;
+	const float damage;
+	//The speed with which the enemy is running. The range is from 0 to 1. (for example: 0.2)
 	const float speed;
 	//The lives of the enemy
-	int lives;
+	float lives;
 
 	/**
-	* @brief Private function to calculate the length of a sf::vector2i in 2D
+	* @brief Private function to calculate the length of a sf::vector2f in 2D
 	*
 	* @param[in]	vector				The vector that have to be calculated
 	* @return		float				The length of the vector
@@ -33,14 +34,14 @@ private:
 	float length(sf::Vector2f vector2f);
 
 	/**
-	* @brief Private function to normalize a sf::vector2i in 2D
+	* @brief Private function to normalize a sf::vector2f in 2D
 	* 
 	* It uses the length function
 	*
 	* @param[in]	vector				The vector that have to be calculated
 	* @return		sf::Vector2i		The normalized vector
 	*/
-	sf::Vector2f normalize(sf::Vector2f vector2f);
+	sf::Vector2f normalize(sf::Vector2f distance_nextlocation);
 
 	/**
 	* @brief Private function for checking when ther is a corner within the grid
@@ -60,9 +61,10 @@ protected:
 	float diameter = 24;
 	//The circle shape of the enemy
 	sf::CircleShape circle;
-	//The next location that have to be located: default first tile(most left at top)
-	sf::Vector2f boundarieA = sf::Vector2f(0, 0);
-	sf::Vector2f boundarieB = sf::Vector2f(1, 1);
+	//The start boundary that have to be located: default first tile(most left at top)
+	sf::Vector2f boundaryA = sf::Vector2f(0, 0);
+	//The end boundary that have to be locatred 
+	sf::Vector2f boundaryB;
 public:
 
 	/**
@@ -76,7 +78,7 @@ public:
 	* @param[in]	speed				The speed with which the enemy moves.
 	* @param[in]	lives				The lives of the enemy.
 	*/
-	Enemy( sf::Color color, const int damage, const float speed, int lives);
+	Enemy( sf::Color color, const float damage, const float speed, int lives);
 
 	/**
 	* @brief Destructor
@@ -108,23 +110,10 @@ public:
 	* This will give you the direction as a vector of length 1. multiply this direction by the speed constant of that enemy's type. 
 	* The result is a vector with it's length depending on the speed factor instead of the distance to the player.
 	*
-	* @param[in]	location			The location where the enemy has to move to.
+	* @param[in]	size_grid			The size of the grid that is used when position of enemy is outside the grid
 	*/
 	void move_direction(const int & size_grid);
 	
-	/**
-	* @brief Getter for getting the Circleshape of the enemy.
-	*
-	* This is useful for other class to get the globalbounds of the circle
-	*/
-	sf::CircleShape get_circle();
-
-	/**
-	* @brief Virtual function for coloring the shape of the enemy when hovering over it with your mouse.
-	*
-	* @param[in]	color				The color that must take the shape of the enemy
-	*/
-	void set_fill_color(sf::Color color);
 
 	/**
 	* @brief Function for transforming a vector2f to 2i.
@@ -136,12 +125,21 @@ public:
 	/**
 	* @brief Function for looking at the next location on the path
 	*
-	* First the function walks through the path and checks if the location of the enemy matches 
-	* with the location of a tile. If so, the next_location then refers to the tile thereon.
-	* When the end destination is reached, true will be returned.
+	* If first, the function passes through the tile of the path.
+	* When a tile matches the boundaryA and the next tile is not the end of the path.
+	*
+	* if true, boundaryB is referenced to the location of the next tile. 
+	* If the position of the enemy is boundaryB, boundaryA becomes boundaryB. 
+	* If the next tile is not the last tile. BoundaryB becomes the next location in the path.
+	*
+	* If the position of the enemy is within the boundaries. the enemy moves in the direction of boundaryB.
+	*
+	* otherwise boundaryA becomes boundaryB. If the next tile is not the last tile. 
+	* BoundaryB becomes the next location in the path. and then the enemy moves in the direction of boundaryB and executes a corner check
+	*
+	* untrue, true will be returned
 	*
 	* @param[in]	path				The path for looking at the next pathtile
-	* @param[in]	grid				The grid for getting info to calculate the next locatiion
 	*
 	* @return		bool				When the end destination is reached, true will be returned.
 	*/

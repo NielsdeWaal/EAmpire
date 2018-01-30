@@ -5,12 +5,12 @@ float Enemy::length(sf::Vector2f vector2f) {
 	return roundf(float(sqrt(vector2f.x * vector2f.x + vector2f.y * vector2f.y)) * 10) / 10;
 }
 
-sf::Vector2f Enemy::normalize(sf::Vector2f vector2f) {
+sf::Vector2f Enemy::normalize(sf::Vector2f distance_nextlocation) {
 	sf::Vector2f vector;
-	float length_of_vector = length(vector2f);
+	float length_of_vector = length(distance_nextlocation);
 	if (length_of_vector != 0) {
-		vector.x = (vector2f.x / length_of_vector);
-		vector.y = (vector2f.y / length_of_vector);
+		vector.x = (distance_nextlocation.x / length_of_vector);
+		vector.y = (distance_nextlocation.y / length_of_vector);
 	}
     return vector;
 }
@@ -24,7 +24,7 @@ void Enemy::corner_check(sf::Vector2f & boundarieA, sf::Vector2f & boundarieB, s
 	}
 }
 //PUBLIC
-Enemy::Enemy(sf::Color color, const int damage, const float speed, int lives) :
+Enemy::Enemy(sf::Color color, const float damage, const float speed, int lives) :
 	color(color),
 	damage(damage),
 	speed(speed),
@@ -51,25 +51,17 @@ void Enemy::take_damage(const int damage_tower) {
 }
 
 void Enemy::move_direction(const int & size_grid) {
-	sf::Vector2f direction_enemy = normalize(sf::Vector2f(position.x - boundarieB.x, position.y - boundarieB.y));
+	sf::Vector2f direction_enemy = normalize(sf::Vector2f(position.x - boundaryB.x, position.y - boundaryB.y));
 	position = position - sf::Vector2f(direction_enemy.x * speed, direction_enemy.y * speed);
 	if (position.x > size_grid - 1) {
-		position.x = size_grid - 1;
+		position.x = (float)size_grid - 1;
 	} else if (position.y > size_grid - 1) {
-		position.y = size_grid - 1;
+		position.y = (float)size_grid - 1;
 	} else if (position.x < 0) {
 		position.x = 0;
 	} else if (position.y < 0) {
 		position.y = 0;
 	}
-}
-
-sf::CircleShape Enemy::get_circle() {
-	return circle;
-}
-
-void Enemy::set_fill_color(sf::Color color) {
-	circle.setFillColor(color);
 }
 
 sf::Vector2f Enemy::Vector2f_from_Vector2i(sf::Vector2i rhs) {
@@ -81,27 +73,28 @@ sf::Vector2f Enemy::Vector2f_from_Vector2i(sf::Vector2i rhs) {
 
 bool Enemy::next_location(std::vector<sf::Vector2i> path) {
 	for (auto it = path.begin(); it != path.end(); ++it) {
-		if (it->x == boundarieA.x && it->y == boundarieA.y) {
+		if (it->x == boundaryA.x && it->y == boundaryA.y) {
 			if (std::next(it) != path.end()) {
-				boundarieB = sf::Vector2f((float)std::next(it)->x, (float)std::next(it)->y);
-				if (position == boundarieB) {
-					boundarieA = boundarieB;
+				boundaryB = sf::Vector2f((float)std::next(it)->x, (float)std::next(it)->y);
+				if (position == boundaryB) {
+					boundaryA = boundaryB;
 					move_direction(path.size());
 					if (std::next(std::next(it)) != path.end()) {
-						boundarieB = sf::Vector2f((float)std::next(std::next(it))->x, (float)std::next(std::next(it))->y);
+						boundaryB = sf::Vector2f((float)std::next(std::next(it))->x, (float)std::next(std::next(it))->y);
 					}
-				} else if (position.x >= boundarieA.x && position.y >= boundarieA.y && position.x <= boundarieB.x && position.y <= boundarieB.y || position.x <= boundarieA.x && position.y <= boundarieA.y && position.x >= boundarieB.x && position.y >= boundarieB.y) {
+					return false;
+				} else if (position.x >= boundaryA.x && position.y >= boundaryA.y && position.x <= boundaryB.x && position.y <= boundaryB.y || position.x <= boundaryA.x && position.y <= boundaryA.y && position.x >= boundaryB.x && position.y >= boundaryB.y) {
 					move_direction(path.size());
-					corner_check(boundarieA, boundarieB, position);
+					corner_check(boundaryA, boundaryB, position);
 					return false;
 				}
 				else {
-					boundarieA = boundarieB;
+					boundaryA = boundaryB;
 					if (std::next(std::next(it)) != path.end()) {
-						boundarieB = sf::Vector2f(float(std::next(std::next(it))->x), float(std::next(std::next(it))->y));
+						boundaryB = sf::Vector2f(float(std::next(std::next(it))->x), float(std::next(std::next(it))->y));
 					}
 					move_direction(path.size());
-					corner_check(boundarieA, boundarieB, position);
+					corner_check(boundaryA, boundaryB, position);
 					return false;
 				}
 			}
