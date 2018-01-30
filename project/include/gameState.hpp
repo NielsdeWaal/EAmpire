@@ -35,6 +35,7 @@ class GameState {
     std::map<std::string, sf::Sprite> sprites;
 
     std::string round_state;
+    std::string game_state = "start_menu";
 
   public:
     /**
@@ -114,6 +115,10 @@ class GameState {
     void set_round_state(std::string state);
 
     std::string get_round_state();
+
+    void set_game_state(std::string state);
+
+    std::string get_game_state();
 };
 
 #endif // GAME_STATE_HPP

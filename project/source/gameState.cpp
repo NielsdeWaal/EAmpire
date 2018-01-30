@@ -68,3 +68,11 @@ void GameState::set_round_state(std::string state) {
 std::string GameState::get_round_state() {
     return round_state;
 }
+
+void GameState::set_game_state(std::string state) {
+    game_state = state;
+}
+
+std::string GameState::get_game_state() {
+    return game_state;
+}

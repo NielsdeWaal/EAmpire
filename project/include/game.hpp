@@ -17,6 +17,20 @@ private:
 
     sf::RenderWindow window;
 
+    Button quit_button;
+    Button start_button;
+
+    action actions[1] = {
+        action(sf::Mouse::Left, [&] {
+        if (quit_button.is_pressed()) {
+            window.close();
+        }
+        if (start_button.is_pressed()) {
+            game_state->set_game_state("ingame");
+            initialize();
+        }
+    })};
+
 public:
     Game();
 
