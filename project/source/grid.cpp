@@ -105,13 +105,13 @@ std::vector<sf::Vector2i> Grid::path_from_grid(std::vector<Grid::Mini_tile> &min
 }
 
 Grid::Grid(): // Default constructor
-      tiles(std::vector<Tile>(10 * 10)),
-      size_tiles_x(10), size_tiles_y(10), 
-      scale(50), 
-      start_x(0), 
-      start_y(0) 
-	{	
-	//enemy_generator(enemies, 10, 20);
+    tiles(std::vector<Tile>(10 * 10)),
+    size_tiles_x(10), size_tiles_y(10), 
+    scale(50), 
+    start_x(0), 
+    start_y(0) 
+    {	
+    enemy_generator(enemies, 10, 20);
 }
 
 Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
@@ -122,8 +122,8 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
     scale(scale), 
     start_x(start_x), 
     start_y(start_y) 
-{
-	//enemy_generator(enemies, 10, 20);
+    {
+    enemy_generator(enemies, 10, 20);
 }
 
 bool Grid::is_clicked(int x, int y) {
