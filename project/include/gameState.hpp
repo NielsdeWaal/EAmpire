@@ -22,9 +22,7 @@ class GameState {
 
     GameState();
 
-    std::string action_state = "nothing";
-
-    // TODO(niels) Is a hardcoded value, needs to be scalable to difficulty level.
+    // TODO Is a hardcoded value, needs to be scalable to difficulty level.
     int lives = 100; ///< Current amount of lives.
 
     int curreny_amount = 0;
@@ -49,20 +47,6 @@ class GameState {
      * @return Pointer to GameState
      */
     static GameState *get_state();
-
-    /**
-    * @brief function that returns the current action state.
-    *
-    * @return current action state.
-    */
-    std::string get_action_state();
-
-    /**
-    * @brief function which sets the current action state.
-    *
-    * @param[in] new action state.
-    */
-    void set_action_state(std::string new_state);
 
     /**
      * @brief function that returns the current amount of lives.

@@ -4,8 +4,14 @@ Board::Board(sf::RenderWindow &window):
     boardGrid(Grid(grid_x, grid_y, scale, (grid_x_pixel - 100) / 2 - grid_x * 25, grid_y_pixel / 2 - grid_y * 25)),
     window(window),
     menu_button(Button(std::string("Menu"), 
-                sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 25), 
-                sf::Vector2f(100, 50), window))
+				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 25), 
+				sf::Vector2f(100, 50), window)),
+	tower1_button(Button(std::string("Tower1"),
+				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 100), 
+				sf::Vector2f(100, 50), window)),
+	sell_button(Button(std::string("Sell"), 
+				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 175), 
+				sf::Vector2f(100, 50), window))
 {
     window.create(sf::VideoMode(grid_x_pixel, grid_y_pixel), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close);
 
@@ -48,12 +54,12 @@ void Board::draw() {
     boardGrid.draw(window);
     boardGrid.draw_path(window, path);
 
-    // tower1_button.draw();
+    tower1_button.draw();
     // tower2_button.draw();
     // tower3_button.draw();
     // tower4_button.draw();
     // tower5_button.draw();
-    //sell_button.draw();
+    sell_button.draw();
     menu_button.draw();
     // play_button.draw();
     //std::cout << "Komen we hier?" << std::endl;
@@ -70,10 +76,10 @@ void Board::draw() {
     //	}
     //}
 
-    if (game_state->get_action_state() == "building") {
+    if (game_state->get_round_state() == "building") {
         game_state->draw_sprite("hammer", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
         window.setMouseCursorVisible(false);
-    } else if (game_state->get_action_state() == "selling") {
+    } else if (game_state->get_round_state() == "selling") {
         game_state->draw_sprite("sell", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
         window.setMouseCursorVisible(false);
     } else {
@@ -89,7 +95,7 @@ void Board::update() {
     for (auto &action: actions) {
         action();
     }
-
+	boardGrid.calculate_damage(towers);
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
     currency_amount.setString(("Moneh: " + std::to_string(game_state->get_curreny())).c_str());
 }
