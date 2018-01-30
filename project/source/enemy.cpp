@@ -119,3 +119,7 @@ void Enemy::draw(sf::RenderWindow & window, const int & tile_size) {
 	circle.setPosition((position.x + 1) * tile_size, (position.y + 1) * tile_size);
 	window.draw(circle);
 }
+
+float Enemy::get_lives() {
+    return lives;
+}

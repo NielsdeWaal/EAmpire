@@ -155,6 +155,9 @@ public:
 	* @param[out]	window				The screen on which you have to draw
 	*/
 	void draw(sf::RenderWindow & window, const int & tile_size);
+
+
+    float get_lives();
 };
 
 #endif // ENEMY_HPP

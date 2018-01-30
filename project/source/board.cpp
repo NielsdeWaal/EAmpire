@@ -96,9 +96,23 @@ void Board::update() {
         action();
     }
 
-    //for (auto& enemy : enemies ) {
-    //  enemy->take_damage(boardGrid.get_damage(enemy.get_location().x - boardGrid.get_start_x()) / 50,enemy.get_location().y - boardGrid.get_start_y()) / 50));
-    //}
+    //int enemy_index = 0;
+    //int temp_size = enemies.size();
+    /*for (auto& enemy : enemies ) {
+            enemy_index -= (temp_size - enemies.size());
+            temp_size = enemies.size();
+            for (enemy_index;enemy_index<=enemies.size();enemy_index++){
+                if(enemy.second()->next_location()){
+                    enemies.erase(enemy);
+                }
+                else{
+                     enemy->take_damage(boardGrid.get_damage(enemy.get_location().x - boardGrid.get_start_x()) / 50,enemy.get_location().y - boardGrid.get_start_y()) / 50));
+                     if (!(enemy->get_lives())){
+                        enemies.erase(enemy);
+                    }
+                }
+            }
+    }*/
 
 	boardGrid.calculate_damage(towers);
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
