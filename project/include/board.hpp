@@ -72,14 +72,6 @@ private:
                                                     towers.end(),
                             [&](tower_ptr tower_pointer) { return (tower_pointer->get_loc() == sf::Vector2i((mouse_x - boardGrid.get_start_x()) / 50, (mouse_y - boardGrid.get_start_y()) / 50)); }),
                             towers.end());
-						//int i = 0;
-						//for (auto& tower : towers) {
-						//	if (tower->get_loc() == sf::Vector2i((mouse_x - boardGrid.get_start_x()) / 50, (mouse_y - boardGrid.get_start_y()) / 50)) {
-						//		towers.erase(towers.begin()+i);
-						//	}
-							//i++;
-                        //     std::cout <<"i = "<< i << std::endl;
-						//}
 						game_state->set_round_state("free");
 					}
 		})
