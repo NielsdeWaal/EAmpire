@@ -42,7 +42,7 @@ void Enemy::attack(int & health_player) {
 	health_player -= damage;
 }
 
-void Enemy::take_damage(const int damage_tower) {
+void Enemy::take_damage(float damage_tower) {
     if (lives <= 0) {
         std::cout << "death";
     } else {
@@ -80,7 +80,7 @@ sf::Vector2f Enemy::Vector2f_from_Vector2i(sf::Vector2i rhs) {
 	);
 };
 
-bool Enemy::next_location(std::vector<sf::Vector2i> path) {
+void Enemy::next_location(std::vector<sf::Vector2i> path) {
 	for (auto it = path.begin(); it != path.end(); ++it) {
 		if (it->x == boundarieA.x && it->y == boundarieA.y) {
 			if (std::next(it) != path.end()) {
@@ -94,7 +94,6 @@ bool Enemy::next_location(std::vector<sf::Vector2i> path) {
 				} else if (position.x >= boundarieA.x && position.y >= boundarieA.y && position.x <= boundarieB.x && position.y <= boundarieB.y || position.x <= boundarieA.x && position.y <= boundarieA.y && position.x >= boundarieB.x && position.y >= boundarieB.y) {
 					move_direction();
 					corner_check(boundarieA, boundarieB, position);
-					return false;
 				}
 				else {
 					boundarieA = boundarieB;
@@ -103,19 +102,31 @@ bool Enemy::next_location(std::vector<sf::Vector2i> path) {
 					}
 					move_direction();
 					corner_check(boundarieA, boundarieB, position);
-					return false;
 				}
-			}
-			else {
-				return true;
 			}
 		}
 	}
-	return false;
 }
 
+bool Enemy::check_end_location(std::vector<sf::Vector2i> path) {
+    for (auto it = path.begin(); it != path.end(); ++it) {
+        if (it->x == boundarieA.x && it->y == boundarieA.y) {
+            if (std::next(it) == path.end()){
+                return true;
+            }
+        }
+    }
+}
 
 void Enemy::draw(sf::RenderWindow & window, const int & tile_size) {
 	circle.setPosition((position.x + 1) * tile_size, (position.y + 1) * tile_size);
 	window.draw(circle);
+}
+
+float Enemy::get_lives() {
+    return lives;
+}
+
+sf::Vector2f Enemy::get_location() {
+    return position;
 }

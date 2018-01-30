@@ -38,7 +38,7 @@ class Grid {
     int scale;
     int start_x;
     int start_y;
-    std::vector<std::pair<int, std::shared_ptr<Enemy>>> enemies;
+    
     GameState *game_state = GameState::get_state();
 
     /**

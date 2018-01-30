@@ -14,6 +14,7 @@
 #include "tower.hpp"
 #include "tower_a.hpp"
 #include "tower_b.hpp"
+#include "typedefs.hpp"
 
 class Board {
 private:
@@ -30,7 +31,8 @@ private:
     sf::Text lives;
     sf::Text currency_amount;
 
-    Enemy_container container = Enemy_container();
+    //Enemy_container container = Enemy_container();
+    enemy_vector enemies;
 	tower_vector towers;
 
     std::vector<sf::Vector2i> path;

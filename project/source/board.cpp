@@ -24,6 +24,7 @@ Board::Board(sf::RenderWindow &window):
     end = sf::Vector2i(9, 9);
 
     std::cout << "New board created" << std::endl;
+    enemy_generator(enemies, 10, 20);
 }
 
 void Board::setup() {
@@ -99,23 +100,31 @@ void Board::update() {
         action();
     }
 
-    //int enemy_index = 0;
-    //int temp_size = enemies.size();
-    /*for (auto& enemy : enemies ) {
-            enemy_index -= (temp_size - enemies.size());
-            temp_size = enemies.size();
-            for (enemy_index;enemy_index<=enemies.size();enemy_index++){
-                if(enemy.second()->next_location()){
-                    enemies.erase(enemy);
-                }
-                else{
-                     enemy->take_damage(boardGrid.get_damage(enemy.get_location().x - boardGrid.get_start_x()) / 50,enemy.get_location().y - boardGrid.get_start_y()) / 50));
-                     if (!(enemy->get_lives())){
-                        enemies.erase(enemy);
-                    }
-                }
+    int enemy_index = 0;
+    int temp_size = enemies.size();
+    for (auto& enemy : enemies ) {
+        enemy_index -= (temp_size - enemies.size());
+        temp_size = enemies.size();
+        for (enemy_index;enemy_index<=enemies.size();enemy_index++){
+            //window.clear();
+            //enemy.second->draw(window,50);
+            //window.display();
+            std::cout << __LINE__ << std::endl;
+            if (enemy.second->check_end_location(path)) {
+                std::cout << __LINE__ << std::endl;
+                enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy));
+                std::cout << __LINE__ << std::endl;
             }
-    }*/
+            else{
+                std::cout << enemy.second->get_location().x << ',' << enemy.second->get_location().y << std::endl;
+                enemy.second->take_damage(boardGrid.get_damage(enemy.second->get_location().x ,(enemy.second->get_location().y )));
+                
+                //if (!(enemy.second->get_lives())){
+                enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [&](auto enemy) {return ((enemy.second->get_lives() <= 0)); }), enemies.end());
+                //}
+            }
+        }
+    }
 
 	boardGrid.calculate_damage(towers);
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
