@@ -96,7 +96,7 @@ void Board::update() {
     }
 
     //for (auto& enemy : enemies ) {
-    //  enemy.take_damage(boardGrid.get_damage(enemy.get_location().x - boardGrid.get_start_x()) / 50,enemy.get_location().y - boardGrid.get_start_y()) / 50)):
+    //  enemy->take_damage(boardGrid.get_damage(enemy.get_location().x - boardGrid.get_start_x()) / 50,enemy.get_location().y - boardGrid.get_start_y()) / 50));
     //}
 
 	boardGrid.calculate_damage(towers);

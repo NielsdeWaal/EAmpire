@@ -270,6 +270,8 @@ class Grid {
     void reset_damage();
 
     void calculate_damage(std::vector<tower_ptr> tower_vector);
+
+    float Grid::get_damage(int tile_x, int tile_y)
 };
 
 #endif // GRID_HPP
