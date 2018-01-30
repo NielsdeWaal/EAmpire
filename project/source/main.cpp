@@ -16,7 +16,8 @@ int main(void) {
         {"tile_blocked", "textures/tile_blocked.png"},
         {"tile_path", "textures/tile_path.png"},
         {"hammer", "textures/hammer.png"},
-        {"sell", "textures/sell.png"}
+        {"sell", "textures/sell.png"},
+        {"start_menu", "textures/start_menu.png"}
     };
 
     game_state->load_sprites(sprites);
