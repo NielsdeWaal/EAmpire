@@ -17,7 +17,9 @@ int main(void) {
         {"tile_path", "textures/tile_path.png"},
         {"hammer", "textures/hammer.png"},
         {"sell", "textures/sell.png"},
-        {"start_menu", "textures/start_menu.png"}
+        {"start_menu", "textures/start_menu.png"},
+        {"arno", "textures/TinyArno.png"},
+        {"firewall", "textures/firewall.png"}
     };
 
     game_state->load_sprites(sprites);

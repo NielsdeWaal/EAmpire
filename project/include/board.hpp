@@ -13,6 +13,7 @@
 #include "grid.hpp"
 #include "tower.hpp"
 #include "tower_a.hpp"
+#include "tower_b.hpp"
 
 class Board {
 private:
@@ -36,14 +37,22 @@ private:
 
     Button menu_button;
 	Button tower1_button;
+    Button tower2_button;
+
 	Button sell_button;
 
-        action actions[5] = {
+        action actions[6] = {
             action(sf::Keyboard::Escape, [&] { window.close(); }),
             action(sf::Keyboard::Num1,
                    [&] {
-                       if (game_state->get_round_state() != "building") {
-                           game_state->set_round_state("building");
+                       if (game_state->get_round_state() != "building1") {
+                           game_state->set_round_state("building1");
+                       }
+                   }),
+            action(sf::Keyboard::Num2,
+                [&] {
+                       if (game_state->get_round_state() != "building2") {
+                           game_state->set_round_state("building2");
                        }
                    }),
             action(sf::Keyboard::Delete,
@@ -65,8 +74,13 @@ private:
                     window.close();
                 }
                 if (tower1_button.is_pressed()) {
-                    if (game_state->get_round_state() != "building") {
-                        game_state->set_round_state("building");
+                    if (game_state->get_round_state() != "building1") {
+                        game_state->set_round_state("building1");
+                    }
+                }
+                if (tower2_button.is_pressed()) {
+                    if (game_state->get_round_state() != "building2") {
+                        game_state->set_round_state("building2");
                     }
                 }
                 if (sell_button.is_pressed()) {
@@ -75,14 +89,19 @@ private:
                     }
                 }
                 if ((boardGrid.is_clicked(mouse_x, mouse_y)) &&
-                    (game_state->get_round_state() == "building")) {
+                    (game_state->get_round_state() == "building1")) {
                     if (boardGrid.is_navigable(
                             (mouse_x - boardGrid.get_start_x()) / 50,
                             (mouse_y - boardGrid.get_start_y()) / 50)) {
                         if (boardGrid.can_place(start, end, sf::Vector2i(
                             (mouse_x - boardGrid.get_start_x()) / 50,
                             (mouse_y - boardGrid.get_start_y()) / 50))) {
-                            boardGrid.set_built(mouse_x, mouse_y);
+                            boardGrid.set_tile_navigability(
+                                (mouse_x - boardGrid.get_start_x()) / 50,
+                                (mouse_y - boardGrid.get_start_y()) / 50, false);
+                            boardGrid.set_sprite(
+                                (mouse_x - boardGrid.get_start_x()) / 50,
+                                (mouse_y - boardGrid.get_start_y()) / 50, "arno");
                             towers.push_back(tower_ptr(new tower_a(
                                 (mouse_x - boardGrid.get_start_x()) / 50,
                                 (mouse_y - boardGrid.get_start_y()) / 50)));
@@ -90,13 +109,41 @@ private:
                         }
                         else {
                             //TODO Add some vidual indication that you can't build where the user is clicking.
+                        }   
+                    }
+                }
+                if ((boardGrid.is_clicked(mouse_x, mouse_y)) &&
+                    (game_state->get_round_state() == "building2")) {
+                    if (boardGrid.is_navigable(
+                        (mouse_x - boardGrid.get_start_x()) / 50,
+                        (mouse_y - boardGrid.get_start_y()) / 50)) {
+                        if (boardGrid.can_place(start, end, sf::Vector2i(
+                            (mouse_x - boardGrid.get_start_x()) / 50,
+                            (mouse_y - boardGrid.get_start_y()) / 50))) {
+                            boardGrid.set_tile_navigability(
+                                (mouse_x - boardGrid.get_start_x()) / 50,
+                                (mouse_y - boardGrid.get_start_y()) / 50, false);
+                            boardGrid.set_sprite(
+                                (mouse_x - boardGrid.get_start_x()) / 50,
+                                (mouse_y - boardGrid.get_start_y()) / 50, "firewall");
+                            towers.push_back(tower_ptr(new tower_b(
+                                (mouse_x - boardGrid.get_start_x()) / 50,
+                                (mouse_y - boardGrid.get_start_y()) / 50)));
+                            game_state->set_round_state("free");
                         }
-                        
+                        else {
+                            //TODO Add some vidual indication that you can't build where the user is clicking.
+                        }   
                     }
                 }
                 if (boardGrid.is_clicked(mouse_x, mouse_y) &&
                     (game_state->get_round_state() == "selling")) {
-                    boardGrid.set_free(mouse_x, mouse_y);
+                    boardGrid.set_tile_navigability(
+                        (mouse_x - boardGrid.get_start_x()) / 50,
+                        (mouse_y - boardGrid.get_start_y()) / 50, true);
+                    boardGrid.set_sprite(
+                        (mouse_x - boardGrid.get_start_x()) / 50,
+                        (mouse_y - boardGrid.get_start_y()) / 50, "tile_normal");
                     towers.erase(
                         std::remove_if(
                             towers.begin(), towers.end(),
