@@ -2,21 +2,20 @@
 #define GRID_HPP
 
 #include <SFML/Graphics.hpp>
-#include <utility>
-#include <vector>
 #include <algorithm>
 #include <chrono>
 #include <iostream>
 #include <random>
+#include <utility>
+#include <vector>
 
-#include "gameState.hpp"
 #include "enemy.hpp"
 #include "enemy_a.hpp"
 #include "enemy_b.hpp"
 #include "enemy_container.hpp"
 #include "enemy_generator.hpp"
-#include "tile.hpp"
 #include "gameState.hpp"
+#include "tile.hpp"
 #include "typedefs.hpp"
 
 /**
@@ -268,11 +267,33 @@ class Grid {
      */
     std::pair<int, int> get_start_values();
 
-	void reset_damage();
+    /**
+    * @brief Returns size of grid
+    *
+    * @return std::pair with size values
+    */
+    void reset_damage();
 
-	void calculate_damage(std::vector<tower_ptr> tower_vector);
+    /**
+    * @brief Calculates damage
+    *
+    * This function loops through the tower vector and applying the damage to the tiles affected by each tower
+    *
+    * @param[in] tower_vector an std::vector containing tower_pointers
+    */
+    void calculate_damage(std::vector<tower_ptr> tower_vector);
 
-
+    /**
+    * @brief Get damage
+    *
+    * This function returns the damage of a specific tile (tile_x,tile_y)
+    *
+    * @param[in] tile_x an x coordinate in the grid
+    * @param[in] tile_y a y coordinate in the grid
+    *
+    * @return float with the damage a tile deals
+    */
+    float get_damage(int tile_x, int tile_y);
 };
 
 #endif // GRID_HPP

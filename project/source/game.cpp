@@ -1,10 +1,15 @@
 #include "game.hpp"
 
-Game::Game()
+Game::Game():
+    quit_button(Button(std::string("Quit"), 
+        sf::Vector2f(950, 25), 
+        sf::Vector2f(100, 50), window)),
+    start_button(Button(std::string("Start"), 
+        sf::Vector2f(500, 250), 
+        sf::Vector2f(100, 50), window))
 {
-    window.create(sf::VideoMode(1000, 1000), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close);
+    window.create(sf::VideoMode(1000, 750), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close);
     std::cout << "Game started" << std::endl;
-    initialize();
 }
 
 sf::RenderWindow& Game::get_window() {
@@ -19,17 +24,31 @@ void Game::clicked(sf::Vector2i position) {
 }
 
 void Game::draw() {
-    for (auto& board : boards) {
-        board->draw();
+    if (game_state->get_game_state() == "start_menu") {
+        window.clear();
+        game_state->draw_sprite("start_menu", sf::Vector2f(0,0), window);
+        start_button.draw();
+        quit_button.draw();
+        window.display();
     }
-    //boards->draw();
+    else if (game_state->get_game_state() == "ingame") {
+        for (auto& board : boards) {
+            board->draw();
+        }
+    }
 }
 
 void Game::update() {
-    for (auto& board : boards) {
-        board->update();
+    if (game_state->get_game_state() == "start_menu") {
+        for (auto &action: actions) {
+            action();
+        }
     }
-    //boards->update();
+    else if (game_state->get_game_state() == "ingame") {
+        for (auto& board : boards) {
+            board->update();
+        }
+    }
 }
 
 void Game::initialize() {

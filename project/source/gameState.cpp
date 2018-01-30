@@ -10,14 +10,6 @@ GameState *GameState::get_state() {
     return instance;
 }
 
-std::string GameState::get_action_state() {
-    return action_state;
-}
-
-void GameState::set_action_state(std::string new_state) {
-    action_state = new_state;
-}
-
 int GameState::get_lives() {
     return lives;
 }
@@ -67,4 +59,12 @@ void GameState::set_round_state(std::string state) {
 
 std::string GameState::get_round_state() {
     return round_state;
+}
+
+void GameState::set_game_state(std::string state) {
+    game_state = state;
+}
+
+std::string GameState::get_game_state() {
+    return game_state;
 }

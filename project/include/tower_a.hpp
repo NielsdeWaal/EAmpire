@@ -1,8 +1,8 @@
 #ifndef TOWER_A_HPP
 #define TOWER_A_HPP
 
-#include <SFML/Graphics.hpp>
 #include "tower.hpp"
+#include <SFML/Graphics.hpp>
 #include <iostream>
 
 class tower_a : public Tower {
@@ -12,7 +12,6 @@ private:
 	float value;
 
 	float damage = 15.0;
-	//float fire_rate = 1.0;
 	int radius = 1;
 
 	int current_level = 1;
@@ -21,13 +20,12 @@ private:
 	int x_location;
 	int y_location;
 
-	//sf::CircleShape radius_circle;
-
 public:
 	tower_a(int x_location, int y_location);
 
+	~tower_a();
+
 	void upgrade();
-	void sell_tower();
 
 	float get_damage();
 	void draw(sf::RenderWindow & window);
@@ -36,10 +34,7 @@ public:
 
 	sf::Vector2i get_loc();
 
-	//sf::Texture get_texture();
-	//sf::Sprite get_sprite();
-
 };
 
 
-#endif //TOWER_A_HPP
+#endif // TOWER_A_HPP

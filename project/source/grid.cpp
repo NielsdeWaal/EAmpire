@@ -194,9 +194,15 @@ void Grid::draw(sf::RenderWindow &window) {
     for (int x = 0; x < size_tiles_x; x++) {
         for (int y = 0; y < size_tiles_y; y++) {
             if (tiles[y * size_tiles_x + x].is_navigable()) {
-                game_state->draw_sprite("tile_normal", sf::Vector2f(start_x + (x * scale), start_y + (y * scale)), window);
+                game_state->draw_sprite("tile_normal", 
+                                        sf::Vector2f(static_cast<float>(start_x + (x * scale)), 
+                                                     static_cast<float>(start_y + (y * scale))), 
+                                        window);
             } else {
-                game_state->draw_sprite("tile_blocked", sf::Vector2f(start_x + (x * scale), start_y + (y * scale)), window);
+                game_state->draw_sprite("tile_blocked", 
+                                        sf::Vector2f(static_cast<float>(start_x + (x * scale)), 
+                                                     static_cast<float>(start_y + (y * scale))), 
+                                        window);
             }
         }
     }
@@ -204,7 +210,10 @@ void Grid::draw(sf::RenderWindow &window) {
 
 void Grid::draw_path(sf::RenderWindow &window, std::vector<sf::Vector2i> path) {
     for (auto tile : path) {
-        game_state->draw_sprite("tile_path", sf::Vector2f(start_x + (tile.x * scale), start_y + (tile.y * scale)), window);
+        game_state->draw_sprite("tile_path", 
+                                sf::Vector2f(static_cast<float>(start_x + (tile.x * scale)),
+                                             static_cast<float>(start_y + (tile.y * scale))), 
+                                window);
     }
 }
 
@@ -230,7 +239,7 @@ void Grid::create_maze() {
     walls.insert(walls.begin(), sf::Vector2i(2, 1));
     while (!walls.empty()) {
         unsigned seed =
-        std::chrono::system_clock::now().time_since_epoch().count();
+            static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
         std::shuffle(walls.begin(), walls.end(),
                      std::default_random_engine(seed));
         auto current_wall = walls[0];
@@ -375,5 +384,9 @@ void Grid::calculate_damage(std::vector<tower_ptr> tower_vector) {
             }
         }
     }
+}
+
+float Grid::get_damage(int tile_x, int tile_y) {
+    return tiles[tile_y * size_tiles_x + tile_x].get_damage();
 }
 
