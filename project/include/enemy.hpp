@@ -19,7 +19,7 @@
 class Enemy {
 private:
 	//The damage that the enemy can do to the lives of the player. And the speed with which the enemy can move
-	const float damage;
+	const int damage;
 	//The speed with which the enemy is running. The range is from 0 to 1. (for example: 0.2)
 	const float speed;
 	//The lives of the enemy
