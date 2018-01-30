@@ -116,6 +116,7 @@ bool Enemy::check_end_location(std::vector<sf::Vector2i> path) {
             }
         }
     }
+    return false;
 }
 
 void Enemy::draw(sf::RenderWindow & window, const int & tile_size) {

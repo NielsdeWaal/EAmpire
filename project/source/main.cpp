@@ -11,6 +11,8 @@ int main(void) {
     Game game;
     GameState *game_state = GameState::get_state();
 
+    sf::Clock clock;
+
     std::map<std::string, std::string> sprites {
         {"tile_normal", "textures/tile_normal.png"},
         {"tile_blocked", "textures/tile_blocked.png"},
@@ -50,8 +52,11 @@ int main(void) {
                 break;
             }
         }
+        if (clock.getElapsedTime() >= sf::milliseconds(20) ){
+            game.update();
+            clock.restart();
+        }
 
-        game.update();
         game.draw();
     }
     return 0;

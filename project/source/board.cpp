@@ -24,7 +24,7 @@ Board::Board(sf::RenderWindow &window):
     end = sf::Vector2i(9, 9);
 
     std::cout << "New board created" << std::endl;
-    enemy_generator(enemies, 10, 20);
+    enemy_generator(enemy_queue, 10, 20);
 }
 
 void Board::setup() {
@@ -90,41 +90,58 @@ void Board::draw() {
         window.setMouseCursorVisible(true);
     }
 
+    for (auto&enemy : enemies) {
+        //enemy.second->next_location(path);
+        enemy.second->draw(window, 50);
+    }
+
     window.display();
 }
 
 void Board::update() {
     path = boardGrid.find_path(start, end);
+    int enemy_index = 0;
+    int temp_size = enemies.size();
 
     for (auto &action: actions) {
         action();
     }
-
-    int enemy_index = 0;
-    int temp_size = enemies.size();
-    for (auto& enemy : enemies ) {
-        enemy_index -= (temp_size - enemies.size());
-        temp_size = enemies.size();
-        for (enemy_index;enemy_index<=enemies.size();enemy_index++){
-            //window.clear();
-            //enemy.second->draw(window,50);
-            //window.display();
-            std::cout << __LINE__ << std::endl;
-            if (enemy.second->check_end_location(path)) {
-                std::cout << __LINE__ << std::endl;
-                enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy));
-                std::cout << __LINE__ << std::endl;
-            }
-            else{
-                std::cout << enemy.second->get_location().x << ',' << enemy.second->get_location().y << std::endl;
-                enemy.second->take_damage(boardGrid.get_damage(enemy.second->get_location().x ,(enemy.second->get_location().y )));
-                
-                //if (!(enemy.second->get_lives())){
-                enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [&](auto enemy) {return ((enemy.second->get_lives() <= 0)); }), enemies.end());
-                //}
-            }
-        }
+    
+    for (auto&enemy : enemies) {
+        enemy.second->next_location(path);
     }
+
+    if (queue_clock.getElapsedTime() >= sf::milliseconds(500)) {
+        if (enemy_queue.size()>0) {
+            enemies.emplace_back(enemy_queue.end());
+            enemy_queue.pop_back();
+        }
+        queue_clock.restart();
+    }
+
+    //for (auto it = enemies.begin(), end = enemies.end(); it != end; ++it)
+    //{
+    //    for (auto it2 = enemies.begin(); it2 != (it + 1); ++it2)
+    //    {
+    //        it2->second->next_location(path);
+    //        
+    //    }
+    //    //std::cout << "\n";
+    //}
+
+    //for (auto& enemy : enemies ) {
+    //    //enemy_index -= (temp_size - enemies.size());
+    //    //temp_size = enemies.size();
+
+    //    if (enemy.second->check_end_location(path)) {
+    //        enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy));
+    //    }
+    //    else{
+    //        std::cout << enemy.second->get_location().x << ',' << enemy.second->get_location().y << std::endl;
+    //        enemy.second->take_damage(boardGrid.get_damage(enemy.second->get_location().x ,(enemy.second->get_location().y )));
+    //        enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [&](auto enemy) {return ((enemy.second->get_lives() <= 0)); }), enemies.end());
+    //    }
+    //}
 
 	boardGrid.calculate_damage(towers);
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
