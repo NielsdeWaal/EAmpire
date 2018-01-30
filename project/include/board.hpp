@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <SFML/Graphics.hpp>
+#include <algorithm>
 
 #include "action.hpp"
 #include "gameState.hpp"
@@ -39,33 +40,46 @@ private:
 
     action actions[5] = {
         action(sf::Keyboard::Escape,    [&] {window.close();}),
-        action(sf::Keyboard::Num1,      [&] {game_state->set_round_state("building"); }),
-        action(sf::Keyboard::Delete,    [&] {game_state->set_round_state("selling"); }),
-        action(sf::Mouse::Right,        [&] {game_state->set_round_state("free"); }),
+		action(sf::Keyboard::Num1,      [&] {if (game_state->get_round_state() != "building") { game_state->set_round_state("building"); } }),
+		action(sf::Keyboard::Delete,    [&] {if (game_state->get_round_state() != "selling" ) { game_state->set_round_state("selling" ); } }),
+		action(sf::Mouse::Right,        [&] {if (game_state->get_round_state() != "free"    ) { game_state->set_round_state("free"    ); } }),
         action(sf::Mouse::Left,			[&] {
+					int mouse_x = sf::Mouse::getPosition(window).x;
+					int mouse_y = sf::Mouse::getPosition(window).y;
                     if (menu_button.is_pressed()) {
                         window.close();
                     }
 					if (tower1_button.is_pressed()) {
-						game_state->set_round_state("building");
+						if (game_state->get_round_state() != "building") {
+							game_state->set_round_state("building");
+						}
 					}
 					if (sell_button.is_pressed()) {
-						game_state->set_round_state("selling");
-					}
-					if ((boardGrid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y)) && (game_state->get_round_state() == "building")) {
-						boardGrid.set_built(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-						towers.push_back(tower_ptr(new tower_a((sf::Mouse::getPosition(window).x - boardGrid.get_start_x()) / 50, (sf::Mouse::getPosition(window).y - boardGrid.get_start_y()) / 50)));
-						game_state->set_round_state("free");
-					}
-					if (boardGrid.is_clicked(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y) && (game_state->get_round_state() == "selling")) {
-						boardGrid.set_free(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
-						int i = 0;
-						for (auto& tower : towers) {
-							if (tower->get_loc() == sf::Vector2i((sf::Mouse::getPosition(window).x - boardGrid.get_start_x()) / 50, (sf::Mouse::getPosition(window).y - boardGrid.get_start_y()) / 50)) {
-								towers.erase(towers.begin()+i);
-							}
-							i++;
+						if (game_state->get_round_state() != "selling") {
+							game_state->set_round_state("selling");
 						}
+					}
+					if ((boardGrid.is_clicked(mouse_x,mouse_y)) && (game_state->get_round_state() == "building")) {
+                        if (boardGrid.is_navigable((mouse_x - boardGrid.get_start_x()) / 50, (mouse_y - boardGrid.get_start_y()) / 50)) {
+                            boardGrid.set_built(mouse_x, mouse_y);
+                            towers.push_back(tower_ptr(new tower_a((mouse_x - boardGrid.get_start_x()) / 50, (mouse_y - boardGrid.get_start_y()) / 50)));
+                            game_state->set_round_state("free");
+                        }
+					}
+					if (boardGrid.is_clicked(mouse_x,mouse_y) && (game_state->get_round_state() == "selling")) {
+						boardGrid.set_free(mouse_x, mouse_y);
+                        towers.erase(std::remove_if(towers.begin(),
+                                                    towers.end(),
+                            [&](tower_ptr tower_pointer) { return (tower_pointer->get_loc() == sf::Vector2i((mouse_x - boardGrid.get_start_x()) / 50, (mouse_y - boardGrid.get_start_y()) / 50)); }),
+                            towers.end());
+						//int i = 0;
+						//for (auto& tower : towers) {
+						//	if (tower->get_loc() == sf::Vector2i((mouse_x - boardGrid.get_start_x()) / 50, (mouse_y - boardGrid.get_start_y()) / 50)) {
+						//		towers.erase(towers.begin()+i);
+						//	}
+							//i++;
+                        //     std::cout <<"i = "<< i << std::endl;
+						//}
 						game_state->set_round_state("free");
 					}
 		})

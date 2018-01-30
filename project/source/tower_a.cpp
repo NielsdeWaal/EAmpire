@@ -13,6 +13,7 @@ tower_a::tower_a(int x_location, int y_location) :
 }
 
 tower_a::~tower_a() {
+	std::cout << "TOWER SOLD" << std::endl;
 	//currency += (value*0.75)
 }
 
