@@ -17,9 +17,6 @@ Board::Board(sf::RenderWindow &window):
 
     setup();
 
-    currency_amount.setFont(font);
-    currency_amount.setPosition(sf::Vector2f(250, 0));
-
     start = sf::Vector2i(0, 0);
     end = sf::Vector2i(9, 9);
 
@@ -31,9 +28,13 @@ void Board::setup() {
 
     lives.setCharacterSize(30);
     lives.setFont(font);
-    lives.setFillColor(sf::Color::White);
-    //lives.setString("Lives??");
+    lives.setFillColor(sf::Color(32, 194, 14));
     lives.setPosition(sf::Vector2f(50, 0));
+
+    currency_amount.setCharacterSize(30);
+    currency_amount.setFont(font);
+    currency_amount.setFillColor(sf::Color(32, 194, 14));
+    currency_amount.setPosition(sf::Vector2f(250, 0));
 
 }
 
@@ -48,7 +49,7 @@ void Board::clicked(sf::Vector2i position) {
 }
 
 void Board::draw() {
-    window.clear(sf::Color(100, 100, 100)); // Clear screen with a grey background.
+    window.clear(sf::Color(0, 0, 0)); // Clear screen with a grey background.
 
     boardGrid.draw(window);
     boardGrid.draw_path(window, path);
