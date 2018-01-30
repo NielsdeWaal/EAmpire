@@ -89,6 +89,7 @@ set(sources
     source/enemy_container.cpp
     source/tower.cpp
     source/tower_a.cpp
+    source/tower_b.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
@@ -102,6 +103,7 @@ set(sources
     include/enemy_container.hpp
     include/tower.hpp
     include/tower_a.hpp
+    include/tower_b.hpp
     include/typedefs.hpp)
 
 
