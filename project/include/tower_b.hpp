@@ -17,7 +17,7 @@ private:
 	int radius = 1;
 
 	int current_level = 1;
-	int max_level = 5;
+	int max_level = 1;
 
 	int x_location;
 	int y_location;
