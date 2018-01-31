@@ -24,11 +24,11 @@ Board::Board(sf::RenderWindow &window):
     end = sf::Vector2i(9, 9);
 
     std::cout << "New board created" << std::endl;
-    enemy_generator(enemy_queue, 0, 0, 0, 0, 10);
-	enemy_generator(enemy_queue, 0, 0, 0, 10, 0);
-	enemy_generator(enemy_queue, 0, 0, 10, 0, 0);
-	enemy_generator(enemy_queue, 0, 10, 0, 0, 0);
-	enemy_generator(enemy_queue, 10, 0, 0, 0, 0);
+ //   enemy_generator(enemy_queue, 0, 0, 0, 0, 10);
+	//enemy_generator(enemy_queue, 0, 0, 0, 10, 0);
+	//enemy_generator(enemy_queue, 0, 0, 10, 0, 0);
+	//enemy_generator(enemy_queue, 0, 10, 0, 0, 0);
+	//enemy_generator(enemy_queue, 10, 0, 0, 0, 0);
 }
 
 void Board::setup() {
@@ -71,10 +71,43 @@ void Board::next_wave() {
     if (game_state->get_round_state() != "fighting") {
         game_state->set_round_state("fighting");
         game_state->set_action_state("free");
+        switch (wave) {
+        case 0:
+            enemy_generator(enemy_queue, 5);
+            break;
+        case 1:
+                enemy_generator(enemy_queue, 7, 2);
+            break;
+        case 2:
+                enemy_generator(enemy_queue, 2, 5);
+            break;
+        case 3:
+                enemy_generator(enemy_queue, 5, 5, 2);
+            break;
+        case 4:
+                enemy_generator(enemy_queue, 5, 0, 0, 1);
+                enemy_generator(enemy_queue, 5, 0, 0, 1);
+            break;
+        case 5:
+            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
+            wave++;
+            break;
+        case 6:
+            std::cout << "GAME OVER" << std::endl;
+            break;
+        }
         wave++;
-        std::cout << "Wave " << wave << " incomming!\n";
-        enemy_generator(enemy_queue, 10+wave, 5+wave*2);
     }
+    
+    
+    
+    //if (game_state->get_round_state() != "fighting") {
+    //    game_state->set_round_state("fighting");
+    //    game_state->set_action_state("free");
+    //    wave++;
+    //    std::cout << "Wave " << wave << " incomming!\n";
+    //    enemy_generator(enemy_queue, 10+wave, 5+wave*2);
+    //}
 }
 
 void Board::draw() {
@@ -142,7 +175,7 @@ void Board::update() {
         for (auto&enemy : enemies) {
             if (enemy.second->check_end_location(path)) {
                 enemy.second->take_damage(enemy.second->get_lives());
-                game_state->set_lives(game_state->get_lives() - 1);
+                game_state->set_lives(game_state->get_lives() - enemy.second->get_damage());
             }
         }
         tower_clock.restart();

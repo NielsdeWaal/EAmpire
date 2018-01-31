@@ -167,6 +167,8 @@ public:
 	sf::Color get_fillcolor();
 
 	void set_speed(float speed_input);
+
+    int get_damage();
 };
 
 #endif // ENEMY_HPP
