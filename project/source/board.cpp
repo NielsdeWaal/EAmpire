@@ -125,10 +125,15 @@ void Board::update() {
     //}
 
     for (auto& enemy : enemies) {
-        std::cout << __LINE__ << std::endl;
+        //std::cout << __LINE__ << std::endl;
         enemy.second->take_damage(boardGrid.get_damage(enemy.second->get_location().x, (enemy.second->get_location().y)));
-        std::cout << __LINE__ << std::endl;
-        std::remove_if(enemies.begin(), enemies.end(), [&](auto& enemy) {return ((enemy.second->get_lives() <= 0)); });
+        //std::cout << __LINE__ << std::endl;
+    }
+
+    for (auto& enemy : enemies) {
+        //std::cout << __LINE__ << std::endl;
+        //std::cout << enemy.second->get_lives() << std::endl;
+        std::remove_if(enemies.begin(), enemies.end(), [&](auto& enemy) {return (enemy.second->get_lives() <= 0); });
         std::cout << __LINE__ << std::endl;
     }
 

@@ -43,12 +43,12 @@ void Enemy::attack(int & health_player) {
 }
 
 void Enemy::take_damage(float damage_tower) {
-    if (lives <= 0) {
-        std::cout << "death";
-    } else {
+   // if (lives <= 0) {
+   //     std::cout << "death";
+   // } else {
         lives -= damage_tower;
         //std::cout << "lives down";
-    }
+    //}
 }
 
 void Enemy::move_direction() {
