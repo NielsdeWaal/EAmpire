@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "tile.hpp"
 
 Tile::Tile(bool is_navigable) : navigable(is_navigable) {
@@ -22,5 +20,25 @@ void Tile::set_built() {
 }
 
 void Tile::set_free() {
-    navigable = true;
+	navigable = true;
+}
+
+float Tile::get_damage() {
+	return damage;
+}
+
+void Tile::update_damage(float new_damage) {
+	damage += new_damage;
+}
+
+void Tile::set_damage(float new_damage) {
+	damage = new_damage;
+}
+
+std::string Tile::get_sprite() {
+    return sprite;
+}
+
+void Tile::set_sprite(std::string new_sprite) {
+    sprite = new_sprite;
 }

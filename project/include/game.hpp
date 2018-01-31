@@ -9,16 +9,37 @@
 #include "gameState.hpp"
 
 class Game {
-  private:
-    std::vector<Board> boards;
+private:
+    std::vector<Board*> boards;
+    //Board* boards;
 
     GameState *game_state = GameState::get_state();
 
-  public:
-    Game() {
-        std::cout << "Game started" << std::endl;
-        initialize();
-    }
+    sf::RenderWindow window;
+
+    Button quit_button;
+    Button start_button;
+
+    action actions[2] = {
+        action(sf::Keyboard::Escape, [&] { window.close(); }),
+        action(sf::Mouse::Left, [&] {
+        if (quit_button.is_pressed()) {
+            window.close();
+        }
+        if (start_button.is_pressed()) {
+            game_state->set_game_state("ingame");
+            initialize();
+        }
+    })};
+
+public:
+    Game();
+
+    sf::RenderWindow& get_window();
+
+    void clicked(sf::Vector2i position);
+
+    void draw();
 
     void update();
 

@@ -1,6 +1,6 @@
 #include "button.hpp"
 
-Button::Button(std::string &s, sf::Vector2f location, sf::Vector2f size,
+Button::Button(const std::string s, sf::Vector2f location, sf::Vector2f size,
                sf::RenderWindow &window): 
                s(s), 
                location(location), 
@@ -18,7 +18,7 @@ void Button::setup() {
     font.loadFromFile("PlayfairDisplay-Black.ttf");
 
     text.setFont(font);
-    text.setFillColor(sf::Color::White);
+    text.setFillColor(sf::Color::Black);
     text.setString(s);
     text.setOrigin(size.x / 2, size.y / 2);
     text.setPosition(location.x + 2, location.y + 2);
@@ -26,7 +26,7 @@ void Button::setup() {
     boundary.setPosition(location);
     boundary.setOrigin(size.x / 2, size.y / 2);
     boundary.setSize(size);
-    boundary.setFillColor(sf::Color::Green);
+    boundary.setFillColor(sf::Color(32, 194, 14));
 }
 
 void Button::draw() {
@@ -51,7 +51,7 @@ bool Button::is_pressed() {
             this->draw();
             window.display();
         }
-        boundary.setFillColor(sf::Color::Green);
+        boundary.setFillColor(sf::Color(32, 194, 14));
         return true;
     }
     return false;
