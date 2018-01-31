@@ -111,7 +111,7 @@ Grid::Grid(): // Default constructor
     start_x(0), 
     start_y(0) 
     {	
-    enemy_generator(enemies, 10, 20);
+    
 }
 
 Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
@@ -123,7 +123,7 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
     start_x(start_x), 
     start_y(start_y) 
     {
-    enemy_generator(enemies, 10, 20);
+    //enemy_generator(enemies, 10, 20);
 }
 
 bool Grid::is_clicked(int x, int y) {

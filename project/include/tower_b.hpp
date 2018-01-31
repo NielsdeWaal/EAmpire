@@ -11,7 +11,7 @@ private:
 	float upgrade_cost = 50.0;
 	float value;
 
-	float damage = 15.0;
+	float damage = 0.0;
 	int radius = 1;
 
 	int current_level = 1;

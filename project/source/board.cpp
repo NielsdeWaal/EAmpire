@@ -24,6 +24,7 @@ Board::Board(sf::RenderWindow &window):
     end = sf::Vector2i(9, 9);
 
     std::cout << "New board created" << std::endl;
+    enemy_generator(enemy_queue, 10, 20);
 }
 
 void Board::setup() {
@@ -52,7 +53,7 @@ void Board::clicked(sf::Vector2i position) {
 }
 
 void Board::draw() {
-    window.clear(sf::Color(0, 0, 0)); // Clear screen with a grey background.
+    window.clear(sf::Color(0, 0, 0)); // Clear screen with a black background.
 
     boardGrid.draw(window);
     boardGrid.draw_path(window, path);
@@ -65,19 +66,9 @@ void Board::draw() {
     sell_button.draw();
     menu_button.draw();
     // play_button.draw();
-    //std::cout << "Komen we hier?" << std::endl;
 
     window.draw(lives);
     window.draw(currency_amount);
-    
-
-    //      for (const auto & enemy : container.get_container()) {
-    //	enemy.second->draw(window);
-    //	if (!enemy.second->next_location(path, grid)) {
-    //		container.remove(enemy.first);
-    //		//std::cout << "end of path" << std::endl;
-    //	}
-    //}
 
     if (game_state->get_round_state() == "building1" || game_state->get_round_state() == "building2") {
         game_state->draw_sprite("hammer", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
@@ -89,19 +80,46 @@ void Board::draw() {
         window.setMouseCursorVisible(true);
     }
 
+    for (auto&enemy : enemies) {
+        enemy.second->draw(window, 50);
+    }
+
     window.display();
 }
 
 void Board::update() {
     path = boardGrid.find_path(start, end);
+    int enemy_index = 0;
+    int temp_size = enemies.size();
 
     for (auto &action: actions) {
         action();
     }
+    
+    if (queue_clock.getElapsedTime() >= sf::milliseconds(500)) {
+        if (enemy_queue.size()>0) {
+            enemies.push_back(enemy_queue.back());
+            enemy_queue.pop_back();
+        }
+        queue_clock.restart();
+    }
 
-    //for (auto& enemy : enemies ) {
-    //  enemy->take_damage(boardGrid.get_damage(enemy.get_location().x - boardGrid.get_start_x()) / 50,enemy.get_location().y - boardGrid.get_start_y()) / 50));
-    //}
+    for (auto& enemy : enemies) {
+        enemy.second->take_damage(boardGrid.get_damage(enemy.second->get_location().x, (enemy.second->get_location().y)));
+    }
+
+    for (auto&enemy : enemies) {
+        if (enemy.second->check_end_location(path)) {
+            enemy.second->take_damage(enemy.second->get_lives());
+            game_state->set_lives(game_state->get_lives()-1);
+        }
+    }
+    
+    enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [&](auto& enemy) {return (enemy.second->get_lives() <= 0); }), enemies.end());
+
+    for (auto&enemy : enemies) {
+        enemy.second->next_location(path);
+    }
 
 	boardGrid.calculate_damage(towers);
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());

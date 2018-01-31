@@ -51,7 +51,6 @@ private:
 	*/
 	void corner_check(sf::Vector2f & boundarieA, sf::Vector2f & boundarieB, sf::Vector2f & position);
 
-protected:
 	//The speed with which the enemy can move
 	sf::Vector2f position = sf::Vector2f(0.0,0.0);
 	//The color of the enemy's shape
@@ -98,7 +97,7 @@ public:
 	*
 	* @param[in]	damage_tower		The damage of the tower who reduced the lives of the enemy
 	*/
-	void take_damage(const int damage_tower);
+	void take_damage(float damage_tower);
 
 	/**
 	* @brief Function for moving the enemy to a specific location
@@ -146,7 +145,9 @@ public:
 	* @return		bool				When the end destination is reached, true will be returned.
 	*/
 
-	bool next_location(std::vector<sf::Vector2i> path);
+	void next_location(std::vector<sf::Vector2i> path);
+
+    bool check_end_location(std::vector<sf::Vector2i> path);
 
 
 	/**
@@ -155,6 +156,11 @@ public:
 	* @param[out]	window				The screen on which you have to draw
 	*/
 	void draw(sf::RenderWindow & window, const int & tile_size);
+
+
+    float get_lives();
+
+    sf::Vector2f get_location();
 };
 
 #endif // ENEMY_HPP
