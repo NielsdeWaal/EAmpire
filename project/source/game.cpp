@@ -6,7 +6,8 @@ Game::Game():
         sf::Vector2f(100, 50), window)),
     start_button(Button(std::string("Start"), 
         sf::Vector2f(500, 250), 
-        sf::Vector2f(100, 50), window))
+        sf::Vector2f(100, 50), window)),
+    scenes(window)
 {
     window.create(sf::VideoMode(1000, 750), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close);
     std::cout << "Game started" << std::endl;
@@ -31,7 +32,13 @@ void Game::draw() {
         quit_button.draw();
         window.display();
     }
-    else if (game_state->get_game_state() == "ingame") {
+    if (game_state->get_game_state() == "scene") {
+        window.clear();
+        scenes.play_scene();
+        game_state->set_game_state("ingame");
+        window.clear();
+    }
+    if (game_state->get_game_state() == "ingame") {
         for (auto& board : boards) {
             board->draw();
         }

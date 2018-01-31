@@ -7,6 +7,7 @@
 
 #include "board.hpp"
 #include "gameState.hpp"
+#include "cutscene.hpp"
 
 class Game {
 private:
@@ -19,6 +20,7 @@ private:
 
     Button quit_button;
     Button start_button;
+    cutscene scenes;
 
     action actions[2] = {
         action(sf::Keyboard::Escape, [&] { window.close(); }),
@@ -27,7 +29,7 @@ private:
             window.close();
         }
         if (start_button.is_pressed()) {
-            game_state->set_game_state("ingame");
+            game_state->set_game_state("scene");
             initialize();
         }
     })};
