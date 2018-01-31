@@ -39,6 +39,8 @@ class Grid {
     int start_x;
     int start_y;
     
+    sf::RectangleShape highlight;
+
     GameState *game_state = GameState::get_state();
 
     /**
@@ -204,19 +206,27 @@ class Grid {
     bool is_navigable(int tile_x, int tile_y);
 
     /**
-    * @brief Draws the grid on the relative coordinates
+    * @brief Draws the grid on the relative coordinates.
     *
     * @param[in] window The window to draw on.
     **/
     void draw(sf::RenderWindow &window);
 
     /**
-    * @brief Draws a path on the grid on the relative coordinates
+    * @brief Draws a path on the grid on the relative coordinates.
     *
     * @param[in] window The window to draw on.
     * @param[in] path Path to be drawn.
     **/
     void draw_path(sf::RenderWindow &window, std::vector<sf::Vector2i> path);
+
+    /**
+    * @brief Draws a highlighted tile on the grid.
+    *
+    * @param[in] window The window to draw on.
+    * @param[in] mouse_location Location of mouse on window.
+    **/
+    void draw_selected(sf::RenderWindow &window, sf::Vector2i mouse_location);
 
     /**
     * @brief Function to turn the grind into a random maze.
