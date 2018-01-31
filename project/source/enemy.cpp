@@ -127,3 +127,7 @@ sf::Color Enemy::get_fillcolor() {
 void Enemy::set_speed(float speed_input) {
 	speed = speed_input;
 }
+
+int Enemy::get_damage() {
+    return damage;
+}

@@ -71,10 +71,43 @@ void Board::next_wave() {
     if (game_state->get_round_state() != "fighting") {
         game_state->set_round_state("fighting");
         game_state->set_action_state("free");
+        switch (wave) {
+        case 0:
+            enemy_generator(enemy_queue, 5);
+            break;
+        case 1:
+            enemy_generator(enemy_queue, 7, 2);
+            break;
+        case 2:
+            enemy_generator(enemy_queue, 2, 5);
+            break;
+        case 3:
+            enemy_generator(enemy_queue, 5, 5, 2);
+            break;
+        case 4:
+            enemy_generator(enemy_queue, 5, 0, 0, 1);
+            enemy_generator(enemy_queue, 5, 0, 0, 1);
+            break;
+        case 5:
+            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
+            wave++;
+            break;
+        case 6:
+            std::cout << "GAME OVER" << std::endl;
+            break;
+        }
         wave++;
-        std::cout << "Wave " << wave << " incomming!\n";
-        enemy_generator(enemy_queue, 10);
     }
+    
+    
+    
+    //if (game_state->get_round_state() != "fighting") {
+    //    game_state->set_round_state("fighting");
+    //    game_state->set_action_state("free");
+    //    wave++;
+    //    std::cout << "Wave " << wave << " incomming!\n";
+    //    enemy_generator(enemy_queue, 10+wave, 5+wave*2);
+    //}
 }
 
 void Board::draw() {
@@ -126,7 +159,7 @@ void Board::update() {
         action();
     }
     
-    if (queue_clock.getElapsedTime() >= sf::milliseconds(50)) {
+    if (queue_clock.getElapsedTime() >= sf::milliseconds(500)) {
         if (enemy_queue.size()>0) {
             enemies.push_back(enemy_queue.back());
             enemy_queue.pop_back();
@@ -135,21 +168,18 @@ void Board::update() {
     }
 
     if (tower_clock.getElapsedTime() >= sf::milliseconds(500)) {
-        for (auto& enemy : enemies) {
-            enemy.second->take_damage(boardGrid.get_damage(enemy.second->get_location().x, (enemy.second->get_location().y)));
-        }
-
-        for (auto&enemy : enemies) {
-            if (enemy.second->check_end_location(path)) {
-                enemy.second->take_damage(enemy.second->get_lives());
-                game_state->set_lives(game_state->get_lives() - 1);
-            }
-        }
+        boardGrid.calculate_damage(towers, enemies);
         tower_clock.restart();
     }
+
     //TODO Maybe combine these 4 enemy loops into 1?
     enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [&](auto& enemy) {return (enemy.second->get_lives() <= 0); }), enemies.end());
-
+    for (auto&enemy : enemies) {
+        if (enemy.second->check_end_location(path)) {
+            enemy.second->take_damage(enemy.second->get_lives());
+            game_state->set_lives(game_state->get_lives() - enemy.second->get_damage());
+        }
+    }
     for (auto&enemy : enemies) {
         enemy.second->next_location(path);
     }
@@ -159,7 +189,7 @@ void Board::update() {
         game_state->set_round_state("building");
     }
 
-	boardGrid.calculate_damage(towers, enemies);
+	
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
     currency_amount.setString(("$: " + std::to_string(game_state->get_curreny())).c_str());
     current_wave.setString(("Wave: " + std::to_string(wave)).c_str());
