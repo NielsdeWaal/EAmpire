@@ -9,6 +9,8 @@
 #include <utility>
 #include <vector>
 #include <string>
+#include <cmath>
+#include <limits>
 
 #include "enemy.hpp"
 #include "enemy_a.hpp"
@@ -269,8 +271,9 @@ class Grid {
     * This function loops through the tower vector and applying the damage to the tiles affected by each tower
     *
     * @param[in] tower_vector an std::vector containing tower_pointers
+    * @param[in] enemy_vector an std::vector containing pairs with an enemy in it
     */
-    void calculate_damage(std::vector<tower_ptr> tower_vector);
+    void calculate_damage(std::vector<tower_ptr> tower_vector, enemy_vector enemies);
 
     /**
     * @brief Get damage

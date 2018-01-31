@@ -24,11 +24,11 @@ Board::Board(sf::RenderWindow &window):
     end = sf::Vector2i(9, 9);
 
     std::cout << "New board created" << std::endl;
- //   enemy_generator(enemy_queue, 0, 0, 0, 0, 10);
-	//enemy_generator(enemy_queue, 0, 0, 0, 10, 0);
-	//enemy_generator(enemy_queue, 0, 0, 10, 0, 0);
-	//enemy_generator(enemy_queue, 0, 10, 0, 0, 0);
-	//enemy_generator(enemy_queue, 10, 0, 0, 0, 0);
+    /*enemy_generator(enemy_queue, 0, 0, 0, 0, 10);
+	enemy_generator(enemy_queue, 0, 0, 0, 10, 0);
+	enemy_generator(enemy_queue, 0, 0, 10, 0, 0);
+	enemy_generator(enemy_queue, 0, 10, 0, 0, 0);
+	enemy_generator(enemy_queue, 10, 0, 0, 0, 0);*/
 }
 
 void Board::setup() {
@@ -76,17 +76,17 @@ void Board::next_wave() {
             enemy_generator(enemy_queue, 5);
             break;
         case 1:
-                enemy_generator(enemy_queue, 7, 2);
+            enemy_generator(enemy_queue, 7, 2);
             break;
         case 2:
-                enemy_generator(enemy_queue, 2, 5);
+            enemy_generator(enemy_queue, 2, 5);
             break;
         case 3:
-                enemy_generator(enemy_queue, 5, 5, 2);
+            enemy_generator(enemy_queue, 5, 5, 2);
             break;
         case 4:
-                enemy_generator(enemy_queue, 5, 0, 0, 1);
-                enemy_generator(enemy_queue, 5, 0, 0, 1);
+            enemy_generator(enemy_queue, 5, 0, 0, 1);
+            enemy_generator(enemy_queue, 5, 0, 0, 1);
             break;
         case 5:
             enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
@@ -168,21 +168,18 @@ void Board::update() {
     }
 
     if (tower_clock.getElapsedTime() >= sf::milliseconds(500)) {
-        for (auto& enemy : enemies) {
-            enemy.second->take_damage(boardGrid.get_damage(enemy.second->get_location().x, (enemy.second->get_location().y)));
-        }
-
-        for (auto&enemy : enemies) {
-            if (enemy.second->check_end_location(path)) {
-                enemy.second->take_damage(enemy.second->get_lives());
-                game_state->set_lives(game_state->get_lives() - enemy.second->get_damage());
-            }
-        }
+        boardGrid.calculate_damage(towers, enemies);
         tower_clock.restart();
     }
+
     //TODO Maybe combine these 4 enemy loops into 1?
     enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [&](auto& enemy) {return (enemy.second->get_lives() <= 0); }), enemies.end());
-
+    for (auto&enemy : enemies) {
+        if (enemy.second->check_end_location(path)) {
+            enemy.second->take_damage(enemy.second->get_lives());
+            game_state->set_lives(game_state->get_lives() - enemy.second->get_damage());
+        }
+    }
     for (auto&enemy : enemies) {
         enemy.second->next_location(path);
     }
@@ -192,7 +189,7 @@ void Board::update() {
         game_state->set_round_state("building");
     }
 
-	boardGrid.calculate_damage(towers);
+	
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
     currency_amount.setString(("$: " + std::to_string(game_state->get_curreny())).c_str());
     current_wave.setString(("Wave: " + std::to_string(wave)).c_str());
