@@ -10,11 +10,11 @@ tower_a::tower_a(int x_location, int y_location) :
 	//radius_circle.setOutlineThickness(1);
 	//radius_circle.setPosition(x_location, y_location);
 	value = cost;
+    game_state->set_curreny(game_state->get_curreny() - cost);
 }
 
 tower_a::~tower_a() {
-	std::cout << "TOWER SOLD" << std::endl;
-	//currency += (value*0.75)
+    game_state->add_currency(value-20);
 }
 
 
@@ -37,4 +37,8 @@ sf::Vector2i tower_a::get_loc() {
 
 int tower_a::get_radius() {
 	return radius;
+}
+
+float tower_a::get_cost() {
+    return cost;
 }

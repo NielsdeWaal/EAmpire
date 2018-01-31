@@ -23,16 +23,17 @@ class GameState {
     GameState();
 
     // TODO Is a hardcoded value, needs to be scalable to difficulty level.
-    int lives = 100; ///< Current amount of lives.
+    signed int lives = 100; ///< Current amount of lives.
 
-    int curreny_amount = 0;
+    signed int curreny_amount = 300;
 
     bool new_round = true;
 
     std::map<std::string, sf::Texture> textures;
     std::map<std::string, sf::Sprite> sprites;
 
-    std::string round_state;
+    std::string action_state = "free";
+    std::string round_state = "building";
     std::string game_state = "start_menu";
 
   public:
@@ -72,6 +73,8 @@ class GameState {
     * @param[in] the amount that curreny_amount needs to be set to.
     */
     void set_curreny(int amount);
+
+    void add_currency(int amount);
     /**
     * @brief function that loads sprites from a map.
     *
@@ -92,9 +95,9 @@ class GameState {
     void draw_sprite(std::string name, sf::Vector2f position,
                      sf::RenderWindow &window);
 
-    void set_new_round(bool result);
+    void set_action_state(std::string state);
 
-    bool get_round_status();
+    std::string get_action_state();
 
     void set_round_state(std::string state);
 
