@@ -1,6 +1,6 @@
 #include "cutscene.hpp"
 
-int sleep = 1;
+float sleep = 6.0;
 
 cutscene::cutscene(sf::RenderWindow & window) :
     window(window),
@@ -24,7 +24,7 @@ cutscene::cutscene(sf::RenderWindow & window) :
 void cutscene::play_scene() {
     scene1.draw(window);
     window.display();
-    sf::sleep(sf::seconds(sleep));
+    sf::sleep(sf::seconds(3));
     window.clear();
 
     scene2.draw(window);
@@ -34,7 +34,7 @@ void cutscene::play_scene() {
     
     scene3.draw(window);
     window.display();
-    sf::sleep(sf::seconds(sleep));
+    sf::sleep(sf::seconds(10));
     window.clear();
     
     scene4.draw(window);
@@ -44,12 +44,12 @@ void cutscene::play_scene() {
     
     scene5.draw(window);
     window.display();
-    sf::sleep(sf::seconds(sleep));
+    sf::sleep(sf::seconds(3));
     window.clear();
     
     scene6.draw(window);
     window.display();
-    sf::sleep(sf::seconds(sleep));
+    sf::sleep(sf::seconds(3));
     window.clear();
     
     scene7.draw(window);
@@ -59,7 +59,7 @@ void cutscene::play_scene() {
     
     scene8.draw(window);
     window.display();
-    sf::sleep(sf::seconds(sleep));
+    sf::sleep(sf::seconds(15));
     window.clear();
     
     scene9.draw(window);
@@ -69,7 +69,7 @@ void cutscene::play_scene() {
     
     scene10.draw(window);
     window.display();
-    sf::sleep(sf::seconds(sleep));
+    sf::sleep(sf::seconds(15));
     window.clear();
     
     scene11.draw(window);
@@ -84,7 +84,7 @@ void cutscene::play_scene() {
 
     scene13.draw(window);
     window.display();
-    sf::sleep(sf::seconds(sleep));
+    sf::sleep(sf::seconds(2));
     window.clear();
 
     scene14.draw(window);
