@@ -24,7 +24,6 @@ Board::Board(sf::RenderWindow &window):
     end = sf::Vector2i(9, 9);
 
     std::cout << "New board created" << std::endl;
-    enemy_generator(enemy_queue, 10, 20);
 }
 
 void Board::setup() {
@@ -40,6 +39,17 @@ void Board::setup() {
     currency_amount.setFillColor(sf::Color(32, 194, 14));
     currency_amount.setPosition(sf::Vector2f(250, 0));
 
+    current_wave.setCharacterSize(30);
+    current_wave.setFont(font);
+    current_wave.setFillColor(sf::Color(32, 194, 14));
+    current_wave.setPosition(sf::Vector2f(400, 0));
+
+    wave_hint.setCharacterSize(30);
+    wave_hint.setFont(font);
+    wave_hint.setFillColor(sf::Color(32, 194, 14));
+    wave_hint.setPosition(sf::Vector2f(50, static_cast<float>(grid_y_pixel - 50)));
+    wave_hint.setString("Press Space to summon next wave");
+
 }
 
 void Board::clicked(sf::Vector2i position) {
@@ -49,6 +59,16 @@ void Board::clicked(sf::Vector2i position) {
                                         (position.y - boardGrid.get_start_values().second) / scale, 
                                         !(boardGrid.is_navigable((position.x - boardGrid.get_start_values().first) / scale, 
                                         (position.y - boardGrid.get_start_values().second) / scale)));
+    }
+}
+
+void Board::next_wave() {
+    if (game_state->get_round_state() != "fighting") {
+        game_state->set_round_state("fighting");
+        game_state->set_action_state("free");
+        wave++;
+        std::cout << "Wave " << wave << " incomming!\n";
+        enemy_generator(enemy_queue, 10+wave, 5+wave*2);
     }
 }
 
@@ -69,11 +89,15 @@ void Board::draw() {
 
     window.draw(lives);
     window.draw(currency_amount);
+    window.draw(current_wave);
+    if (game_state->get_round_state() == "building") {
+        window.draw(wave_hint);
+    }
 
-    if (game_state->get_round_state() == "building1" || game_state->get_round_state() == "building2") {
+    if (game_state->get_action_state() == "building1" || game_state->get_action_state() == "building2") {
         game_state->draw_sprite("hammer", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
         window.setMouseCursorVisible(false);
-    } else if (game_state->get_round_state() == "selling") {
+    } else if (game_state->get_action_state() == "selling") {
         game_state->draw_sprite("sell", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
         window.setMouseCursorVisible(false);
     } else {
@@ -117,15 +141,20 @@ void Board::update() {
         }
         tower_clock.restart();
     }
-    
+    //TODO Maybe combine these 4 enemy loops into 1?
     enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [&](auto& enemy) {return (enemy.second->get_lives() <= 0); }), enemies.end());
 
     for (auto&enemy : enemies) {
         enemy.second->next_location(path);
     }
 
+    if (game_state->get_round_state() == "fighting" && enemies.size() == 0 && enemy_queue.size() == 0) {
+        game_state->set_round_state("building");
+    }
+
 	boardGrid.calculate_damage(towers);
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
-    //std::cout << game_state->get_curreny() << std::endl;
-    currency_amount.setString(("Monet: " + std::to_string(game_state->get_curreny())).c_str());
+    currency_amount.setString(("$: " + std::to_string(game_state->get_curreny())).c_str());
+    current_wave.setString(("Wave: " + std::to_string(wave)).c_str());
+
 }

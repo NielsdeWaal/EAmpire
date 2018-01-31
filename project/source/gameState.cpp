@@ -34,14 +34,6 @@ void GameState::add_currency(int amount) {
 GameState::GameState()
 {}
 
-void GameState::set_new_round(bool result) {
-    new_round = result;
-}
-
-bool GameState::get_round_status() {
-    return new_round;
-}
-
 void GameState::load_sprites(std::map<std::string, std::string> files) {
 	for (std::map<std::string, std::string>::iterator it = files.begin(); it != files.end(); ++it) {
 		textures.insert(std::pair<std::string, sf::Texture>(it->first, sf::Texture()));
@@ -54,6 +46,14 @@ void GameState::load_sprites(std::map<std::string, std::string> files) {
 void GameState::draw_sprite(std::string name, sf::Vector2f position, sf::RenderWindow &window) {
 	sprites.find(name)->second.setPosition(position);
 	window.draw(sprites.find(name)->second);
+}
+
+void GameState::set_action_state(std::string state) {
+    action_state = state;
+}
+
+std::string GameState::get_action_state() {
+    return action_state;
 }
 
 void GameState::set_round_state(std::string state) {
