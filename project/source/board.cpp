@@ -149,6 +149,7 @@ void Board::update() {
     }
 
     if (game_state->get_round_state() == "fighting" && enemies.size() == 0 && enemy_queue.size() == 0) {
+        game_state->add_currency(150);
         game_state->set_round_state("building");
     }
 
