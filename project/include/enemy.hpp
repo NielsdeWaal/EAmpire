@@ -21,7 +21,7 @@ private:
 	//The damage that the enemy can do to the lives of the player. And the speed with which the enemy can move
 	const int damage;
 	//The speed with which the enemy is running. The range is from 0 to 1. (for example: 0.2)
-	const float speed;
+	float speed;
 	//The lives of the enemy
 	float lives;
 
@@ -52,7 +52,6 @@ private:
 	*/
 	void corner_check(sf::Vector2f & boundarieA, sf::Vector2f & boundarieB, sf::Vector2f & position);
 
-protected:
 	//The speed with which the enemy can move
 	sf::Vector2f position = sf::Vector2f(0.0,0.0);
 	//The color of the enemy's shape
@@ -78,7 +77,7 @@ public:
 	* @param[in]	speed				The speed with which the enemy moves.
 	* @param[in]	lives				The lives of the enemy.
 	*/
-	Enemy( sf::Color color, const float damage, const float speed, int lives);
+	Enemy( sf::Color color, const int damage, const float speed, float lives);
 
 	/**
 	* @brief Destructor
@@ -100,7 +99,7 @@ public:
 	*
 	* @param[in]	damage_tower		The damage of the tower who reduced the lives of the enemy
 	*/
-	void take_damage(const int damage_tower);
+	virtual void take_damage(float damage_tower) {};
 
 	/**
 	* @brief Function for moving the enemy to a specific location
@@ -144,7 +143,9 @@ public:
 	* @return		bool				When the end destination is reached, true will be returned.
 	*/
 
-	bool next_location(std::vector<sf::Vector2i> path);
+	void next_location(std::vector<sf::Vector2i> path);
+
+    bool check_end_location(std::vector<sf::Vector2i> path);
 
 
 	/**
@@ -153,6 +154,19 @@ public:
 	* @param[out]	window				The screen on which you have to draw
 	*/
 	void draw(sf::RenderWindow & window, const int & tile_size);
+
+
+    float get_lives();
+
+	void set_lives(float lives);
+
+    sf::Vector2f get_location();
+
+	void set_fillcolor(sf::Color color_output);
+
+	sf::Color get_fillcolor();
+
+	void set_speed(float speed_input);
 };
 
 #endif // ENEMY_HPP

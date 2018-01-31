@@ -1,17 +1,17 @@
-#ifndef TOWER_A_HPP
-#define TOWER_A_HPP
+#ifndef TOWER_B_HPP
+#define TOWER_B_HPP
 
 #include "tower.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-class tower_a : public Tower {
+class tower_b : public Tower {
 private:
 	float cost = 100.0;
 	float upgrade_cost = 50.0;
 	float value;
 
-	float damage = 5.0;
+	float damage = 0.0;
 	int radius = 1;
 
 	int current_level = 1;
@@ -21,9 +21,9 @@ private:
 	int y_location;
 
 public:
-	tower_a(int x_location, int y_location);
+	tower_b(int x_location, int y_location);
 
-	~tower_a();
+	~tower_b();
 
 	void upgrade();
 
@@ -37,4 +37,4 @@ public:
 };
 
 
-#endif // TOWER_A_HPP
+#endif // TOWER_B_HPP

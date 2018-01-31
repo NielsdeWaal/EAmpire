@@ -2,21 +2,21 @@
 #define GRID_HPP
 
 #include <SFML/Graphics.hpp>
-#include <utility>
-#include <vector>
 #include <algorithm>
 #include <chrono>
 #include <iostream>
 #include <random>
+#include <utility>
+#include <vector>
+#include <string>
 
-#include "gameState.hpp"
 #include "enemy.hpp"
 #include "enemy_a.hpp"
 #include "enemy_b.hpp"
 #include "enemy_container.hpp"
 #include "enemy_generator.hpp"
-#include "tile.hpp"
 #include "gameState.hpp"
+#include "tile.hpp"
 #include "typedefs.hpp"
 
 /**
@@ -38,8 +38,8 @@ class Grid {
     int scale;
     int start_x;
     int start_y;
-	std::vector<std::pair<int, std::shared_ptr<Enemy>>> enemies;
-	GameState *game_state = GameState::get_state();
+    
+    GameState *game_state = GameState::get_state();
 
     /**
     * @brief Struct to help with path-finding.
@@ -149,28 +149,6 @@ class Grid {
     int get_start_y();
 
     /**
-    * @brief Changes the specific tile that has been clicked to non-navigatable
-    *
-    * The right tile is calculated by deviding the coordinate by the scale.
-    * It then communicates to the correct tile that it has been clicked on.
-    *
-    * @param[in] x The relative x coordinate in the grid.
-    * @param[in] y The relative y coordinate in the grid.
-    **/
-    void set_built(int x, int y);
-
-    /**
-    * @brief Changes the specific tile that has been clicked to navigatable
-    *
-    * The right tile is calculated by deviding the coordinate by the scale.
-    * It then communicates to the correct tile that it has been clicked on.
-    *
-    * @param[in] x The relative x coordinate in the grid.
-    * @param[in] y The relative y coordinate in the grid.
-    **/
-    void set_free(int x, int y);
-
-    /**
     * @brief Finds a path in the grid.
     *
     * This function calculates the fastest path from one point in the grid to
@@ -268,11 +246,37 @@ class Grid {
      */
     std::pair<int, int> get_start_values();
 
-	void reset_damage();
+    /**
+    * @brief Returns size of grid
+    *
+    * @return std::pair with size values
+    */
+    void reset_damage();
 
-	void calculate_damage(std::vector<tower_ptr> tower_vector);
+    /**
+    * @brief Calculates damage
+    *
+    * This function loops through the tower vector and applying the damage to the tiles affected by each tower
+    *
+    * @param[in] tower_vector an std::vector containing tower_pointers
+    */
+    void calculate_damage(std::vector<tower_ptr> tower_vector);
 
+    /**
+    * @brief Get damage
+    *
+    * This function returns the damage of a specific tile (tile_x,tile_y)
+    *
+    * @param[in] tile_x an x coordinate in the grid
+    * @param[in] tile_y a y coordinate in the grid
+    *
+    * @return float with the damage a tile deals
+    */
+    float get_damage(int tile_x, int tile_y);
 
+    std::string get_sprite(int tile_x, int tile_y);
+
+    void set_sprite(int tile_x, int tile_y, std::string new_sprite);
 };
 
 #endif // GRID_HPP

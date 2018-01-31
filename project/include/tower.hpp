@@ -13,7 +13,7 @@ private:
 
 	float damage;
 	float fire_rate;
-	float radius;
+	int radius;
 
 	int current_level;
 	int max_level;
@@ -30,7 +30,6 @@ public:
 
 	void build_tower();
 	void upgrade();
-	void sell_tower();
 	
 	virtual float get_damage();
 	virtual void draw(sf::RenderWindow & window);
@@ -42,4 +41,4 @@ public:
 	//sf::Sprite get_sprite();
 };
 
-#endif // !TOWER_HPP
+#endif // TOWER_HPP

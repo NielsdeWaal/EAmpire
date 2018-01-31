@@ -2,7 +2,7 @@
 
 //PRIVATE
 float Enemy::length(sf::Vector2f vector2f) {
-	return roundf(float(sqrt(vector2f.x * vector2f.x + vector2f.y * vector2f.y)) * 10) / 10;
+	return roundf(float(sqrt(vector2f.x * vector2f.x + vector2f.y * vector2f.y)) * 100) / 100;
 }
 
 sf::Vector2f Enemy::normalize(sf::Vector2f distance_nextlocation) {
@@ -24,7 +24,7 @@ void Enemy::corner_check(sf::Vector2f & boundarieA, sf::Vector2f & boundarieB, s
 	}
 }
 //PUBLIC
-Enemy::Enemy(sf::Color color, const float damage, const float speed, int lives) :
+Enemy::Enemy(sf::Color color, const int damage, const float speed, float lives) :
 	color(color),
 	damage(damage),
 	speed(speed),
@@ -39,15 +39,6 @@ Enemy::~Enemy() {}
 
 void Enemy::attack(int & health_player) {
 	health_player -= damage;
-}
-
-void Enemy::take_damage(const int damage_tower) {
-    if (lives <= 0) {
-        std::cout << "death";
-    } else {
-        lives -= damage_tower;
-        std::cout << "lives down";
-    }
 }
 
 void Enemy::move_direction(const int & size_grid) {
@@ -71,7 +62,7 @@ sf::Vector2f Enemy::Vector2f_from_Vector2i(sf::Vector2i rhs) {
 	);
 };
 
-bool Enemy::next_location(std::vector<sf::Vector2i> path) {
+void Enemy::next_location(std::vector<sf::Vector2i> path) {
 	for (auto it = path.begin(); it != path.end(); ++it) {
 		if (it->x == boundaryA.x && it->y == boundaryA.y) {
 			if (std::next(it) != path.end()) {
@@ -82,32 +73,57 @@ bool Enemy::next_location(std::vector<sf::Vector2i> path) {
 					if (std::next(std::next(it)) != path.end()) {
 						boundaryB = sf::Vector2f((float)std::next(std::next(it))->x, (float)std::next(std::next(it))->y);
 					}
-					return false;
 				} else if (position.x >= boundaryA.x && position.y >= boundaryA.y && position.x <= boundaryB.x && position.y <= boundaryB.y || position.x <= boundaryA.x && position.y <= boundaryA.y && position.x >= boundaryB.x && position.y >= boundaryB.y) {
 					move_direction(path.size());
 					corner_check(boundaryA, boundaryB, position);
-					return false;
-				}
-				else {
+				} else {
 					boundaryA = boundaryB;
 					if (std::next(std::next(it)) != path.end()) {
 						boundaryB = sf::Vector2f(float(std::next(std::next(it))->x), float(std::next(std::next(it))->y));
 					}
 					move_direction(path.size());
 					corner_check(boundaryA, boundaryB, position);
-					return false;
 				}
-			}
-			else {
-				return true;
 			}
 		}
 	}
-	return false;
 }
 
+bool Enemy::check_end_location(std::vector<sf::Vector2i> path) {
+    for (auto it = path.begin(); it != path.end(); ++it) {
+        if (it->x == boundaryA.x && it->y == boundaryA.y) {
+            if (std::next(it) == path.end()){
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 void Enemy::draw(sf::RenderWindow & window, const int & tile_size) {
 	circle.setPosition((position.x + 1) * tile_size, (position.y + 1) * tile_size);
 	window.draw(circle);
+}
+
+float Enemy::get_lives() {
+    return lives;
+}
+
+void Enemy::set_lives(float lives_input) {
+	lives = lives_input;
+}
+sf::Vector2f Enemy::get_location() {
+    return position;
+}
+
+void Enemy::set_fillcolor(sf::Color color_output) {
+	circle.setFillColor(color_output);
+}
+
+sf::Color Enemy::get_fillcolor() {
+	return color;
+}
+
+void Enemy::set_speed(float speed_input) {
+	speed = speed_input;
 }

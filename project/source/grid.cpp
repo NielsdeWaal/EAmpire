@@ -105,13 +105,13 @@ std::vector<sf::Vector2i> Grid::path_from_grid(std::vector<Grid::Mini_tile> &min
 }
 
 Grid::Grid(): // Default constructor
-      tiles(std::vector<Tile>(10 * 10)),
-      size_tiles_x(10), size_tiles_y(10), 
-      scale(50), 
-      start_x(0), 
-      start_y(0) 
-	{	
-	//enemy_generator(enemies, 10, 20);
+    tiles(std::vector<Tile>(10 * 10)),
+    size_tiles_x(10), size_tiles_y(10), 
+    scale(50), 
+    start_x(0), 
+    start_y(0) 
+    {	
+    
 }
 
 Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
@@ -122,8 +122,8 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
     scale(scale), 
     start_x(start_x), 
     start_y(start_y) 
-	{
-	//enemy_generator(enemies, 10, 20);
+    {
+    //enemy_generator(enemies, 10, 20);
 }
 
 bool Grid::is_clicked(int x, int y) {
@@ -151,14 +151,6 @@ int Grid::get_start_x() {
 
 int Grid::get_start_y() {
     return start_y;
-}
-
-void Grid::set_built(int x, int y) {
-    tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].set_built();
-}
-
-void Grid::set_free(int x, int y) {
-    tiles[((y - start_y) / scale) * size_tiles_x + ((x - start_x) / scale)].set_free();
 }
 
 std::vector<sf::Vector2i> Grid::find_path(sf::Vector2i start,
@@ -193,18 +185,20 @@ bool Grid::is_navigable(int tile_x, int tile_y) {
 void Grid::draw(sf::RenderWindow &window) {
     for (int x = 0; x < size_tiles_x; x++) {
         for (int y = 0; y < size_tiles_y; y++) {
-            if (tiles[y * size_tiles_x + x].is_navigable()) {
-				game_state->draw_sprite("tile_normal", sf::Vector2f(start_x + (x * scale), start_y + (y * scale)), window);
-            } else {
-				game_state->draw_sprite("tile_blocked", sf::Vector2f(start_x + (x * scale), start_y + (y * scale)), window);
-            }
+            game_state->draw_sprite(tiles[y * size_tiles_x + x].get_sprite(), 
+                sf::Vector2f(static_cast<float>(start_x + (x * scale)),
+                static_cast<float>(start_y + (y * scale))), 
+                window);
         }
     }
 }
 
 void Grid::draw_path(sf::RenderWindow &window, std::vector<sf::Vector2i> path) {
     for (auto tile : path) {
-		game_state->draw_sprite("tile_path", sf::Vector2f(start_x + (tile.x * scale), start_y + (tile.y * scale)), window);
+        game_state->draw_sprite("tile_path", 
+                                sf::Vector2f(static_cast<float>(start_x + (tile.x * scale)),
+                                             static_cast<float>(start_y + (tile.y * scale))), 
+                                window);
     }
 }
 
@@ -230,7 +224,7 @@ void Grid::create_maze() {
     walls.insert(walls.begin(), sf::Vector2i(2, 1));
     while (!walls.empty()) {
         unsigned seed =
-            std::chrono::system_clock::now().time_since_epoch().count();
+            static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
         std::shuffle(walls.begin(), walls.end(),
                      std::default_random_engine(seed));
         auto current_wall = walls[0];
@@ -365,15 +359,26 @@ void Grid::reset_damage() {
 }
 
 void Grid::calculate_damage(std::vector<tower_ptr> tower_vector) {
-	reset_damage();
-	for (auto& tower : tower_vector) {
-		for (int y = (tower->get_loc().y + (tower->get_radius()*-1)); y <= tower->get_loc().y + tower->get_radius(); y++ ) {
-			for (int x = (tower->get_loc().x + (tower->get_radius()*-1)); x <= tower->get_loc().x + tower->get_radius(); x++) {
-				if ((x >= 0) && (x < size_tiles_x) && (y >= 0) && (y < size_tiles_y)) {
-					tiles[y * size_tiles_x + x].update_damage(tower->get_damage());
-				}
-			}
-		}
-	}
+    reset_damage();
+    for (auto& tower : tower_vector) {
+        for (int y = (tower->get_loc().y + (tower->get_radius()*-1)); y <= tower->get_loc().y + tower->get_radius(); y++ ) {
+            for (int x = (tower->get_loc().x + (tower->get_radius()*-1)); x <= tower->get_loc().x + tower->get_radius(); x++) {
+                if ((x >= 0) && (x < size_tiles_x) && (y >= 0) && (y < size_tiles_y)) {
+                    tiles[y * size_tiles_x + x].update_damage(tower->get_damage());
+                }
+            }
+        }
+    }
 }
 
+float Grid::get_damage(int tile_x, int tile_y) {
+    return tiles[tile_y * size_tiles_x + tile_x].get_damage();
+}
+
+std::string Grid::get_sprite(int tile_x, int tile_y) {
+    return tiles[tile_y * size_tiles_x + tile_x].get_sprite();
+}
+
+void Grid::set_sprite(int tile_x, int tile_y, std::string new_sprite) {
+    return tiles[tile_y * size_tiles_x + tile_x].set_sprite(new_sprite);
+}
