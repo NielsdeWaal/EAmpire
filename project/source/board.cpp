@@ -68,7 +68,7 @@ void Board::next_wave() {
         game_state->set_action_state("free");
         wave++;
         std::cout << "Wave " << wave << " incomming!\n";
-        enemy_generator(enemy_queue, 10+wave, 5+wave*2);
+        enemy_generator(enemy_queue, 10);
     }
 }
 
@@ -121,7 +121,7 @@ void Board::update() {
         action();
     }
     
-    if (queue_clock.getElapsedTime() >= sf::milliseconds(500)) {
+    if (queue_clock.getElapsedTime() >= sf::milliseconds(50)) {
         if (enemy_queue.size()>0) {
             enemies.push_back(enemy_queue.back());
             enemy_queue.pop_back();
@@ -154,7 +154,7 @@ void Board::update() {
         game_state->set_round_state("building");
     }
 
-	boardGrid.calculate_damage(towers);
+	boardGrid.calculate_damage(towers, enemies);
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
     currency_amount.setString(("$: " + std::to_string(game_state->get_curreny())).c_str());
     current_wave.setString(("Wave: " + std::to_string(wave)).c_str());
