@@ -1,8 +1,8 @@
 #include "enemy_container.hpp"
 
 void Enemy_container::add() {
-	Enemy *enemy = new Enemy_b();
-	enemy_container[count] = enemy;
+	//Enemy *enemy = new Enemy_b();
+	//enemy_container[count] = enemy;
 	count++;;
 }
 

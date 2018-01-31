@@ -85,6 +85,9 @@ set(sources
     source/enemy.cpp
     source/enemy_a.cpp
     source/enemy_b.cpp
+    source/enemy_c.cpp
+    source/enemy_d.cpp
+    source/enemy_e.cpp
     source/enemy_container.cpp
     source/tower.cpp
     source/tower_a.cpp
@@ -99,6 +102,9 @@ set(sources
     include/enemy.hpp
     include/enemy_a.hpp
     include/enemy_b.hpp
+    include/enemy_c.hpp
+    include/enemy_d.hpp
+    include/enemy_e.hpp
     include/enemy_container.hpp
     include/tower.hpp
     include/tower_a.hpp

@@ -24,6 +24,11 @@ Board::Board(sf::RenderWindow &window):
     end = sf::Vector2i(9, 9);
 
     std::cout << "New board created" << std::endl;
+    enemy_generator(enemy_queue, 0, 0, 0, 0, 10);
+	enemy_generator(enemy_queue, 0, 0, 0, 10, 0);
+	enemy_generator(enemy_queue, 0, 0, 10, 0, 0);
+	enemy_generator(enemy_queue, 0, 10, 0, 0, 0);
+	enemy_generator(enemy_queue, 10, 0, 0, 0, 0);
 }
 
 void Board::setup() {

@@ -30,6 +30,7 @@ public:
 	*/
 	~Enemy_b();
 
+	void take_damage(float damage_tower) override;
 };
 #endif // ENEMY_B_HPP
 
