@@ -10,11 +10,11 @@ tower_b::tower_b(int x_location, int y_location) :
 	//radius_circle.setOutlineThickness(1);
 	//radius_circle.setPosition(x_location, y_location);
 	value = cost;
+    game_state->set_curreny(game_state->get_curreny() - cost);
 }
 
 tower_b::~tower_b() {
-	std::cout << "TOWER SOLD" << std::endl;
-	//currency += (value*0.75)
+    game_state->add_currency(value - 5);
 }
 
 

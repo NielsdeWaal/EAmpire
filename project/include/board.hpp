@@ -32,6 +32,7 @@ private:
     sf::Text currency_amount;
 
     sf::Clock queue_clock;
+    sf::Clock tower_clock;
 
 
     //Enemy_container container = Enemy_container();
@@ -96,9 +97,9 @@ private:
                 }
                 if ((boardGrid.is_clicked(mouse_x, mouse_y)) &&
                     (game_state->get_round_state() == "building1")) {
-                    if (boardGrid.is_navigable(
+                    if ((boardGrid.is_navigable(
                             (mouse_x - boardGrid.get_start_x()) / 50,
-                            (mouse_y - boardGrid.get_start_y()) / 50)) {
+                            (mouse_y - boardGrid.get_start_y()) / 50)) && (game_state->get_curreny()>=100)) {
                         if (boardGrid.can_place(start, end, sf::Vector2i(
                             (mouse_x - boardGrid.get_start_x()) / 50,
                             (mouse_y - boardGrid.get_start_y()) / 50))) {
@@ -112,6 +113,7 @@ private:
                                 (mouse_x - boardGrid.get_start_x()) / 50,
                                 (mouse_y - boardGrid.get_start_y()) / 50)));
                             game_state->set_round_state("free");
+
                         }
                         else {
                             //TODO Add some vidual indication that you can't build where the user is clicking.
@@ -119,7 +121,7 @@ private:
                     }
                 }
                 if ((boardGrid.is_clicked(mouse_x, mouse_y)) &&
-                    (game_state->get_round_state() == "building2")) {
+                    (game_state->get_round_state() == "building2") && (game_state->get_curreny() >= 10)) {
                     if (boardGrid.is_navigable(
                         (mouse_x - boardGrid.get_start_x()) / 50,
                         (mouse_y - boardGrid.get_start_y()) / 50)) {

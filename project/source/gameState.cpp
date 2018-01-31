@@ -26,6 +26,10 @@ void GameState::set_curreny(int amount) {
     curreny_amount = amount;
 }
 
+void GameState::add_currency(int amount) {
+    curreny_amount += amount;
+}
+
 
 GameState::GameState()
 {}
