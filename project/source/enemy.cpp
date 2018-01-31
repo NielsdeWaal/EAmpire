@@ -47,7 +47,7 @@ void Enemy::take_damage(float damage_tower) {
         std::cout << "death";
     } else {
         lives -= damage_tower;
-        std::cout << "lives down";
+        //std::cout << "lives down";
     }
 }
 

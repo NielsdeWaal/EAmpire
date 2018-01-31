@@ -107,10 +107,6 @@ void Board::update() {
         action();
     }
     
-    for (auto&enemy : enemies) {
-        enemy.second->next_location(path);
-    }
-
     if (queue_clock.getElapsedTime() >= sf::milliseconds(500)) {
         if (enemy_queue.size()>0) {
             enemies.push_back(enemy_queue.back());
@@ -119,29 +115,34 @@ void Board::update() {
         queue_clock.restart();
     }
 
-    //for (auto it = enemies.begin(), end = enemies.end(); it != end; ++it)
-    //{
-    //    for (auto it2 = enemies.begin(); it2 != (it + 1); ++it2)
-    //    {
-    //        it2->second->next_location(path);
-    //        
-    //    }s
-    //    //std::cout << "\n";
+    //for (auto& enemy : enemies) {
+    //    if (enemy.second->get_lives() <= 0) {
+    //        enemies.pop_back();
+    //    }
+    //    if (enemy.second->check_end_location(path)) {
+    //        enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy));
+    //    }
     //}
 
-    for (auto& enemy : enemies ) {
-        //enemy_index -= (temp_size - enemies.size());
-        //temp_size = enemies.size();
+    for (auto& enemy : enemies) {
+        std::cout << __LINE__ << std::endl;
+        enemy.second->take_damage(boardGrid.get_damage(enemy.second->get_location().x, (enemy.second->get_location().y)));
+        std::cout << __LINE__ << std::endl;
+        std::remove_if(enemies.begin(), enemies.end(), [&](auto& enemy) {return ((enemy.second->get_lives() <= 0)); });
+        std::cout << __LINE__ << std::endl;
+    }
 
-        if (enemy.second->check_end_location(path)) {
-            enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy));
-        }
-        else{
-            std::cout << enemy.second->get_location().x << ',' << enemy.second->get_location().y << std::endl;
-            enemy.second->take_damage(boardGrid.get_damage(enemy.second->get_location().x ,(enemy.second->get_location().y )));
-            enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [&](auto enemy) {return ((enemy.second->get_lives() <= 0)); }), enemies.end());
+    if (enemies.size() > 0) {
+        while (enemies.back().second->get_lives() <= 0) {
+            enemies.pop_back();
         }
     }
+
+    for (auto&enemy : enemies) {
+        enemy.second->next_location(path);
+    }
+
+
 
 	boardGrid.calculate_damage(towers);
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
