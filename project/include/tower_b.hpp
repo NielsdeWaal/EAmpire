@@ -4,10 +4,12 @@
 #include "tower.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "gameState.hpp"
 
 class tower_b : public Tower {
 private:
-	float cost = 100.0;
+    GameState *game_state = GameState::get_state();
+	float cost = 10.0;
 	float upgrade_cost = 50.0;
 	float value;
 
@@ -15,7 +17,7 @@ private:
 	int radius = 1;
 
 	int current_level = 1;
-	int max_level = 5;
+	int max_level = 1;
 
 	int x_location;
 	int y_location;

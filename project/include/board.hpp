@@ -36,6 +36,7 @@ private:
     int wave = 0;
 
     sf::Clock queue_clock;
+    sf::Clock tower_clock;
 
 
     enemy_vector enemies;
@@ -102,7 +103,7 @@ private:
                     (game_state->get_action_state() == "building1")) {
                     if (boardGrid.is_navigable(
                             (mouse_x - boardGrid.get_start_x()) / 50,
-                            (mouse_y - boardGrid.get_start_y()) / 50)) {
+                            (mouse_y - boardGrid.get_start_y()) / 50) && (game_state->get_curreny()>=100)) {
                         if (boardGrid.can_place(start, end, sf::Vector2i(
                             (mouse_x - boardGrid.get_start_x()) / 50,
                             (mouse_y - boardGrid.get_start_y()) / 50))) {
@@ -126,7 +127,7 @@ private:
                     (game_state->get_action_state() == "building2")) {
                     if (boardGrid.is_navigable(
                         (mouse_x - boardGrid.get_start_x()) / 50,
-                        (mouse_y - boardGrid.get_start_y()) / 50)) {
+                        (mouse_y - boardGrid.get_start_y()) / 50) && (game_state->get_curreny() >= 10)) {
                         if (boardGrid.can_place(start, end, sf::Vector2i(
                             (mouse_x - boardGrid.get_start_x()) / 50,
                             (mouse_y - boardGrid.get_start_y()) / 50))) {

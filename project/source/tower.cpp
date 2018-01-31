@@ -12,7 +12,7 @@ Tower::Tower() {}
 
 Tower::~Tower()
 {
-	//currency += (value*0.75)
+    //game_state->set_curreny(game_state->get_curreny() + (value - 20));
 }
 
 void Tower::build_tower() {
@@ -47,4 +47,8 @@ sf::Vector2i Tower::get_loc() {
 
 int Tower::get_radius() {
 	return radius;
+}
+
+float Tower::get_cost() {
+    return cost;
 }
