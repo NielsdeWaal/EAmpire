@@ -57,6 +57,7 @@ void Board::draw() {
 
     boardGrid.draw(window);
     boardGrid.draw_path(window, path);
+    boardGrid.draw_selected(window, sf::Mouse::getPosition(window));
 
     tower1_button.draw();
     tower2_button.draw();

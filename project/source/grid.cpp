@@ -109,10 +109,11 @@ Grid::Grid(): // Default constructor
     size_tiles_x(10), size_tiles_y(10), 
     scale(50), 
     start_x(0), 
-    start_y(0) 
-    {	
-    
-}
+    start_y(0),
+    highlight(sf::RectangleShape(sf::Vector2f(scale, scale)))
+    {
+        highlight.setFillColor(sf::Color(0, 0, 0, 100));
+    }
 
 Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
            int start_y = 0): 
@@ -121,10 +122,11 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
     size_tiles_y(tiles_y), 
     scale(scale), 
     start_x(start_x), 
-    start_y(start_y) 
+    start_y(start_y),
+    highlight(sf::RectangleShape(sf::Vector2f(scale, scale)))
     {
-    //enemy_generator(enemies, 10, 20);
-}
+        highlight.setFillColor(sf::Color(0, 0, 0, 100));
+    }
 
 bool Grid::is_clicked(int x, int y) {
     if ((x - start_x) < 0 || (y - start_y) < 0 ||
@@ -202,6 +204,10 @@ void Grid::draw_path(sf::RenderWindow &window, std::vector<sf::Vector2i> path) {
     }
 }
 
+void Grid::draw_selected(sf::RenderWindow &window, sf::Vector2i mouse_location) {
+    highlight.setPosition(sf::Vector2f((((mouse_location.x-start_x)/50)*50+start_x), (((mouse_location.y-start_y)/50)*50 + start_y)));
+    window.draw(highlight);
+}
 
 //void Grid::update(sf::RenderWindow& window, std::vector<sf::Vector2i> path) {
 //	for(auto tile : path) {
