@@ -115,39 +115,22 @@ void Board::update() {
         queue_clock.restart();
     }
 
-    //for (auto& enemy : enemies) {
-    //    if (enemy.second->get_lives() <= 0) {
-    //        enemies.pop_back();
-    //    }
-    //    if (enemy.second->check_end_location(path)) {
-    //        enemies.erase(std::remove(enemies.begin(), enemies.end(), enemy));
-    //    }
-    //}
-
     for (auto& enemy : enemies) {
-        //std::cout << __LINE__ << std::endl;
         enemy.second->take_damage(boardGrid.get_damage(enemy.second->get_location().x, (enemy.second->get_location().y)));
-        //std::cout << __LINE__ << std::endl;
     }
 
-    for (auto& enemy : enemies) {
-        //std::cout << __LINE__ << std::endl;
-        //std::cout << enemy.second->get_lives() << std::endl;
-        std::remove_if(enemies.begin(), enemies.end(), [&](auto& enemy) {return (enemy.second->get_lives() <= 0); });
-        std::cout << __LINE__ << std::endl;
-    }
-
-    if (enemies.size() > 0) {
-        while (enemies.back().second->get_lives() <= 0) {
-            enemies.pop_back();
+    for (auto&enemy : enemies) {
+        if (enemy.second->check_end_location(path)) {
+            enemy.second->take_damage(enemy.second->get_lives());
+            game_state->set_lives(game_state->get_lives()-1);
         }
     }
+    
+    enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [&](auto& enemy) {return (enemy.second->get_lives() <= 0); }), enemies.end());
 
     for (auto&enemy : enemies) {
         enemy.second->next_location(path);
     }
-
-
 
 	boardGrid.calculate_damage(towers);
     lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
