@@ -32,7 +32,8 @@ class GameState {
     std::map<std::string, sf::Texture> textures;
     std::map<std::string, sf::Sprite> sprites;
 
-    std::string round_state;
+    std::string action_state = "free";
+    std::string round_state = "building";
     std::string game_state = "start_menu";
 
   public:
@@ -92,9 +93,9 @@ class GameState {
     void draw_sprite(std::string name, sf::Vector2f position,
                      sf::RenderWindow &window);
 
-    void set_new_round(bool result);
+    void set_action_state(std::string state);
 
-    bool get_round_status();
+    std::string get_action_state();
 
     void set_round_state(std::string state);
 
