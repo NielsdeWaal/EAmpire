@@ -20,7 +20,8 @@ private:
     Button quit_button;
     Button start_button;
 
-    action actions[1] = {
+    action actions[2] = {
+        action(sf::Keyboard::Escape, [&] { window.close(); }),
         action(sf::Mouse::Left, [&] {
         if (quit_button.is_pressed()) {
             window.close();
