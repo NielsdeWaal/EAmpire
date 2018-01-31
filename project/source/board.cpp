@@ -53,7 +53,7 @@ void Board::clicked(sf::Vector2i position) {
 }
 
 void Board::draw() {
-    window.clear(sf::Color(0, 0, 0)); // Clear screen with a grey background.
+    window.clear(sf::Color(0, 0, 0)); // Clear screen with a black background.
 
     boardGrid.draw(window);
     boardGrid.draw_path(window, path);
@@ -66,19 +66,9 @@ void Board::draw() {
     sell_button.draw();
     menu_button.draw();
     // play_button.draw();
-    //std::cout << "Komen we hier?" << std::endl;
 
     window.draw(lives);
     window.draw(currency_amount);
-    
-
-    //      for (const auto & enemy : container.get_container()) {
-    //	enemy.second->draw(window);
-    //	if (!enemy.second->next_location(path, grid)) {
-    //		container.remove(enemy.first);
-    //		//std::cout << "end of path" << std::endl;
-    //	}
-    //}
 
     if (game_state->get_round_state() == "building1" || game_state->get_round_state() == "building2") {
         game_state->draw_sprite("hammer", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
@@ -91,7 +81,6 @@ void Board::draw() {
     }
 
     for (auto&enemy : enemies) {
-        //enemy.second->next_location(path);
         enemy.second->draw(window, 50);
     }
 
