@@ -4,11 +4,20 @@
 #include "gameState.hpp"
 #include <SFML/Graphics.hpp>
 
-class Tower {
-  private:
-    float cost;
-    float upgrade_cost;
-    float value;
+
+/**
+* @file tower.hpp
+* @author Nick Goris
+* @date 16/1/18
+*
+* @brief Super class to derive towers from
+*/
+class Tower
+{
+private:
+	float cost;
+	float upgrade_cost;
+	float value;
 
     float damage;
     float fire_rate;
@@ -21,26 +30,52 @@ class Tower {
     int y_location;
     GameState *game_state = GameState::get_state();
 
-  public:
-    Tower(int x_location, int y_location);
+public:
+    /**
+    * @brief Tower constructor
+    *
+    * @param[in] x_location Location of the tower in the grid, x coordinate
+    * @param[in] y_location Location of the tower in the grid, y coordinate
+    */
+	Tower(int x_location, int y_location);
 
-    Tower();
+    /**
+    * @brief Empty tower constructor
+    */
+	Tower();
 
-    virtual ~Tower();
+    /**
+    * @brief Virtual tower destructor
+    */
+	virtual ~Tower();
 
-    void build_tower();
-    void upgrade();
+	//void upgrade();
 
-    virtual float get_damage();
-    virtual void draw(sf::RenderWindow &window);
+    /**
+    * @brief Virtual function to return damage of a tower
+    */
+	virtual float get_damage();
 
-    virtual int get_radius();
+    /**
+    * @brief Virtual function to return radius of a tower
+    *
+    * @return an integer containing the radius of the tower
+    */
+	virtual int get_radius();
 
-    virtual sf::Vector2i get_loc();
+    /**
+    * @brief Virtual function to return location of a tower
+    *
+    * @return an sf::Vector2i with the location of the tower on the grid
+    */
+	virtual sf::Vector2i get_loc();
 
+    /**
+    * @brief Virtual function to return the cost of a tower
+    *
+    * @return a float containing the cost of a tower
+    */
     virtual float get_cost();
-
-    // sf::Sprite get_sprite();
 };
 
 #endif // TOWER_HPP
