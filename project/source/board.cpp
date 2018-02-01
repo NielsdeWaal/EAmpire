@@ -82,6 +82,7 @@ void Board::next_wave() {
     if (game_state->get_round_state() != "fighting" && game_state->get_round_state() != "death") {
         game_state->set_round_state("fighting");
         game_state->set_action_state("free");
+        
         switch (wave) {
         case 0:
             enemy_generator(enemy_queue, 3);
