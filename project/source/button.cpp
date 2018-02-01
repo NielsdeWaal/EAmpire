@@ -3,9 +3,9 @@
 Button::Button(const std::string s, sf::Vector2f location, sf::Vector2f size,
                sf::RenderWindow &window): 
                s(s), 
-               location(location), 
+               location(location),
                size(size), 
-               window(window) 
+               window(window)
 {
     setup();
 }
