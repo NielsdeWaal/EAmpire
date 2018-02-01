@@ -35,6 +35,7 @@ void Game::draw() {
         window.clear();
         scenes.play_scene();
         scenes.help_screen();
+        sf::sleep(sf::seconds(2));
         game_state->set_game_state("ingame");
         window.clear();
     }
