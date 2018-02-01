@@ -20,7 +20,8 @@ Board::Board(sf::RenderWindow &window):
              sell_button(
                  Button(std::string("Sell"),
                         sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 275),
-                        sf::Vector2f(100, 50), window))
+                        sf::Vector2f(100, 50), window)),
+    scenes(window)
 {
     window.create(sf::VideoMode(grid_x_pixel, grid_y_pixel),
                   "EAmpire Tower Defense",
@@ -108,7 +109,7 @@ void Board::next_wave() {
             enemy_generator(enemy_queue, 0, 0, 1);
             sf::sleep(sf::milliseconds(500));
             enemy_generator(enemy_queue, 3, 3);
-            //TODO(Nick) Insert Arno Angry cutscene 
+            scenes.angry_arno();
             break;
         case 7:
             enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
@@ -125,7 +126,7 @@ void Board::next_wave() {
             break;
         case 10:
             enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
-            //TODO(Nick) Insert Boss Fight cutscene
+            scenes.boss_fight();
             break;
         case 12:
             enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
@@ -133,10 +134,9 @@ void Board::next_wave() {
             enemy_generator(enemy_queue, 2, 1);
             sf::sleep(sf::milliseconds(500));
             enemy_generator(enemy_queue, 2, 1);
-            //TODO(Nick) Insert end game screen
+            scenes.end_game();
             break;
         default:
-            //TODO Endless mode
             std::cout << "ENDLESS MODE" << std::endl;
             if (wave % 5 == 0) {
                 enemy_generator(enemy_queue, 0, 0, 0, 0, 1 * (wave/2));
