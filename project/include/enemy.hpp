@@ -5,6 +5,8 @@
 #include <cmath>
 #include <iostream>
 
+#include "gameState.hpp"
+
 /**
 * @file enemy.hpp
 * @author Dylan van Eck
@@ -18,6 +20,7 @@
 
 class Enemy {
   private:
+    GameState *game_state = GameState::get_state();
     // The damage that the enemy can do to the lives of the player. And the
     // speed with which the enemy can move
     const int damage;
@@ -57,12 +60,8 @@ class Enemy {
 
 	//The speed with which the enemy can move
 	sf::Vector2f position = sf::Vector2f(0.0,0.0);
-	//The color of the enemy's shape
-	sf::Color color;
-	//The diameteer of the circle
-	float diameter = 24;
-	//The circle shape of the enemy
-	sf::CircleShape circle;
+	//The name of the enemy
+	std::string name;
 	//The start boundary that have to be located: default first tile(most left at top)
 	sf::Vector2f boundaryA = sf::Vector2f(0, 0);
 	//The end boundary that have to be located 
@@ -80,7 +79,7 @@ public:
 	* @param[in]	speed				The speed with which the enemy moves.
 	* @param[in]	lives				The lives of the enemy.
 	*/
-	Enemy( sf::Color color, const int damage, const float speed, float lives);
+	Enemy( std::string name, const int damage, const float speed, float lives);
 
     /**
     * @brief Destructor
@@ -176,18 +175,18 @@ public:
     sf::Vector2f get_location();
 
     /**
-    * @brief Setter for the color of the enemy
+    * @brief Setter for the name of the enemy
     *
-    * @param[in]    sf::Color           Color_input to set the color of the circle
+    * @param[in]    std::string           Name to set the enemy
     */
-	void set_fillcolor(sf::Color color_input);
+	void set_name(std::string new_name);
 
     /**
     * @brief Getter for color
     *
-    * @return       sf::Color           Color of the enemy
+    * @return       std::string           Name of the enemy
     */
-	sf::Color get_fillcolor();
+	std::string get_name();
 
     /**
     * @brief Setter for speed

@@ -22,7 +22,12 @@ int main(void) {
         {"start_menu", "textures/start_menu.png"},
         {"arno", "textures/TinyArno.png"},
         {"firewall", "textures/firewall.png"},
-        {"death_screen", "textures/death.png"}
+        {"death_screen", "textures/death.png"},
+        {"enemy_a", "textures/enemy_a.png"},
+        {"enemy_b", "textures/enemy_b.png"},
+        {"enemy_c", "textures/enemy_c.png"},
+        {"enemy_d", "textures/enemy_d.png"},
+        {"enemy_e", "textures/enemy_e.png"}
     };
 
     game_state->load_sprites(sprites);
