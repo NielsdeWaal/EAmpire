@@ -1,8 +1,8 @@
 #ifndef TOWER_HPP
 #define TOWER_HPP
 
-#include <SFML/Graphics.hpp>
 #include "gameState.hpp"
+#include <SFML/Graphics.hpp>
 
 
 /**
@@ -19,15 +19,15 @@ private:
 	float upgrade_cost;
 	float value;
 
-	float damage;
-	float fire_rate;
-	int radius;
+    float damage;
+    float fire_rate;
+    int radius;
 
-	int current_level;
-	int max_level;
+    int current_level;
+    int max_level;
 
-	int x_location;
-	int y_location;
+    int x_location;
+    int y_location;
     GameState *game_state = GameState::get_state();
 
 public:

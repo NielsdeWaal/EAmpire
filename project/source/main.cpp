@@ -13,7 +13,7 @@ int main(void) {
 
     sf::Clock clock;
 
-    std::map<std::string, std::string> sprites {
+    std::map<std::string, std::string> sprites{
         {"tile_normal", "textures/tile_normal.png"},
         {"tile_blocked", "textures/tile_blocked.png"},
         {"tile_path", "textures/tile_path.png"},
@@ -25,10 +25,10 @@ int main(void) {
     };
 
     game_state->load_sprites(sprites);
- 
-    auto& window = game.get_window();
 
-    //auto state = "free";
+    auto &window = game.get_window();
+
+    // auto state = "free";
 
     while (window.isOpen()) {
 
@@ -52,7 +52,7 @@ int main(void) {
                 break;
             }
         }
-        if (clock.getElapsedTime() >= sf::milliseconds(20) ){
+        if (clock.getElapsedTime() >= sf::milliseconds(20)) {
             game.update();
             clock.restart();
         }

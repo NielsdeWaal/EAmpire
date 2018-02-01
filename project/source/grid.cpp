@@ -1,6 +1,6 @@
 #include "grid.hpp"
 
-//void Grid::initialise(int size_x, int size_y) {
+// void Grid::initialise(int size_x, int size_y) {
 //    for (int i = 0; i < (size_x * size_y); ++i) {
 //        tiles.push_back(Tile());
 //    }
@@ -68,8 +68,9 @@ bool Grid::fill_mini_grid(std::vector<Grid::Mini_tile> &mini_grid,
     return false;
 }
 
-std::vector<sf::Vector2i> Grid::path_from_grid(std::vector<Grid::Mini_tile> &mini_grid,
-                                               sf::Vector2i end) {
+std::vector<sf::Vector2i>
+Grid::path_from_grid(std::vector<Grid::Mini_tile> &mini_grid,
+                     sf::Vector2i end) {
     std::vector<sf::Vector2i> path;
     auto current = end;
 
@@ -105,28 +106,20 @@ std::vector<sf::Vector2i> Grid::path_from_grid(std::vector<Grid::Mini_tile> &min
 }
 
 Grid::Grid(): // Default constructor
-    tiles(std::vector<Tile>(10 * 10)),
-    size_tiles_x(10), size_tiles_y(10), 
-    scale(50), 
-    start_x(0), 
-    start_y(0),
-    highlight(sf::RectangleShape(sf::Vector2f(scale, scale)))
-    {
-        highlight.setFillColor(sf::Color(0, 0, 0, 100));
-    }
+      tiles(std::vector<Tile>(10 * 10)),
+      size_tiles_x(10), size_tiles_y(10), scale(50), start_x(0), start_y(0),
+      highlight(sf::RectangleShape(sf::Vector2f(scale, scale)))
+{
+    highlight.setFillColor(sf::Color(0, 0, 0, 100));
+}
 
 Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
-           int start_y = 0): 
-    tiles(std::vector<Tile>(tiles_x * tiles_y)), 
-    size_tiles_x(tiles_x),
-    size_tiles_y(tiles_y), 
-    scale(scale), 
-    start_x(start_x), 
-    start_y(start_y),
-    highlight(sf::RectangleShape(sf::Vector2f(scale, scale)))
-    {
-        highlight.setFillColor(sf::Color(0, 0, 0, 100));
-    }
+           int start_y = 0)
+    : tiles(std::vector<Tile>(tiles_x * tiles_y)), size_tiles_x(tiles_x),
+      size_tiles_y(tiles_y), scale(scale), start_x(start_x), start_y(start_y),
+      highlight(sf::RectangleShape(sf::Vector2f(scale, scale))) {
+    highlight.setFillColor(sf::Color(0, 0, 0, 100));
+}
 
 bool Grid::is_clicked(int x, int y) {
     if ((x - start_x) < 0 || (y - start_y) < 0 ||
@@ -187,9 +180,10 @@ bool Grid::is_navigable(int tile_x, int tile_y) {
 void Grid::draw(sf::RenderWindow &window) {
     for (int x = 0; x < size_tiles_x; x++) {
         for (int y = 0; y < size_tiles_y; y++) {
-            game_state->draw_sprite(tiles[y * size_tiles_x + x].get_sprite(), 
+            game_state->draw_sprite(
+                tiles[y * size_tiles_x + x].get_sprite(),
                 sf::Vector2f(static_cast<float>(start_x + (x * scale)),
-                static_cast<float>(start_y + (y * scale))), 
+                             static_cast<float>(start_y + (y * scale))),
                 window);
         }
     }
@@ -197,19 +191,23 @@ void Grid::draw(sf::RenderWindow &window) {
 
 void Grid::draw_path(sf::RenderWindow &window, std::vector<sf::Vector2i> path) {
     for (auto tile : path) {
-        game_state->draw_sprite("tile_path", 
-                                sf::Vector2f(static_cast<float>(start_x + (tile.x * scale)),
-                                             static_cast<float>(start_y + (tile.y * scale))), 
-                                window);
+        game_state->draw_sprite(
+            "tile_path",
+            sf::Vector2f(static_cast<float>(start_x + (tile.x * scale)),
+                         static_cast<float>(start_y + (tile.y * scale))),
+            window);
     }
 }
 
-void Grid::draw_selected(sf::RenderWindow &window, sf::Vector2i mouse_location) {
-    highlight.setPosition(sf::Vector2f((((mouse_location.x-start_x)/50)*50+start_x), (((mouse_location.y-start_y)/50)*50 + start_y)));
+void Grid::draw_selected(sf::RenderWindow &window,
+                         sf::Vector2i mouse_location) {
+    highlight.setPosition(
+        sf::Vector2f((((mouse_location.x - start_x) / 50) * 50 + start_x),
+                     (((mouse_location.y - start_y) / 50) * 50 + start_y)));
     window.draw(highlight);
 }
 
-//void Grid::update(sf::RenderWindow& window, std::vector<sf::Vector2i> path) {
+// void Grid::update(sf::RenderWindow& window, std::vector<sf::Vector2i> path) {
 //	for(auto tile : path) {
 //
 //	}
@@ -229,8 +227,8 @@ void Grid::create_maze() {
     walls.insert(walls.begin(), sf::Vector2i(1, 2));
     walls.insert(walls.begin(), sf::Vector2i(2, 1));
     while (!walls.empty()) {
-        unsigned seed =
-            static_cast<unsigned>(std::chrono::system_clock::now().time_since_epoch().count());
+        unsigned seed = static_cast<unsigned>(
+            std::chrono::system_clock::now().time_since_epoch().count());
         std::shuffle(walls.begin(), walls.end(),
                      std::default_random_engine(seed));
         auto current_wall = walls[0];
@@ -291,10 +289,10 @@ void Grid::create_maze() {
         } else { // Tile vertical between tiles.
             if (!(std::find(visited.begin(), visited.end(),
                             sf::Vector2i(current_wall.x, current_wall.y - 1)) !=
-                            visited.end() && // Both tiles allready visited.
+                      visited.end() && // Both tiles allready visited.
                   std::find(visited.begin(), visited.end(),
                             sf::Vector2i(current_wall.x, current_wall.y + 1)) !=
-                            visited.end())) {
+                      visited.end())) {
                 tiles[current_wall.y * size_tiles_x + current_wall.x]
                     .set_navigability(true);
                 if (std::find(
@@ -354,35 +352,12 @@ std::pair<int, int> Grid::get_grid_size() {
 }
 
 std::pair<int, int> Grid::get_start_values() {
-	return std::make_pair(start_x, start_y);
+    return std::make_pair(start_x, start_y);
 }
-
 
 void Grid::reset_damage() {
-	for (auto& tile : tiles) {
-		tile.set_damage(0);
-	}
-}
-
-void Grid::calculate_damage(std::vector<tower_ptr> tower_vector, enemy_vector enemies) {
-    if (enemies.size() == 0) {return;}
-    for (auto& tower : tower_vector) {
-        float shortest_distance = std::numeric_limits<float>::max();
-        std::pair<int, std::shared_ptr<Enemy>> shortest_enemy = enemies.front();
-
-        for (auto& enemy : enemies) {
-            float delta_x = abs(tower->get_loc().x - enemy.second->get_location().x);
-            float delta_y = abs(tower->get_loc().y - enemy.second->get_location().y);
-            float distance = sqrt(pow(delta_x, 2) + pow(delta_y, 2));
-            if (distance < shortest_distance) {
-                shortest_distance = distance;
-                shortest_enemy = enemy;
-            }
-        }
-        shortest_distance -= 1;
-        if (shortest_distance < tower->get_radius()) {
-            shortest_enemy.second->take_damage(tower->get_damage());
-        }
+    for (auto &tile : tiles) {
+        tile.set_damage(0);
     }
 }
 

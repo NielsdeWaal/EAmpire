@@ -16,19 +16,20 @@
 * This is a subclass of Enemy.
 */
 
-class Enemy_a :public Enemy{ //#1
-public:
-	/**
-	* @brief Constructor
-	*
-	* When this constructor is called, it will make a custom enemy.
-	*/
-	Enemy_a();
-	
-	/**
-	* @brief Destructor
-	*/
-	~Enemy_a();
+class Enemy_a : public Enemy { //#1
+  public:
+    /**
+    * @brief Constructor
+    *
+    * When this constructor is called, it will make a custom enemy.
+    */
+    Enemy_a();
 
+    /**
+    * @brief Destructor
+    */
+    ~Enemy_a();
+
+    void take_damage(float damage_tower) override;
 };
 #endif // ENEMY_A_HPP

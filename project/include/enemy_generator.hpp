@@ -18,6 +18,9 @@
 
 #include "enemy_a.hpp"
 #include "enemy_b.hpp"
+#include "enemy_c.hpp"
+#include "enemy_d.hpp"
+#include "enemy_e.hpp"
 
 typedef Enemy *(*Creator)(); ///< serves to my life easier with all the braces
 
@@ -32,7 +35,8 @@ static Enemy *make() {
 /**
  * @brief Array with the dataypes of all the enemies
  */
-static Creator const enemy_class_array[] = {make<Enemy_a>, make<Enemy_b>};
+static Creator const enemy_class_array[] = {
+    make<Enemy_a>, make<Enemy_b>, make<Enemy_c>, make<Enemy_d>, make<Enemy_e>};
 
 /**
  * @brief Template function to generate enemies and add them to a vector
@@ -42,8 +46,8 @@ static Creator const enemy_class_array[] = {make<Enemy_a>, make<Enemy_b>};
  * generated with the correct amount.
  *
  * @param[in, out] std::vector Vector where all the enemies will be placed in.
- * @param[in]      int paramter pack of ints which dictates the amount and type of
- * enemies placed in the vector.
+ * @param[in]      int paramter pack of ints which dictates the amount and type
+ * of enemies placed in the vector.
  */
 template <typename T, typename... Ts>
 void enemy_generator(std::vector<T> &vec, Ts... ts) {

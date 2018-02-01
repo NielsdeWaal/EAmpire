@@ -1,8 +1,8 @@
 #ifndef TOWER_A_HPP
 #define TOWER_A_HPP
 
-#include "tower.hpp"
 #include "gameState.hpp"
+#include "tower.hpp"
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
@@ -14,20 +14,20 @@
 * @brief Derived, specific tower class
 */
 class tower_a : public Tower {
-private:
+  private:
     GameState *game_state = GameState::get_state();
-	float cost = 100.0;
-	float upgrade_cost = 50.0;
-	float value;
+    float cost = 100.0;
+    float upgrade_cost = 50.0;
+    float value;
 
-	float damage = 5.0;
-	int radius = 1;
+    float damage = 15.0;
+    int radius = 1;
 
-	int current_level = 1;
-	int max_level = 5;
+    int current_level = 1;
+    int max_level = 5;
 
-	int x_location;
-	int y_location;
+    int x_location;
+    int y_location;
 
 public:
     /**
@@ -74,6 +74,5 @@ public:
 	sf::Vector2i get_loc();
 
 };
-
 
 #endif // TOWER_A_HPP
