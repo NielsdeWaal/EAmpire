@@ -2,29 +2,26 @@
 
 // PRIVATE
 float Enemy::length(sf::Vector2f vector2f) {
-    return roundf(
-               float(sqrt(vector2f.x * vector2f.x + vector2f.y * vector2f.y)) *
-               100) /
-           100;
+	return roundf(float(sqrt(vector2f.x * vector2f.x + vector2f.y * vector2f.y)) * 100) / 100;
 }
 
 sf::Vector2f Enemy::normalize(sf::Vector2f distance_nextlocation) {
-    sf::Vector2f vector;
-    float length_of_vector = length(distance_nextlocation);
-    if (length_of_vector != 0) {
-        vector.x = (distance_nextlocation.x / length_of_vector);
-        vector.y = (distance_nextlocation.y / length_of_vector);
-    }
+	sf::Vector2f vector;
+	float length_of_vector = length(distance_nextlocation);
+	if (length_of_vector != 0) {
+		vector.x = (distance_nextlocation.x / length_of_vector);
+		vector.y = (distance_nextlocation.y / length_of_vector);
+	}
     return vector;
 }
 
-void Enemy::corner_check(sf::Vector2f &boundarieA, sf::Vector2f &boundarieB,
-                         sf::Vector2f &position) {
-    if (boundarieA.x == boundarieB.x) {
-        position.x = boundarieA.x;
-    } else if (boundarieA.y == boundarieB.y) {
-        position.y = boundarieA.y;
-    }
+void Enemy::corner_check(sf::Vector2f & boundaryA, sf::Vector2f & boundaryB, sf::Vector2f & position) {
+	if (boundaryA.x == boundaryB.x) {
+		position.x = boundaryA.x;
+	}
+	else if (boundaryA.y == boundaryB.y) {
+		position.y = boundaryA.y;
+	}
 }
 // PUBLIC
 Enemy::Enemy(sf::Color color, const int damage, const float speed, float lives): 
@@ -60,10 +57,6 @@ void Enemy::move_direction(const int &size_grid) {
         position.y = 0;
     }
 }
-
-sf::Vector2f Enemy::Vector2f_from_Vector2i(sf::Vector2i rhs) {
-    return sf::Vector2f(static_cast<float>(rhs.x), static_cast<float>(rhs.y));
-};
 
 void Enemy::next_location(std::vector<sf::Vector2i> path) {
     for (auto it = path.begin(); it != path.end(); ++it) {
@@ -141,9 +134,13 @@ sf::Color Enemy::get_fillcolor() {
 }
 
 void Enemy::set_speed(float speed_input) {
-    speed = speed_input;
+	speed = speed_input;
 }
 
 int Enemy::get_damage() {
     return damage;
+}
+
+void Enemy::take_damage(float damage_tower) {
+    lives -= damage_tower;
 }

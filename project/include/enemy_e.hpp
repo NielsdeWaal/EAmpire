@@ -17,20 +17,18 @@
 * diameter and adaptable color.
 */
 
-class Enemy_e : public Enemy {
-  public:
-    /**
-    * @brief Constructor
-    *
-    * When this constructor is called, it will make a custom enemy.
-    */
-    Enemy_e();
-
-    /**
-    * @brief Destructor
-    */
-    ~Enemy_e();
-
-    void take_damage(float damage_tower) override;
+class Enemy_e :public Enemy {
+public:
+	/**
+	* @brief Constructor
+	*
+	* When this constructor is called, it will make a custom enemy.
+	*/
+	Enemy_e();
+	
+	/**
+	* @brief Destructor
+	*/
+	~Enemy_e();
 };
 #endif // ENEMY_E_HPP

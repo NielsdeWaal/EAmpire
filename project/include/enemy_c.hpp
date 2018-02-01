@@ -31,6 +31,15 @@ class Enemy_c : public Enemy {
     */
     ~Enemy_c();
 
-    void take_damage(float damage_tower) override;
+    /**
+    * @brief Custom function for taking enemy_a down
+    *
+    * Reduces the lives of the enemy with the attack number of the towers.
+    * When reaching under 100 lives the enemy will have the same characteristics as enemy_b
+    * When reaching under 50 lives the enemy will have the same characteristics as enemy_a
+    *
+    * @param[in]	damage_tower		The damage of the tower who reduced the lives of the enemy
+    */
+	void take_damage(float damage_tower) override;
 };
 #endif // ENEMY_C_HPP

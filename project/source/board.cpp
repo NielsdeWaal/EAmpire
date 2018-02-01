@@ -190,7 +190,7 @@ void Board::calculate_damage(std::vector<tower_ptr> tower_vector,
         if (shortest_distance < tower->get_radius() && tower->get_damage() > 0) {
             shortest_enemy.second->take_damage(tower->get_damage());
             std::pair<sf::Vertex, sf::Vertex> line(
-                sf::Vertex(sf::Vector2f(tower->get_loc().x*50+75, tower->get_loc().y*50+75)),
+                sf::Vertex(sf::Vector2f(static_cast<float>(tower->get_loc().x*50+75), static_cast<float>(tower->get_loc().y*50+75))),
                 sf::Vertex(sf::Vector2f(shortest_enemy.second->get_location().x*50+75, shortest_enemy.second->get_location().y*50+75)));
             projectiles.emplace(projectiles.begin(), line);
         }
@@ -205,7 +205,6 @@ void Board::draw_projectiles() {
             projectile.second
         };
         line[1].color = sf::Color(255,255,255, 0);
-        std::cout << line[0].position.x << std::endl;
         window.draw(line, 2, sf::Lines);
     }
 }
