@@ -80,3 +80,11 @@ void GameState::set_game_state(std::string state) {
 std::string GameState::get_game_state() {
     return game_state;
 }
+
+void GameState::set_updates_per_sec(int amount) {
+    updates_per_sec = amount;
+}
+
+int GameState::get_updates_per_sec() {
+    return updates_per_sec;
+}

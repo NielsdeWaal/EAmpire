@@ -63,7 +63,12 @@ void Board::setup() {
     wave_hint.setFillColor(sf::Color(32, 194, 14));
     wave_hint.setPosition(
         sf::Vector2f(50, static_cast<float>(grid_y_pixel - 50)));
-    wave_hint.setString("Press Space to summon next wave");
+    wave_hint.setString("Press Space for next wave");
+
+    tickrate.setCharacterSize(30);
+    tickrate.setFont(font);
+    tickrate.setFillColor(sf::Color(32, 194, 14));
+    tickrate.setPosition(sf::Vector2f(500, static_cast<float>(grid_y_pixel - 50)));
 }
 
 void Board::clicked(sf::Vector2i position) {
@@ -167,6 +172,18 @@ void Board::next_wave() {
     }
 }
 
+void Board::decrease_tickrate() {
+    if (game_state->get_updates_per_sec() >= 20) {
+        game_state->set_updates_per_sec(game_state->get_updates_per_sec() - 10);
+    }
+}
+
+void Board::increase_tickrate() {
+    if (game_state->get_updates_per_sec() <= 190) {
+        game_state->set_updates_per_sec(game_state->get_updates_per_sec() + 10);
+    }
+}
+
 void Board::calculate_damage(std::vector<tower_ptr> tower_vector,
                              enemy_vector enemies) {
     if (enemies.size() == 0) {
@@ -233,6 +250,8 @@ void Board::draw() {
     window.draw(lives);
     window.draw(currency_amount);
     window.draw(current_wave);
+    window.draw(tickrate);
+
     if (game_state->get_round_state() == "building") {
         window.draw(wave_hint);
     }
@@ -276,18 +295,17 @@ void Board::update() {
         action();
     }
 
-    if (queue_clock.getElapsedTime() >= sf::milliseconds(400)) {
+    if (queue_clock >= 20) {
+        queue_clock = 0;
         if (enemy_queue.size() > 0) {
             enemies.push_back(enemy_queue.back());
             enemy_queue.pop_back();
         }
-        queue_clock.restart();
     }
 
-    if (tower_clock.getElapsedTime() >= sf::milliseconds(500)) {
+    if (tower_clock >= 25) {
         clear_projectiles();
         calculate_damage(towers, enemies);
-        tower_clock.restart();
     }
 
     // TODO Maybe combine these 4 enemy loops into 1?
@@ -321,4 +339,8 @@ void Board::update() {
     currency_amount.setString(
         ("$: " + std::to_string(game_state->get_curreny())).c_str());
     current_wave.setString(("Wave: " + std::to_string(wave)).c_str());
+    tickrate.setString(("Tickrate: " + std::to_string(game_state->get_updates_per_sec())).c_str());
+
+    queue_clock++;
+    tower_clock++;
 }

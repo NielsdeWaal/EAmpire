@@ -53,7 +53,7 @@ int main(void) {
                 break;
             }
         }
-        if (clock.getElapsedTime() >= sf::milliseconds(20)) {
+        if (clock.getElapsedTime() >= sf::milliseconds(1000/game_state->get_updates_per_sec())) {
             game.update();
             clock.restart();
         }

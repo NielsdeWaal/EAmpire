@@ -23,7 +23,7 @@ cutscene::cutscene(sf::RenderWindow &window):
                    boss_fight2(sf::Vector2f(0, 0), "textures/ArnoBossFight2.png"),
                    end_game1(sf::Vector2f(0, 0), "textures/AfterGameScene1.png"),
                    end_game2(sf::Vector2f(0, 0), "textures/AfterGameScene2.png"),
-                   helpscreen(sf::Vector2f(0, 87.5f), "textures/HelpScreen.png")
+                   helpscreen(sf::Vector2f(0, 40.5f), "textures/HelpScreen.png")
 {}
 
 void cutscene::play_scene() {
@@ -136,6 +136,9 @@ void cutscene::help_screen() {
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
             window.clear();
             return;
+        }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape)) {
+            window.close();
         }
     }
 }

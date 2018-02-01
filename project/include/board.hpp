@@ -33,13 +33,14 @@ class Board {
     sf::Text currency_amount;
     sf::Text current_wave;
     sf::Text wave_hint;
+    sf::Text tickrate;
 
     int wave = 0;
 
     int death_transparency = 0;
 
-    sf::Clock queue_clock;
-    sf::Clock tower_clock;
+    int queue_clock = 0;
+    int tower_clock = 0;
 
     enemy_vector enemies;
     enemy_vector enemy_queue;
@@ -57,9 +58,11 @@ class Board {
 
     cutscene scenes;
 
-    action actions[7] = {
+    action actions[9] = {
         action(sf::Keyboard::Escape, [&] { window.close(); }),
         action(sf::Keyboard::Space, [&] { next_wave(); }),
+        action(sf::Keyboard::Left, [&] { decrease_tickrate(); }),
+        action(sf::Keyboard::Right, [&] { increase_tickrate(); }),
         action(sf::Keyboard::Num1,
                [&] {
                    if (game_state->get_action_state() != "building1" &&
@@ -197,6 +200,10 @@ class Board {
     void clicked(sf::Vector2i position);
 
     void next_wave();
+
+    void decrease_tickrate();
+
+    void increase_tickrate();
 
     /**
     * @brief Calculates damage
