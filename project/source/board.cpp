@@ -93,13 +93,16 @@ void Board::next_wave() {
             enemy_generator(enemy_queue, 3);
             break;
         case 1:
-            enemy_generator(enemy_queue, 3, 1);
+            enemy_generator(enemy_queue, 3);
+            enemy_generator(enemy_queue, 0,1);
             break;
         case 2:
-            enemy_generator(enemy_queue, 2, 2);
+            enemy_generator(enemy_queue, 2);
+            enemy_generator(enemy_queue, 0,2);
             break;
         case 3:
-            enemy_generator(enemy_queue, 3, 3);
+            enemy_generator(enemy_queue, 3);
+            enemy_generator(enemy_queue, 0,3);
             break;
         case 4:
             enemy_generator(enemy_queue, 4);
@@ -109,37 +112,59 @@ void Board::next_wave() {
         case 5:
             enemy_generator(enemy_queue, 0, 0, 1);
             sf::sleep(sf::milliseconds(500));
-            enemy_generator(enemy_queue, 2, 2);
+            enemy_generator(enemy_queue, 2);
+            enemy_generator(enemy_queue, 0,2);
             break;
         case 6:
             enemy_generator(enemy_queue, 0, 0, 1);
             sf::sleep(sf::milliseconds(500));
-            enemy_generator(enemy_queue, 3, 3);
+            enemy_generator(enemy_queue, 3);
+            enemy_generator(enemy_queue, 0,3);
             scenes.angry_arno();
             break;
         case 7:
-            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
+            enemy_generator(enemy_queue, 0, 0, 0, 1);
             sf::sleep(sf::milliseconds(500));
-            enemy_generator(enemy_queue, 2, 1);
+            enemy_generator(enemy_queue, 2);
+            enemy_generator(enemy_queue, 0,1);
             sf::sleep(sf::milliseconds(500));
-            enemy_generator(enemy_queue, 2, 1);
+            enemy_generator(enemy_queue, 2);
+            enemy_generator(enemy_queue, 0, 1);
             break;
         case 8:
-            enemy_generator(enemy_queue, 3, 0, 0, 1, 1);
+            enemy_generator(enemy_queue, 0, 0, 0, 1);
+            sf::sleep(sf::milliseconds(500));
+            enemy_generator(enemy_queue, 0, 0, 2, 0);
+            enemy_generator(enemy_queue, 5);
             break;
         case 9:
-            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
+            for (int i = 0; i < 5; i++) {
+                enemy_generator(enemy_queue, 0, 0, 0, 1);
+                sf::sleep(sf::milliseconds(500));
+                enemy_generator(enemy_queue, 0, 2, 2, 0);
+                enemy_generator(enemy_queue, 5);
+                sf::sleep(sf::milliseconds(800));
+            }
             break;
         case 10:
-            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
+            for (int i = 0; i < 5; i++) {
+                enemy_generator(enemy_queue, 0, 0, 0, 2);
+                sf::sleep(sf::milliseconds(500));
+                enemy_generator(enemy_queue, 0, 2, 2, 0);
+                enemy_generator(enemy_queue, 5);
+                enemy_generator(enemy_queue, 0, 5);
+                sf::sleep(sf::milliseconds(500));
+            }
             scenes.boss_fight();
             break;
         case 12:
-            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
-            sf::sleep(sf::milliseconds(500));
-            enemy_generator(enemy_queue, 2, 1);
-            sf::sleep(sf::milliseconds(500));
-            enemy_generator(enemy_queue, 2, 1);
+            for (int i = 0; i < 5; i++) {
+                enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
+                sf::sleep(sf::milliseconds(500));
+                enemy_generator(enemy_queue, 2, 1);
+                sf::sleep(sf::milliseconds(500));
+                enemy_generator(enemy_queue, 2, 1);
+            }
             scenes.end_game();
             break;
         default:
