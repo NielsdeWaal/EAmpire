@@ -33,7 +33,7 @@ void Game::draw() {
     }
     if (game_state->get_game_state() == "scene") {
         window.clear();
-        scenes.play_scene();
+        //scenes.play_scene();
         game_state->set_game_state("ingame");
         window.clear();
     }

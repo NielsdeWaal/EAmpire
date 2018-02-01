@@ -303,6 +303,7 @@ void Board::update() {
     }
 
     if (tower_clock >= 25) {
+        tower_clock = 0;
         clear_projectiles();
         calculate_damage(towers, enemies);
     }

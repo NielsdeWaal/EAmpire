@@ -24,16 +24,12 @@ void Enemy::corner_check(sf::Vector2f & boundaryA, sf::Vector2f & boundaryB, sf:
 	}
 }
 // PUBLIC
-Enemy::Enemy(sf::Color color, const int damage, const float speed, float lives): 
-             color(color), 
+Enemy::Enemy(std::string name, const int damage, const float speed, float lives): 
+             name(name), 
              damage(damage), 
              speed(speed), 
              lives(lives) 
-{
-    circle.setRadius(diameter);
-    circle.setFillColor(color);
-    circle.setPosition(position);
-}
+{}
 
 Enemy::~Enemy() {
 }
@@ -109,9 +105,7 @@ bool Enemy::check_end_location(std::vector<sf::Vector2i> path) {
 }
 
 void Enemy::draw(sf::RenderWindow &window, const int &tile_size) {
-    circle.setPosition((position.x + 1) * tile_size,
-                       (position.y + 1) * tile_size);
-    window.draw(circle);
+    game_state->draw_sprite(name, sf::Vector2f((position.x + 1) * tile_size, (position.y + 1) * tile_size), window);
 }
 
 float Enemy::get_lives() {
@@ -125,12 +119,12 @@ sf::Vector2f Enemy::get_location() {
     return position;
 }
 
-void Enemy::set_fillcolor(sf::Color color_output) {
-    circle.setFillColor(color_output);
+void Enemy::set_name(std::string new_name) {
+    name = new_name;
 }
 
-sf::Color Enemy::get_fillcolor() {
-    return color;
+std::string Enemy::get_name() {
+    return name;
 }
 
 void Enemy::set_speed(float speed_input) {
