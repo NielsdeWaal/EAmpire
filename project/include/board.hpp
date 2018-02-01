@@ -15,6 +15,7 @@
 #include "tower_a.hpp"
 #include "tower_b.hpp"
 #include "typedefs.hpp"
+#include "cutscene.hpp"
 
 class Board {
   private:
@@ -54,6 +55,8 @@ class Board {
     Button tower2_button;
 
     Button sell_button;
+
+    cutscene scenes;
 
     action actions[9] = {
         action(sf::Keyboard::Escape, [&] { window.close(); }),
