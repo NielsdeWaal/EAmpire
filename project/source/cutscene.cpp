@@ -11,7 +11,7 @@ cutscene::cutscene(sf::RenderWindow & window) :
     scene5(sf::Vector2f(0, 0), "textures/scene5.png"),
     scene6(sf::Vector2f(0, 0), "textures/scene6.png"),
     scene7(sf::Vector2f(0, 0), "textures/scene7.png"),
-    scene8(sf:: Vector2f(0, 0), "textures/scene8.png"),
+    scene8(sf::Vector2f(0, 0), "textures/scene8.png"),
     scene9(sf::Vector2f(0, 0), "textures/scene9.png"),
     scene10(sf::Vector2f(0, 0), "textures/scene10.png"),
     scene11(sf::Vector2f(0, 0), "textures/scene11.png"),
