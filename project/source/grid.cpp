@@ -108,7 +108,7 @@ Grid::path_from_grid(std::vector<Grid::Mini_tile> &mini_grid,
 Grid::Grid(): // Default constructor
       tiles(std::vector<Tile>(10 * 10)),
       size_tiles_x(10), size_tiles_y(10), scale(50), start_x(0), start_y(0),
-      highlight(sf::RectangleShape(sf::Vector2f(scale, scale)))
+      highlight(sf::RectangleShape(sf::Vector2f(static_cast<float>(scale), static_cast<float>(scale))))
 {
     highlight.setFillColor(sf::Color(0, 0, 0, 100));
 }
@@ -117,7 +117,7 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
            int start_y = 0)
     : tiles(std::vector<Tile>(tiles_x * tiles_y)), size_tiles_x(tiles_x),
       size_tiles_y(tiles_y), scale(scale), start_x(start_x), start_y(start_y),
-      highlight(sf::RectangleShape(sf::Vector2f(scale, scale))) {
+      highlight(sf::RectangleShape(sf::Vector2f(static_cast<float>(scale), static_cast<float>(scale)))) {
     highlight.setFillColor(sf::Color(0, 0, 0, 100));
 }
 
@@ -202,8 +202,8 @@ void Grid::draw_path(sf::RenderWindow &window, std::vector<sf::Vector2i> path) {
 void Grid::draw_selected(sf::RenderWindow &window,
                          sf::Vector2i mouse_location) {
     highlight.setPosition(
-        sf::Vector2f((((mouse_location.x - start_x) / 50) * 50 + start_x),
-                     (((mouse_location.y - start_y) / 50) * 50 + start_y)));
+        sf::Vector2f(static_cast<float>(((mouse_location.x - start_x) / 50) * 50 + start_x),
+                     static_cast<float>(((mouse_location.y - start_y) / 50) * 50 + start_y)));
     window.draw(highlight);
 }
 
