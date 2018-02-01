@@ -83,39 +83,87 @@ void Board::next_wave() {
         game_state->set_action_state("free");
         switch (wave) {
         case 0:
-            enemy_generator(enemy_queue, 5);
+            enemy_generator(enemy_queue, 3);
             break;
         case 1:
-            enemy_generator(enemy_queue, 7, 2);
+            enemy_generator(enemy_queue, 3, 1);
             break;
         case 2:
-            enemy_generator(enemy_queue, 2, 5);
+            enemy_generator(enemy_queue, 2, 2);
             break;
         case 3:
-            enemy_generator(enemy_queue, 5, 5, 2);
+            enemy_generator(enemy_queue, 3, 3);
             break;
         case 4:
-            enemy_generator(enemy_queue, 5, 0, 0, 1);
-            enemy_generator(enemy_queue, 5, 0, 0, 1);
+            enemy_generator(enemy_queue, 4);
+            sf::sleep(sf::milliseconds(750));
+            enemy_generator(enemy_queue, 0, 4);
             break;
         case 5:
-            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
-            wave++;
+            enemy_generator(enemy_queue, 0, 0, 1);
+            sf::sleep(sf::milliseconds(500));
+            enemy_generator(enemy_queue, 2, 2);
             break;
         case 6:
-            std::cout << "GAME OVER" << std::endl;
+            enemy_generator(enemy_queue, 0, 0, 1);
+            sf::sleep(sf::milliseconds(500));
+            enemy_generator(enemy_queue, 3, 3);
+            //TODO(Nick) Insert Arno Angry cutscene 
             break;
+        case 7:
+            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
+            sf::sleep(sf::milliseconds(500));
+            enemy_generator(enemy_queue, 2, 1);
+            sf::sleep(sf::milliseconds(500));
+            enemy_generator(enemy_queue, 2, 1);
+            break;
+        case 8:
+            enemy_generator(enemy_queue, 3, 0, 0, 1, 1);
+            break;
+        case 9:
+            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
+            break;
+        case 10:
+            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
+            //TODO(Nick) Insert Boss Fight cutscene
+            break;
+        case 12:
+            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
+            sf::sleep(sf::milliseconds(500));
+            enemy_generator(enemy_queue, 2, 1);
+            sf::sleep(sf::milliseconds(500));
+            enemy_generator(enemy_queue, 2, 1);
+            //TODO(Nick) Insert end game screen
+            break;
+        default:
+            //TODO Endless mode
+            std::cout << "ENDLESS MODE" << std::endl;
+            if (wave % 5 == 0) {
+                enemy_generator(enemy_queue, 0, 0, 0, 0, 1 * (wave/2));
+            }
+            else if (wave % 7 == 0) {
+                enemy_generator(enemy_queue, 0, 0, 0, 1 * wave - 3);
+            }
+            else if (wave % 10 == 0) {
+                for (int i = 0; i < wave/2; i++) {
+                    enemy_generator(enemy_queue, 0, 0, 0, 1, 1);
+                    sf::sleep(sf::milliseconds(1000));
+                }
+            }
+            else {
+                enemy_generator(enemy_queue, 2 * wave);
+                enemy_generator(enemy_queue, 0, 0,  wave);
+                enemy_generator(enemy_queue, 0, 2 * wave);
+                if (wave > 18) {
+                    for (int i = 0; i < wave; i++) {
+                        enemy_generator(enemy_queue, 0, 0, 0, 1);
+                        sf::sleep(sf::milliseconds(500));
+                    }
+                }
+            }
         }
         wave++;
     }
-
-    // if (game_state->get_round_state() != "fighting") {
-    //    game_state->set_round_state("fighting");
-    //    game_state->set_action_state("free");
-    //    wave++;
-    //    std::cout << "Wave " << wave << " incomming!\n";
-    //    enemy_generator(enemy_queue, 10+wave, 5+wave*2);
-    //}
 }
 
 void Board::calculate_damage(std::vector<tower_ptr> tower_vector,
@@ -252,9 +300,8 @@ void Board::update() {
         enemy.second->next_location(path);
     }
 
-    if (game_state->get_round_state() == "fighting" && enemies.size() == 0 &&
-        enemy_queue.size() == 0) {
-        game_state->add_currency(150);
+    if (game_state->get_round_state() == "fighting" && enemies.size() == 0 && enemy_queue.size() == 0) {
+        game_state->add_currency(80);
         game_state->set_round_state("building");
     }
 
