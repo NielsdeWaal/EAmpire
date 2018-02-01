@@ -44,6 +44,8 @@ class Board {
 
     std::vector<sf::Vector2i> path;
 
+    std::vector<std::pair<sf::Vertex, sf::Vertex>> projectiles;
+
     Button menu_button;
     Button tower1_button;
     Button tower2_button;
@@ -203,6 +205,10 @@ class Board {
     */
     void calculate_damage(std::vector<tower_ptr> tower_vector,
                           enemy_vector enemies);
+
+    void draw_projectiles();
+
+    void clear_projectiles();
 
     void draw();
 
