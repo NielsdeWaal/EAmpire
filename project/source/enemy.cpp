@@ -15,12 +15,12 @@ sf::Vector2f Enemy::normalize(sf::Vector2f distance_nextlocation) {
     return vector;
 }
 
-void Enemy::corner_check(sf::Vector2f & boundarieA, sf::Vector2f & boundarieB, sf::Vector2f & position) {
-	if (boundarieA.x == boundarieB.x) {
-		position.x = boundarieA.x;
+void Enemy::corner_check(sf::Vector2f & boundaryA, sf::Vector2f & boundaryB, sf::Vector2f & position) {
+	if (boundaryA.x == boundaryB.x) {
+		position.x = boundaryA.x;
 	}
-	else if (boundarieA.y == boundarieB.y) {
-		position.y = boundarieA.y;
+	else if (boundaryA.y == boundaryB.y) {
+		position.y = boundaryA.y;
 	}
 }
 //PUBLIC

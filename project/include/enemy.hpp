@@ -31,7 +31,7 @@ private:
 	* @param[in]	vector				The vector that have to be calculated
 	* @return		float				The length of the vector
 	*/
-	float length(sf::Vector2f vector2f);
+	float length(sf::Vector2f distance);
 
 	/**
 	* @brief Private function to normalize a sf::vector2f in 2D
@@ -50,7 +50,7 @@ private:
 	* @param[in]	boundarieB			the second boundary
 	* @param[in]	position			position of the enemy
 	*/
-	void corner_check(sf::Vector2f & boundarieA, sf::Vector2f & boundarieB, sf::Vector2f & position);
+	void corner_check(sf::Vector2f & boundaryA, sf::Vector2f & boundaryB, sf::Vector2f & position);
 
 	//The speed with which the enemy can move
 	sf::Vector2f position = sf::Vector2f(0.0,0.0);
