@@ -123,10 +123,26 @@ void Board::next_wave() {
             enemy_generator(enemy_queue, 2, 1);
             sf::sleep(sf::milliseconds(500));
             enemy_generator(enemy_queue, 2, 1);
+            //TODO(Nick) Insert end game screen
             break;
-        case 13:
-            std::cout << "GAME OVER" << std::endl;
-            break;
+        default:
+            //TODO Endless mode
+            std::cout << "ENDLESS MODE" << std::endl;
+            if (wave % 5 == 0) {
+                enemy_generator(enemy_queue, 0, 0, 0, 0, 1 * (wave/2));
+            }
+            else if (wave % 7 == 0) {
+                enemy_generator(enemy_queue, 0, 0, 0, 1 * wave - 3);
+            }
+            else if (wave % 10 == 0) {
+                for (int i = 0; i < wave/2; i++) {
+                    enemy_generator(enemy_queue, 0, 0, 0, 1, 1);
+                    sf::sleep(sf::milliseconds(1000));
+                }
+            }
+            else {
+                enemy_generator(enemy_queue, 2 * wave, 2 * wave);
+            }
         }
         wave++;
     }
