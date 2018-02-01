@@ -9,8 +9,6 @@ Tower::Tower(int x_location, int y_location):
 Tower::Tower() {
 }
 
-Tower::Tower() {}
-
 Tower::~Tower()
 {
 
