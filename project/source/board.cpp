@@ -275,7 +275,7 @@ void Board::update() {
         action();
     }
 
-    if (queue_clock.getElapsedTime() >= sf::milliseconds(500)) {
+    if (queue_clock.getElapsedTime() >= sf::milliseconds(400)) {
         if (enemy_queue.size() > 0) {
             enemies.push_back(enemy_queue.back());
             enemy_queue.pop_back();
