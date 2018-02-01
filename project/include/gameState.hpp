@@ -95,6 +95,8 @@ class GameState {
     void draw_sprite(std::string name, sf::Vector2f position,
                      sf::RenderWindow &window);
 
+    void color_sprite(std::string name, sf::Color color);
+
     void set_action_state(std::string state);
 
     std::string get_action_state();

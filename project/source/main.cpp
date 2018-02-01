@@ -21,7 +21,8 @@ int main(void) {
         {"sell", "textures/sell.png"},
         {"start_menu", "textures/start_menu.png"},
         {"arno", "textures/TinyArno.png"},
-        {"firewall", "textures/firewall.png"}
+        {"firewall", "textures/firewall.png"},
+        {"death_screen", "textures/death.png"}
     };
 
     game_state->load_sprites(sprites);

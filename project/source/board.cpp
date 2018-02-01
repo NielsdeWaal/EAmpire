@@ -78,7 +78,7 @@ void Board::clicked(sf::Vector2i position) {
 }
 
 void Board::next_wave() {
-    if (game_state->get_round_state() != "fighting") {
+    if (game_state->get_round_state() != "fighting" && game_state->get_round_state() != "death") {
         game_state->set_round_state("fighting");
         game_state->set_action_state("free");
         switch (wave) {
@@ -257,13 +257,19 @@ void Board::draw() {
 
     draw_projectiles();
 
+    if (game_state->get_round_state() == "death") {
+        if (death_transparency < 255) {
+            death_transparency += 1;
+            game_state->color_sprite("death_screen", sf::Color(255, 255, 255, death_transparency));
+        }
+        game_state->draw_sprite("death_screen", sf::Vector2f(0, 0), window);
+    }
+
     window.display();
 }
 
 void Board::update() {
     path = boardGrid.find_path(start, end);
-    int enemy_index = 0;
-    int temp_size = enemies.size();
 
     for (auto &action : actions) {
         action();
@@ -303,6 +309,10 @@ void Board::update() {
     if (game_state->get_round_state() == "fighting" && enemies.size() == 0 && enemy_queue.size() == 0) {
         game_state->add_currency(80);
         game_state->set_round_state("building");
+    }
+
+    if (game_state->get_lives() <= 0 && game_state->get_round_state() != "death") {
+        game_state->set_round_state("death");
     }
 
     lives.setString(
