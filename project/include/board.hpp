@@ -35,6 +35,8 @@ class Board {
 
     int wave = 0;
 
+    int death_transparency = 0;
+
     sf::Clock queue_clock;
     sf::Clock tower_clock;
 
@@ -58,21 +60,21 @@ class Board {
         action(sf::Keyboard::Num1,
                [&] {
                    if (game_state->get_action_state() != "building1" &&
-                       game_state->get_round_state() != "fighting") {
+                       game_state->get_round_state() == "building") {
                        game_state->set_action_state("building1");
                    }
                }),
         action(sf::Keyboard::Num2,
                [&] {
                    if (game_state->get_action_state() != "building2" &&
-                       game_state->get_round_state() != "fighting") {
+                       game_state->get_round_state() == "building") {
                        game_state->set_action_state("building2");
                    }
                }),
         action(sf::Keyboard::Delete,
                [&] {
                    if (game_state->get_action_state() != "selling" &&
-                       game_state->get_round_state() != "fighting") {
+                       game_state->get_round_state() == "building") {
                        game_state->set_action_state("selling");
                    }
                }),
@@ -90,19 +92,19 @@ class Board {
             }
             if (tower1_button.is_pressed()) {
                 if (game_state->get_action_state() != "building1" &&
-                    game_state->get_round_state() != "fighting") {
+                    game_state->get_round_state() == "building") {
                     game_state->set_action_state("building1");
                 }
             }
             if (tower2_button.is_pressed()) {
                 if (game_state->get_action_state() != "building2" &&
-                    game_state->get_round_state() != "fighting") {
+                    game_state->get_round_state() == "building") {
                     game_state->set_action_state("building2");
                 }
             }
             if (sell_button.is_pressed()) {
                 if (game_state->get_action_state() != "selling" &&
-                    game_state->get_round_state() != "fighting") {
+                    game_state->get_round_state() == "building") {
                     game_state->set_action_state("selling");
                 }
             }

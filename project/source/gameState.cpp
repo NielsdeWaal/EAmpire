@@ -52,6 +52,10 @@ void GameState::draw_sprite(std::string name, sf::Vector2f position,
     window.draw(sprites.find(name)->second);
 }
 
+void GameState::color_sprite(std::string name, sf::Color color) {
+    sprites.find(name)->second.setColor(color);
+}
+
 void GameState::set_action_state(std::string state) {
     action_state = state;
 }
