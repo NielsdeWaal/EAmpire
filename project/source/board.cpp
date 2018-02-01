@@ -1,22 +1,30 @@
 #include "board.hpp"
 
-Board::Board(sf::RenderWindow &window):
-    boardGrid(Grid(grid_x, grid_y, scale, (grid_x_pixel - 100) / 2 - grid_x * 25, grid_y_pixel / 2 - grid_y * 25)),
-    window(window),
-    menu_button(Button(std::string("Menu"), 
-				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 25), 
-				sf::Vector2f(100, 50), window)),
-	tower1_button(Button(std::string("Arno"),
-				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 125), 
-				sf::Vector2f(100, 50), window)),
-    tower2_button(Button(std::string("Wall"),
-                sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 200), 
-                sf::Vector2f(100, 50), window)),
-	sell_button(Button(std::string("Sell"), 
-				sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 275), 
-				sf::Vector2f(100, 50), window))
+Board::Board(sf::RenderWindow &window): 
+             boardGrid(Grid(grid_x, grid_y, scale,
+                     (grid_x_pixel - 100) / 2 - grid_x * 25,
+                     grid_y_pixel / 2 - grid_y * 25)),
+             window(window),
+             menu_button(
+                 Button(std::string("Menu"),
+                        sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 25),
+                        sf::Vector2f(100, 50), window)),
+             tower1_button(
+                 Button(std::string("Arno"),
+                        sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 125),
+                        sf::Vector2f(100, 50), window)),
+             tower2_button(
+                 Button(std::string("Wall"),
+                        sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 200),
+                        sf::Vector2f(100, 50), window)),
+             sell_button(
+                 Button(std::string("Sell"),
+                        sf::Vector2f(static_cast<float>(grid_x_pixel - 50), 275),
+                        sf::Vector2f(100, 50), window))
 {
-    window.create(sf::VideoMode(grid_x_pixel, grid_y_pixel), "EAmpire Tower Defense", sf::Style::Titlebar | sf::Style::Close);
+    window.create(sf::VideoMode(grid_x_pixel, grid_y_pixel),
+                  "EAmpire Tower Defense",
+                  sf::Style::Titlebar | sf::Style::Close);
 
     setup();
 
@@ -25,10 +33,10 @@ Board::Board(sf::RenderWindow &window):
 
     std::cout << "New board created" << std::endl;
     /*enemy_generator(enemy_queue, 0, 0, 0, 0, 10);
-	enemy_generator(enemy_queue, 0, 0, 0, 10, 0);
-	enemy_generator(enemy_queue, 0, 0, 10, 0, 0);
-	enemy_generator(enemy_queue, 0, 10, 0, 0, 0);
-	enemy_generator(enemy_queue, 10, 0, 0, 0, 0);*/
+        enemy_generator(enemy_queue, 0, 0, 0, 10, 0);
+        enemy_generator(enemy_queue, 0, 0, 10, 0, 0);
+        enemy_generator(enemy_queue, 0, 10, 0, 0, 0);
+        enemy_generator(enemy_queue, 10, 0, 0, 0, 0);*/
 }
 
 void Board::setup() {
@@ -52,18 +60,20 @@ void Board::setup() {
     wave_hint.setCharacterSize(30);
     wave_hint.setFont(font);
     wave_hint.setFillColor(sf::Color(32, 194, 14));
-    wave_hint.setPosition(sf::Vector2f(50, static_cast<float>(grid_y_pixel - 50)));
+    wave_hint.setPosition(
+        sf::Vector2f(50, static_cast<float>(grid_y_pixel - 50)));
     wave_hint.setString("Press Space to summon next wave");
-
 }
 
 void Board::clicked(sf::Vector2i position) {
     if (boardGrid.is_clicked(position.x, position.y)) {
-        //auto start_position = boardGrid.get_start_values();
-        boardGrid.set_tile_navigability((position.x - boardGrid.get_start_values().first) / scale, 
-                                        (position.y - boardGrid.get_start_values().second) / scale, 
-                                        !(boardGrid.is_navigable((position.x - boardGrid.get_start_values().first) / scale, 
-                                        (position.y - boardGrid.get_start_values().second) / scale)));
+        // auto start_position = boardGrid.get_start_values();
+        boardGrid.set_tile_navigability(
+            (position.x - boardGrid.get_start_values().first) / scale,
+            (position.y - boardGrid.get_start_values().second) / scale,
+            !(boardGrid.is_navigable(
+                (position.x - boardGrid.get_start_values().first) / scale,
+                (position.y - boardGrid.get_start_values().second) / scale)));
     }
 }
 
@@ -98,10 +108,8 @@ void Board::next_wave() {
         }
         wave++;
     }
-    
-    
-    
-    //if (game_state->get_round_state() != "fighting") {
+
+    // if (game_state->get_round_state() != "fighting") {
     //    game_state->set_round_state("fighting");
     //    game_state->set_action_state("free");
     //    wave++;
@@ -110,15 +118,20 @@ void Board::next_wave() {
     //}
 }
 
-void Board::calculate_damage(std::vector<tower_ptr> tower_vector, enemy_vector enemies) {
-    if (enemies.size() == 0) {return;}
-    for (auto& tower : tower_vector) {
+void Board::calculate_damage(std::vector<tower_ptr> tower_vector,
+                             enemy_vector enemies) {
+    if (enemies.size() == 0) {
+        return;
+    }
+    for (auto &tower : tower_vector) {
         float shortest_distance = std::numeric_limits<float>::max();
         std::pair<int, std::shared_ptr<Enemy>> shortest_enemy = enemies.front();
 
-        for (auto& enemy : enemies) {
-            float delta_x = abs(tower->get_loc().x - enemy.second->get_location().x);
-            float delta_y = abs(tower->get_loc().y - enemy.second->get_location().y);
+        for (auto &enemy : enemies) {
+            float delta_x =
+                abs(tower->get_loc().x - enemy.second->get_location().x);
+            float delta_y =
+                abs(tower->get_loc().y - enemy.second->get_location().y);
             float distance = sqrt(pow(delta_x, 2) + pow(delta_y, 2));
             if (distance < shortest_distance) {
                 shortest_distance = distance;
@@ -155,17 +168,22 @@ void Board::draw() {
         window.draw(wave_hint);
     }
 
-    if (game_state->get_action_state() == "building1" || game_state->get_action_state() == "building2") {
-        game_state->draw_sprite("hammer", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
+    if (game_state->get_action_state() == "building1" ||
+        game_state->get_action_state() == "building2") {
+        game_state->draw_sprite(
+            "hammer", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)),
+            window);
         window.setMouseCursorVisible(false);
     } else if (game_state->get_action_state() == "selling") {
-        game_state->draw_sprite("sell", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)), window);
+        game_state->draw_sprite(
+            "sell", static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)),
+            window);
         window.setMouseCursorVisible(false);
     } else {
         window.setMouseCursorVisible(true);
     }
 
-    for (auto&enemy : enemies) {
+    for (auto &enemy : enemies) {
         enemy.second->draw(window, 50);
     }
 
@@ -177,12 +195,12 @@ void Board::update() {
     int enemy_index = 0;
     int temp_size = enemies.size();
 
-    for (auto &action: actions) {
+    for (auto &action : actions) {
         action();
     }
-    
+
     if (queue_clock.getElapsedTime() >= sf::milliseconds(500)) {
-        if (enemy_queue.size()>0) {
+        if (enemy_queue.size() > 0) {
             enemies.push_back(enemy_queue.back());
             enemy_queue.pop_back();
         }
@@ -194,26 +212,32 @@ void Board::update() {
         tower_clock.restart();
     }
 
-    //TODO Maybe combine these 4 enemy loops into 1?
-    enemies.erase(std::remove_if(enemies.begin(), enemies.end(), [&](auto& enemy) {return (enemy.second->get_lives() <= 0); }), enemies.end());
-    for (auto&enemy : enemies) {
+    // TODO Maybe combine these 4 enemy loops into 1?
+    enemies.erase(std::remove_if(enemies.begin(), enemies.end(),
+                                 [&](auto &enemy) {
+                                     return (enemy.second->get_lives() <= 0);
+                                 }),
+                  enemies.end());
+    for (auto &enemy : enemies) {
         if (enemy.second->check_end_location(path)) {
             enemy.second->take_damage(enemy.second->get_lives());
-            game_state->set_lives(game_state->get_lives() - enemy.second->get_damage());
+            game_state->set_lives(game_state->get_lives() -
+                                  enemy.second->get_damage());
         }
     }
-    for (auto&enemy : enemies) {
+    for (auto &enemy : enemies) {
         enemy.second->next_location(path);
     }
 
-    if (game_state->get_round_state() == "fighting" && enemies.size() == 0 && enemy_queue.size() == 0) {
+    if (game_state->get_round_state() == "fighting" && enemies.size() == 0 &&
+        enemy_queue.size() == 0) {
         game_state->add_currency(150);
         game_state->set_round_state("building");
     }
 
-	
-    lives.setString(("Lives: " + std::to_string(game_state->get_lives())).c_str());
-    currency_amount.setString(("$: " + std::to_string(game_state->get_curreny())).c_str());
+    lives.setString(
+        ("Lives: " + std::to_string(game_state->get_lives())).c_str());
+    currency_amount.setString(
+        ("$: " + std::to_string(game_state->get_curreny())).c_str());
     current_wave.setString(("Wave: " + std::to_string(wave)).c_str());
-
 }

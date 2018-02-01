@@ -33,7 +33,7 @@ TEST(GridTest, setup) {
         Grid grid(10, 10, 50, window.getSize().x / 4, 50);
 
         auto start = sf::Vector2i(0, 0);
-        auto end   = sf::Vector2i(9, 9);
+        auto end = sf::Vector2i(9, 9);
 
         auto path = grid.find_path(start, end);
     } catch (...) {
