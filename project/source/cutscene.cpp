@@ -126,5 +126,4 @@ void cutscene::end_game() {
     window.display();
     sf::sleep(sf::seconds(3));
     window.clear();
-
 }
