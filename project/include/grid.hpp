@@ -2,11 +2,24 @@
 #define GRID_HPP
 
 #include <SFML/Graphics.hpp>
+#include <algorithm>
+#include <chrono>
+#include <cmath>
+#include <iostream>
+#include <limits>
+#include <random>
+#include <string>
 #include <utility>
 #include <vector>
 
+#include "enemy.hpp"
+#include "enemy_a.hpp"
+#include "enemy_b.hpp"
+#include "enemy_container.hpp"
+#include "enemy_generator.hpp"
 #include "gameState.hpp"
 #include "tile.hpp"
+#include "typedefs.hpp"
 
 /**
 * @file grid.hpp
@@ -21,19 +34,16 @@
 class Grid {
   private:
     std::vector<Tile> tiles;
+
     int size_tiles_x;
     int size_tiles_y;
     int scale;
     int start_x;
     int start_y;
 
-    sf::Texture tile_normal;
-    sf::Texture tile_blocked;
-    sf::Texture tile_path;
+    sf::RectangleShape highlight;
 
-    sf::Sprite sprite_tile_normal;
-    sf::Sprite sprite_tile_blocked;
-    sf::Sprite sprite_tile_path;
+    GameState *game_state = GameState::get_state();
 
     /**
     * @brief Struct to help with path-finding.
@@ -84,8 +94,6 @@ class Grid {
     **/
     std::vector<sf::Vector2i> path_from_grid(std::vector<Mini_tile> &mini_grid,
                                              sf::Vector2i end);
-
-    GameState *game_state = GameState::get_state();
 
   public:
     /**
@@ -145,28 +153,6 @@ class Grid {
     int get_start_y();
 
     /**
-    * @brief Changes the specific tile that has been clicked to non-navigatable
-    *
-    * The right tile is calculated by deviding the coordinate by the scale.
-    * It then communicates to the correct tile that it has been clicked on.
-    *
-    * @param[in] x The relative x coordinate in the grid.
-    * @param[in] y The relative y coordinate in the grid.
-    **/
-    void set_built(int x, int y);
-
-    /**
-    * @brief Changes the specific tile that has been clicked to navigatable
-    *
-    * The right tile is calculated by deviding the coordinate by the scale.
-    * It then communicates to the correct tile that it has been clicked on.
-    *
-    * @param[in] x The relative x coordinate in the grid.
-    * @param[in] y The relative y coordinate in the grid.
-    **/
-    void set_free(int x, int y);
-
-    /**
     * @brief Finds a path in the grid.
     *
     * This function calculates the fastest path from one point in the grid to
@@ -222,19 +208,27 @@ class Grid {
     bool is_navigable(int tile_x, int tile_y);
 
     /**
-    * @brief Draws the grid on the relative coordinates
+    * @brief Draws the grid on the relative coordinates.
     *
     * @param[in] window The window to draw on.
     **/
     void draw(sf::RenderWindow &window);
 
     /**
-    * @brief Draws a path on the grid on the relative coordinates
+    * @brief Draws a path on the grid on the relative coordinates.
     *
     * @param[in] window The window to draw on.
     * @param[in] path Path to be drawn.
     **/
     void draw_path(sf::RenderWindow &window, std::vector<sf::Vector2i> path);
+
+    /**
+    * @brief Draws a highlighted tile on the grid.
+    *
+    * @param[in] window The window to draw on.
+    * @param[in] mouse_location Location of mouse on window.
+    **/
+    void draw_selected(sf::RenderWindow &window, sf::Vector2i mouse_location);
 
     /**
     * @brief Function to turn the grind into a random maze.
@@ -263,6 +257,29 @@ class Grid {
      * @return std::pair with start values
      */
     std::pair<int, int> get_start_values();
+
+    /**
+    * @brief Returns size of grid
+    *
+    * @return std::pair with size values
+    */
+    void reset_damage();
+
+    /**
+    * @brief Get damage
+    *
+    * This function returns the damage of a specific tile (tile_x,tile_y)
+    *
+    * @param[in] tile_x an x coordinate in the grid
+    * @param[in] tile_y a y coordinate in the grid
+    *
+    * @return float with the damage a tile deals
+    */
+    float get_damage(int tile_x, int tile_y);
+
+    std::string get_sprite(int tile_x, int tile_y);
+
+    void set_sprite(int tile_x, int tile_y, std::string new_sprite);
 };
 
 #endif // GRID_HPP

@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <string>
 
 /**
 * @file button.hpp
@@ -17,7 +18,7 @@
 */
 class Button {
   private:
-    std::string &s;
+    std::string s;
     sf::Vector2f location;
     sf::Font font;
     sf::Text text;
@@ -32,12 +33,12 @@ class Button {
     * If this constructor is called, it will create a button according
     * to the following parameters
     *
-    * @param[in] s		The text displayed on the button
+    * @param[in] s		    The text displayed on the button
     * @param[in] location	The top left coordinate of the button
     * @param[in] size		The bottom right coordinate of the button
     * @param[in] window		The window the button is displayed on
     **/
-    Button(std::string &s, sf::Vector2f location, sf::Vector2f size,
+    Button(std::string s, sf::Vector2f location, sf::Vector2f size,
            sf::RenderWindow &window);
 
     /**

@@ -1,11 +1,5 @@
-#ifndef ACTION_HPP
-#define ACTION_HPP
-
-#include <SFML/Graphics.hpp>
-#include <functional>
-
 /**
-* @file button.hpp
+* @file action.hpp
 * @author Nick Goris, Wouter van Ooijen
 * @date 21/1/18
 *
@@ -14,6 +8,11 @@
 * With this class you can save specific events and their corresponding actions
 * (as lambdas)
 */
+#ifndef ACTION_HPP
+#define ACTION_HPP
+
+#include <SFML/Graphics.hpp>
+#include <functional>
 
 class action {
   private:
