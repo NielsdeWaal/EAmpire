@@ -109,10 +109,11 @@ Grid::Grid(): // Default constructor
     size_tiles_x(10), size_tiles_y(10), 
     scale(50), 
     start_x(0), 
-    start_y(0) 
-    {	
-    
-}
+    start_y(0),
+    highlight(sf::RectangleShape(sf::Vector2f(scale, scale)))
+    {
+        highlight.setFillColor(sf::Color(0, 0, 0, 100));
+    }
 
 Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
            int start_y = 0): 
@@ -121,10 +122,11 @@ Grid::Grid(int tiles_x, int tiles_y, int scale = 50, int start_x = 0,
     size_tiles_y(tiles_y), 
     scale(scale), 
     start_x(start_x), 
-    start_y(start_y) 
+    start_y(start_y),
+    highlight(sf::RectangleShape(sf::Vector2f(scale, scale)))
     {
-    //enemy_generator(enemies, 10, 20);
-}
+        highlight.setFillColor(sf::Color(0, 0, 0, 100));
+    }
 
 bool Grid::is_clicked(int x, int y) {
     if ((x - start_x) < 0 || (y - start_y) < 0 ||
@@ -202,6 +204,10 @@ void Grid::draw_path(sf::RenderWindow &window, std::vector<sf::Vector2i> path) {
     }
 }
 
+void Grid::draw_selected(sf::RenderWindow &window, sf::Vector2i mouse_location) {
+    highlight.setPosition(sf::Vector2f((((mouse_location.x-start_x)/50)*50+start_x), (((mouse_location.y-start_y)/50)*50 + start_y)));
+    window.draw(highlight);
+}
 
 //void Grid::update(sf::RenderWindow& window, std::vector<sf::Vector2i> path) {
 //	for(auto tile : path) {
@@ -358,15 +364,24 @@ void Grid::reset_damage() {
 	}
 }
 
-void Grid::calculate_damage(std::vector<tower_ptr> tower_vector) {
-    reset_damage();
+void Grid::calculate_damage(std::vector<tower_ptr> tower_vector, enemy_vector enemies) {
+    if (enemies.size() == 0) {return;}
     for (auto& tower : tower_vector) {
-        for (int y = (tower->get_loc().y + (tower->get_radius()*-1)); y <= tower->get_loc().y + tower->get_radius(); y++ ) {
-            for (int x = (tower->get_loc().x + (tower->get_radius()*-1)); x <= tower->get_loc().x + tower->get_radius(); x++) {
-                if ((x >= 0) && (x < size_tiles_x) && (y >= 0) && (y < size_tiles_y)) {
-                    tiles[y * size_tiles_x + x].update_damage(tower->get_damage());
-                }
+        float shortest_distance = std::numeric_limits<float>::max();
+        std::pair<int, std::shared_ptr<Enemy>> shortest_enemy = enemies.front();
+
+        for (auto& enemy : enemies) {
+            float delta_x = abs(tower->get_loc().x - enemy.second->get_location().x);
+            float delta_y = abs(tower->get_loc().y - enemy.second->get_location().y);
+            float distance = sqrt(pow(delta_x, 2) + pow(delta_y, 2));
+            if (distance < shortest_distance) {
+                shortest_distance = distance;
+                shortest_enemy = enemy;
             }
+        }
+        shortest_distance -= 1;
+        if (shortest_distance < tower->get_radius()) {
+            shortest_enemy.second->take_damage(tower->get_damage());
         }
     }
 }

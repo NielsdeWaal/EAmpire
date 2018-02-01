@@ -2,7 +2,7 @@
 #define TOWER_HPP
 
 #include <SFML/Graphics.hpp>
-
+#include "gameState.hpp"
 
 class Tower
 {
@@ -20,13 +20,15 @@ private:
 
 	int x_location;
 	int y_location;
+    GameState *game_state = GameState::get_state();
 
 public:
+
 	Tower(int x_location, int y_location);
 
 	Tower();
 
-	~Tower();
+	virtual ~Tower();
 
 	void build_tower();
 	void upgrade();
@@ -37,6 +39,8 @@ public:
 	virtual int get_radius();
 
 	virtual sf::Vector2i get_loc();
+
+    virtual float get_cost();
 
 	//sf::Sprite get_sprite();
 };
