@@ -4,13 +4,13 @@
 #include <SFML/Graphics.hpp>
 #include <algorithm>
 #include <chrono>
+#include <cmath>
 #include <iostream>
+#include <limits>
 #include <random>
+#include <string>
 #include <utility>
 #include <vector>
-#include <string>
-#include <cmath>
-#include <limits>
 
 #include "enemy.hpp"
 #include "enemy_a.hpp"
@@ -40,7 +40,7 @@ class Grid {
     int scale;
     int start_x;
     int start_y;
-    
+
     sf::RectangleShape highlight;
 
     GameState *game_state = GameState::get_state();
