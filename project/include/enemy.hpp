@@ -29,6 +29,7 @@ class Enemy {
     float speed;
     // The lives of the enemy
     float lives;
+    const float original_lives;
 
 	/**
 	* @brief Private function to calculate the length of a sf::vector2f in 2D
