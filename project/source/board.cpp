@@ -141,7 +141,15 @@ void Board::next_wave() {
                 }
             }
             else {
-                enemy_generator(enemy_queue, 2 * wave, 2 * wave);
+                enemy_generator(enemy_queue, 2 * wave);
+                enemy_generator(enemy_queue, 0, 0,  wave);
+                enemy_generator(enemy_queue, 0, 2 * wave);
+                if (wave > 18) {
+                    for (int i = 0; i < wave; i++) {
+                        enemy_generator(enemy_queue, 0, 0, 0, 1);
+                        sf::sleep(sf::milliseconds(500));
+                    }
+                }
             }
         }
         wave++;
