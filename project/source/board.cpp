@@ -84,6 +84,7 @@ void Board::clicked(sf::Vector2i position) {
 }
 
 void Board::next_wave() {
+    std::cout << wave << std::endl;
     if (game_state->get_round_state() != "fighting" && game_state->get_round_state() != "death") {
         game_state->set_round_state("fighting");
         game_state->set_action_state("free");
@@ -120,9 +121,9 @@ void Board::next_wave() {
             sf::sleep(sf::milliseconds(500));
             enemy_generator(enemy_queue, 3);
             enemy_generator(enemy_queue, 0,3);
-            scenes.angry_arno();
             break;
         case 7:
+            scenes.angry_arno();
             enemy_generator(enemy_queue, 0, 0, 0, 1);
             sf::sleep(sf::milliseconds(500));
             enemy_generator(enemy_queue, 2);
@@ -138,7 +139,7 @@ void Board::next_wave() {
             enemy_generator(enemy_queue, 5);
             break;
         case 9:
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 2; i++) {
                 enemy_generator(enemy_queue, 0, 0, 0, 1);
                 sf::sleep(sf::milliseconds(500));
                 enemy_generator(enemy_queue, 0, 2, 2, 0);
@@ -147,7 +148,7 @@ void Board::next_wave() {
             }
             break;
         case 10:
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 3; i++) {
                 enemy_generator(enemy_queue, 0, 0, 0, 2);
                 sf::sleep(sf::milliseconds(500));
                 enemy_generator(enemy_queue, 0, 2, 2, 0);
@@ -155,9 +156,19 @@ void Board::next_wave() {
                 enemy_generator(enemy_queue, 0, 5);
                 sf::sleep(sf::milliseconds(500));
             }
-            scenes.boss_fight();
+            break;
+        case 11:
+            for (int i = 0; i < 3; i++) {
+                enemy_generator(enemy_queue, 0, 0, 0, 3);
+                sf::sleep(sf::milliseconds(500));
+                enemy_generator(enemy_queue, 0, 2, 2, 0);
+                enemy_generator(enemy_queue, 7);
+                enemy_generator(enemy_queue, 0, 7);
+                sf::sleep(sf::milliseconds(500));
+            }
             break;
         case 12:
+            scenes.boss_fight();
             for (int i = 0; i < 5; i++) {
                 enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
                 sf::sleep(sf::milliseconds(500));
@@ -165,9 +176,9 @@ void Board::next_wave() {
                 sf::sleep(sf::milliseconds(500));
                 enemy_generator(enemy_queue, 2, 1);
             }
-            scenes.end_game();
             break;
         default:
+            scenes.end_game();
             std::cout << "ENDLESS MODE" << std::endl;
             if (wave % 5 == 0) {
                 enemy_generator(enemy_queue, 0, 0, 0, 0, 1 * (wave/2));
@@ -328,7 +339,7 @@ void Board::update() {
         }
     }
 
-    if (tower_clock >= 25) {
+    if (tower_clock >= 18) {
         tower_clock = 0;
         clear_projectiles();
         calculate_damage(towers, enemies);

@@ -66,7 +66,7 @@ std::string GameState::get_action_state() {
 
 void GameState::set_round_state(std::string state) {
     round_state = state;
-    std::cout << "Round state set to:" << state << std::endl;
+    //std::cout << "Round state set to:" << state << std::endl;
 }
 
 std::string GameState::get_round_state() {
