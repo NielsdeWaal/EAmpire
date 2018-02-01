@@ -17,21 +17,25 @@ tower_b::~tower_b() {
     game_state->add_currency(value - 5);
 }
 
-void tower_b::upgrade() {
-}
+
+//void tower_b::upgrade() {
+//
+//}
+
 
 float tower_b::get_damage() {
     return damage;
 }
 
-void tower_b::draw(sf::RenderWindow &window) {
-    // window.draw(radius_circle);
-}
 
 sf::Vector2i tower_b::get_loc() {
     return sf::Vector2i(x_location, y_location);
 }
 
 int tower_b::get_radius() {
-    return radius;
+	return radius;
+}
+
+float tower_b::get_cost() {
+    return cost;
 }

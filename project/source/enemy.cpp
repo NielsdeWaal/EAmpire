@@ -122,7 +122,7 @@ void Enemy::draw(sf::RenderWindow &window, const int &tile_size) {
 }
 
 float Enemy::get_lives() {
-    return lives;
+    return static_cast<float>(lives);
 }
 
 void Enemy::set_lives(float lives_input) {
