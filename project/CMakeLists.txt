@@ -92,6 +92,8 @@ set(sources
     source/tower.cpp
     source/tower_a.cpp
     source/tower_b.cpp
+	source/image.cpp
+	source/cutscene.cpp
     include/game.hpp
     include/board.hpp
     include/grid.hpp
@@ -109,7 +111,9 @@ set(sources
     include/tower.hpp
     include/tower_a.hpp
     include/tower_b.hpp
-    include/typedefs.hpp)
+    include/typedefs.hpp
+	include/image.hpp
+	include/cutscene.hpp)
 
 
 set(gridLibSRC
