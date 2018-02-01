@@ -9,7 +9,7 @@ cutscene::cutscene(sf::RenderWindow &window):
                    scene3(sf::Vector2f(0, 19.0f), "textures/scene3.png"),
                    scene4(sf::Vector2f(0, 66.5f), "textures/scene4.png"),
                    scene5(sf::Vector2f(0, 32.0f), "textures/scene5.png"),
-                   scene6(sf::Vector2f(0, 101.5f), "textures/scene6.png"),
+                   scene6(sf::Vector2f(0, 56.5f), "textures/scene6.png"),
                    scene7(sf::Vector2f(0, 66.5f), "textures/scene7.png"),
                    scene8(sf::Vector2f(0, 68.5f), "textures/scene8.png"),
                    scene9(sf::Vector2f(0, 68.0f), "textures/scene9.png"),
@@ -17,7 +17,12 @@ cutscene::cutscene(sf::RenderWindow &window):
                    scene11(sf::Vector2f(0, 42.5f), "textures/scene11.png"),
                    scene12(sf::Vector2f(0, 42.5f), "textures/scene12.png"),
                    scene13(sf::Vector2f(0, 42.5f), "textures/scene13.png"),
-                   scene14(sf::Vector2f(0, 42.5f), "textures/scene14.png") 
+                   scene14(sf::Vector2f(0, 42.5f), "textures/scene14.png"),
+                   angry_arni(sf::Vector2f(75.0f,0), "textures/AngryArnoScene.png"),
+                   boss_fight1(sf::Vector2f(0,0), "textures/ArnoBossFight.png"),
+                   boss_fight2(sf::Vector2f(0, 0), "textures/ArnoBossFight2.png"),
+                   end_game1(sf::Vector2f(0, 0), "textures/AfterGameScene1.png"),
+                   end_game2(sf::Vector2f(0, 0), "textures/AfterGameScene2.png")
 {}
 
 void cutscene::play_scene() {
@@ -90,4 +95,36 @@ void cutscene::play_scene() {
     window.display();
     sf::sleep(sf::seconds(sleep));
     window.clear();
+}
+
+void cutscene::angry_arno() {
+    angry_arni.draw(window);
+    window.display();
+    sf::sleep(sf::seconds(5));
+    window.clear();
+}
+
+void cutscene::boss_fight() {
+    boss_fight1.draw(window);
+    window.display();
+    sf::sleep(sf::seconds(3));
+    window.clear();
+
+    boss_fight2.draw(window);
+    window.display();
+    sf::sleep(sf::seconds(3));
+    window.clear();
+}
+
+void cutscene::end_game() {
+    end_game1.draw(window);
+    window.display();
+    sf::sleep(sf::seconds(3));
+    window.clear();
+
+    end_game2.draw(window);
+    window.display();
+    sf::sleep(sf::seconds(3));
+    window.clear();
+
 }
