@@ -110,6 +110,28 @@ void Board::next_wave() {
     //}
 }
 
+void Board::calculate_damage(std::vector<tower_ptr> tower_vector, enemy_vector enemies) {
+    if (enemies.size() == 0) {return;}
+    for (auto& tower : tower_vector) {
+        float shortest_distance = std::numeric_limits<float>::max();
+        std::pair<int, std::shared_ptr<Enemy>> shortest_enemy = enemies.front();
+
+        for (auto& enemy : enemies) {
+            float delta_x = abs(tower->get_loc().x - enemy.second->get_location().x);
+            float delta_y = abs(tower->get_loc().y - enemy.second->get_location().y);
+            float distance = sqrt(pow(delta_x, 2) + pow(delta_y, 2));
+            if (distance < shortest_distance) {
+                shortest_distance = distance;
+                shortest_enemy = enemy;
+            }
+        }
+        shortest_distance -= 1;
+        if (shortest_distance < tower->get_radius()) {
+            shortest_enemy.second->take_damage(tower->get_damage());
+        }
+    }
+}
+
 void Board::draw() {
     window.clear(sf::Color(0, 0, 0)); // Clear screen with a black background.
 
@@ -168,7 +190,7 @@ void Board::update() {
     }
 
     if (tower_clock.getElapsedTime() >= sf::milliseconds(500)) {
-        boardGrid.calculate_damage(towers, enemies);
+        calculate_damage(towers, enemies);
         tower_clock.restart();
     }
 
