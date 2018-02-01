@@ -17,13 +17,15 @@
 */
 
 class Enemy {
-private:
-	//The damage that the enemy can do to the lives of the player. And the speed with which the enemy can move
-	const int damage;
-	//The speed with which the enemy is running. The range is from 0 to 1. (for example: 0.2)
-	float speed;
-	//The lives of the enemy
-	float lives;
+  private:
+    // The damage that the enemy can do to the lives of the player. And the
+    // speed with which the enemy can move
+    const int damage;
+    // The speed with which the enemy is running. The range is from 0 to 1. (for
+    // example: 0.2)
+    float speed;
+    // The lives of the enemy
+    float lives;
 
 	/**
 	* @brief Private function to calculate the length of a sf::vector2f in 2D
@@ -33,15 +35,16 @@ private:
 	*/
 	float length(sf::Vector2f distance);
 
-	/**
-	* @brief Private function to normalize a sf::vector2f in 2D
-	* 
-	* It uses the length function
-	*
-	* @param[in]	vector				The vector that have to be calculated
-	* @return		sf::Vector2i		The normalized vector
-	*/
-	sf::Vector2f normalize(sf::Vector2f distance_nextlocation);
+    /**
+    * @brief Private function to normalize a sf::vector2f in 2D
+    *
+    * It uses the length function
+    *
+    * @param[in]	vector				The vector that have to be
+    * calculated
+    * @return		sf::Vector2i		The normalized vector
+    */
+    sf::Vector2f normalize(sf::Vector2f distance_nextlocation);
 
 	/**
 	* @brief Private function for checking when ther is a corner within the grid
@@ -79,17 +82,18 @@ public:
 	*/
 	Enemy( sf::Color color, const int damage, const float speed, float lives);
 
-	/**
-	* @brief Destructor
-	*/
-	~Enemy();
+    /**
+    * @brief Destructor
+    */
+    ~Enemy();
 
-	/**
-	* @brief Function that reduces the lives of the player
-	*
-	* @param[in]	lives_player		The lives of the player who must be reduced
-	*/
-	void attack(int & lives_player);
+    /**
+    * @brief Function that reduces the lives of the player
+    *
+    * @param[in]	lives_player	The lives of the player who must be
+    * reduced
+    */
+    void attack(int &lives_player);
 
 	/**
 	* @brief Virtual Function that reduces the lives of the enemy

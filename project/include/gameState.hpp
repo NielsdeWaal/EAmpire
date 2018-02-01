@@ -23,9 +23,9 @@ class GameState {
     GameState();
 
     // TODO Is a hardcoded value, needs to be scalable to difficulty level.
-    signed int lives = 100; ///< Current amount of lives.
+    signed int lives = 25; ///< Current amount of lives.
 
-    signed int curreny_amount = 300;
+    signed int curreny_amount = 450;
 
     bool new_round = true;
 

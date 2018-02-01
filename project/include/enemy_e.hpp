@@ -13,7 +13,8 @@
 *
 * @brief subclass of Enemy
 *
-* This is a subclass of Enemy. The Enemy is a circle shape with adaptable diameter and adaptable color.
+* This is a subclass of Enemy. The Enemy is a circle shape with adaptable
+* diameter and adaptable color.
 */
 
 class Enemy_e :public Enemy {
@@ -31,4 +32,3 @@ public:
 	~Enemy_e();
 };
 #endif // ENEMY_E_HPP
-

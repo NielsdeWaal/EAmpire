@@ -13,22 +13,23 @@
 *
 * @brief subclass of Enemy
 *
-* This is a subclass of Enemy. The Enemy is a circle shape with adaptable diameter and adaptable color.
+* This is a subclass of Enemy. The Enemy is a circle shape with adaptable
+* diameter and adaptable color.
 */
 
-class Enemy_c :public Enemy {
-public:
-	/**
-	* @brief Constructor
-	*
-	* When this constructor is called, it will make a custom enemy.
-	*/
-	Enemy_c();
-	
-	/**
-	* @brief Destructor
-	*/
-	~Enemy_c();
+class Enemy_c : public Enemy {
+  public:
+    /**
+    * @brief Constructor
+    *
+    * When this constructor is called, it will make a custom enemy.
+    */
+    Enemy_c();
+
+    /**
+    * @brief Destructor
+    */
+    ~Enemy_c();
 
     /**
     * @brief Custom function for taking enemy_a down
@@ -42,4 +43,3 @@ public:
 	void take_damage(float damage_tower) override;
 };
 #endif // ENEMY_C_HPP
-
