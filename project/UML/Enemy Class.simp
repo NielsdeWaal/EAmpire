@@ -22,12 +22,12 @@
         <value>2</value>
       </counter>
       <counter>
-        <item-type type-id="" type="AbstractElementGroup" />
-        <value>63</value>
-      </counter>
-      <counter>
         <item-type type-id="relationship" type="UmlAssociation" />
         <value>5</value>
+      </counter>
+      <counter>
+        <item-type type-id="" type="AbstractElementGroup" />
+        <value>8</value>
       </counter>
     </entity-ids>
     <diagrams>
@@ -39,7 +39,7 @@
     <fields>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.AttributeField</type>
-        <value>23</value>
+        <value>33</value>
       </counter>
       <counter>
         <type>SoftwareIdeasModeler.Core.DiagramItems.Fields.OperationField</type>
@@ -97,6 +97,7 @@
       <type id="sf::Vector2f &amp;" tid="" name="sf::Vector2f &amp;" description="" />
       <type id="const sf::Color (sf::Color" tid="" name="const sf::Color (sf::Color" description="" />
       <type id=", in damage : Integer const, in speed : Integer const, in lives : Integer, in diameter : const Float)" tid="" name=", in damage : Integer const, in speed : Integer const, in lives : Integer, in diameter : const Float)" description="" />
+      <type id="sf::Vector2f (sf::Vector2f)" tid="" name="sf::Vector2f (sf::Vector2f)" description="" />
     </custom-types>
   </types>
   <items />
@@ -114,7 +115,7 @@
       </meta>
       <abstract-items />
       <sub-models />
-      <diagram type="uml-class" id="pb1df69bf2e194a5aa5e73cf5aaf950aa_974245920" name="ClassDiagram1" order-index="1" uid="" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="0,-49">
+      <diagram type="uml-class" id="pb1df69bf2e194a5aa5e73cf5aaf950aa_974245920" name="ClassDiagram1" order-index="1" uid="" show-id="false" show-name="true" show-parent-name="false" show-stereotypes="true" show-tagged-values="false" show-template-parameters="true" show-fields="true" show-empty-compartments="true" show-special-indicators="false" show-attributes="true" show-attribute-visibility="true" show-operations="true" show-operation-parameters="true" show-operation-visibility="true" show-nullability="true" show-sequence-number="false" show-extension-points="false" show-relationship-texts="true" show-description="false" show-field-description="false" auto-routed-paths="false" view-location="-236,-49">
         <style>
           <background-color index="1" color="#FFFFFFFF" />
           <background-color index="2" color="#FFFFFFFF" />
@@ -132,36 +133,81 @@
         </meta>
         <abstract-items>
           <item id="di521220485485105064" cid="C001" type="class" name="Enemy" style-class="" is-abstract="true" visibility="package" change-tracking-state="added" creator="P0ea67b968ed04ee3be01200c7269b66d" creation-date="01/19/2018 19:33:23">
-            <style class="default" />
+            <style style-name="Default" shadow-type="smooth" shadow-offset="1,1" shadow-visible="true" shadow-color="#32000000" gloss-effect="true" wrap-name-text="true" wrap-other-text="true" padding="1" margin="1" glow-color="#FFFFFFFF" accuracy="0.9">
+              <text-style type="name" use-defaults="false" color="#FF000000" font="Verdana;10;B" horizontal-alignment="center" vertical-alignment="center" shadow="false" />
+              <text-style type="part-header" use-defaults="false" color="#FF1E1E1E" font="Verdana;9;I" horizontal-alignment="center" vertical-alignment="center" shadow="false" />
+              <text-style type="text" use-defaults="false" color="#FF000000" font="Verdana;9;" horizontal-alignment="left" vertical-alignment="center" shadow="false" />
+              <text-style type="tagged-value" use-defaults="false" color="#FF1E1E1E" font="Verdana;9;I" horizontal-alignment="center" vertical-alignment="center" shadow="false" />
+              <text-style type="stereotype" use-defaults="false" color="#FF1E1E1E" font="Verdana;9;I" horizontal-alignment="center" vertical-alignment="center" shadow="false" />
+              <background type="forward-diagonal" color="#FFFFFFFF" color2="#FFEBEBEB" />
+              <border color="#FF000000" width="1" dash-style="Solid" />
+              <label-connector color="#80000000" width="1" dash-style="Dash" />
+              <alternate-styles>
+                <alternate-style style-name="Alternate" shadow-type="smooth" shadow-offset="1,1" shadow-color="#32000000" gloss-effect="true" wrap-name-text="true" padding="1" margin="1" glow-color="#FFFFFFFF" accuracy="0.9">
+                  <text-style type="name" use-defaults="false" color="#FFFFFFFF" font="Verdana;10;B" horizontal-alignment="center" vertical-alignment="center" shadow="false" />
+                  <text-style type="part-header" use-defaults="false" color="#FF1E1E1E" font="Verdana;9;I" horizontal-alignment="center" vertical-alignment="center" shadow="false" />
+                  <text-style type="text" use-defaults="false" color="#FFFFFFFF" font="Verdana;9;" horizontal-alignment="left" vertical-alignment="center" shadow="false" />
+                  <text-style type="tagged-value" use-defaults="false" color="#FFFFFFFF" font="Verdana;9;I" horizontal-alignment="center" vertical-alignment="center" shadow="false" />
+                  <text-style type="stereotype" use-defaults="false" color="#FFFFFFFF" font="Verdana;9;I" horizontal-alignment="center" vertical-alignment="center" shadow="false" />
+                  <background type="solid" color="#FF2B508B" color2="#FF87CEFA" />
+                  <border color="#FF2B508B" width="1" dash-style="Solid" />
+                  <label-connector color="#FF000000" width="1" dash-style="Solid" />
+                </alternate-style>
+              </alternate-styles>
+            </style>
             <attributes>
-              <attribute id="a7b7a31c6b8b741abaaea3357533e4b0a823" cid="ELEM001" name="lives" creation-date="01/01/0001 00:00:00" type="Integer" type-id="Uml.Integer" visibility="private">
+              <attribute id="a7b7a31c6b8b741abaaea3357533e4b0a823" cid="ELEM001" name="lives" creation-date="01/01/0001 00:00:00" type="Float" type-id="Float" visibility="private">
                 <style class="default" />
                 <source-codes>
-                  <source-code language="ActionScript" uid="scs-bb9c9826-d313-48dc-b406-6addc52c13ab" />
+                  <source-code language="ActionScript" uid="scs-b53a4c6a-87cc-4173-a333-7a2706e1b3eb" />
                 </source-codes>
               </attribute>
               <attribute id="a429a594672fe45be867c1a59e33ec333415" cid="ELEM002" name="damage" creation-date="01/01/0001 00:00:00" type="Integer const (Interger const)" type-id="Integer const (Interger const)" visibility="private">
                 <style class="default" />
                 <source-codes>
-                  <source-code language="ActionScript" uid="scs-c81c1326-ee42-4876-a511-69fb8ebad2ee" />
+                  <source-code language="ActionScript" uid="scs-bcdbb4f0-5855-49a2-836b-ce67606ae3e7" />
                 </source-codes>
               </attribute>
-              <attribute id="ae3286a8b961548df9cf4ea6da9716737317" cid="ELEM003" name="speed" creation-date="01/01/0001 00:00:00" type="Integer const" type-id="Integer const" visibility="private">
+              <attribute id="ae3286a8b961548df9cf4ea6da9716737317" cid="ELEM003" name="speed" creation-date="01/01/0001 00:00:00" type="Float" type-id="Float" visibility="private">
                 <style class="default" />
                 <source-codes>
-                  <source-code language="ActionScript" uid="scs-8c9de622-ee1e-4d3c-9a0b-7612972287db" />
+                  <source-code language="ActionScript" uid="scs-8e347915-508e-4f8b-a8e6-ed9c82e9c68d" />
                 </source-codes>
               </attribute>
-              <attribute id="aa76141a5b1ad4c4e86180a943eb941e2317" cid="ELEM006" name="position" creation-date="01/01/0001 00:00:00" type="sf::Vector2f" type-id="sf::Vector2f" visibility="protected">
+              <attribute id="aa76141a5b1ad4c4e86180a943eb941e2317" cid="ELEM006" name="position" creation-date="01/01/0001 00:00:00" type="sf::Vector2f" type-id="sf::Vector2f" visibility="private">
                 <style class="default" />
                 <source-codes>
-                  <source-code language="ActionScript" uid="scs-5c61ae9d-303e-42d4-b96a-1a5cf710d1a8" />
+                  <source-code language="ActionScript" uid="scs-cb8ef1e9-878f-4147-abcb-a6cda18246f1" />
                 </source-codes>
               </attribute>
-              <attribute id="a4b96ba7ac03e429eaf792c7478c4bcf8961" cid="ELEM007" name="color" creation-date="01/01/0001 00:00:00" type="sf::Color" type-id="sf::Color" visibility="protected">
+              <attribute id="a4b96ba7ac03e429eaf792c7478c4bcf8961" cid="ELEM007" name="color" creation-date="01/01/0001 00:00:00" type="sf::Color" type-id="sf::Color" visibility="private">
                 <style class="default" />
                 <source-codes>
-                  <source-code language="ActionScript" uid="scs-bf689664-0996-4124-8260-79969103fefa" />
+                  <source-code language="ActionScript" uid="scs-5a6e0672-6261-4bf4-a3c9-96384b9fba9c" />
+                </source-codes>
+              </attribute>
+              <attribute id="a850b5412adc5488ea6d51d4d793ba029604" cid="ELEM028" name="diameter" creation-date="01/01/0001 00:00:00" type="Float" type-id="Float" visibility="private" default-value="24">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-c44b722a-2ec0-402d-9ee5-5c658d128e88" />
+                </source-codes>
+              </attribute>
+              <attribute id="ae89cb92902ad485da48bd7b93d956615848" cid="ELEM030" name="circle" creation-date="01/01/0001 00:00:00" type="sf::CircleShape" type-id="sf::CircleShape" visibility="private">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-dd5cd0ec-f68d-49f1-834d-0cc560e38f9e" />
+                </source-codes>
+              </attribute>
+              <attribute id="a96efed5440e74f59a0e4cfa08c23a23c639" cid="ELEM031" name="boundaryA" creation-date="01/01/0001 00:00:00" type="sf::Vector2f" type-id="sf::Vector2f" visibility="private" default-value="(0.0,0.0)">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-562e7956-5372-4575-8349-1382976cb165" />
+                </source-codes>
+              </attribute>
+              <attribute id="af2c12381d1954231a052ffcb6ffb3997269" cid="ELEM032" name="boundaryB" creation-date="01/01/0001 00:00:00" type="sf::Vector2f (sf::Vector2f)" type-id="sf::Vector2f (sf::Vector2f)" visibility="private">
+                <style class="default" />
+                <source-codes>
+                  <source-code language="ActionScript" uid="scs-cf8fb371-3364-4e97-8ed7-c1782bc80e4c" />
                 </source-codes>
               </attribute>
             </attributes>
@@ -482,15 +528,15 @@
           <item id="di125238678523883080" cid="REL001" type="relationship" name="" style-class="" visibility="package" change-tracking-state="added" creation-date="01/29/2018 15:14:51" from="di845925958607057174" to="di323763092662904112">
             <style class="default" />
             <relation from="di845925958607057174" to="di323763092662904112">
-              <start-role id="umlar-b3455fe5-3ba5-4788-a688-678d52d4e0c1" name="" navigability="" association-type="association" visibility="private" />
-              <end-role id="umlar-50403731-9ce2-4893-9ae3-13bdaf834cfd" name="" navigability="" association-type="association" visibility="private" />
+              <start-role id="umlar-f76ba346-c113-4b7b-9f23-cb65e4a29b09" name="" navigability="" association-type="association" visibility="private" />
+              <end-role id="umlar-200c483d-9b60-4db3-8196-6e9e6b5cfb96" name="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
           <item id="di200822043827409302" cid="REL002" type="relationship" name="" style-class="" visibility="package" change-tracking-state="added" creation-date="01/29/2018 15:14:53" from="di323763092662904112" to="di323763092662904112">
             <style class="default" />
             <relation from="di323763092662904112" to="di323763092662904112">
-              <start-role id="umlar-499366d8-3ea0-494a-b7b6-1fa26e07ee2f" name="" navigability="" association-type="association" visibility="private" />
-              <end-role id="umlar-e18d19cd-6b5a-4b4d-aed0-3ecf01aea5d2" name="" navigability="yes" association-type="association" visibility="private" />
+              <start-role id="umlar-3c69e0ba-3d8a-4147-a52c-5af9c254c93e" name="" navigability="" association-type="association" visibility="private" />
+              <end-role id="umlar-ef3d926b-45e3-42b6-b309-b34260f5907a" name="" navigability="yes" association-type="association" visibility="private" />
             </relation>
           </item>
           <item id="di675571771263734081" cid="C002" type="class" name="Enemy_b" style-class="" visibility="package" change-tracking-state="added" creation-date="01/21/2018 17:31:39">
@@ -529,30 +575,30 @@
           <item id="di951146599630706028" cid="REL003" type="relationship" name="" style-class="" visibility="package" change-tracking-state="added" creation-date="01/29/2018 15:18:01" from="di675571771263734081" to="di125238678523883080">
             <style class="default" />
             <relation from="di675571771263734081" to="di125238678523883080">
-              <start-role id="umlar-cd8b786d-6901-472b-96e3-dfe1c264edb6" name="" navigability="" association-type="association" visibility="private" />
-              <end-role id="umlar-28cbd578-a923-498b-8d92-d0a7e1deb663" name="" navigability="" association-type="association" visibility="private" />
+              <start-role id="umlar-eaa5cdf8-aed3-4a5c-897a-1d853822d3eb" name="" navigability="" association-type="association" visibility="private" />
+              <end-role id="umlar-6f909fb5-0f3a-45be-9e93-90372f6c843d" name="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
           <item id="di668462981349015442" cid="REL004" type="relationship" name="" style-class="" visibility="package" change-tracking-state="added" creation-date="01/29/2018 15:19:16" from="di675571771263734081" to="di167123449275628929">
             <style class="default" />
             <relation from="di675571771263734081" to="di167123449275628929">
-              <start-role id="umlar-586344b6-9fc5-4667-901c-7469dab4004f" name="" navigability="" association-type="association" visibility="private" />
-              <end-role id="umlar-0ada607e-810e-4615-bcc3-ca9dda73b71b" name="" navigability="" association-type="association" visibility="private" />
+              <start-role id="umlar-0baf5c07-e860-42e1-b0c3-0dab19c9302a" name="" navigability="" association-type="association" visibility="private" />
+              <end-role id="umlar-6cf8c6b2-716e-436d-8d0c-6172a31f33c4" name="" navigability="" association-type="association" visibility="private" />
             </relation>
           </item>
         </abstract-items>
         <layer id="7d430991c8444f6198a03c77349daf2c" name="Default" visible="true" enabled="true" locked="false">
           <item id="di521220485485105064" iid="42b2b5fe50a64cb3a069b8526f08d99c" creation-date="01/19/2018 19:33:23" order-index="0" type="entity">
-            <layout ax="120" ay="55" awidth="398" aheight="400" x="120" y="55" width="398" height="400" />
+            <layout ax="-132" ay="55" awidth="650" aheight="460" x="-132" y="55" width="650" height="460" />
             <class />
           </item>
           <item id="di167123449275628929" iid="3153ee79112c4d1a9f58a2bcc87526f0" creation-date="01/21/2018 17:58:52" order-index="2" type="relation">
-            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="true" auto-path="" x1="715" y1="140" x2="518" y2="264" start-border-pos="0.875366568565369" end-border-pos="0.380625" name-position="0,0">
+            <layout line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="true" auto-path="" x1="715" y1="140" x2="518" y2="310" start-border-pos="0.875366568565369" end-border-pos="0.388858695652174" name-position="0,0">
               <points>
                 <point x="715" y="140" />
                 <point x="616" y="142" />
                 <point x="616" y="263" />
-                <point x="518" y="264" />
+                <point x="518" y="310" />
               </points>
             </layout>
             <relation from="di845925958607057174" from-iid="3e60b8802dba488abce9fb72ec4bdaae" from-field="oeb1f70052ae34bfdaa088817df707e3c545" to="di521220485485105064" to-iid="42b2b5fe50a64cb3a069b8526f08d99c" to-field="o794097abd5754a46ab57170063d75c63421" />
@@ -590,11 +636,11 @@
             <class />
           </item>
           <item id="di668462981349015442" iid="8b41b93321834ac4a480f98abeb32aca" creation-date="01/29/2018 15:19:16" order-index="6" type="relation">
-            <layout start-role-position="25,15" end-role-position="25,-15" end-role-width="50" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" auto-path="" x1="715" y1="320" x2="615" y2="263" start-border-pos="0.875733137829912" end-border-pos="0.694976942424245" name-position="-13,7">
+            <layout start-role-position="25,15" end-role-position="25,-15" end-role-width="50" start-multiplicity-position="25,-15" end-multiplicity-position="25,15" line-style="oblique" lock-start-point="true" lock-end-point="true" lock-to-fields="false" auto-path="" x1="715" y1="320" x2="608" y2="267" start-border-pos="0.875733137829912" end-border-pos="0.694976942424245" name-position="-13,7">
               <points>
                 <point x="715" y="320" />
                 <point x="615" y="320.5" />
-                <point x="615" y="263" />
+                <point x="608" y="267" />
               </points>
             </layout>
             <relation from="di675571771263734081" from-iid="7baaa4a715ed4ed3b804aa929f51ae69" to="di167123449275628929" to-iid="3153ee79112c4d1a9f58a2bcc87526f0" />
