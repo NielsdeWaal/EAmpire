@@ -18,18 +18,15 @@ tower_b::~tower_b() {
 }
 
 
-void tower_b::upgrade() {
-
-}
+//void tower_b::upgrade() {
+//
+//}
 
 
 float tower_b::get_damage() {
 	return damage;
 }
 
-void tower_b::draw(sf::RenderWindow & window) {
-	//window.draw(radius_circle);
-}
 
 sf::Vector2i tower_b::get_loc() {
 	return sf::Vector2i(x_location, y_location);
@@ -37,4 +34,8 @@ sf::Vector2i tower_b::get_loc() {
 
 int tower_b::get_radius() {
 	return radius;
+}
+
+float tower_b::get_cost() {
+    return cost;
 }

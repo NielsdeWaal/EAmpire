@@ -46,7 +46,7 @@ void Enemy::take_damage(float damage_tower) {
    // if (lives <= 0) {
    //     std::cout << "death";
    // } else {
-        lives -= damage_tower;
+        lives -= static_cast<int>(damage_tower);
         //std::cout << "lives down";
     //}
 }
@@ -125,7 +125,7 @@ void Enemy::draw(sf::RenderWindow & window, const int & tile_size) {
 }
 
 float Enemy::get_lives() {
-    return lives;
+    return static_cast<float>(lives);
 }
 
 sf::Vector2f Enemy::get_location() {
