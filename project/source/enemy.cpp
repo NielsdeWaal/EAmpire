@@ -55,13 +55,6 @@ void Enemy::move_direction(const int & size_grid) {
 	}
 }
 
-sf::Vector2f Enemy::Vector2f_from_Vector2i(sf::Vector2i rhs) {
-	return sf::Vector2f(
-		static_cast< float >(rhs.x),
-		static_cast< float >(rhs.y)
-	);
-};
-
 void Enemy::next_location(std::vector<sf::Vector2i> path) {
 	for (auto it = path.begin(); it != path.end(); ++it) {
 		if (it->x == boundaryA.x && it->y == boundaryA.y) {

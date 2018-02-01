@@ -112,13 +112,6 @@ public:
 	
 
 	/**
-	* @brief Function for transforming a vector2f to 2i.
-	*
-	* @param[in]	rhs					The vector2i what have to be transformed
-	*/
-	sf::Vector2f Vector2f_from_Vector2i(sf::Vector2i rhs);
-
-	/**
 	* @brief Function for looking at the next location on the path
 	*
 	* If first, the function passes through the tile of the path.
