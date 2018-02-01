@@ -62,7 +62,7 @@ private:
 	sf::CircleShape circle;
 	//The start boundary that have to be located: default first tile(most left at top)
 	sf::Vector2f boundaryA = sf::Vector2f(0, 0);
-	//The end boundary that have to be locatred 
+	//The end boundary that have to be located 
 	sf::Vector2f boundaryB;
 public:
 
@@ -92,14 +92,11 @@ public:
 	void attack(int & lives_player);
 
 	/**
-	* @brief Function that reduces the lives of the enemy
-	*
-	* Reduces the lives of the enemy with the attack number of the towers.
-	* when the lives are at 0, the destructor will be invoked.
+	* @brief Virtual Function that reduces the lives of the enemy
 	*
 	* @param[in]	damage_tower		The damage of the tower who reduced the lives of the enemy
 	*/
-	virtual void take_damage(float damage_tower) {};
+	virtual void take_damage(float damage_tower);
 
 	/**
 	* @brief Function for moving the enemy to a specific location
@@ -136,37 +133,78 @@ public:
 	* otherwise boundaryA becomes boundaryB. If the next tile is not the last tile. 
 	* BoundaryB becomes the next location in the path. and then the enemy moves in the direction of boundaryB and executes a corner check
 	*
-	* untrue, true will be returned
+	* @param[in]	path				The path for looking at the next pathtile
+	*/
+
+	void next_location(std::vector<sf::Vector2i> path);
+
+
+	/**
+	* @brief Function for looking at the next location on the path
 	*
 	* @param[in]	path				The path for looking at the next pathtile
 	*
 	* @return		bool				When the end destination is reached, true will be returned.
 	*/
-
-	void next_location(std::vector<sf::Vector2i> path);
-
     bool check_end_location(std::vector<sf::Vector2i> path);
 
 
 	/**
-	* @brief Virtual function for drawing the enemy
+	* @brief Function for drawing the enemy
 	*
 	* @param[out]	window				The screen on which you have to draw
 	*/
 	void draw(sf::RenderWindow & window, const int & tile_size);
 
 
+    /**
+    * @brief Getter for lives
+    *
+    * @return       float               Lives of the enemy
+    */
     float get_lives();
 
+    /**
+    * @brief Setter for lives
+    *
+    * @param        float               Input float to set lives
+    */
 	void set_lives(float lives);
-
+    
+    /**
+    * @brief Getter for location
+    *
+    * @return       sf::Vector2f        Location of the enemy
+    */
     sf::Vector2f get_location();
 
-	void set_fillcolor(sf::Color color_output);
+    /**
+    * @brief Setter for the color of the enemy
+    *
+    * @param[in]    sf::Color           Color_input to set the color of the circle
+    */
+	void set_fillcolor(sf::Color color_input);
 
+    /**
+    * @brief Getter for color
+    *
+    * @return       sf::Color           Color of the enemy
+    */
 	sf::Color get_fillcolor();
 
+    /**
+    * @brief Setter for speed
+    *
+    * @param       float                Speed_input to set the speed of the enemy
+    */
 	void set_speed(float speed_input);
+
+    /**
+    * @brief Getter for damage
+    *
+    * @return       int                 Damage of the enemy
+    */
+    int get_damage();
 };
 
 #endif // ENEMY_HPP

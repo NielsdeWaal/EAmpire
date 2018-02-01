@@ -29,8 +29,6 @@ public:
 	* @brief Destructor
 	*/
 	~Enemy_e();
-
-	void take_damage(float damage_tower) override;
 };
 #endif // ENEMY_E_HPP
 
