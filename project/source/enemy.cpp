@@ -107,7 +107,7 @@ bool Enemy::check_end_location(std::vector<sf::Vector2i> path) {
 
 void Enemy::draw(sf::RenderWindow &window, const int &tile_size) {
     game_state->draw_sprite(name, sf::Vector2f((position.x + 1) * tile_size, (position.y + 1) * tile_size), window);
-    game_state->draw_sprite("health" + std::to_string((static_cast<int>(lives/original_lives)*10)), sf::Vector2f((position.x + 1.1) * tile_size, (position.y + 1.9) * tile_size), window);
+    game_state->draw_sprite("health" + std::to_string(static_cast<int>((lives/original_lives)*10)), sf::Vector2f((position.x + 1.1) * tile_size, (position.y + 1.9) * tile_size), window);
 }
 
 float Enemy::get_lives() {
