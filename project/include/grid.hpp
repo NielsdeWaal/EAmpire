@@ -15,7 +15,6 @@
 #include "enemy.hpp"
 #include "enemy_a.hpp"
 #include "enemy_b.hpp"
-#include "enemy_container.hpp"
 #include "enemy_generator.hpp"
 #include "gameState.hpp"
 #include "tile.hpp"

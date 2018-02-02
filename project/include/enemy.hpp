@@ -75,7 +75,7 @@ public:
 	* If this constructor is called, it will make a circle shaped enemy with custom characteristics.
 	* That are determines by the parameters. It will also automatic set the radius, color and position.
 	*
-	* @param[in]	color				The default color of the enemy.
+	* @param[in]	name				The name of the enemy
 	* @param[in]	damage				The damage the enemy will do to the players lives.
 	* @param[in]	speed				The speed with which the enemy moves.
 	* @param[in]	lives				The lives of the enemy.
