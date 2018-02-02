@@ -178,7 +178,9 @@ void Board::next_wave() {
             }
             break;
         default:
-            scenes.end_game();
+            if (wave == 13) {
+                game_state->set_game_state("won");
+            }
             std::cout << "ENDLESS MODE" << std::endl;
             if (wave % 5 == 0) {
                 enemy_generator(enemy_queue, 0, 0, 0, 0, 1 * (wave/2));
@@ -193,9 +195,11 @@ void Board::next_wave() {
                 }
             }
             else {
-                enemy_generator(enemy_queue, 2 * wave);
-                enemy_generator(enemy_queue, 0, 0,  wave);
-                enemy_generator(enemy_queue, 0, 2 * wave);
+                for (int j = 0; j < wave; j++) {
+                    enemy_generator(enemy_queue, 0, 0, 1);
+                    enemy_generator(enemy_queue, 0, 2);
+                    enemy_generator(enemy_queue, 2);
+                }
                 if (wave > 18) {
                     for (int i = 0; i < wave; i++) {
                         enemy_generator(enemy_queue, 0, 0, 0, 1);
@@ -203,6 +207,7 @@ void Board::next_wave() {
                     }
                 }
             }
+            break;
         }
         wave++;
     }

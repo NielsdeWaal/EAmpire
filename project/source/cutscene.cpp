@@ -120,7 +120,7 @@ void cutscene::boss_fight() {
 void cutscene::end_game() {
     end_game1.draw(window);
     window.display();
-    sf::sleep(sf::seconds(3));
+    sf::sleep(sf::seconds(sleep));
     window.clear();
 
     end_game2.draw(window);

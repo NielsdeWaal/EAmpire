@@ -39,6 +39,11 @@ void Game::draw() {
         game_state->set_game_state("ingame");
         window.clear();
     }
+    if (game_state->get_game_state() == "won") {
+        window.clear();
+        scenes.end_game();
+        game_state->set_game_state("ingame");
+    }
     if (game_state->get_game_state() == "ingame") {
         for (auto &board : boards) {
             board->draw();
