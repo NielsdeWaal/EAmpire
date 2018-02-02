@@ -34,8 +34,15 @@ void Game::draw() {
     if (game_state->get_game_state() == "scene") {
         window.clear();
         scenes.play_scene();
+        scenes.help_screen();
+        sf::sleep(sf::seconds(2));
         game_state->set_game_state("ingame");
         window.clear();
+    }
+    if (game_state->get_game_state() == "won") {
+        window.clear();
+        scenes.end_game();
+        game_state->set_game_state("ingame");
     }
     if (game_state->get_game_state() == "ingame") {
         for (auto &board : boards) {

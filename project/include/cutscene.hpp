@@ -35,6 +35,7 @@ class cutscene {
     image_from_file boss_fight2;
     image_from_file end_game1;
     image_from_file end_game2;
+    image_from_file helpscreen;
 
   public:
     /**
@@ -79,6 +80,13 @@ class cutscene {
     * our game.
     */
     void end_game();
+    
+    /**
+    * @brief This function plays a specific set of scenes, the help screen
+    *
+    * This function draws and displays an image, aand waits for user input to continue
+    */
+    void help_screen();
 };
 
 #endif // CUTSCENE_HPP

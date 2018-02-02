@@ -63,7 +63,12 @@ void Board::setup() {
     wave_hint.setFillColor(sf::Color(32, 194, 14));
     wave_hint.setPosition(
         sf::Vector2f(50, static_cast<float>(grid_y_pixel - 50)));
-    wave_hint.setString("Press Space to summon next wave");
+    wave_hint.setString("Press Space for next wave");
+
+    tickrate.setCharacterSize(30);
+    tickrate.setFont(font);
+    tickrate.setFillColor(sf::Color(32, 194, 14));
+    tickrate.setPosition(sf::Vector2f(500, static_cast<float>(grid_y_pixel - 50)));
 }
 
 void Board::clicked(sf::Vector2i position) {
@@ -79,21 +84,26 @@ void Board::clicked(sf::Vector2i position) {
 }
 
 void Board::next_wave() {
+    std::cout << wave << std::endl;
     if (game_state->get_round_state() != "fighting" && game_state->get_round_state() != "death") {
         game_state->set_round_state("fighting");
         game_state->set_action_state("free");
+        
         switch (wave) {
         case 0:
             enemy_generator(enemy_queue, 3);
             break;
         case 1:
-            enemy_generator(enemy_queue, 3, 1);
+            enemy_generator(enemy_queue, 3);
+            enemy_generator(enemy_queue, 0,1);
             break;
         case 2:
-            enemy_generator(enemy_queue, 2, 2);
+            enemy_generator(enemy_queue, 2);
+            enemy_generator(enemy_queue, 0,2);
             break;
         case 3:
-            enemy_generator(enemy_queue, 3, 3);
+            enemy_generator(enemy_queue, 3);
+            enemy_generator(enemy_queue, 0,3);
             break;
         case 4:
             enemy_generator(enemy_queue, 4);
@@ -103,40 +113,74 @@ void Board::next_wave() {
         case 5:
             enemy_generator(enemy_queue, 0, 0, 1);
             sf::sleep(sf::milliseconds(500));
-            enemy_generator(enemy_queue, 2, 2);
+            enemy_generator(enemy_queue, 2);
+            enemy_generator(enemy_queue, 0,2);
             break;
         case 6:
             enemy_generator(enemy_queue, 0, 0, 1);
             sf::sleep(sf::milliseconds(500));
-            enemy_generator(enemy_queue, 3, 3);
-            scenes.angry_arno();
+            enemy_generator(enemy_queue, 3);
+            enemy_generator(enemy_queue, 0,3);
             break;
         case 7:
-            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
+            scenes.angry_arno();
+            enemy_generator(enemy_queue, 0, 0, 0, 1);
             sf::sleep(sf::milliseconds(500));
-            enemy_generator(enemy_queue, 2, 1);
+            enemy_generator(enemy_queue, 2);
+            enemy_generator(enemy_queue, 0,1);
             sf::sleep(sf::milliseconds(500));
-            enemy_generator(enemy_queue, 2, 1);
+            enemy_generator(enemy_queue, 2);
+            enemy_generator(enemy_queue, 0, 1);
             break;
         case 8:
-            enemy_generator(enemy_queue, 3, 0, 0, 1, 1);
+            enemy_generator(enemy_queue, 0, 0, 0, 1);
+            sf::sleep(sf::milliseconds(500));
+            enemy_generator(enemy_queue, 0, 0, 2, 0);
+            enemy_generator(enemy_queue, 5);
             break;
         case 9:
-            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
+            for (int i = 0; i < 2; i++) {
+                enemy_generator(enemy_queue, 0, 0, 0, 1);
+                sf::sleep(sf::milliseconds(500));
+                enemy_generator(enemy_queue, 0, 2, 2, 0);
+                enemy_generator(enemy_queue, 5);
+                sf::sleep(sf::milliseconds(800));
+            }
             break;
         case 10:
-            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
-            scenes.boss_fight();
+            for (int i = 0; i < 3; i++) {
+                enemy_generator(enemy_queue, 0, 0, 0, 2);
+                sf::sleep(sf::milliseconds(500));
+                enemy_generator(enemy_queue, 0, 2, 2, 0);
+                enemy_generator(enemy_queue, 5);
+                enemy_generator(enemy_queue, 0, 5);
+                sf::sleep(sf::milliseconds(500));
+            }
+            break;
+        case 11:
+            for (int i = 0; i < 3; i++) {
+                enemy_generator(enemy_queue, 0, 0, 0, 3);
+                sf::sleep(sf::milliseconds(500));
+                enemy_generator(enemy_queue, 0, 2, 2, 0);
+                enemy_generator(enemy_queue, 7);
+                enemy_generator(enemy_queue, 0, 7);
+                sf::sleep(sf::milliseconds(500));
+            }
             break;
         case 12:
-            enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
-            sf::sleep(sf::milliseconds(500));
-            enemy_generator(enemy_queue, 2, 1);
-            sf::sleep(sf::milliseconds(500));
-            enemy_generator(enemy_queue, 2, 1);
-            scenes.end_game();
+            scenes.boss_fight();
+            for (int i = 0; i < 5; i++) {
+                enemy_generator(enemy_queue, 0, 0, 0, 0, 1);
+                sf::sleep(sf::milliseconds(500));
+                enemy_generator(enemy_queue, 2, 1);
+                sf::sleep(sf::milliseconds(500));
+                enemy_generator(enemy_queue, 2, 1);
+            }
             break;
         default:
+            if (wave == 13) {
+                game_state->set_game_state("won");
+            }
             std::cout << "ENDLESS MODE" << std::endl;
             if (wave % 5 == 0) {
                 enemy_generator(enemy_queue, 0, 0, 0, 0, 1 * (wave/2));
@@ -151,9 +195,11 @@ void Board::next_wave() {
                 }
             }
             else {
-                enemy_generator(enemy_queue, 2 * wave);
-                enemy_generator(enemy_queue, 0, 0,  wave);
-                enemy_generator(enemy_queue, 0, 2 * wave);
+                for (int j = 0; j < wave; j++) {
+                    enemy_generator(enemy_queue, 0, 0, 1);
+                    enemy_generator(enemy_queue, 0, 2);
+                    enemy_generator(enemy_queue, 2);
+                }
                 if (wave > 18) {
                     for (int i = 0; i < wave; i++) {
                         enemy_generator(enemy_queue, 0, 0, 0, 1);
@@ -161,8 +207,21 @@ void Board::next_wave() {
                     }
                 }
             }
+            break;
         }
         wave++;
+    }
+}
+
+void Board::decrease_tickrate() {
+    if (game_state->get_updates_per_sec() >= 20) {
+        game_state->set_updates_per_sec(game_state->get_updates_per_sec() - 10);
+    }
+}
+
+void Board::increase_tickrate() {
+    if (game_state->get_updates_per_sec() <= 190) {
+        game_state->set_updates_per_sec(game_state->get_updates_per_sec() + 10);
     }
 }
 
@@ -232,6 +291,8 @@ void Board::draw() {
     window.draw(lives);
     window.draw(currency_amount);
     window.draw(current_wave);
+    window.draw(tickrate);
+
     if (game_state->get_round_state() == "building") {
         window.draw(wave_hint);
     }
@@ -275,18 +336,18 @@ void Board::update() {
         action();
     }
 
-    if (queue_clock.getElapsedTime() >= sf::milliseconds(400)) {
+    if (queue_clock >= 20) {
+        queue_clock = 0;
         if (enemy_queue.size() > 0) {
             enemies.push_back(enemy_queue.back());
             enemy_queue.pop_back();
         }
-        queue_clock.restart();
     }
 
-    if (tower_clock.getElapsedTime() >= sf::milliseconds(500)) {
+    if (tower_clock >= 18) {
+        tower_clock = 0;
         clear_projectiles();
         calculate_damage(towers, enemies);
-        tower_clock.restart();
     }
 
     // TODO Maybe combine these 4 enemy loops into 1?
@@ -320,4 +381,8 @@ void Board::update() {
     currency_amount.setString(
         ("$: " + std::to_string(game_state->get_curreny())).c_str());
     current_wave.setString(("Wave: " + std::to_string(wave)).c_str());
+    tickrate.setString(("Tickrate: " + std::to_string(game_state->get_updates_per_sec())).c_str());
+
+    queue_clock++;
+    tower_clock++;
 }

@@ -27,7 +27,7 @@ class GameState {
 
     signed int curreny_amount = 450;
 
-    bool new_round = true;
+    int updates_per_sec = 50;
 
     std::map<std::string, sf::Texture> textures;
     std::map<std::string, sf::Sprite> sprites;
@@ -108,6 +108,11 @@ class GameState {
     void set_game_state(std::string state);
 
     std::string get_game_state();
+
+    void set_updates_per_sec(int amount);
+
+    int get_updates_per_sec();
+
 };
 
 #endif // GAME_STATE_HPP
