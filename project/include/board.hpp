@@ -15,6 +15,7 @@
 #include "tower_a.hpp"
 #include "tower_b.hpp"
 #include "typedefs.hpp"
+#include "cutscene.hpp"
 
 class Board {
   private:
@@ -32,11 +33,14 @@ class Board {
     sf::Text currency_amount;
     sf::Text current_wave;
     sf::Text wave_hint;
+    sf::Text tickrate;
 
     int wave = 0;
 
-    sf::Clock queue_clock;
-    sf::Clock tower_clock;
+    int death_transparency = 0;
+
+    int queue_clock = 0;
+    int tower_clock = 0;
 
     enemy_vector enemies;
     enemy_vector enemy_queue;
@@ -52,27 +56,31 @@ class Board {
 
     Button sell_button;
 
-    action actions[7] = {
+    cutscene scenes;
+
+    action actions[9] = {
         action(sf::Keyboard::Escape, [&] { window.close(); }),
         action(sf::Keyboard::Space, [&] { next_wave(); }),
+        action(sf::Keyboard::Left, [&] { decrease_tickrate(); }),
+        action(sf::Keyboard::Right, [&] { increase_tickrate(); }),
         action(sf::Keyboard::Num1,
                [&] {
                    if (game_state->get_action_state() != "building1" &&
-                       game_state->get_round_state() != "fighting") {
+                       game_state->get_round_state() == "building") {
                        game_state->set_action_state("building1");
                    }
                }),
         action(sf::Keyboard::Num2,
                [&] {
                    if (game_state->get_action_state() != "building2" &&
-                       game_state->get_round_state() != "fighting") {
+                       game_state->get_round_state() == "building") {
                        game_state->set_action_state("building2");
                    }
                }),
         action(sf::Keyboard::Delete,
                [&] {
                    if (game_state->get_action_state() != "selling" &&
-                       game_state->get_round_state() != "fighting") {
+                       game_state->get_round_state() == "building") {
                        game_state->set_action_state("selling");
                    }
                }),
@@ -90,19 +98,19 @@ class Board {
             }
             if (tower1_button.is_pressed()) {
                 if (game_state->get_action_state() != "building1" &&
-                    game_state->get_round_state() != "fighting") {
+                    game_state->get_round_state() == "building") {
                     game_state->set_action_state("building1");
                 }
             }
             if (tower2_button.is_pressed()) {
                 if (game_state->get_action_state() != "building2" &&
-                    game_state->get_round_state() != "fighting") {
+                    game_state->get_round_state() == "building") {
                     game_state->set_action_state("building2");
                 }
             }
             if (sell_button.is_pressed()) {
                 if (game_state->get_action_state() != "selling" &&
-                    game_state->get_round_state() != "fighting") {
+                    game_state->get_round_state() == "building") {
                     game_state->set_action_state("selling");
                 }
             }
@@ -185,13 +193,39 @@ class Board {
         })};
 
   public:
+    /**
+    * @brief Constructor for the board.
+    *
+    * @param[in] &window Reference to the window the board will use.
+    */
     explicit Board(sf::RenderWindow &window);
 
+    /**
+    * @brief Setup for the board.
+    */
     void setup();
 
+    /**
+    * @brief Handles a click on the board.
+    *
+    * @param[in] position Position on the board that has been clicked.
+    */
     void clicked(sf::Vector2i position);
 
+    /**
+    * @brief Summons next wave if available.
+    */
     void next_wave();
+
+    /**
+    * @brief Decreases the tickrate by 10.
+    */
+    void decrease_tickrate();
+
+    /**
+    * @brief Increases the tickrate by 10.
+    */
+    void increase_tickrate();
 
     /**
     * @brief Calculates damage
@@ -206,12 +240,24 @@ class Board {
     void calculate_damage(std::vector<tower_ptr> tower_vector,
                           enemy_vector enemies);
 
+    /**
+    * @brief Draws all the projectiles on the screen.
+    */
     void draw_projectiles();
 
+    /**
+    * @brief Clears all the projectiles in the projectile vector.
+    */
     void clear_projectiles();
 
+    /**
+    * @brief Draws the board.
+    */
     void draw();
 
+    /**
+    * @brief Updates the board.
+    */
     void update();
 };
 

@@ -52,6 +52,10 @@ void GameState::draw_sprite(std::string name, sf::Vector2f position,
     window.draw(sprites.find(name)->second);
 }
 
+void GameState::color_sprite(std::string name, sf::Color color) {
+    sprites.find(name)->second.setColor(color);
+}
+
 void GameState::set_action_state(std::string state) {
     action_state = state;
 }
@@ -62,7 +66,7 @@ std::string GameState::get_action_state() {
 
 void GameState::set_round_state(std::string state) {
     round_state = state;
-    std::cout << "Round state set to:" << state << std::endl;
+    //std::cout << "Round state set to:" << state << std::endl;
 }
 
 std::string GameState::get_round_state() {
@@ -75,4 +79,12 @@ void GameState::set_game_state(std::string state) {
 
 std::string GameState::get_game_state() {
     return game_state;
+}
+
+void GameState::set_updates_per_sec(int amount) {
+    updates_per_sec = amount;
+}
+
+int GameState::get_updates_per_sec() {
+    return updates_per_sec;
 }
