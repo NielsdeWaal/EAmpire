@@ -193,16 +193,38 @@ class Board {
         })};
 
   public:
+    /**
+    * @brief Constructor for the board.
+    *
+    * @param[in] &window Reference to the window the board will use.
+    */
     explicit Board(sf::RenderWindow &window);
 
+    /**
+    * @brief Setup for the board.
+    */
     void setup();
 
+    /**
+    * @brief Handles a click on the board.
+    *
+    * @param[in] position Position on the board that has been clicked.
+    */
     void clicked(sf::Vector2i position);
 
+    /**
+    * @brief Summons next wave if available.
+    */
     void next_wave();
 
+    /**
+    * @brief Decreases the tickrate by 10.
+    */
     void decrease_tickrate();
 
+    /**
+    * @brief Increases the tickrate by 10.
+    */
     void increase_tickrate();
 
     /**
@@ -218,12 +240,24 @@ class Board {
     void calculate_damage(std::vector<tower_ptr> tower_vector,
                           enemy_vector enemies);
 
+    /**
+    * @brief Draws all the projectiles on the screen.
+    */
     void draw_projectiles();
 
+    /**
+    * @brief Clears all the projectiles in the projectile vector.
+    */
     void clear_projectiles();
 
+    /**
+    * @brief Draws the board.
+    */
     void draw();
 
+    /**
+    * @brief Updates the board.
+    */
     void update();
 };
 

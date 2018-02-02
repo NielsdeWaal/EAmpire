@@ -34,16 +34,38 @@ class Game {
                          })};
 
   public:
+    /**
+    * @brief Constructor for the game.
+    */
     Game();
 
+    /**
+    * @brief Get the reference to the window the game uses.
+    *
+    * @return Reference to the window the game uses.
+    */
     sf::RenderWindow &get_window();
 
+    /**
+    * @brief Handles a click on the game.
+    *
+    * @param[in] position Position that has been clicked.
+    */
     void clicked(sf::Vector2i position);
 
+    /**
+    * @brief Draws the game.
+    */
     void draw();
 
+    /**
+    * @brief Updates the game.
+    */
     void update();
 
+    /**
+    * @brief Initializes the game.
+    */
     void initialize();
 };
 

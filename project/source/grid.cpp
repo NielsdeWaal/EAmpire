@@ -207,12 +207,6 @@ void Grid::draw_selected(sf::RenderWindow &window,
     window.draw(highlight);
 }
 
-// void Grid::update(sf::RenderWindow& window, std::vector<sf::Vector2i> path) {
-//	for(auto tile : path) {
-//
-//	}
-//}
-
 void Grid::create_maze() {
     for (int x = 0; x < size_tiles_x; x++) {
         for (int y = 0; y < size_tiles_y; y++) {
@@ -353,16 +347,6 @@ std::pair<int, int> Grid::get_grid_size() {
 
 std::pair<int, int> Grid::get_start_values() {
     return std::make_pair(start_x, start_y);
-}
-
-void Grid::reset_damage() {
-    for (auto &tile : tiles) {
-        tile.set_damage(0);
-    }
-}
-
-float Grid::get_damage(int tile_x, int tile_y) {
-    return tiles[tile_y * size_tiles_x + tile_x].get_damage();
 }
 
 std::string Grid::get_sprite(int tile_x, int tile_y) {
