@@ -11,30 +11,6 @@ bool Tile::is_navigable() {
     return navigable;
 }
 
-void Tile::clicked() {
-    navigable = !navigable;
-}
-
-void Tile::set_built() {
-    navigable = false;
-}
-
-void Tile::set_free() {
-    navigable = true;
-}
-
-float Tile::get_damage() {
-    return damage;
-}
-
-void Tile::update_damage(float new_damage) {
-    damage += new_damage;
-}
-
-void Tile::set_damage(float new_damage) {
-    damage = new_damage;
-}
-
 std::string Tile::get_sprite() {
     return sprite;
 }

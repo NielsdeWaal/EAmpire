@@ -7,9 +7,7 @@
 
 class Tile {
   private:
-    int id;
     int lives;
-    float damage = 0.0;
     bool navigable = true;
     std::string sprite = "tile_normal";
 
@@ -17,28 +15,39 @@ class Tile {
     Tile() {
     }
 
+    /**
+    * @brief Constructor for tile.
+    *
+    * @param[in] is_navigable Whether the tile should allready be navigable or not.
+    **/
     Tile(bool is_navigable);
 
+    /**
+    * @brief Set the navigability of the tile
+    *
+    * @param[in] navigability Whether the tile should be navigable or not.
+    **/
     void set_navigability(bool navigability);
 
+    /**
+    * @brief Return the navigability of the tile.
+    *
+    * @return Bool whether the tile is navigable.
+    **/
     bool is_navigable();
 
-    int getID();
-
-    void clicked();
-
-    void set_built();
-
-    void set_free();
-
-    float get_damage();
-
-    void update_damage(float new_damage);
-
-    void set_damage(float new_damage);
-
+    /**
+    * @brief Get the name of the sprite of the tile.
+    *
+    * @return A string of the name of the sprite of the tile.
+    **/
     std::string get_sprite();
 
+    /**
+    * @brief Set the name of the sprite of the tile.
+    *
+    * @param[in] Name of the sprite.
+    **/
     void set_sprite(std::string new_sprite);
 };
 
