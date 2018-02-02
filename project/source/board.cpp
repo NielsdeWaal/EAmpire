@@ -84,7 +84,6 @@ void Board::clicked(sf::Vector2i position) {
 }
 
 void Board::next_wave() {
-    std::cout << wave << std::endl;
     if (game_state->get_round_state() != "fighting" && game_state->get_round_state() != "death") {
         game_state->set_round_state("fighting");
         game_state->set_action_state("free");

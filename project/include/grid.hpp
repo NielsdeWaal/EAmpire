@@ -238,13 +238,6 @@ class Grid {
     void create_maze();
 
     /**
-    * @brief Updates all the tiles in the grid.
-    *
-    * NOTE: Doesn't yet work.
-    **/
-    void update();
-
-    /**
      * @brief Returns size of grid
      *
      * @return std::pair with size values
@@ -259,26 +252,21 @@ class Grid {
     std::pair<int, int> get_start_values();
 
     /**
-    * @brief Returns size of grid
+    * @brief Returns sprite name of a tile.
     *
-    * @return std::pair with size values
+    * @param[in] tile_x X location of tile.
+    * @param[in] tile_y Y location of tile.
+    * @return Name of the sprite of the tile.
     */
-    void reset_damage();
-
-    /**
-    * @brief Get damage
-    *
-    * This function returns the damage of a specific tile (tile_x,tile_y)
-    *
-    * @param[in] tile_x an x coordinate in the grid
-    * @param[in] tile_y a y coordinate in the grid
-    *
-    * @return float with the damage a tile deals
-    */
-    float get_damage(int tile_x, int tile_y);
-
     std::string get_sprite(int tile_x, int tile_y);
 
+    /**
+    * @brief Sets sprite name of a tile.
+    *
+    * @param[in] tile_x X location of tile.
+    * @param[in] tile_y Y location of tile.
+    * @param[in] new_sprite Name of sprite.
+    */
     void set_sprite(int tile_x, int tile_y, std::string new_sprite);
 };
 
